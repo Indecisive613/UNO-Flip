@@ -65,7 +65,7 @@
     </void>
     <void property="name">
      <void property="text">
-      <string>Interaction</string>
+      <string>GameController</string>
      </void>
     </void>
    </object>
@@ -745,7 +745,7 @@
   <void method="connect">
    <object class="com.horstmann.violet.CallEdge">
     <void property="middleLabel">
-     <string>Interaction(); getUserInput()</string>
+     <string>GameController(); getUserInput()</string>
     </void>
    </object>
    <object idref="CallNode2"/>

@@ -218,7 +218,7 @@
     </void>
     <void property="name">
      <void property="text">
-      <string>Interaction</string>
+      <string>GameController</string>
      </void>
     </void>
    </object>

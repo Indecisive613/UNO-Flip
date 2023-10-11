@@ -1,8 +1,8 @@
 package main;
 
-public class Interaction {
+public class GameController {
 
-    public Interaction() {
+    public GameController() {
 
     }
 
