@@ -1,8 +1,8 @@
 package main;
 
 public class Card {
-    public enum Colour { RED, GREEN, BLUE, YELLOW }
-    public enum Symbol { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, WILD, DRAW_ONE, WILD_DRAW_TWO, SKIP, REVERSE, }
+    public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
+    public enum Symbol { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DRAW_ONE, WILD_DRAW_TWO, SKIP, REVERSE, }
 
     private final Colour colour;
     private final Symbol symbol;
@@ -24,5 +24,11 @@ public class Card {
      */
     public Boolean validCard(Card card) {
         return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return colour + " " + symbol;
     }
 }
