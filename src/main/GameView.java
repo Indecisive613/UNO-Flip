@@ -13,6 +13,21 @@ public class GameView {
     private void updateStartGame() {
     }
 
+    private void updatePlayedCard(Card card) {
+        System.out.printf("Played: %s\n", card);
+    }
+
+    private void updateInvalidInput() {
+        System.out.println("Invalid input. Please enter a valid number.");
+    }
+    private void updateInvalidChoice() {
+        System.out.println("Invalid choice. Try again.");
+    }
+
+    private void updateCardDoesntMatch(Card card) {
+        System.out.println("Card doesn't match the top card. Try again.");
+    }
+
     public void updateNewTurn(Player player) {
         System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
@@ -23,7 +38,9 @@ public class GameView {
             System.out.println(i + 1 + ". " + playersHand.get(i));
         }
         System.out.println();
-        System.out.printf("Top card %s.", "YELLOW SKIP");
+        System.out.printf("Top card %s.\n", "YELLOW SKIP");
+        System.out.println("Enter card index to play or 0 to draw a card:");
+
     }
 
     public static void main(String[] args) {
