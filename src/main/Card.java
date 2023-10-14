@@ -5,7 +5,28 @@ import java.util.Arrays;
 
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
-    public enum Symbol { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DRAW_ONE, WILD_DRAW_TWO, SKIP, REVERSE, WILD }
+    public enum Symbol {
+        ONE(1),
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        DRAW_ONE(10),
+        SKIP(20),
+        REVERSE(20),
+        WILD(40),
+        WILD_DRAW_TWO(50);
+
+        private final int pointValue;
+
+        Symbol(int pointValue) {
+            this.pointValue = pointValue;
+        }
+    }
 
     private final Colour colour;
     private final Symbol symbol;
@@ -19,53 +40,8 @@ public class Card {
     public Card(Colour colour, Symbol symbol) throws IllegalArgumentException{
         //Making the assumption that no one will try to create WILD SEVEN for example...
         this.colour = colour;
-
         this.symbol = symbol;
-
-        switch(symbol){
-            case ONE:
-                pointValue = 1;
-                break;
-            case TWO:
-                pointValue = 2;
-                break;
-            case THREE:
-                pointValue = 3;
-                break;
-            case FOUR:
-                pointValue = 4;
-                break;
-            case FIVE:
-                pointValue = 5;
-                break;
-            case SIX:
-                pointValue = 6;
-                break;
-            case SEVEN:
-                pointValue = 7;
-                break;
-            case EIGHT:
-                pointValue = 8;
-                break;
-            case NINE:
-                pointValue = 9;
-                break;
-            case DRAW_ONE:
-                pointValue = 10;
-                break;
-            case WILD_DRAW_TWO:
-                pointValue = 50;
-                break;
-            case SKIP:
-            case REVERSE:
-                pointValue = 20;
-                break;
-            case WILD:
-                pointValue = 40;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid Symbol");
-        }
+        this.pointValue = symbol.pointValue;
 
         if(wildColours.contains(colour) && nonWildSymbols.contains(symbol)) {
             throw new IllegalArgumentException("The symbol for a wild card can not be in " + nonWildSymbols);
