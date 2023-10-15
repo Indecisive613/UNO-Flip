@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class GameView {
 
-    private final Game game;
+    private Game game;
 
-    public GameView(Game game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 
@@ -20,6 +20,7 @@ public class GameView {
     private void updateInvalidInput() {
         System.out.println("Invalid input. Please enter a valid number.");
     }
+
     private void updateInvalidChoice() {
         System.out.println("Invalid choice. Try again.");
     }
@@ -50,10 +51,13 @@ public class GameView {
         h.add(new Card(Card.Colour.WILD, Card.Symbol.WILD_DRAW_TWO));
         h.add(new Card(Card.Colour.BLUE, Card.Symbol.DRAW_ONE));
         h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
+        h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
+        h.add(new Card(Card.Colour.BLUE, Card.Symbol.DRAW_ONE));
+        h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
         Player p = new Player("Test guy 1", h);
 
 
-        GameView v = new GameView(g);
+        GameView v = new GameView();
         v.updateNewTurn(p);
     }
 }
