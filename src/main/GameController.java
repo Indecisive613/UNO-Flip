@@ -13,14 +13,29 @@ public class GameController {
     public int requestPlayerCount() {
         int playerCount = -1;
         while (true) {
-            System.out.print("Enter number of players (2-4): ");
+            System.out.print("Enter number of players (2-4): "); // TODO: Make method call in view
             if (!input.hasNextInt()) {
                 input.next();
                 continue;
             }
             playerCount = input.nextInt();
-            if (playerCount >= 2 && playerCount <= 4) {
+            if (playerCount >= Game.PLAYER_MIN && playerCount <= Game.PLAYER_MAX) {
                 return playerCount;
+            }
+        }
+    }
+
+    public int requestPlayerAction(int handSize) {
+        int action = -1;
+        while (true) {
+            System.out.print("Enter card index to play or 0 to draw a card: "); // TODO: Make method call in view
+            if (!input.hasNextInt()) {
+                input.next();
+                continue;
+            }
+            action = input.nextInt();
+            if (action >= 0 && action <= handSize) {
+                return action;
             }
         }
     }

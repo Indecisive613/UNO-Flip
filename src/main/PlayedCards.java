@@ -14,7 +14,7 @@ public class PlayedCards {
         return cards;
     }
 
-    public void placeCard(Card card) {
+    public void dealCard(Card card) {
         cards.push(card);
     }
 

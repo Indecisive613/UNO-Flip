@@ -11,7 +11,8 @@ public class Player {
 
     public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
         if(hand.size() != 7){
-            throw new IllegalArgumentException("The player must start with 7 cards in their hand.");
+            // throw new IllegalArgumentException("The player must start with 7 cards in their hand.");
+            // TODO: Maybe this logic should be in Game?
         }
         this.name = name;
         this.hand = hand;
@@ -28,6 +29,10 @@ public class Player {
 
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public void dealCard(Card card) {
+        hand.add(card);
     }
 
     public Card playCard(int index) throws IllegalArgumentException {

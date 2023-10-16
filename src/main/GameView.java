@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameView {
 
-    private Game game;
+    private Game game; // TODO: Do we need this? Doesn't Game store GameView? This seems like a circular dependency.
 
     public void setGame(Game game) {
         this.game = game;
@@ -40,24 +40,9 @@ public class GameView {
         }
         System.out.println();
         System.out.printf("Top card %s.\n", "YELLOW SKIP");
-        System.out.println("Enter card index to play or 0 to draw a card:");
-
     }
 
-    public static void main(String[] args) {
-        Game g = new Game();
-        ArrayList<Card> h = new ArrayList<>();
-        h.add(new Card(Card.Colour.BLUE, Card.Symbol.EIGHT));
-        h.add(new Card(Card.Colour.WILD, Card.Symbol.WILD_DRAW_TWO));
-        h.add(new Card(Card.Colour.BLUE, Card.Symbol.DRAW_ONE));
-        h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
-        h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
-        h.add(new Card(Card.Colour.BLUE, Card.Symbol.DRAW_ONE));
-        h.add(new Card(Card.Colour.RED, Card.Symbol.REVERSE));
-        Player p = new Player("Test guy 1", h);
-
-
-        GameView v = new GameView();
-        v.updateNewTurn(p);
+    public void updatePlayCard(Card card) {
+        System.out.println("Played: " + card);
     }
 }
