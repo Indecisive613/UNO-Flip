@@ -10,23 +10,16 @@ public class GameView {
         this.game = game;
     }
 
-    private void updateStartGame() {
-    }
-
-    private void updatePlayedCard(Card card) {
-        System.out.printf("Played: %s\n", card);
-    }
-
-    private void updateInvalidInput() {
-        System.out.println("Invalid input. Please enter a valid number.");
-    }
-
-    private void updateInvalidChoice() {
-        System.out.println("Invalid choice. Try again.");
+    public void updateGetPlayerName(int index) {
+        System.out.print("Enter name for Player " + (index + 1) + ": ");
     }
 
     private void updateCardDoesntMatch(Card card) {
         System.out.println("Card doesn't match the top card. Try again.");
+    }
+
+    public void updateInvalidInput(String message) {
+        System.out.println(message);
     }
 
     public void updateNewTurn(Player player) {
@@ -42,7 +35,15 @@ public class GameView {
         System.out.printf("Top card %s.\n", "YELLOW SKIP");
     }
 
-    public void updatePlayCard(Card card) {
-        System.out.println("Played: " + card);
+    public void updatePlayCard(Card playedCard) {
+        System.out.println("Played: " + playedCard);
+    }
+
+    public void updateDrawCard(Card drawnCard) {
+        System.out.println("Drew a card: " + drawnCard);
+    }
+
+    public void updateGetCard() {
+        System.out.println("Enter card index to play or 0 to draw a card:"); // TODO: Make method call in view
     }
 }

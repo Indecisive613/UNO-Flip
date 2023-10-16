@@ -7,12 +7,13 @@ public class Game {
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
     public static final int STARTING_HAND_SIZE = 7;
+    public static final int DRAW_CARD_ACTION = 0;
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
     private final Deck deck;
     private final boolean turnOrderReversed = false;
-    private int currentPlayer = 0;
+    private int currentPlayer = -1; // set to -1 for first increment
 
 
     public Game(Deck deck) {
@@ -49,13 +50,13 @@ public class Game {
     }
 
     public void nextTurn() {
-        for (GameView view : views) {
-            view.updateNewTurn(players.get(currentPlayer));
-        }
         if (turnOrderReversed) {
             currentPlayer = (currentPlayer - 1) % players.size();
         } else {
             currentPlayer = (currentPlayer + 1) % players.size();
+        }
+        for (GameView view : views) {
+            view.updateNewTurn(players.get(currentPlayer));
         }
     }
 
@@ -67,6 +68,14 @@ public class Game {
         // TODO: Play card logic
         for (GameView view : views) {
             view.updatePlayCard(card);
+        }
+    }
+
+    public void drawCard(Player currentPlayer) {
+        Card drawnCard = deck.drawCard();
+        currentPlayer.dealCard(drawnCard);
+        for (GameView view : views) {
+            view.updateDrawCard(drawnCard);
         }
     }
 }

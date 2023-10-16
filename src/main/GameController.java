@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class GameController {
 
     private final Scanner input;
+    private final GameView view;
 
-    public GameController() {
+    public GameController(GameView view) {
+        this.view = view;
         input = new Scanner(System.in);
     }
 
@@ -27,16 +29,23 @@ public class GameController {
 
     public int requestPlayerAction(int handSize) {
         int action = -1;
+        view.updateGetCard();
         while (true) {
-            System.out.print("Enter card index to play or 0 to draw a card: "); // TODO: Make method call in view
             if (!input.hasNextInt()) {
                 input.next();
+                view.updateInvalidInput("Invalid input. Please enter a valid number.");
                 continue;
             }
             action = input.nextInt();
             if (action >= 0 && action <= handSize) {
                 return action;
             }
+            view.updateInvalidInput("Invalid choice. Try again.");
         }
+    }
+
+    public String requestPlayerName(int i) {
+        view.updateGetPlayerName(i);
+        return input.next();
     }
 }
