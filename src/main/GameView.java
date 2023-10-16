@@ -14,7 +14,7 @@ public class GameView {
         System.out.print("Enter name for Player " + (index + 1) + ": ");
     }
 
-    private void updateCardDoesntMatch(Card card) {
+    public void updateCardDoesntMatch() {
         System.out.println("Card doesn't match the top card. Try again.");
     }
 
@@ -32,7 +32,7 @@ public class GameView {
             System.out.println(i + 1 + ". " + playersHand.get(i));
         }
         System.out.println();
-        System.out.printf("Top card %s.\n", "YELLOW SKIP");
+        System.out.printf("Top card %s.\n", game.getTopCard());
     }
 
     public void updatePlayCard(Card playedCard) {
