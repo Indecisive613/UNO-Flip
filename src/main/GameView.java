@@ -1,34 +1,49 @@
 package main;
 
+import java.util.ArrayList;
+
 public class GameView {
 
-    private Game game;
+    private Game game; // TODO: Do we need this? Doesn't Game store GameView? This seems like a circular dependency.
 
-    public GameView(Game game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 
-    private void printStartOfTurn() {
-        System.out.printf("%s's turn.\n", "Player 1");
+    public void updateGetPlayerName(int index) {
+        System.out.print("Enter name for Player " + (index + 1) + ": ");
+    }
+
+    private void updateCardDoesntMatch(Card card) {
+        System.out.println("Card doesn't match the top card. Try again.");
+    }
+
+    public void updateInvalidInput(String message) {
+        System.out.println(message);
+    }
+
+    public void updateNewTurn(Player player) {
+        System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
-    }
-    private void printPlayerCards() {
         System.out.println("Your cards:");
+
+        ArrayList<Card> playersHand = player.getHand();
+        for (int i = 0; i < playersHand.size(); i++) {
+            System.out.println(i + 1 + ". " + playersHand.get(i));
+        }
+        System.out.println();
+        System.out.printf("Top card %s.\n", "YELLOW SKIP");
     }
 
-    private void printPlayerSelect() {
-        System.out.println("Enter number of players: ");
+    public void updatePlayCard(Card playedCard) {
+        System.out.println("Played: " + playedCard);
     }
 
-    public void update() {
-        printStartOfTurn();
-        printPlayerCards();
-        System.out.printf("Top card %s.", "YELLOW SKIP");
+    public void updateDrawCard(Card drawnCard) {
+        System.out.println("Drew a card: " + drawnCard);
     }
 
-    public static void main(String[] args) {
-        Game g = new Game();
-        GameView v = new GameView(g);
-        v.update();
+    public void updateGetCard() {
+        System.out.println("Enter card index to play or 0 to draw a card:"); // TODO: Make method call in view
     }
 }
