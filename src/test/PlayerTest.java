@@ -18,10 +18,6 @@ class PlayerTest {
 
     @BeforeEach
     protected void setUp() {
-        Player player1 = new Player("Buffy", );
-        Player player2 = new Player("Xander", );
-        Player player3 = new Player("Willow", );
-        Player player4 = new Player("Giles", );
     }
 
     @Test

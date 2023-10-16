@@ -29,7 +29,7 @@ public class GameRunner {
         int playerCount = controller.requestPlayerCount();
         for (int i = 0; i < playerCount; i++) {
             ArrayList<Card> hand = new ArrayList<>();
-            String name = controller.requestPlayerName(i);
+            String name = controller.requestPlayerName();
             Player player = new Player(name, hand);
             game.addPlayer(player);
         }
