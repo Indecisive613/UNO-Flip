@@ -1,9 +1,5 @@
 package test;
 
-import main.PlayedCards;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class GameTest {
 
     /*

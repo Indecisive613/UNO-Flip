@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 public class Game {
 
@@ -12,15 +14,16 @@ public class Game {
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
-    private final PlayedCards playedCards;
-    private final Deck deck;
+    private final Stack<Card> playedCards;
+
+    private final Stack<Card> deck;
     private final boolean turnOrderReversed = false;
     private int currentPlayer = -1; // set to -1 for first increment
 
 
-    public Game(Deck deck) {
+    public Game(Stack<Card> deck) {
         this.deck = deck;
-        this.playedCards = new PlayedCards();
+        this.playedCards = new Stack<Card>();
         players = new ArrayList<>();
         views = new ArrayList<>();
     }
@@ -38,21 +41,35 @@ public class Game {
     }
 
     public Card getTopCard() {
-        return playedCards.seeTopCard();
+        return playedCards.peek();
     }
 
     public void shuffleDeck() {
-        Collections.shuffle(deck.getDeck());
+        //Puts cards in played cards into discard and reshuffles
+        if(!playedCards.isEmpty()) {
+            Card topCard = playedCards.pop();
+            while (!playedCards.isEmpty()) {
+                deck.push(playedCards.pop());
+            }
+            playedCards.push(topCard);
+        }
+        Collections.shuffle(deck);
     }
 
     public void deal() {
         for (int i = 0; i < STARTING_HAND_SIZE; i++) {
             for (Player p : players) {
-                p.dealCard(deck.drawCard());
+                if(deck.isEmpty()){
+                    shuffleDeck();
+                }
+                p.dealCard(deck.pop());
             }
         }
         // Place starting card
-        playedCards.dealCard(deck.drawCard());
+        if(deck.isEmpty()){
+            shuffleDeck();
+        }
+        playedCards.push(deck.pop());
     }
 
     public boolean isRunning() {
@@ -71,7 +88,7 @@ public class Game {
     }
 
     public boolean canPlay(Card card) {
-        Card topCard = playedCards.seeTopCard();
+        Card topCard = playedCards.peek();
         return (card == null
                 || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(topCard.getColour())
@@ -80,15 +97,17 @@ public class Game {
     }
 
     public void playCard(Card card) {
-        playedCards.dealCard(card);
+        playedCards.push(card);
         for (GameView view : views) {
             view.updatePlayCard(card);
         }
     }
 
     public void drawCard(Player currentPlayer) {
-        // TODO: Reshuffle deck & also add error checking for when deck is empty
-        Card drawnCard = deck.drawCard();
+        if(deck.isEmpty()){
+            shuffleDeck();
+        }
+        Card drawnCard = deck.pop();
         currentPlayer.dealCard(drawnCard);
         for (GameView view : views) {
             view.updateDrawCard(drawnCard);
