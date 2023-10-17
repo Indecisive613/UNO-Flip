@@ -41,16 +41,21 @@ public class GameRunner {
             Player currentPlayer = game.getCurrentPlayer();
 
             Card card = null;
-            // TODO: Fix this
-            do {
+            while (true) {
                 int action = controller.requestPlayerAction(currentPlayer.getHand().size());
+
                 if (action == Game.DRAW_CARD_ACTION) {
                     game.drawCard(currentPlayer);
-                } else {
-                    card = currentPlayer.getHand().get(action - 1);
-                    game.playCard(currentPlayer.playCard(action - 1));
+                    break;
                 }
-            } while (!game.canPlay(card));
+
+                card = currentPlayer.getHand().get(action - 1);
+                if (game.canPlay(card)) {
+                    game.playCard(currentPlayer.playCard(action - 1));
+                    break;
+                }
+                System.out.println("Card doesn't match the top card. Try again.");
+            }
 
             if (currentPlayer.getHand().isEmpty()) {
                 // game.announceWinner();

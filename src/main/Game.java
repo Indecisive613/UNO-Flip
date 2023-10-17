@@ -72,16 +72,11 @@ public class Game {
 
     public boolean canPlay(Card card) {
         Card topCard = playedCards.seeTopCard();
-        if (card.getColour().equals(Card.Colour.WILD)
+        return (card == null
+                || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(topCard.getColour())
-                || card.getSymbol().equals(topCard.getSymbol())) {
-            for (GameView view : views) {
-                view.updateCardDoesntMatch();
-            }
-            return false;
-        } else {
-            return true;
-        }
+                || card.getSymbol().equals(topCard.getSymbol()));
+        // TODO: Add wild card logic (maybe store currentColour independently from the top card)
     }
 
     public void playCard(Card card) {

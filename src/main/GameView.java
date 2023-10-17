@@ -23,7 +23,8 @@ public class GameView {
     }
 
     public void updateNewTurn(Player player) {
-        System.out.printf("%s's Turn.\n", player.getName());
+        System.out.printf("\n######## %s's Turn. ########\n", player.getName()); // TODO: For debugging - remove later
+        // System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
         System.out.println("Your cards:");
 
