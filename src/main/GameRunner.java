@@ -29,7 +29,7 @@ public class GameRunner {
         int playerCount = controller.requestPlayerCount();
         for (int i = 0; i < playerCount; i++) {
             ArrayList<Card> hand = new ArrayList<>();
-            String name = controller.requestPlayerName();
+            String name = controller.requestPlayerName(i);
             Player player = new Player(name, hand);
             game.addPlayer(player);
         }
@@ -54,8 +54,8 @@ public class GameRunner {
 
             if (currentPlayer.getHand().isEmpty()) {
                 // game.announceWinner();
-               System.out.println(currentPlayer + " wins!");
-               return;
+                System.out.println(currentPlayer + " wins!");
+                return;
             }
         }
     }
