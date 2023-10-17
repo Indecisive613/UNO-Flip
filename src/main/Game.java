@@ -14,12 +14,14 @@ public class Game {
     private final Deck deck;
     private final boolean turnOrderReversed = false;
     private int currentPlayer = -1; // set to -1 for first increment
+    private final PlayedCards playedCards;
 
 
     public Game(Deck deck) {
         this.deck = deck;
         players = new ArrayList<>();
         views = new ArrayList<>();
+        playedCards = new PlayedCards();
     }
 
     public void addPlayer(Player player) {
@@ -64,10 +66,19 @@ public class Game {
         return true; // TODO: implement
     }
 
-    public void playCard(Card card) {
-        // TODO: Play card logic
-        for (GameView view : views) {
-            view.updatePlayCard(card);
+    public void playCard(Card card, Player player) {
+        Card topCard = playedCards.seeTopCard();
+        if (card.getSymbol().equals(Card.Symbol.WILD) | topCard.getColour().equals(card.getColour()) | topCard.getSymbol().equals(card.getSymbol())) {
+            playedCards.dealCard(card);
+            for (GameView view : views) {
+                view.updatePlayCard(card);
+            }
+        }
+        else{
+            player.dealCard(card);
+            for (GameView view: views){
+                view.updateCardDoesntMatch();
+            }
         }
     }
 

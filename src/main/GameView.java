@@ -14,7 +14,7 @@ public class GameView {
         System.out.print("Enter name for Player " + (index + 1) + ": ");
     }
 
-    private void updateCardDoesntMatch(Card card) {
+    public void updateCardDoesntMatch() {
         System.out.println("Card doesn't match the top card. Try again.");
     }
 

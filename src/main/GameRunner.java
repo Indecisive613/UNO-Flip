@@ -50,7 +50,7 @@ public class GameRunner {
                     game.drawCard(currentPlayer);
                 } else {
                     card = currentPlayer.getHand().get(action - 1);
-                    game.playCard(currentPlayer.playCard(action - 1));
+                    game.playCard(currentPlayer.playCard(action - 1), currentPlayer);
                 }
             } while (!game.canPlay(card));
         }
