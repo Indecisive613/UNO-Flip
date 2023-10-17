@@ -37,6 +37,11 @@ public class Card {
     public static final ArrayList<Colour> wildColours = new ArrayList<Colour>(Arrays.asList(Colour.WILD));
     public static final ArrayList<Colour> nonWildColours = new ArrayList<Colour>(Arrays.asList(Colour.RED, Colour.GREEN, Colour.BLUE, Colour.YELLOW));
 
+    /** An UNO card with a colour and face value
+     *
+     * @param colour The colour of the card, or wild if it's a wild card
+     * @param symbol The card number or symbol if it's a special card
+     */
     public Card(Colour colour, Symbol symbol) throws IllegalArgumentException{
         //Making the assumption that no one will try to create WILD SEVEN for example...
         this.colour = colour;
@@ -51,14 +56,23 @@ public class Card {
         }
     }
 
+    /**
+     * @return the colour of the card
+     */
     public Colour getColour() {
         return colour;
     }
 
+    /**
+     * @return The symbol of the card
+     */
     public Symbol getSymbol() {
         return symbol;
     }
 
+    /**
+     * @return The point value of the card
+     */
     public int getPointValue() {
         return pointValue;
     }
