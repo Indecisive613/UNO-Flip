@@ -23,7 +23,8 @@ public class GameView {
     }
 
     public void updateNewTurn(Player player) {
-        System.out.printf("%s's Turn.\n", player.getName());
+        System.out.printf("\n######## %s's Turn. ########\n", player.getName()); // TODO: For debugging - remove later
+        // System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
         System.out.println("Your cards:");
 
@@ -32,7 +33,7 @@ public class GameView {
             System.out.println(i + 1 + ". " + playersHand.get(i));
         }
         System.out.println();
-        System.out.printf("Top card %s.\n", "YELLOW SKIP");
+        System.out.printf("Top card %s.\n", game.getTopCard());
     }
 
     public void updatePlayCard(Card playedCard) {

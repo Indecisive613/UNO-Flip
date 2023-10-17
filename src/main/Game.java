@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Game {
 
@@ -11,6 +12,7 @@ public class Game {
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
+    private final PlayedCards playedCards;
     private final Deck deck;
     private final boolean turnOrderReversed = false;
     private int currentPlayer = -1; // set to -1 for first increment
@@ -19,6 +21,7 @@ public class Game {
 
     public Game(Deck deck) {
         this.deck = deck;
+        this.playedCards = new PlayedCards();
         players = new ArrayList<>();
         views = new ArrayList<>();
         playedCards = new PlayedCards();
@@ -36,7 +39,12 @@ public class Game {
         views.add(view);
     }
 
+    public Card getTopCard() {
+        return playedCards.seeTopCard();
+    }
+
     public void shuffleDeck() {
+        Collections.shuffle(deck.getDeck());
     }
 
     public void deal() {
@@ -45,6 +53,8 @@ public class Game {
                 p.dealCard(deck.drawCard());
             }
         }
+        // Place starting card
+        playedCards.dealCard(deck.drawCard());
     }
 
     public boolean isRunning() {
@@ -63,26 +73,24 @@ public class Game {
     }
 
     public boolean canPlay(Card card) {
-        return true; // TODO: implement
+        Card topCard = playedCards.seeTopCard();
+        return (card == null
+                || card.getColour().equals(Card.Colour.WILD)
+                || card.getColour().equals(topCard.getColour())
+                || card.getSymbol().equals(topCard.getSymbol()));
+        // TODO: Add wild card logic (maybe store currentColour independently from the top card)
     }
 
-    public void playCard(Card card, Player player) {
-        Card topCard = playedCards.seeTopCard();
-        if (card.getSymbol().equals(Card.Symbol.WILD) | topCard.getColour().equals(card.getColour()) | topCard.getSymbol().equals(card.getSymbol())) {
-            playedCards.dealCard(card);
-            for (GameView view : views) {
-                view.updatePlayCard(card);
-            }
-        }
-        else{
-            player.dealCard(card);
-            for (GameView view: views){
-                view.updateCardDoesntMatch();
-            }
+    public void playCard(Card card) {
+        playedCards.dealCard(card);
+        for (GameView view : views) {
+            view.updatePlayCard(card);
+
         }
     }
 
     public void drawCard(Player currentPlayer) {
+        // TODO: Reshuffle deck & also add error checking for when deck is empty
         Card drawnCard = deck.drawCard();
         currentPlayer.dealCard(drawnCard);
         for (GameView view : views) {

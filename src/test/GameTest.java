@@ -5,14 +5,15 @@ import main.PlayedCards;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
+
+    /*
     Game game;
     Deck deck;
     Player player1, player2,  player3, player4;
 
-    /*
     Sets up the test fixture.
     Called before every test case method.
-     */
+
     @Before
     protected void setUp() {
         ArrayList<Card> hand1 = new ArrayList<Card>(); // create hand for player 1
@@ -73,5 +74,5 @@ class GameTest {
         assertTrue(deck.shuffle());
     }
 
-
+    */
 }

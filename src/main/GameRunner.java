@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class GameRunner {
 
     private final Game game;
-    private final int playerCount;
     private final GameController controller;
 
-    public GameRunner(Game game, int playerCount, GameController controller) {
+    public GameRunner(Game game, GameController controller) {
         this.game = game;
-        this.playerCount = playerCount;
         this.controller = controller;
     }
 
@@ -22,13 +20,13 @@ public class GameRunner {
         view.setGame(game);
 
 
-        int playerCount = controller.requestPlayerCount();
 
-        GameRunner runner = new GameRunner(game, playerCount, controller);
+        GameRunner runner = new GameRunner(game, controller);
         runner.startGame();
     }
 
     public void startGame() {
+        int playerCount = controller.requestPlayerCount();
         for (int i = 0; i < playerCount; i++) {
             ArrayList<Card> hand = new ArrayList<>();
             String name = controller.requestPlayerName(i);
@@ -43,16 +41,27 @@ public class GameRunner {
             Player currentPlayer = game.getCurrentPlayer();
 
             Card card = null;
-            do {
+            while (true) {
                 int action = controller.requestPlayerAction(currentPlayer.getHand().size());
+
                 if (action == Game.DRAW_CARD_ACTION) {
-                    // TODO: Draw a card
                     game.drawCard(currentPlayer);
-                } else {
-                    card = currentPlayer.getHand().get(action - 1);
-                    game.playCard(currentPlayer.playCard(action - 1), currentPlayer);
+                    break;
                 }
-            } while (!game.canPlay(card));
+
+                card = currentPlayer.getHand().get(action - 1);
+                if (game.canPlay(card)) {
+                    game.playCard(currentPlayer.playCard(action - 1));
+                    break;
+                }
+                System.out.println("Card doesn't match the top card. Try again.");
+            }
+
+            if (currentPlayer.getHand().isEmpty()) {
+                // game.announceWinner();
+                System.out.println(currentPlayer + " wins!");
+                return;
+            }
         }
     }
 }
