@@ -75,7 +75,8 @@ public class GameRunner {
 
             if (currentPlayer.getHand().isEmpty()) {
                 // game.announceWinner();
-                System.out.println(currentPlayer.getName() + " wins!");
+                System.out.println(currentPlayer.getName() + " has won!");
+                System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
             }
         }
     }

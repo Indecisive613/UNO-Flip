@@ -100,7 +100,7 @@ public class Game {
         if(deck.isEmpty()){
             shuffleDeck();
         }
-        Card topCard = deck.pop();
+        Card topCard = deck.pop(); // TODO: What happens if the top card is wild?
         playedCards.push(topCard);
         currentColour = topCard.getColour();
     }
@@ -123,12 +123,13 @@ public class Game {
             turnOrderReversed = false;
         }
         else if (skipPlayer){
-            currentPlayer = (currentPlayer + 2) & playerCount;
+            currentPlayer = (currentPlayer + 2) % playerCount;
             skipPlayer = false;
         }
         else {
             currentPlayer = (currentPlayer + 1) % playerCount;
         }
+
         for (GameView view : views) {
             view.updateNewTurn(players.get(currentPlayer));
         }
@@ -199,5 +200,22 @@ public class Game {
         for (GameView view : views) {
             view.updateDrawCard(drawnCard);
         }
+    }
+
+    /**
+     * Return the score of the current Player assuming they have zero cards in their hand.
+     * This is calculated by summing the values of all other Player's card.
+     *
+     * @return The score of the current Player
+     */
+    public int getCurrentScore() {
+        int score = 0;
+        for (Player player : players) {
+            for (Card card : player.getHand()) {
+                score += card.getPointValue();
+            }
+        }
+
+        return score;
     }
 }
