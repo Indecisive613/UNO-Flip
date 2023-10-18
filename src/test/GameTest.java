@@ -1,74 +1,62 @@
 package test;
 
+import main.Card;
+import main.Game;
+import main.GameRunner;
+import main.Player;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class GameTest {
 
-    /*
+
     Game game;
-    Deck deck;
+    Stack<Card> deck;
     Player player1, player2,  player3, player4;
 
-    Sets up the test fixture.
-    Called before every test case method.
-
-    @Before
-    protected void setUp() {
+    @BeforeEach
+    public void setUp() {
         ArrayList<Card> hand1 = new ArrayList<Card>(); // create hand for player 1
         ArrayList<Card> hand2 = new ArrayList<Card>(); // create hand for player 2
         ArrayList<Card> hand3 = new ArrayList<Card>(); // create hand for player 3
         ArrayList<Card> hand4 = new ArrayList<Card>(); // create hand for player 4
-        player1 = new Player("Homer", hand1, 0); // create player 1
-        player2 = new Player("Marge", hand2, 0); // create player 2
-        player3 = new Player("Bart", hand3, 0); // create player 3
-        player4 = new Player("Lisa", hand4, 0); // create player 4
+        player1 = new Player("Homer", hand1); // create player 1
+        player2 = new Player("Marge", hand2); // create player 2
+        player3 = new Player("Bart", hand3); // create player 3
+        player4 = new Player("Lisa", hand4); // create player 4
 
-        ArrayList<Player> players = new ArrayList<Player>(); // create players for the game and add players
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
-        players.add(player4);
+        deck = GameRunner.createDeck();
 
-        Stack<Card> playedCards = new Stack<Card>(); // create empty played cards pile
+        game = new Game(deck); // create the game with the players and the deck
 
-        game = new Gane(players, deck); // create the game with the players and the deck
+        game.addPlayer(player1);
+        game.addPlayer(player3);
+        game.addPlayer(player2);
+        game.addPlayer(player4);
     }
-    // According to Google Doc:
+
     @Test
     public void testStartGame() {
-        setUp();
-        assertEquals(player1.getHand().size(), 7);
-        assertEquals(player2.getHand().size(), 7);
-        assertEquals(player3.getHand().size(), 7);
-        assertEquals(player4.getHand().size(), 7);
+        assertEquals(0, player1.getHand().size());
+        assertEquals(0, player2.getHand().size());
+        assertEquals(0, player4.getHand().size());
+        assertEquals(0, player3.getHand().size());
+        assertEquals(104, deck.size());
 
-        assertEquals(deck.size(), 80);
-        assertEquals(playedCards.size(), 0);
-    }
-    @Test
-    public void testPlaying() {
-        setUp();
-        assertEquals();
-    }
+        game.deal();
 
-    @Test
-    public void testEndGame() {
-        setUp();
-        assertEquals();
-    }
+        assertEquals(7, player1.getHand().size());
+        assertEquals(7, player2.getHand().size());
+        assertEquals(7, player3.getHand().size());
+        assertEquals(7, player4.getHand().size());
 
-    // According to UML Diagram:
-    @Test
-    public void testGetValidCommands() {
-        setUp();
-        assertTrue(getValidCommands().contains("play"));
-        //assertTrue(getValidCommands().contains("wild"));
-        assertTrue(getValidCommands().contains("draw"));
+        // All 4 players are dealt 7 cards + 1 card placed on the table
+        assertEquals(104 - 7*4 - 1, deck.size());
     }
-
-    @Test
-    public void testReshuffle() {
-        setUp();
-        assertTrue(deck.shuffle());
-    }
-
-    */
 }
