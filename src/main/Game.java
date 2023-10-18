@@ -16,8 +16,10 @@ public class Game {
     private final Stack<Card> playedCards;
 
     private final Stack<Card> deck;
-    private final boolean turnOrderReversed = false;
+    private boolean turnOrderReversed = false;
+    private boolean skipPlayer = false;
     private int currentPlayer = -1; // set to -1 for first increment
+    private Card.Colour currentColour;
 
 
     public Game(Stack<Card> deck) {
@@ -68,7 +70,9 @@ public class Game {
         if(deck.isEmpty()){
             shuffleDeck();
         }
-        playedCards.push(deck.pop());
+        Card topCard = deck.pop();
+        playedCards.push(topCard);
+        currentColour = topCard.getColour();
     }
 
     public boolean isRunning() {
@@ -78,7 +82,13 @@ public class Game {
     public void nextTurn() {
         if (turnOrderReversed) {
             currentPlayer = (currentPlayer - 1) % players.size();
-        } else {
+            turnOrderReversed = false;
+        }
+        else if (skipPlayer){
+            currentPlayer = (currentPlayer + 2) & players.size();
+            skipPlayer = false;
+        }
+        else {
             currentPlayer = (currentPlayer + 1) % players.size();
         }
         for (GameView view : views) {
@@ -88,15 +98,39 @@ public class Game {
 
     public boolean canPlay(Card card) {
         Card topCard = playedCards.peek();
+
         return (card == null
                 || card.getColour().equals(Card.Colour.WILD)
-                || card.getColour().equals(topCard.getColour())
-                || card.getSymbol().equals(topCard.getSymbol()));
+                || card.getColour().equals(currentColour)
+                || card.getSymbol().equals(topCard.getSymbol())
+                || currentColour.equals(Card.Colour.WILD));
         // TODO: Add wild card logic (maybe store currentColour independently from the top card)
     }
 
     public void playCard(Card card) {
         playedCards.push(card);
+        if (!card.getColour().equals(Card.Colour.WILD)){
+            currentColour = card.getColour();
+        }
+        if (card.getSymbol().equals(Card.Symbol.DRAW_ONE)){
+            int nextPlayer = (currentPlayer + 1) % players.size();
+            players.get(nextPlayer).dealCard(deck.pop());
+        }
+        else if (card.getSymbol().equals(Card.Symbol.SKIP)){
+            skipPlayer = true;
+        }
+        else if (card.getSymbol().equals(Card.Symbol.REVERSE)){
+            turnOrderReversed = true;
+        }
+        else if (card.getSymbol().equals(Card.Symbol.WILD)){
+            currentColour = Card.Colour.WILD; // TODO: in game controller implement a select colour method for user to chose colour
+        }
+        else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
+            currentColour = Card.Colour.WILD;
+            int nextPlayer = (currentPlayer + 1) % players.size();
+            players.get(nextPlayer).dealCard(deck.pop());
+            players.get(nextPlayer).dealCard(deck.pop());
+        }
         for (GameView view : views) {
             view.updatePlayCard(card);
         }
