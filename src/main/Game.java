@@ -180,7 +180,7 @@ public class Game {
         }
         else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
             currentColour = Card.Colour.WILD;
-            int nextPlayer = (currentPlayer + 1) % players.size();
+            int nextPlayer = (currentPlayer + 1) % players.size(); // TODO: This is wrong when turn order is reversed. I think we should add a "nextPlayer()" method to get whoever's going next
             players.get(nextPlayer).dealCard(deck.pop());
             players.get(nextPlayer).dealCard(deck.pop());
         }
