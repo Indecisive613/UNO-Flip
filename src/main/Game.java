@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
+/**
+ * An UNO game
+ */
 public class Game {
 
     public static final int PLAYER_MIN = 2;
@@ -22,6 +25,11 @@ public class Game {
     private Card.Colour currentColour;
 
 
+    /**
+     * Create a new UNO Game given a deck of cards
+     *
+     * @param deck The decks of cards to use in this game
+     */
     public Game(Stack<Card> deck) {
         this.deck = deck;
         this.playedCards = new Stack<Card>();
@@ -29,22 +37,41 @@ public class Game {
         views = new ArrayList<>();
     }
 
+    /**
+     * Add a new Player to the Game
+     *
+     * @param player The Player to add
+     */
     public void addPlayer(Player player) {
         players.add(player);
     }
 
+    /**
+     * @return The Player whose turn it is
+     */
     public Player getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
+    /**
+     * Add a GameView to display game info
+     *
+     * @param view The GameView
+     */
     public void addView(GameView view) {
         views.add(view);
     }
 
+    /**
+     * @return The card on top
+     */
     public Card getTopCard() {
         return playedCards.peek();
     }
 
+    /**
+     * Shuffle the deck of cards
+     */
     public void shuffleDeck() {
         //Puts cards in played cards into discard and reshuffles
         if(!playedCards.isEmpty()) {
@@ -57,7 +84,10 @@ public class Game {
         Collections.shuffle(deck);
     }
 
-    public void deal() {
+    /**
+     * Deal STARTING_HAND_SIZE cards to each player
+     */
+    public void dealCards() {
         for (int i = 0; i < STARTING_HAND_SIZE; i++) {
             for (Player p : players) {
                 if(deck.isEmpty()){
@@ -75,11 +105,17 @@ public class Game {
         currentColour = topCard.getColour();
     }
 
+    /**
+     * @return If the game is running
+     */
     public boolean isRunning() {
         return true;
     }
 
-    public void nextTurn() {
+    /**
+     * Advance the turn to the next player
+     */
+    public void advanceTurn() {
         if (turnOrderReversed) {
             currentPlayer = (currentPlayer - 1) % players.size();
             turnOrderReversed = false;
@@ -96,7 +132,13 @@ public class Game {
         }
     }
 
-    public boolean canPlay(Card card) {
+    /**
+     * Return if a given Card can legally be played on the current top card
+     *
+     * @param card The card to be played
+     * @return If the given Card can be played
+     */
+    public boolean canPlayCard(Card card) {
         Card topCard = playedCards.peek();
 
         return (card == null
@@ -107,6 +149,11 @@ public class Game {
         // TODO: Add wild card logic (maybe store currentColour independently from the top card)
     }
 
+    /**
+     * Play a given card and determine its effect
+     *
+     * @param card The card to play
+     */
     public void playCard(Card card) {
         playedCards.push(card);
         if (!card.getColour().equals(Card.Colour.WILD)){
@@ -136,12 +183,17 @@ public class Game {
         }
     }
 
-    public void drawCard(Player currentPlayer) {
+    /**
+     * Deal a card from the deck to a given Player
+     *
+     * @param player The Player whose turn it is
+     */
+    public void drawCard(Player player) {
         if(deck.isEmpty()){
             shuffleDeck();
         }
         Card drawnCard = deck.pop();
-        currentPlayer.dealCard(drawnCard);
+        player.dealCard(drawnCard);
         for (GameView view : views) {
             view.updateDrawCard(drawnCard);
         }

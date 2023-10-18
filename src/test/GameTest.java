@@ -49,7 +49,7 @@ class GameTest {
         assertEquals(0, player3.getHand().size());
         assertEquals(104, deck.size());
 
-        game.deal();
+        game.dealCards();
 
         assertEquals(7, player1.getHand().size());
         assertEquals(7, player2.getHand().size());

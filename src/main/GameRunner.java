@@ -50,10 +50,10 @@ public class GameRunner {
             game.addPlayer(player);
         }
         game.shuffleDeck();
-        game.deal();
+        game.dealCards();
 
         while (game.isRunning()) {
-            game.nextTurn();
+            game.advanceTurn();
             Player currentPlayer = game.getCurrentPlayer();
 
             Card card = null;
@@ -66,7 +66,7 @@ public class GameRunner {
                 }
 
                 card = currentPlayer.getHand().get(action - 1);
-                if (game.canPlay(card)) {
+                if (game.canPlayCard(card)) {
                     game.playCard(currentPlayer.playCard(action - 1));
                     break;
                 }
