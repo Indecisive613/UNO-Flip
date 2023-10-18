@@ -2,16 +2,29 @@ package main;
 
 import java.util.Scanner;
 
+/**
+ * A Controller class for Game to respond to user input
+ */
 public class GameController {
 
     private final Scanner input;
     private final GameView view;
 
+    /**
+     * Creates a GameController which gets user input
+     *
+     * @param view The associated GameView to display info to
+     */
     public GameController(GameView view) {
         this.view = view;
         input = new Scanner(System.in);
     }
 
+    /**
+     * Asks the user for the number of players in the game
+     *
+     * @return The number of players in the game
+     */
     public int requestPlayerCount() {
         int playerCount = -1;
         while (true) {
@@ -27,6 +40,15 @@ public class GameController {
         }
     }
 
+    /**
+     * Asks the user for an action from a specific player
+     * Actions:
+     * 0: Draw a card
+     * 1 to handSize: Play the card at that index
+     *
+     * @param handSize The player's hand size
+     * @return The player's action
+     */
     public int requestPlayerAction(int handSize) {
         int action = -1;
         view.updateGetCard();
@@ -44,6 +66,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Ask the user for player i's name
+     *
+     * @param i The turn-number of the player who will be named
+     * @return The name of player i
+     */
     public String requestPlayerName(int i) {
         view.updateGetPlayerName(i);
         return input.next();

@@ -3,6 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * An UNO card with a colour, symbol, and point value
+ */
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
     public enum Symbol {
@@ -37,7 +40,8 @@ public class Card {
     public static final ArrayList<Colour> wildColours = new ArrayList<Colour>(Arrays.asList(Colour.WILD));
     public static final ArrayList<Colour> nonWildColours = new ArrayList<Colour>(Arrays.asList(Colour.RED, Colour.GREEN, Colour.BLUE, Colour.YELLOW));
 
-    /** An UNO card with a colour and face value
+    /**
+     * An UNO card with a colour and face value
      *
      * @param colour The colour of the card, or wild if it's a wild card
      * @param symbol The card number or symbol if it's a special card

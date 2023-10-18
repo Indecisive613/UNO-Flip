@@ -3,16 +3,30 @@ package main;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * A class to initialize and run an UNO game
+ */
 public class GameRunner {
 
     private final Game game;
     private final GameController controller;
 
+    /**
+     * Create a GameRunner with a specific Game and GameController
+     *
+     * @param game The Game to run
+     * @param controller The GameController to get user input with
+     */
     public GameRunner(Game game, GameController controller) {
         this.game = game;
         this.controller = controller;
     }
 
+    /**
+     * The Main method to create a new UNO game
+     *
+     * @param args Main args - not used
+     */
     public static void main(String[] args) {
         GameView view = new GameView();
         GameController controller = new GameController(view);
@@ -20,12 +34,13 @@ public class GameRunner {
         game.addView(view);
         view.setGame(game);
 
-
-
         GameRunner runner = new GameRunner(game, controller);
         runner.startGame();
     }
 
+    /**
+     * Start the UNO game
+     */
     public void startGame() {
         int playerCount = controller.requestPlayerCount();
         for (int i = 0; i < playerCount; i++) {
@@ -66,6 +81,11 @@ public class GameRunner {
         }
     }
 
+    /**
+     * Create and return a deck of UNO cards
+     *
+     * @return A deck of UNO cards
+     */
     public static Stack<Card> createDeck() {
         Stack<Card> cards = new Stack<Card>();
 
