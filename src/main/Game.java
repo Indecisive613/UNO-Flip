@@ -116,16 +116,18 @@ public class Game {
      * Advance the turn to the next player
      */
     public void advanceTurn() {
+        int playerCount = players.size();
+
         if (turnOrderReversed) {
-            currentPlayer = (currentPlayer - 1) % players.size();
+            currentPlayer = (currentPlayer - 1 + playerCount) % playerCount;
             turnOrderReversed = false;
         }
         else if (skipPlayer){
-            currentPlayer = (currentPlayer + 2) & players.size();
+            currentPlayer = (currentPlayer + 2) & playerCount;
             skipPlayer = false;
         }
         else {
-            currentPlayer = (currentPlayer + 1) % players.size();
+            currentPlayer = (currentPlayer + 1) % playerCount;
         }
         for (GameView view : views) {
             view.updateNewTurn(players.get(currentPlayer));
