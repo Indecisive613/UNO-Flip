@@ -13,7 +13,7 @@ public class Player {
 
 
     /**
-     * Create a Player with a given name and hanf of cards
+     * Create a Player with a given name and hadd of cards
      *
      * @param name The name of the Player
      * @param hand The Player's hand of cards
@@ -42,6 +42,16 @@ public class Player {
         return score;
     }
 
+
+    /**
+     * Increment the Player's score by a given amount
+     *
+     * @param score The score increment
+     */
+    public void incrementScore(int score) {
+        this.score += score;
+    }
+
     /**
      * @return The Player's hand
      */
@@ -65,7 +75,7 @@ public class Player {
      * @return The card at index
      */
     public Card playCard(int index) throws IllegalArgumentException {
-        if(index < 0 || index > hand.size()) {
+        if(index < 0 || index > hand.size() - 1) {
             throw new IllegalArgumentException("You must play a card between 0 and " + hand.size());
         }
         Card card = hand.get(index);

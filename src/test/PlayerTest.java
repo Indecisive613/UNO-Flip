@@ -2,37 +2,99 @@ package test;
 
 import main.Card;
 import main.Player;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
+/**
+ * Tests for the Player class
+ *
+ * @author Jackie Smolkin-Lerner
+ */
 class PlayerTest {
 
-    public PlayerTest() {
+    @Test
+    public void testCreatePlayer() {
+        ArrayList<Card> hand = new ArrayList<>();
+        Player p = new Player("Test Name", hand);
 
-    }
-
-    @BeforeEach
-    protected void setUp() {
+        assertEquals("Test Name", p.getName());
+        assertEquals(0, p.getScore());
+        assertEquals(hand, p.getHand());
     }
 
     @Test
-    public void testGetName() {
+    public void testDealCard() {
+        ArrayList<Card> hand = new ArrayList<>();
+        Player p = new Player("Test Name", hand);
 
+        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        p.dealCard(card);
+
+        assertEquals(1, p.getHand().size());
+        assertEquals(card, p.getHand().get(0));
     }
 
     @Test
-    public void testGetScore() {
+    public void testPlayCard() {
+        ArrayList<Card> hand= new ArrayList<>();
+        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        hand.add(card);
+        Player p = new Player("Test Name", hand);
 
+        assertEquals(card, p.playCard(0));
+        assertEquals(0, p.getHand().size());
     }
 
     @Test
-    public void testGetHand() {
+    public void testPlayMultipleCard() {
+        ArrayList<Card> hand= new ArrayList<>();
+        Card c1 = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        Card c2 = new Card(Card.Colour.BLUE, Card.Symbol.TWO);
+        Card c3 = new Card(Card.Colour.GREEN, Card.Symbol.THREE);
+        hand.add(c1);
+        hand.add(c2);
+        hand.add(c3);
+        Player p = new Player("Test Name", hand);
 
+        System.out.println(p.getHand().size());
+        assertEquals(c2, p.playCard(1));
+        System.out.println(p.getHand().size());
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.playCard(2);
+        });
+        assertEquals(c1, p.playCard(0));
+        assertEquals(c3, p.playCard(0));
+        assertEquals(0, p.getHand().size());
     }
 
+    @Test
+    public void testInvalidPlayCard() {
+        ArrayList<Card> hand= new ArrayList<>();
+        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        hand.add(card);
+        Player p = new Player("Test Name", hand);
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.playCard(-1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.playCard(2);
+        });
+    }
+
+    @Test
+    public void testIncrementScore() {
+        ArrayList<Card> hand = new ArrayList<>();
+        Player p = new Player("Test Name", hand);
+
+        p.incrementScore(100);
+        assertEquals(100, p.getScore());
+
+        p.incrementScore(2009);
+        assertEquals(100 + 2009, p.getScore());
+    }
 }
