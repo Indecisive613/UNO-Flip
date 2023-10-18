@@ -16,9 +16,10 @@ public class Game {
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
-    private final Stack<Card> playedCards;
 
+    private final Stack<Card> playedCards;
     private final Stack<Card> deck;
+
     private boolean turnOrderReversed = false;
     private boolean skipPlayer = false;
     private int currentPlayer = -1; // set to -1 for first increment
@@ -118,13 +119,15 @@ public class Game {
     public void advanceTurn() {
         int playerCount = players.size();
 
-        if (turnOrderReversed) {
+        if (turnOrderReversed && skipPlayer) {
+            currentPlayer = (currentPlayer - 2 + playerCount) % playerCount;
+        }
+        else if (turnOrderReversed) {
             currentPlayer = (currentPlayer - 1 + playerCount) % playerCount;
-            turnOrderReversed = false;
         }
         else if (skipPlayer){
-            currentPlayer = (currentPlayer + 2) % playerCount;
             skipPlayer = false;
+            currentPlayer = (currentPlayer + 2) % playerCount;
         }
         else {
             currentPlayer = (currentPlayer + 1) % playerCount;
