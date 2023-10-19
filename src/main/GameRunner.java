@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
- * A class to initialize and run an UNO game
+ * A class to initialize and run an UNO game.
+ *
+ * @authors Fiona
  */
 public class GameRunner {
 

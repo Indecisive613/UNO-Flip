@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * An UNO game
+ * A light side UNO Flip game that has players, cards, and contains the logic required to play a game of light side UNO Flip.
+ *
+ * @authors Fiona
  */
 public class Game {
 

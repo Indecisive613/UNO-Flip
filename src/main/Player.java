@@ -3,7 +3,9 @@ package main;
 import java.util.ArrayList;
 
 /**
- * A Player with a name, score, and hand of cards
+ * An UNO player with a name, score, and hand of cards.
+ *
+ * @authors Fiona
  */
 public class Player {
 
@@ -18,11 +20,7 @@ public class Player {
      * @param name The name of the Player
      * @param hand The Player's hand of cards
      */
-    public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
-        if(hand.size() != 7){
-            // throw new IllegalArgumentException("The player must start with 7 cards in their hand.");
-            // TODO: Maybe this logic should be in Game?
-        }
+    public Player(String name, ArrayList<Card> hand) {
         this.name = name;
         this.hand = hand;
         score = 0;

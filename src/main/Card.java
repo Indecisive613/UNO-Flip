@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * An UNO card with a colour, symbol, and point value
+ * An UNO card that has a colour, symbol, and point value.
+ *
+ * @authors Fiona
  */
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
@@ -47,7 +49,6 @@ public class Card {
      * @param symbol The card number or symbol if it's a special card
      */
     public Card(Colour colour, Symbol symbol) throws IllegalArgumentException{
-        //Making the assumption that no one will try to create WILD SEVEN for example...
         this.colour = colour;
         this.symbol = symbol;
         this.pointValue = symbol.pointValue;
