@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * An UNO card that has a colour, symbol, and point value.
  *
- * @authors Fiona
+ * @authors Fiona, Anand
  */
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
@@ -85,5 +85,17 @@ public class Card {
     @Override
     public String toString() {
         return colour + " " + symbol;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Card)) {
+            return false;
+        }
+        Card c = (Card) o;
+        return this.colour.equals(c.colour) && this.symbol.equals(c.symbol);
     }
 }
