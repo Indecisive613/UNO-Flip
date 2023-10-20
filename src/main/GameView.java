@@ -36,8 +36,9 @@ public class GameView {
         System.out.printf("Top card %s.\n", game.getTopCard());
     }
 
-    public void updatePlayCard(Card playedCard) {
+    public void updatePlayCard(Card playedCard, String additionalMessage) {
         System.out.println("Played: " + playedCard);
+        System.out.println(additionalMessage);
     }
 
     public void updateDrawCard(Card drawnCard) {
@@ -46,5 +47,13 @@ public class GameView {
 
     public void updateGetCard() {
         System.out.println("Enter card index to play or 0 to draw a card:"); // TODO: Make method call in view
+    }
+
+    public void updateGetColor(){
+        System.out.println("Choose a color (RED, YELLOW, GREEN, BLUE):");
+    }
+
+    public void updateConfirmColor(Card.Colour color){
+        System.out.println(color + " has been chosen.");
     }
 }

@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /**
  * A Controller class for Game to respond to user input
+ *
+ * @author Jake, Anand Balaram
  */
 public class GameController {
 
@@ -75,5 +77,38 @@ public class GameController {
     public String requestPlayerName(int i) {
         view.updateGetPlayerName(i);
         return input.next();
+    }
+
+    /**
+     * Asks the user to choose a color when they play a wild card
+     *
+     * @return The colour chosen
+     */
+    public Card.Colour requestColour(){
+        view.updateGetColor();
+        while (true) {
+            Scanner stringScanner = new Scanner(System.in);
+            String color = stringScanner.next();
+            Card.Colour returnVal;
+            if (color.toUpperCase().equals("GREEN")) {
+                returnVal = Card.Colour.GREEN;
+            }
+            else if(color.toUpperCase().equals("BLUE")){
+                returnVal = Card.Colour.GREEN;
+            }
+            else if(color.toUpperCase().equals("YELLOW")){
+                returnVal = Card.Colour.YELLOW;
+            }
+            else if(color.toUpperCase().equals("RED")){
+                returnVal = Card.Colour.RED;
+            }
+            else{
+                view.updateInvalidInput("Invalid choice. Try again.");
+                continue;
+            }
+            view.updateConfirmColor(returnVal);
+            return returnVal;
+
+        }
     }
 }

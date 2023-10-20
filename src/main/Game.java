@@ -18,6 +18,7 @@ public class Game {
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
+    private final ArrayList<Integer> scores;
 
     private final Stack<Card> playedCards;
     private final Stack<Card> deck;
@@ -38,6 +39,7 @@ public class Game {
         this.playedCards = new Stack<Card>();
         players = new ArrayList<>();
         views = new ArrayList<>();
+        scores = new ArrayList<Integer>();
     }
 
     /**
@@ -103,7 +105,7 @@ public class Game {
         if(deck.isEmpty()){
             shuffleDeck();
         }
-        Card topCard = deck.pop(); // TODO: What happens if the top card is wild?
+        Card topCard = deck.pop();
         playedCards.push(topCard);
         currentColour = topCard.getColour();
     }
@@ -119,21 +121,8 @@ public class Game {
      * Advance the turn to the next player
      */
     public void advanceTurn() {
-        int playerCount = players.size();
-
-        if (turnOrderReversed && skipPlayer) {
-            currentPlayer = (currentPlayer - 2 + playerCount) % playerCount;
-        }
-        else if (turnOrderReversed) {
-            currentPlayer = (currentPlayer - 1 + playerCount) % playerCount;
-        }
-        else if (skipPlayer){
-            skipPlayer = false;
-            currentPlayer = (currentPlayer + 2) % playerCount;
-        }
-        else {
-            currentPlayer = (currentPlayer + 1) % playerCount;
-        }
+        currentPlayer = nextPlayer();
+        skipPlayer = false;
 
         for (GameView view : views) {
             view.updateNewTurn(players.get(currentPlayer));
@@ -154,22 +143,29 @@ public class Game {
                 || card.getColour().equals(currentColour)
                 || card.getSymbol().equals(topCard.getSymbol())
                 || currentColour.equals(Card.Colour.WILD));
-        // TODO: Add wild card logic (maybe store currentColour independently from the top card)
     }
 
     /**
      * Play a given card and determine its effect
      *
      * @param card The card to play
+     * @return An integer that indicates if and which action card was played
      */
-    public void playCard(Card card) {
+    public boolean playCard(Card card) {
         playedCards.push(card);
+        boolean wild = false;
+        String additionalMessage = "";
         if (!card.getColour().equals(Card.Colour.WILD)){
             currentColour = card.getColour();
         }
+        else{
+            wild = true;
+        }
         if (card.getSymbol().equals(Card.Symbol.DRAW_ONE)){
-            int nextPlayer = (currentPlayer + 1) % players.size();
-            players.get(nextPlayer).dealCard(deck.pop());
+            int nextPlayer = nextPlayer();
+            Card drawn = deck.pop();
+            players.get(nextPlayer).dealCard(drawn);
+            additionalMessage += players.get(nextPlayer).getName() + " has to draw a card due to " + card + ": " + drawn;
         }
         else if (card.getSymbol().equals(Card.Symbol.SKIP)){
             skipPlayer = true;
@@ -177,18 +173,19 @@ public class Game {
         else if (card.getSymbol().equals(Card.Symbol.REVERSE)){
             turnOrderReversed = true;
         }
-        else if (card.getSymbol().equals(Card.Symbol.WILD)){
-            currentColour = Card.Colour.WILD; // TODO: in game controller implement a select colour method for user to chose colour
-        }
         else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
-            currentColour = Card.Colour.WILD;
-            int nextPlayer = (currentPlayer + 1) % players.size(); // TODO: This is wrong when turn order is reversed. I think we should add a "nextPlayer()" method to get whoever's going next
-            players.get(nextPlayer).dealCard(deck.pop());
-            players.get(nextPlayer).dealCard(deck.pop());
+            skipPlayer = true;
+            int nextPlayer = nextPlayer();
+            Card drawn1 = deck.pop();
+            Card drawn2 = deck.pop();
+            players.get(nextPlayer).dealCard(drawn1);
+            players.get(nextPlayer).dealCard(drawn2);
+            additionalMessage += players.get(nextPlayer).getName() + " has to draw two cards due to " + card + ": " + drawn1 + ", " + drawn2;
         }
         for (GameView view : views) {
-            view.updatePlayCard(card);
+            view.updatePlayCard(card, additionalMessage);
         }
+        return wild;
     }
 
     /**
@@ -222,5 +219,35 @@ public class Game {
         }
 
         return score;
+    }
+    public int nextPlayer(){
+        int playerCount = players.size();
+
+        if (turnOrderReversed && skipPlayer) {
+            return (currentPlayer - 2) % playerCount;
+        }
+        else if (turnOrderReversed) {
+            return (currentPlayer - 1) % playerCount;
+        }
+        else if (skipPlayer){
+            return (currentPlayer + 2) % playerCount;
+        }
+        else {
+            return (currentPlayer + 1) % playerCount;
+        }
+    }
+    public boolean hasWonGame(){
+        for (Integer i : scores){
+            if (i >= 500){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void assignScore(){
+        scores.set(currentPlayer, getCurrentScore());
+    }
+    public void setCurrentColour(Card.Colour currentColour) {
+        this.currentColour = currentColour;
     }
 }

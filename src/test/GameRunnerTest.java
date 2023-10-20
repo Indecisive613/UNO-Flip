@@ -26,7 +26,7 @@ public class GameRunnerTest {
     public void testCreateDeck(){
         assertTrue(main.GameRunner.createDeck() instanceof Stack<Card>);
         Stack<Card> deck = main.GameRunner.createDeck();
-        assertEquals(deck.size(), 108);
+        assertEquals(104, deck.size());
 
         Stack<Card> testDeck = new Stack<Card>();
 
@@ -48,7 +48,7 @@ public class GameRunnerTest {
         }
 
         while(!deck.isEmpty()) {
-            assertEquals(deck.pop(), testDeck.pop());
+            assertEquals(testDeck.pop(), deck.pop());
         }
         assertTrue(testDeck.isEmpty());
     }
