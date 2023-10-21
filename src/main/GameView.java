@@ -2,6 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
+/**
+ * A View class for Game to update and display an UNO game
+ *
+ * @authors Jackie Smolkin-Lerner, Anand Balaram
+ */
 public class GameView {
 
     private Game game; // TODO: Do we need this? Doesn't Game store GameView? This seems like a circular dependency.
@@ -22,6 +27,11 @@ public class GameView {
         System.out.println(message);
     }
 
+    /**
+     * Display the card side, the top card, and the hand of the current player for this turn
+     *
+     * @param player The current player whose turn it is
+     */
     public void updateNewTurn(Player player) {
         System.out.printf("\n######## %s's Turn. ########\n", player.getName()); // TODO: For debugging - remove later
         // System.out.printf("%s's Turn.\n", player.getName());
@@ -36,23 +46,45 @@ public class GameView {
         System.out.printf("Top card %s.\n", game.getTopCard());
     }
 
+    /**
+     * Display information about the card that was played and additional useful information
+     *
+     * @param playedCard the card that has been played
+     * @param additionalMessage a message that provides useful information to the players
+     */
     public void updatePlayCard(Card playedCard, String additionalMessage) {
         System.out.println("Played: " + playedCard);
         System.out.println(additionalMessage);
     }
 
+    /**
+     * Display information about the card that was drawn by a player
+     *
+     * @param drawnCard the card that was drawn by a player
+     */
     public void updateDrawCard(Card drawnCard) {
         System.out.println("Drew a card: " + drawnCard);
     }
 
+    /**
+     * Display instructions to the current player about how to play or draw a card
+     */
     public void updateGetCard() {
         System.out.println("Enter card index to play or 0 to draw a card:"); // TODO: Make method call in view
     }
 
+    /**
+     * Display instructions to the current player about what colour to pick
+     */
     public void updateGetColor(){
         System.out.println("Choose a color (RED, YELLOW, GREEN, BLUE):");
     }
 
+    /**
+     * Display information about what colour the player has chosen
+     *
+     * @param color The colour that the player has chosen
+     */
     public void updateConfirmColor(Card.Colour color){
         System.out.println(color + " has been chosen.");
     }
