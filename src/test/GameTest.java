@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 class GameTest {
 
-
     Game game;
     Stack<Card> deck;
     Player player1, player2,  player3, player4;
@@ -36,9 +35,10 @@ class GameTest {
         player3 = new Player("Bart", hand3); // create player 3
         player4 = new Player("Lisa", hand4); // create player 4
 
-        deck = GameRunner.createDeck();
+        deck = GameRunner.createDeck(); // create the deck
         game = new Game(deck); // create the game with the players and the deck
 
+        // add the players to the game
         game.addPlayer(player1);
         game.addPlayer(player3);
         game.addPlayer(player2);

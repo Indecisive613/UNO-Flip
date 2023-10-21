@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * An UNO card that has a colour, symbol, and point value.
  *
- * @authors Fiona, Anand
+ * @authors Fiona Cheng, Anand Balaram
  */
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }

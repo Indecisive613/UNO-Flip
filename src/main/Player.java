@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * A Player with a name, score, and hand of cards
+ *
+ * @authors Fiona Cheng, Jackie Smolkin-Lerner
  */
 public class Player {
 
@@ -41,7 +43,6 @@ public class Player {
     public Integer getScore() {
         return score;
     }
-
 
     /**
      * Increment the Player's score by a given amount
