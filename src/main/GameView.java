@@ -11,18 +11,36 @@ public class GameView {
 
     private Game game; // TODO: Do we need this? Doesn't Game store GameView? This seems like a circular dependency.
 
+    /**
+     * Set the current UNO game
+     *
+     * @param game the current UNO game
+     */
     public void setGame(Game game) {
         this.game = game;
     }
 
+    /**
+     * Display instructions for the user(s) to enter the name of a specific player
+     *
+     * @param index the number-1 corresponding to a specific player
+     */
     public void updateGetPlayerName(int index) {
         System.out.print("Enter name for Player " + (index + 1) + ": ");
     }
 
+    /**
+     * Display a message stating that a card does not match the top card
+     */
     public void updateCardDoesntMatch() {
         System.out.println("Card doesn't match the top card. Try again.");
     }
 
+    /**
+     * Display an invalid input message
+     *
+     * @param message the message that is displayed
+     */
     public void updateInvalidInput(String message) {
         System.out.println(message);
     }
