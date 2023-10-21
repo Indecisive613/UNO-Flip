@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * A class to test GameController
  *
- * @authors Fiona Jackie
+ * @authors Fiona Cheng, Jackie Smolkin-Lerner
  */
 
 public class GameControllerTest {
