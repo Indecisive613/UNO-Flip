@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * A class to initialize and run an UNO game.
  *
- * @authors Fiona
+ * @authors Fiona, Anand Balaram
  */
 public class GameRunner {
 
@@ -37,7 +37,11 @@ public class GameRunner {
         view.setGame(game);
 
         GameRunner runner = new GameRunner(game, controller);
-        runner.startGame();
+        while(!game.hasWonGame()){
+            runner.startGame();
+        }
+        System.out.println(game.getCurrentPlayer().getName() + " has won!");
+        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentScore() + " points this round.");
     }
 
     /**
@@ -69,7 +73,10 @@ public class GameRunner {
 
                 card = currentPlayer.getHand().get(action - 1);
                 if (game.canPlayCard(card)) {
-                    game.playCard(currentPlayer.playCard(action - 1));
+                    boolean wild = game.playCard(currentPlayer.playCard(action - 1));
+                    if (wild) {
+                        game.setCurrentColour(controller.requestColour());
+                    }
                     break;
                 }
                 System.out.println("Card doesn't match the top card. Try again.");
@@ -79,6 +86,7 @@ public class GameRunner {
                 // game.announceWinner();
                 System.out.println(currentPlayer.getName() + " has won!");
                 System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
+                game.assignScore();
             }
         }
     }
