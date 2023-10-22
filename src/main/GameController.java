@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * A Controller class for Game to respond to user input
  *
- * @authors Jake Siushansian, Anand Balaram
+ * @author Jake Siushansian, Anand Balaram, Jackie Smolkin-Lerner
  */
 public class GameController {
 
@@ -30,7 +30,7 @@ public class GameController {
     public int requestPlayerCount() {
         int playerCount = -1;
         while (true) {
-            System.out.print("Enter number of players (2-4): "); // TODO: Make method call in view
+            System.out.print("Enter number of players (2-4): ");
             if (!input.hasNextInt()) {
                 input.next();
                 continue;
@@ -80,32 +80,32 @@ public class GameController {
     }
 
     /**
-     * Asks the user to choose a color when they play a wild card
+     * Asks the user to choose a colour when they play a wild card
      *
      * @return The colour chosen
      */
     public Card.Colour requestColour(){
-        view.updateGetColor();
+        view.updateGetColour();
         Card.Colour returnVal;
         while (true) {
             Scanner stringScanner = new Scanner(System.in);
-            String color = stringScanner.next();
-            if (color.toUpperCase().equals("GREEN")) {
+            String colour = stringScanner.next();
+            if (colour.equalsIgnoreCase("GREEN")) {
                 returnVal = Card.Colour.GREEN;
                 break;
-            } else if (color.toUpperCase().equals("BLUE")) {
+            } else if (colour.equalsIgnoreCase("BLUE")) {
                 returnVal = Card.Colour.BLUE;
                 break;
-            } else if (color.toUpperCase().equals("YELLOW")) {
+            } else if (colour.equalsIgnoreCase("YELLOW")) {
                 returnVal = Card.Colour.YELLOW;
                 break;
-            } else if (color.toUpperCase().equals("RED")) {
+            } else if (colour.equalsIgnoreCase("RED")) {
                 returnVal = Card.Colour.RED;
                 break;
             }
             view.updateInvalidInput("Invalid choice. Try again.");
         }
-        view.updateConfirmColor(returnVal);
+        view.updateConfirmColour(returnVal);
         return returnVal;
 
     }

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @authors Jackie Smolkin-Lerner, Jake Siushansian
  */
-class GameTest {
+public class GameTest {
 
     Game game;
     Stack<Card> deck;

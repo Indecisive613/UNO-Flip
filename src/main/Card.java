@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * An UNO card that has a colour, symbol, and point value.
  *
- * @authors Fiona Cheng, Anand Balaram
+ * @author Fiona Cheng, Anand Balaram
  */
 public class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
@@ -57,7 +57,7 @@ public class Card {
             throw new IllegalArgumentException("The symbol for a wild card can not be in " + nonWildSymbols);
         }
         if(nonWildColours.contains(colour) && wildSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a colored card can not be in " + wildSymbols);
+            throw new IllegalArgumentException("The symbol for a coloured card can not be in " + wildSymbols);
         }
     }
 

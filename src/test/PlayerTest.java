@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  *
  * @author Jackie Smolkin-Lerner
  */
-class PlayerTest {
+public class PlayerTest {
 
     @Test
     public void testCreatePlayer() {

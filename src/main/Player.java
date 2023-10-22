@@ -15,12 +15,12 @@ public class Player {
 
 
     /**
-     * Create a Player with a given name and hadd of cards
+     * Create a Player with a given name and hand of cards
      *
      * @param name The name of the Player
      * @param hand The Player's hand of cards
      */
-    public Player(String name, ArrayList<Card> hand) {
+    public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
         this.name = name;
         this.hand = hand;
         score = 0;
@@ -38,6 +38,15 @@ public class Player {
      */
     public Integer getScore() {
         return score;
+    }
+
+    /**
+     * Increment the Player's score by a given amount
+     *
+     * @param score The score increment
+     */
+    public void incrementScore(int score) {
+        this.score += score;
     }
 
     /**
@@ -74,14 +83,5 @@ public class Player {
         ArrayList<Card> tempHand = hand;
         hand.clear();
         return tempHand;
-    }
-
-    /**
-     * Increment the Player's score by a given amount
-     *
-     * @param score The score increment
-     */
-    public void incrementScore(int score) {
-        this.score += score;
     }
 }

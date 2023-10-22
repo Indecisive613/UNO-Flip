@@ -17,14 +17,10 @@ import java.util.Stack;
  */
 
 public class GameRunnerTest {
-    @Test
-    public void testStartGame(){
-        // No idea how I'm supposed to test this because it's basically covered in all the other tests
-    }
 
     @Test
     public void testCreateDeck(){
-        assertTrue(main.GameRunner.createDeck() instanceof Stack<Card>);
+        assertTrue(main.GameRunner.createDeck() instanceof Stack);
         Stack<Card> deck = main.GameRunner.createDeck();
         assertEquals(104, deck.size());
 
