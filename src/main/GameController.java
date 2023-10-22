@@ -86,29 +86,27 @@ public class GameController {
      */
     public Card.Colour requestColour(){
         view.updateGetColor();
+        Card.Colour returnVal;
         while (true) {
             Scanner stringScanner = new Scanner(System.in);
             String color = stringScanner.next();
-            Card.Colour returnVal;
             if (color.toUpperCase().equals("GREEN")) {
                 returnVal = Card.Colour.GREEN;
-            }
-            else if(color.toUpperCase().equals("BLUE")){
+                break;
+            } else if (color.toUpperCase().equals("BLUE")) {
                 returnVal = Card.Colour.GREEN;
-            }
-            else if(color.toUpperCase().equals("YELLOW")){
+                break;
+            } else if (color.toUpperCase().equals("YELLOW")) {
                 returnVal = Card.Colour.YELLOW;
-            }
-            else if(color.toUpperCase().equals("RED")){
+                break;
+            } else if (color.toUpperCase().equals("RED")) {
                 returnVal = Card.Colour.RED;
+                break;
             }
-            else{
-                view.updateInvalidInput("Invalid choice. Try again.");
-                continue;
-            }
-            view.updateConfirmColor(returnVal);
-            return returnVal;
-
+            view.updateInvalidInput("Invalid choice. Try again.");
         }
+        view.updateConfirmColor(returnVal);
+        return returnVal;
+
     }
 }
