@@ -20,11 +20,7 @@ public class Player {
      * @param name The name of the Player
      * @param hand The Player's hand of cards
      */
-    public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
-        if(hand.size() != 7){
-            // throw new IllegalArgumentException("The player must start with 7 cards in their hand.");
-            // TODO: Maybe this logic should be in Game?
-        }
+    public Player(String name, ArrayList<Card> hand) {
         this.name = name;
         this.hand = hand;
         score = 0;
@@ -42,15 +38,6 @@ public class Player {
      */
     public Integer getScore() {
         return score;
-    }
-
-    /**
-     * Increment the Player's score by a given amount
-     *
-     * @param score The score increment
-     */
-    public void incrementScore(int score) {
-        this.score += score;
     }
 
     /**
@@ -87,5 +74,14 @@ public class Player {
         ArrayList<Card> tempHand = hand;
         hand.clear();
         return tempHand;
+    }
+
+    /**
+     * Increment the Player's score by a given amount
+     *
+     * @param score The score increment
+     */
+    public void incrementScore(int score) {
+        this.score += score;
     }
 }

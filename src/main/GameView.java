@@ -33,7 +33,7 @@ public class GameView {
      * Display a message stating that a card does not match the top card
      */
     public void updateCardDoesntMatch() {
-        System.out.println("Card doesn't match the top card. Try again.");
+        System.out.println("Card doesn't match the top card. Try again."); // TODO: Should something be using this?
     }
 
     /**
