@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * A light side UNO Flip game that has players, cards, and contains the logic required to play a game of light side UNO Flip.
  *
- * @authors Fiona
+ * @authors Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram
  */
 public class Game {
 
@@ -27,7 +27,6 @@ public class Game {
     private boolean skipPlayer = false;
     private int currentPlayer = -1; // set to -1 for first increment
     private Card.Colour currentColour;
-
 
     /**
      * Create a new UNO Game given a deck of cards

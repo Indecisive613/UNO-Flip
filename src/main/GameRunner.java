@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * A class to initialize and run an UNO game.
  *
- * @authors Fiona, Anand Balaram
+ * @authors Fiona Cheng, Anand Balaram
  */
 public class GameRunner {
 

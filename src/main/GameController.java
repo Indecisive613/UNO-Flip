@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * A Controller class for Game to respond to user input
  *
- * @author Jake, Anand Balaram
+ * @authors Jake Siushansian, Anand Balaram
  */
 public class GameController {
 
