@@ -18,7 +18,6 @@ public class Game {
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
-    private final ArrayList<Integer> scores;
 
     private final Stack<Card> playedCards;
     private final Stack<Card> deck;
@@ -38,7 +37,6 @@ public class Game {
         this.playedCards = new Stack<Card>();
         players = new ArrayList<>();
         views = new ArrayList<>();
-        scores = new ArrayList<Integer>();
         turnOrderReversed = false;
         skipPlayer = false;
     }
@@ -54,7 +52,7 @@ public class Game {
      * @return The score of the current player
      */
     public int getCurrentPlayerScore(){
-        return scores.get(currentPlayerIndex);
+        return players.get(currentPlayerIndex).getScore();
     }
 
     /**
@@ -82,13 +80,6 @@ public class Game {
     }
 
     /**
-     * @return The scores of each Player in the game
-     */
-    public ArrayList<Integer> getScores() {
-        return scores;
-    }
-
-    /**
      * @return The card on top
      */
     public Card getTopCard() {
@@ -102,7 +93,6 @@ public class Game {
      */
     public void addPlayer(Player player) {
         players.add(player);
-        scores.add(0);
     }
 
     /**
@@ -272,8 +262,8 @@ public class Game {
      * @return Whether or not a Player has won the game
      */
     public boolean hasWonGame(){
-        for (Integer i : scores){
-            if (i >= 500){
+        for (Player player : players){
+            if (player.getScore() >= 200){
                 return true;
             }
         }
@@ -284,7 +274,7 @@ public class Game {
      * Updates the score for the current player
      */
     public void assignScore(){
-        scores.set(currentPlayerIndex, (scores.get(currentPlayerIndex) + getCurrentScore()));
+        players.get(currentPlayerIndex).incrementScore(getCurrentScore());
     }
 
     /**

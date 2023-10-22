@@ -67,7 +67,7 @@ public class GameRunner {
         game.resetGame();
         int i = 0;
         for (Player player: game.getPlayers()){
-            System.out.println(player.getName() + " has " + game.getScores().get(i) + " points.");
+            System.out.println(player.getName() + " has " + player.getScore() + " points.");
             i++;
         }
 
