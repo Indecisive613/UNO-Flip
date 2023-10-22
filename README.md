@@ -3,7 +3,7 @@
 ## Description
 This project simulates a game of UNO-Flip played solely with cards from the light side. In this game, players are trying to be the first to get rid of all the cards in their hand. In turn order, players play cards to the draw pile matching by either color, number, or special action. Players have the capability to view their drawn cards, place cards, draw additional cards, execute special card actions, and observe the resulting state of the cards presented in text format. 
 
-Milestone 2 will incorporate a feature letting players say UNO when they have one card. It will also convert the current text-based format to a graphical user interface. The final milestone will integrate the dark side of the deck and add AI player capabilies.
+Milestone 2 will incorporate a feature letting players say UNO when they have one card. It will also convert the current text-based format to a graphical user interface. The final milestones will integrate the dark side of the deck and add AI player capabilities.
 
 ## Contents
 This project contains the following deliverables:
@@ -32,6 +32,6 @@ Follow the instructions in the command prompt to continue playing the UNO game.
 Milestone 1 Completion: October 22, 2023
 Authors: 
 * Anand Balaram
-* Fiona Cheng
-* Jackie Smolkin-Lerner
-* Jake Siushansian
+* Fiona Cheng - 101234672
+* Jackie Smolkin-Lerner - 101184457
+* Jake Siushansian - 101226956
