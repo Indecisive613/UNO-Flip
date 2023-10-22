@@ -170,7 +170,7 @@ public class Game {
             skipPlayer = true;
         }
         else if (card.getSymbol().equals(Card.Symbol.REVERSE)){
-            turnOrderReversed = true;
+            turnOrderReversed = !turnOrderReversed;
         }
         else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
             skipPlayer = true;
@@ -223,10 +223,10 @@ public class Game {
         int playerCount = players.size();
 
         if (turnOrderReversed && skipPlayer) {
-            return (currentPlayer - 2) % playerCount;
+            return ((currentPlayer - 2) % playerCount + playerCount) % playerCount;
         }
         else if (turnOrderReversed) {
-            return (currentPlayer - 1) % playerCount;
+            return ((currentPlayer - 1) % playerCount + playerCount) % playerCount;
         }
         else if (skipPlayer){
             return (currentPlayer + 2) % playerCount;
