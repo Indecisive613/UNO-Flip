@@ -94,7 +94,7 @@ public class GameController {
                 returnVal = Card.Colour.GREEN;
                 break;
             } else if (color.toUpperCase().equals("BLUE")) {
-                returnVal = Card.Colour.GREEN;
+                returnVal = Card.Colour.BLUE;
                 break;
             } else if (color.toUpperCase().equals("YELLOW")) {
                 returnVal = Card.Colour.YELLOW;

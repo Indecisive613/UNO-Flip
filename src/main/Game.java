@@ -23,8 +23,8 @@ public class Game {
     private final Stack<Card> playedCards;
     private final Stack<Card> deck;
 
-    private boolean turnOrderReversed = false;
-    private boolean skipPlayer = false;
+    private boolean turnOrderReversed;
+    private boolean skipPlayer;
     private int currentPlayer = -1; // set to -1 for first increment
     private Card.Colour currentColour;
 
@@ -39,6 +39,8 @@ public class Game {
         players = new ArrayList<>();
         views = new ArrayList<>();
         scores = new ArrayList<Integer>();
+        turnOrderReversed = false;
+        skipPlayer = false;
     }
 
     /**
@@ -173,8 +175,8 @@ public class Game {
             turnOrderReversed = !turnOrderReversed;
         }
         else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
-            skipPlayer = true;
             int nextPlayer = nextPlayer();
+            skipPlayer = true;
             Card drawn1 = deck.pop();
             Card drawn2 = deck.pop();
             players.get(nextPlayer).dealCard(drawn1);
