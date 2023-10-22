@@ -60,7 +60,7 @@ public class Game {
         return players.get(currentPlayer);
     }
 
-    public Integer getCurrentPlayerScore(){
+    public int getCurrentPlayerScore(){
         return scores.get(currentPlayer);
     }
 
