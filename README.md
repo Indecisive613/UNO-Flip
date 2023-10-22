@@ -35,3 +35,16 @@ Authors:
 * Fiona Cheng - 101234672
 * Jackie Smolkin-Lerner - 101184457
 * Jake Siushansian - 101226956
+
+## Class Diagram
+![](milestone_1.png)
+
+## Sequence Diagrams
+### Initialize
+![](Milestone%201%20Sequence%20Diagram%20Initialize.png)
+
+### Start Game
+![](Milestone%201%20Sequence%20Diagram%20Start%20Game.png)
+
+### Playing Game
+![](Milestone%201%20Sequence%20Diagram%20Playing%20Game.png)
