@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 /**
  * A class to test Game
  *
- * @authors Jackie Smolkin-Lerner, Jake Siushansian
+ * @author Jackie Smolkin-Lerner, Jake Siushansian
  */
 public class GameTest {
 

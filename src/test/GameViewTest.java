@@ -2,9 +2,14 @@ package test;
 
 import main.Card;
 import main.Game;
+import main.GameView;
+import main.Player;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import static org.junit.Assert.*;
@@ -15,50 +20,51 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class GameViewTest {
+    private ByteArrayOutputStream outContent;
+    private GameView view;
     private Game game;
 
     @Before
     public void setUp() {
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         Stack<Card> deck = new Stack<>();
+        deck.push(new Card(Card.Colour.WILD, Card.Symbol.WILD));
+        deck.push(new Card(Card.Colour.RED, Card.Symbol.ONE));
+        deck.push(new Card(Card.Colour.RED, Card.Symbol.TWO));
+        deck.push(new Card(Card.Colour.BLUE, Card.Symbol.THREE));
+        deck.push(new Card(Card.Colour.BLUE, Card.Symbol.FOUR));
+        deck.push(new Card(Card.Colour.GREEN, Card.Symbol.FIVE));
+        deck.push(new Card(Card.Colour.GREEN, Card.Symbol.SIX));
+        deck.push(new Card(Card.Colour.WILD, Card.Symbol.WILD_DRAW_TWO));
         game = new Game(deck);
-        //current
 
-        //game.addPlayer(n);
-    }
+        ArrayList<Card> hand = new ArrayList<>();
+        Player currentPlayer = new Player("TEST NAME", hand);
 
-    @Test
-    public void setGame() {
-    }
+        game.addPlayer(currentPlayer);
 
-    @Test
-    public void updateGetPlayerName() {
-    }
-
-    @Test
-    public void updateInvalidInput() {
+        view = new GameView();
+        view.setGame(game);
+        game.addView(view);
     }
 
     @Test
     public void updateNewTurn() {
-    }
+        game.dealCards();
+        game.advanceTurn();
+        view.updateNewTurn(game.getCurrentPlayer());
 
-    @Test
-    public void updatePlayCard() {
-    }
+        assertTrue(outContent.toString().contains("TEST NAME"));
 
-    @Test
-    public void updateDrawCard() {
-    }
-
-    @Test
-    public void updateGetCard() {
-    }
-
-    @Test
-    public void updateGetColour() {
-    }
-
-    @Test
-    public void updateConfirmColour() {
+        assertTrue(outContent.toString().contains("WILD WILD"));
+        assertTrue(outContent.toString().contains("RED ONE"));
+        assertTrue(outContent.toString().contains("RED TWO"));
+        assertTrue(outContent.toString().contains("BLUE THREE"));
+        assertTrue(outContent.toString().contains("BLUE FOUR"));
+        assertTrue(outContent.toString().contains("GREEN FIVE"));
+        assertTrue(outContent.toString().contains("GREEN SIX"));
+        assertTrue(outContent.toString().contains("WILD WILD_DRAW_TWO"));
     }
 }
