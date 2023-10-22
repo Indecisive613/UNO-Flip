@@ -106,7 +106,6 @@ public class GameController {
             view.updateInvalidInput("Invalid choice. Try again.");
         }
         view.updateConfirmColor(returnVal);
-        int i = 1;
         return returnVal;
 
     }
