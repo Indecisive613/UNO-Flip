@@ -25,7 +25,7 @@ public class Game {
 
     private boolean turnOrderReversed;
     private boolean skipPlayer;
-    private int currentPlayer = -1; // set to -1 for first increment
+    private int currentPlayerIndex = -1; // set to -1 for first increment
     private Card.Colour currentColour;
 
     /**
@@ -57,11 +57,11 @@ public class Game {
      * @return The Player whose turn it is
      */
     public Player getCurrentPlayer() {
-        return players.get(currentPlayer);
+        return players.get(currentPlayerIndex);
     }
 
     public int getCurrentPlayerScore(){
-        return scores.get(currentPlayer);
+        return scores.get(currentPlayerIndex);
     }
 
     /**
@@ -127,11 +127,11 @@ public class Game {
      * Advance the turn to the next player
      */
     public void advanceTurn() {
-        currentPlayer = nextPlayer();
+        currentPlayerIndex = nextPlayer();
         skipPlayer = false;
 
         for (GameView view : views) {
-            view.updateNewTurn(players.get(currentPlayer));
+            view.updateNewTurn(players.get(currentPlayerIndex));
         }
     }
 
@@ -230,16 +230,16 @@ public class Game {
         int playerCount = players.size();
 
         if (turnOrderReversed && skipPlayer) {
-            return ((currentPlayer - 2) % playerCount + playerCount) % playerCount;
+            return ((currentPlayerIndex - 2) % playerCount + playerCount) % playerCount;
         }
         else if (turnOrderReversed) {
-            return ((currentPlayer - 1) % playerCount + playerCount) % playerCount;
+            return ((currentPlayerIndex - 1) % playerCount + playerCount) % playerCount;
         }
         else if (skipPlayer){
-            return (currentPlayer + 2) % playerCount;
+            return (currentPlayerIndex + 2) % playerCount;
         }
         else {
-            return (currentPlayer + 1) % playerCount;
+            return (currentPlayerIndex + 1) % playerCount;
         }
     }
     public boolean hasWonGame(){
@@ -251,8 +251,7 @@ public class Game {
         return false;
     }
     public void assignScore(){
-        //Integer currentScore = scores.get(currentPlayer);
-        scores.set(currentPlayer, (scores.get(currentPlayer) + getCurrentScore()));
+        scores.set(currentPlayerIndex, (scores.get(currentPlayerIndex) + getCurrentScore()));
     }
     public void setCurrentColour(Card.Colour currentColour) {
         this.currentColour = currentColour;
@@ -268,7 +267,7 @@ public class Game {
     public void resetGame(){
         turnOrderReversed = false;
         skipPlayer = false;
-        currentPlayer = -1;
+        currentPlayerIndex = -1;
     }
     public ArrayList<Integer> getScores() {
         return scores;
