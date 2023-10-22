@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.4" class="java.beans.XMLDecoder">
+<java version="18.0.1.1" class="java.beans.XMLDecoder">
  <object class="com.horstmann.violet.ClassDiagramGraph">
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
@@ -107,7 +107,6 @@
 + DRAW_CARD_ACTION: 0 (read-only)&lt;/u&gt;
 - views: ArrayList&lt;GameView&gt; (read-only)
 - players: ArrayList&lt;Player&gt; (read-only)
-- scores: ArrayList&lt;Integer&gt; (read-only)
 - playedCards: Stack&lt;Card&gt; (read-only)
 - deck: Stack&lt;Card&gt; (read-only)
 - turnOrderReversed: boolean
@@ -123,7 +122,6 @@
 + getCurrentPlayerScore(): Integer
 + getCurrentScore(): int
 + getPlayers(): ArrayList&lt;Player&gt;
-+ getScores(): ArrayList&lt;Integer&gt;
 + addPlayer(Player: player): void
 + addView(view: GameView): void
 + getTopCard(): Card
