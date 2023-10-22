@@ -44,6 +44,58 @@ public class Game {
     }
 
     /**
+     * @return The Player whose turn it is
+     */
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
+
+    /**
+     * @return The score of the current player
+     */
+    public int getCurrentPlayerScore(){
+        return scores.get(currentPlayerIndex);
+    }
+
+    /**
+     * Return the score of the current Player assuming they have zero cards in their hand.
+     * This is calculated by summing the values of all other Player's card.
+     *
+     * @return The score of the current Player
+     */
+    public int getCurrentScore() {
+        int score = 0;
+        for (Player player : players) {
+            for (Card card : player.getHand()) {
+                score += card.getPointValue();
+            }
+        }
+
+        return score;
+    }
+
+    /**
+     * @return The Players in the game
+     */
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+    /**
+     * @return The scores of each Player in the game
+     */
+    public ArrayList<Integer> getScores() {
+        return scores;
+    }
+
+    /**
+     * @return The card on top
+     */
+    public Card getTopCard() {
+        return playedCards.peek();
+    }
+
+    /**
      * Add a new Player to the Game
      *
      * @param player The Player to add
@@ -54,30 +106,12 @@ public class Game {
     }
 
     /**
-     * @return The Player whose turn it is
-     */
-    public Player getCurrentPlayer() {
-        return players.get(currentPlayerIndex);
-    }
-
-    public int getCurrentPlayerScore(){
-        return scores.get(currentPlayerIndex);
-    }
-
-    /**
      * Add a GameView to display game info
      *
      * @param view The GameView
      */
     public void addView(GameView view) {
         views.add(view);
-    }
-
-    /**
-     * @return The card on top
-     */
-    public Card getTopCard() {
-        return playedCards.peek();
     }
 
     /**
@@ -211,21 +245,10 @@ public class Game {
     }
 
     /**
-     * Return the score of the current Player assuming they have zero cards in their hand.
-     * This is calculated by summing the values of all other Player's card.
+     * Determines the next Player
      *
-     * @return The score of the current Player
+     * @return The index of the next Player
      */
-    public int getCurrentScore() {
-        int score = 0;
-        for (Player player : players) {
-            for (Card card : player.getHand()) {
-                score += card.getPointValue();
-            }
-        }
-
-        return score;
-    }
     public int nextPlayer(){
         int playerCount = players.size();
 
@@ -242,6 +265,12 @@ public class Game {
             return (currentPlayerIndex + 1) % playerCount;
         }
     }
+
+    /**
+     * Return whether or not a Player has won the game
+     *
+     * @return Whether or not a Player has won the game
+     */
     public boolean hasWonGame(){
         for (Integer i : scores){
             if (i >= 500){
@@ -250,26 +279,36 @@ public class Game {
         }
         return false;
     }
+
+    /**
+     * Updates the score for the current player
+     */
     public void assignScore(){
         scores.set(currentPlayerIndex, (scores.get(currentPlayerIndex) + getCurrentScore()));
     }
+
+    /**
+     * Sets the current colour
+     */
     public void setCurrentColour(Card.Colour currentColour) {
         this.currentColour = currentColour;
     }
-    public ArrayList<Player> getPlayers(){
-        return players;
-    }
+
+    /**
+     * Puts all the cards in a given hand back into the deck
+     */
     public void addToDeck(ArrayList<Card> hand){
         for (Card card: hand){
             deck.push(card);
         }
     }
+
+    /**
+     * Resets the state of the game
+     */
     public void resetGame(){
         turnOrderReversed = false;
         skipPlayer = false;
         currentPlayerIndex = -1;
-    }
-    public ArrayList<Integer> getScores() {
-        return scores;
     }
 }
