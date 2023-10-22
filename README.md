@@ -31,7 +31,7 @@ Follow the instructions in the command prompt to continue playing the UNO game.
 ## Credits
 Milestone 1 Completion: October 22, 2023
 Authors: 
-* Anand Balaram
+* Anand Balaram - 101217776
 * Fiona Cheng - 101234672
 * Jackie Smolkin-Lerner - 101184457
 * Jake Siushansian - 101226956
