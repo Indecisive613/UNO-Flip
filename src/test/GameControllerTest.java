@@ -2,12 +2,12 @@ package test;
 
 import main.GameController;
 import main.GameView;
+
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * A class to test GameController

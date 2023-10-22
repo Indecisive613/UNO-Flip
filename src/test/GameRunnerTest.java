@@ -1,14 +1,14 @@
 package test;
 
 import main.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.*;
-import static org.junit.Assert.*;
 
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
+
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Test class for GameRunner

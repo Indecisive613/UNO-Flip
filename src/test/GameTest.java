@@ -7,14 +7,10 @@ import main.Player;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.Collections;
 
-import main.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.*;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  * A class to test Game

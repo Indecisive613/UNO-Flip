@@ -3,9 +3,9 @@ package test;
 import main.Card;
 import static main.Card.Symbol.*;
 import static main.Card.Colour.*;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Tests for the Card class
