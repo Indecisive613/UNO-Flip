@@ -2,8 +2,8 @@ package test;
 
 import main.Card;
 import main.Game;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Stack;
 
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class GameViewTest {
     private Game game;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         Stack<Card> deck = new Stack<>();
         game = new Game(deck);

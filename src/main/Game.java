@@ -263,7 +263,7 @@ public class Game {
      */
     public boolean hasWonGame(){
         for (Player player : players){
-            if (player.getScore() >= 200){
+            if (player.getScore() >= 500){
                 return true;
             }
         }
