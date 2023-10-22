@@ -1,11 +1,13 @@
 package test;
 
+import main.Card;
 import main.GameController;
 import main.GameView;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 
@@ -76,6 +78,20 @@ public class GameControllerTest {
         assertEquals("Jak", controller.requestPlayerName(3));
         assertEquals("Ana", controller.requestPlayerName(0));
         assertEquals("**Jac**", controller.requestPlayerName(2));
+
+        System.out.println();
+    }
+
+    @Test
+    public void requestColour() {
+        testInput = new ByteArrayInputStream("8 :) BLUE PINK GREEN \t\nYELLOW rEd".getBytes());
+        System.setIn(testInput);
+        controller = new GameController(view);
+
+        assertEquals(Card.Colour.BLUE, controller.requestColour());
+        assertEquals(Card.Colour.GREEN, controller.requestColour());
+        assertEquals(Card.Colour.YELLOW, controller.requestColour());
+        assertEquals(Card.Colour.RED, controller.requestColour());
 
         System.out.println();
     }

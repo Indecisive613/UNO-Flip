@@ -112,7 +112,7 @@
 - deck: Stack&lt;Card&gt; (read-only)
 - turnOrderReversed: boolean
 - skipPlayer: boolean
-- currentPlayerIndex: int
+- currentPlayer: int
 - currentColour: Card.Colour</string>
      </void>
     </void>

@@ -88,8 +88,7 @@ public class GameController {
         view.updateGetColour();
         Card.Colour returnVal;
         while (true) {
-            Scanner stringScanner = new Scanner(System.in);
-            String colour = stringScanner.next();
+            String colour = input.next();
             if (colour.equalsIgnoreCase("GREEN")) {
                 returnVal = Card.Colour.GREEN;
                 break;
