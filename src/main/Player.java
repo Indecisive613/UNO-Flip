@@ -36,7 +36,7 @@ public class Player {
     /**
      * @return The Player's score
      */
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 

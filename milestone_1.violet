@@ -232,8 +232,8 @@
 + updatePlayCard(playedCard: Card, additionalMessage: String): void
 + updateDrawCard(drawnCard: Card): void
 + updateGetCard(): void
-+ updateGetColor(): void
-+ updateConfirmColor(color: Card.colour): void
++ updateGetColour(): void
++ updateConfirmColour(color: Card.colour): void
 </string>
      </void>
     </void>
