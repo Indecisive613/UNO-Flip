@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author Jackie Smolkin-Lerner
  */
-class PlayerTest {
+public class PlayerTest {
 
     @Test
     public void testCreatePlayer() {

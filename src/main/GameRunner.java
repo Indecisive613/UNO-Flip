@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * A class to initialize and run an UNO game.
  *
- * @authors Fiona Cheng, Anand Balaram
+ * @author Fiona Cheng, Anand Balaram, Jackie Smolkin-Lerner
  */
 public class GameRunner {
 
@@ -96,7 +96,6 @@ public class GameRunner {
             }
 
             if (currentPlayer.getHand().isEmpty()) {
-                // game.announceWinner();
                 System.out.println(currentPlayer.getName() + " has won!");
                 System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
                 game.assignScore();

@@ -15,16 +15,12 @@ public class Player {
 
 
     /**
-     * Create a Player with a given name and hadd of cards
+     * Create a Player with a given name and hand of cards
      *
      * @param name The name of the Player
      * @param hand The Player's hand of cards
      */
     public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
-        if(hand.size() != 7){
-            // throw new IllegalArgumentException("The player must start with 7 cards in their hand.");
-            // TODO: Maybe this logic should be in Game?
-        }
         this.name = name;
         this.hand = hand;
         score = 0;
@@ -40,7 +36,7 @@ public class Player {
     /**
      * @return The Player's score
      */
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 

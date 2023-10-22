@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GameView {
 
-    private Game game; // TODO: Do we need this? Doesn't Game store GameView? This seems like a circular dependency.
+    private Game game;
 
     /**
      * Set the current UNO game
@@ -30,13 +30,6 @@ public class GameView {
     }
 
     /**
-     * Display a message stating that a card does not match the top card
-     */
-    public void updateCardDoesntMatch() {
-        System.out.println("Card doesn't match the top card. Try again.");
-    }
-
-    /**
      * Display an invalid input message
      *
      * @param message the message that is displayed
@@ -51,8 +44,7 @@ public class GameView {
      * @param player The current player whose turn it is
      */
     public void updateNewTurn(Player player) {
-        System.out.printf("\n######## %s's Turn. ########\n", player.getName()); // TODO: For debugging - remove later
-        // System.out.printf("%s's Turn.\n", player.getName());
+        System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
         System.out.println("Your cards:");
 
@@ -88,22 +80,22 @@ public class GameView {
      * Display instructions to the current player about how to play or draw a card
      */
     public void updateGetCard() {
-        System.out.println("Enter card index to play or 0 to draw a card:"); // TODO: Make method call in view
+        System.out.println("Enter card index to play or 0 to draw a card:");
     }
 
     /**
      * Display instructions to the current player about what colour to pick
      */
-    public void updateGetColor(){
-        System.out.println("Choose a color (RED, YELLOW, GREEN, BLUE):");
+    public void updateGetColour(){
+        System.out.println("Choose a colour (RED, YELLOW, GREEN, BLUE):");
     }
 
     /**
      * Display information about what colour the player has chosen
      *
-     * @param color The colour that the player has chosen
+     * @param colour The colour that the player has chosen
      */
-    public void updateConfirmColor(Card.Colour color){
-        System.out.println(color + " has been chosen.");
+    public void updateConfirmColour(Card.Colour colour){
+        System.out.println(colour + " has been chosen.");
     }
 }
