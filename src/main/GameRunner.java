@@ -37,17 +37,15 @@ public class GameRunner {
         view.setGame(game);
 
         GameRunner runner = new GameRunner(game, controller);
+        runner.initGame();
         while(!game.hasWonGame()){
-            runner.startGame();
+            runner.playGame();
         }
-        System.out.println(game.getCurrentPlayer().getName() + " has won!");
-        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentScore() + " points this round.");
+        System.out.println(game.getCurrentPlayer().getName() + " has won the game!!!");
+        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentPlayerScore() + " points this game.");
     }
 
-    /**
-     * Start the UNO game
-     */
-    public void startGame() {
+    public void initGame(){
         int playerCount = controller.requestPlayerCount();
         for (int i = 0; i < playerCount; i++) {
             ArrayList<Card> hand = new ArrayList<>();
@@ -55,8 +53,23 @@ public class GameRunner {
             Player player = new Player(name, hand);
             game.addPlayer(player);
         }
+    }
+
+    /**
+     * Start the UNO game
+     */
+    public void playGame() {
+        for(Player player: game.getPlayers()){
+            game.addToDeck(player.clearHand());
+        }
         game.shuffleDeck();
         game.dealCards();
+        game.resetGame();
+        int i = 0;
+        for (Player player: game.getPlayers()){
+            System.out.println(player.getName() + " has " + game.getScores().get(i) + " points.");
+            i++;
+        }
 
         while (game.isRunning()) {
             game.advanceTurn();
@@ -87,6 +100,7 @@ public class GameRunner {
                 System.out.println(currentPlayer.getName() + " has won!");
                 System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
                 game.assignScore();
+                break;
             }
         }
     }

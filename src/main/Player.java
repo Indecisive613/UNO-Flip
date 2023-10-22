@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * A Player with a name, score, and hand of cards
  *
- * @authors Fiona Cheng, Jackie Smolkin-Lerner
+ * @authors Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram
  */
 public class Player {
 
@@ -82,5 +82,10 @@ public class Player {
         Card card = hand.get(index);
         hand.remove(index);
         return card;
+    }
+    public ArrayList<Card> clearHand(){
+        ArrayList<Card> tempHand = hand;
+        hand.clear();
+        return tempHand;
     }
 }

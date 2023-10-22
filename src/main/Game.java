@@ -50,6 +50,7 @@ public class Game {
      */
     public void addPlayer(Player player) {
         players.add(player);
+        scores.add(0);
     }
 
     /**
@@ -57,6 +58,10 @@ public class Game {
      */
     public Player getCurrentPlayer() {
         return players.get(currentPlayer);
+    }
+
+    public Integer getCurrentPlayerScore(){
+        return scores.get(currentPlayer);
     }
 
     /**
@@ -246,9 +251,26 @@ public class Game {
         return false;
     }
     public void assignScore(){
-        scores.set(currentPlayer, getCurrentScore());
+        //Integer currentScore = scores.get(currentPlayer);
+        scores.set(currentPlayer, (scores.get(currentPlayer) + getCurrentScore()));
     }
     public void setCurrentColour(Card.Colour currentColour) {
         this.currentColour = currentColour;
+    }
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+    public void addToDeck(ArrayList<Card> hand){
+        for (Card card: hand){
+            deck.push(card);
+        }
+    }
+    public void resetGame(){
+        turnOrderReversed = false;
+        skipPlayer = false;
+        currentPlayer = -1;
+    }
+    public ArrayList<Integer> getScores() {
+        return scores;
     }
 }
