@@ -1,9 +1,6 @@
 package test;
 
-import main.Card;
-import main.Game;
-import main.GameView;
-import main.Player;
+import main.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +42,7 @@ public class GameViewTest {
 
         game.addPlayer(currentPlayer);
 
-        view = new GameView();
+        view = new GameDebugView();
         view.setGame(game);
         game.addView(view);
     }

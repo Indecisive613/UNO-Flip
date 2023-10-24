@@ -438,41 +438,41 @@ public class GameTest {
         assertEquals(player1, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(365, game.getCurrentScore() - 59);
-        assertEquals(365, game.getCurrentPlayerScore() - 59);
+        assertEquals(365, game.getCurrentPlayer().getScore() - 59);
 
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(295, game.getCurrentScore() - 129);
-        assertEquals(295, game.getCurrentPlayerScore() - 129);
+        assertEquals(295, game.getCurrentPlayer().getScore() - 129);
 
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(398, game.getCurrentScore() - 26);
-        assertEquals(398, game.getCurrentPlayerScore() - 26);
+        assertEquals(398, game.getCurrentPlayer().getScore() - 26);
 
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(214, game.getCurrentScore() - 210);
-        assertEquals(214, game.getCurrentPlayerScore() - 210);
+        assertEquals(214, game.getCurrentPlayer().getScore() - 210);
 
         assertFalse(game.hasWonGame());
 
         // check the scores after calculations
         assertTrue(game.isRunning());
         game.advanceTurn();
-        assertEquals(365, game.getCurrentPlayerScore() - 59);
+        assertEquals(365, game.getCurrentPlayer().getScore() - 59);
         game.advanceTurn();
-        assertEquals(295, game.getCurrentPlayerScore() - 129);
+        assertEquals(295, game.getCurrentPlayer().getScore() - 129);
         game.advanceTurn();
-        assertEquals(398, game.getCurrentPlayerScore() - 26);
+        assertEquals(398, game.getCurrentPlayer().getScore() - 26);
         game.advanceTurn();
-        assertEquals(214, game.getCurrentPlayerScore() - 210);
+        assertEquals(214, game.getCurrentPlayer().getScore() - 210);
     }
 
     @Test
@@ -520,7 +520,7 @@ public class GameTest {
         assertEquals(player1, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(324, game.getCurrentScore() - 240);
-        assertEquals(324, game.getCurrentPlayerScore() - 240);
+        assertEquals(324, game.getCurrentPlayer().getScore() - 240);
         assertTrue(game.hasWonGame());
 
         // update the score for player2
@@ -529,7 +529,7 @@ public class GameTest {
         assertEquals(player2, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(324, game.getCurrentScore() - 240);
-        assertEquals(324, game.getCurrentPlayerScore() - 240);
+        assertEquals(324, game.getCurrentPlayer().getScore() - 240);
         assertTrue(game.hasWonGame());
 
         // update the score for player3
@@ -538,7 +538,7 @@ public class GameTest {
         assertEquals(player3, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(480, game.getCurrentScore() - 84);
-        assertEquals(480, game.getCurrentPlayerScore() - 84);
+        assertEquals(480, game.getCurrentPlayer().getScore() - 84);
         assertTrue(game.hasWonGame());
 
         // update the score for player4
@@ -547,7 +547,7 @@ public class GameTest {
         assertEquals(player4, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(564, game.getCurrentScore() - 0);
-        assertEquals(564, game.getCurrentPlayerScore() - 0);
+        assertEquals(564, game.getCurrentPlayer().getScore() - 0);
         game.assignScore();
 
         // player4 should have won

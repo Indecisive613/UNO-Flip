@@ -30,7 +30,7 @@ public class GameRunner {
      * @param args Main args - not used
      */
     public static void main(String[] args) {
-        GameView view = new GameView();
+        GameView view = new GameDebugView();
         GameController controller = new GameController(view);
         Game game = new Game(createDeck());
         game.addView(view);
@@ -42,7 +42,7 @@ public class GameRunner {
             runner.playGame();
         }
         System.out.println(game.getCurrentPlayer().getName() + " has won the game!!!");
-        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentPlayerScore() + " points this game.");
+        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentPlayer().getScore() + " points this game.");
     }
 
     public void initGame(){

@@ -2,6 +2,7 @@ package test;
 
 import main.Card;
 import main.GameController;
+import main.GameDebugView;
 import main.GameView;
 
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class GameControllerTest {
 
     @Before
     public void setUp() {
-        view = new GameView();
+        view = new GameDebugView();
     }
 
     @Test

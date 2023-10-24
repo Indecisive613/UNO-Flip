@@ -49,13 +49,6 @@ public class Game {
     }
 
     /**
-     * @return The score of the current player
-     */
-    public int getCurrentPlayerScore(){
-        return players.get(currentPlayerIndex).getScore();
-    }
-
-    /**
      * Return the score of the current Player assuming they have zero cards in their hand.
      * This is calculated by summing the values of all other Player's card.
      *
