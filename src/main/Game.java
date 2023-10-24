@@ -148,7 +148,7 @@ public class Game {
         skipPlayer = false;
 
         for (GameView view : views) {
-            view.updateNewTurn(players.get(currentPlayerIndex));
+            view.handleNewTurn(players.get(currentPlayerIndex));
         }
     }
 

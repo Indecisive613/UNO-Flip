@@ -51,7 +51,7 @@ public class GameViewTest {
     public void updateNewTurn() {
         game.dealCards();
         game.advanceTurn();
-        view.updateNewTurn(game.getCurrentPlayer());
+        view.handleNewTurn(game.getCurrentPlayer());
 
         assertTrue(outContent.toString().contains("TEST NAME"));
 

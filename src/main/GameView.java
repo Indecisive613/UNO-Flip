@@ -33,7 +33,7 @@ public interface GameView {
      *
      * @param player The current player whose turn it is
      */
-    public void updateNewTurn(Player player);
+    public void handleNewTurn(Player player);
 
     /**
      * Display information about the card that was played and additional useful information

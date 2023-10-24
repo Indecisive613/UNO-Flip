@@ -43,7 +43,7 @@ public class GameDebugView implements GameView{
      *
      * @param player The current player whose turn it is
      */
-    public void updateNewTurn(Player player) {
+    public void handleNewTurn(Player player) {
         System.out.printf("%s's Turn.\n", player.getName());
         System.out.printf("Current side: %s.\n", "Light");
         System.out.println("Your cards:");
