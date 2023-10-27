@@ -6,17 +6,22 @@ import java.awt.*;
 public class HandViewPanel extends JPanel implements GameView {
 
     private Player player;
-    private JPanel playerHand;
-    private JTextArea playerName;
+    private final JLabel playerName;
+    private final Box buttons;
 
     public HandViewPanel() {
-        playerName = new JTextArea();
-        playerName.setEnabled(false);
+        playerName = new JLabel("", SwingConstants.CENTER);
+        playerName.setFont(new Font("Mono", Font.PLAIN, 24));
+        playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
 
-        playerHand = new JPanel();
-        this.setLayout(new FlowLayout());
-        this.add(new JScrollPane(playerHand));
+        buttons = Box.createHorizontalBox();
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setSize(300, 60);
+        JScrollPane scrollPane = new JScrollPane(buttons);
+        scrollPane.setPreferredSize(new Dimension(300, 100));
+        this.add(scrollPane);
     }
 
     @Override
@@ -40,10 +45,12 @@ public class HandViewPanel extends JPanel implements GameView {
         this.player = player;
         playerName.setText(player.getName());
 
-        playerHand.removeAll();
+        buttons.removeAll();
         for (Card card : player.getHand()) {
-            System.out.println("adding card: " + card);
-            playerHand.add(new JCardButton(card));
+            JButton cardButton = new JCardButton(card);
+            cardButton.setFont(new Font("Mono", Font.PLAIN, 24));
+            cardButton.setSize(70 ,200);
+            buttons.add(cardButton);
         }
     }
 
