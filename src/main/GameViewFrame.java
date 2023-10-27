@@ -5,10 +5,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class GameViewFrame extends JFrame implements GameView {
+public class GameViewFrame extends JFrame {
 
     private final Game game;
-    private final JCardButton topCardButton;
     private final HandViewPanel hand;
     private final TableViewFrame table;
 
@@ -16,15 +15,6 @@ public class GameViewFrame extends JFrame implements GameView {
         this.setLayout(new BorderLayout());
         this.game = game;
         JFrame frame = new JFrame("UNO");
-
-        frame.setSize(300, 300);
-
-        // Add top card
-        topCardButton = new JCardButton(null);
-        topCardButton.setEnabled(false);
-        topCardButton.setCard(new Card(Card.Colour.BLUE, Card.Symbol.ONE));
-        topCardButton.setSize(50, 50);
-        frame.add(topCardButton, BorderLayout.CENTER);
 
         // Add table view
         table = new TableViewFrame();
@@ -36,54 +26,9 @@ public class GameViewFrame extends JFrame implements GameView {
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
+        frame.setSize(600, 600);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    @Override
-    public void setGame(Game game) {
-
-    }
-
-    @Override
-    public void handleNewTurn(Player player) {
-
-    }
-
-    @Override
-    public void updateGetPlayerName(int index) {
-
-    }
-
-    @Override
-    public void updateInvalidInput(String message) {
-
-    }
-
-
-    @Override
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
-        topCardButton.setCard(playedCard);
-    }
-
-    @Override
-    public void updateDrawCard(Card drawnCard) {
-
-    }
-
-    @Override
-    public void updateGetCard() {
-
-    }
-
-    @Override
-    public void updateGetColour() {
-
-    }
-
-    @Override
-    public void updateConfirmColour(Card.Colour colour) {
-
     }
 
     public static void main(String[] args) {
