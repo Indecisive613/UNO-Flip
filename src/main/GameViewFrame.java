@@ -10,6 +10,7 @@ public class GameViewFrame extends JFrame implements GameView {
     private final Game game;
     private final JCardButton topCardButton;
     private final HandViewPanel hand;
+    private final TableViewFrame table;
 
     public GameViewFrame(Game game) {
         this.setLayout(new BorderLayout());
@@ -24,6 +25,11 @@ public class GameViewFrame extends JFrame implements GameView {
         topCardButton.setCard(new Card(Card.Colour.BLUE, Card.Symbol.ONE));
         topCardButton.setSize(50, 50);
         frame.add(topCardButton, BorderLayout.CENTER);
+
+        // Add table view
+        table = new TableViewFrame();
+        game.addView(table);
+        frame.add(table, BorderLayout.CENTER);
 
         // Add hand view
         hand = new HandViewPanel();
