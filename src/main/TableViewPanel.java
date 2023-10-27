@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.*;
 
-public class TableViewFrame extends JFrame implements GameView {
+public class TableViewPanel extends JPanel implements GameView {
     @Override
     public void setGame(Game game) {
 

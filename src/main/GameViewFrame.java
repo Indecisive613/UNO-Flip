@@ -9,7 +9,7 @@ public class GameViewFrame extends JFrame {
 
     private final Game game;
     private final HandViewPanel hand;
-    private final TableViewFrame table;
+    private final TableViewPanel table;
 
     public GameViewFrame(Game game) {
         this.setLayout(new BorderLayout());
@@ -17,7 +17,7 @@ public class GameViewFrame extends JFrame {
         JFrame frame = new JFrame("UNO");
 
         // Add table view
-        table = new TableViewFrame();
+        table = new TableViewPanel();
         game.addView(table);
         frame.add(table, BorderLayout.CENTER);
 
