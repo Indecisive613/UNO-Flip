@@ -6,10 +6,15 @@ import java.awt.*;
 public class HandViewPanel extends JPanel implements GameView {
 
     private Player player;
+    private Game game;
+
     private final JLabel playerName;
     private final Box buttons;
+    private final HandController controller;
 
     public HandViewPanel() {
+        controller = new HandController();
+
         playerName = new JLabel("", SwingConstants.CENTER);
         playerName.setFont(new Font("Mono", Font.PLAIN, 24));
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -26,7 +31,8 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void setGame(Game game) {
-
+        this.game = game;
+        controller.setGame(game);
     }
 
     @Override
@@ -50,6 +56,14 @@ public class HandViewPanel extends JPanel implements GameView {
             JButton cardButton = new JCardButton(card);
             cardButton.setFont(new Font("Mono", Font.PLAIN, 24));
             cardButton.setSize(70 ,200);
+            if (controller.isValidCard(card)) {
+                cardButton.addActionListener(event -> {
+                   controller.playCard(card);
+                });
+            }
+            else {
+                cardButton.setEnabled(false);
+            }
             buttons.add(cardButton);
         }
     }
