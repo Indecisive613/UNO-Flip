@@ -80,6 +80,15 @@ public class Game {
     }
 
     /**
+     * Set the top card
+     * TODO: This is for testing, maybe should remove
+     */
+    public Card setTopCard(Card card) {
+        return playedCards.push(card);
+    }
+
+
+    /**
      * Add a new Player to the Game
      *
      * @param player The Player to add
