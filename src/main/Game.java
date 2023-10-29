@@ -84,6 +84,7 @@ public class Game {
      * TODO: This is for testing, maybe should remove
      */
     public Card setTopCard(Card card) {
+        currentColour = card.getColour();
         return playedCards.push(card);
     }
 
@@ -184,6 +185,7 @@ public class Game {
      * @return An integer that indicates if and which action card was played
      */
     public boolean playCard(Card card) {
+        System.out.println("Playing " + card);
         playedCards.push(card);
         boolean wild = false;
         String additionalMessage = "";

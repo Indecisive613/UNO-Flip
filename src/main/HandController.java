@@ -15,8 +15,15 @@ public class HandController {
         return game.canPlayCard(card);
     }
 
-    public void playCard(Card card) {
-        game.playCard(card);
-        //game.getCurrentPlayer().playCard(); TODO: Remove card from player
+    public void playCard(int index) {
+        game.playCard(game.getCurrentPlayer().playCard(index));
+    }
+
+    public void drawCard() {
+        game.drawCard(game.getCurrentPlayer());
+    }
+
+    public void nextTurn() {
+        game.advanceTurn();
     }
 }
