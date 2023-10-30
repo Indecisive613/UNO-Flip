@@ -27,7 +27,8 @@ public class GameViewFrame extends JFrame {
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
-        frame.setSize(600, 600);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
