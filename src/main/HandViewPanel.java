@@ -32,7 +32,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //this.setSize(300, 60);
-        JScrollPane scrollPane = new JScrollPane(buttons);
+        JScrollPane scrollPane = new JScrollPane(buttons, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         // scrollPane.setPreferredSize(new Dimension(200, 100));
         //scrollPane.setSize(new Dimension(200, 100));
         this.add(actions);
@@ -83,8 +83,10 @@ public class HandViewPanel extends JPanel implements GameView {
 
         drawButton.addActionListener(event -> {
             controller.drawCard();
+            drawButton.setEnabled(false);
             lockButtons();
             nextTurnButton.setEnabled(true);
+            nextTurnButton.setBackground(Color.GREEN);
         });
         actions.add(drawButton);
 
@@ -98,8 +100,10 @@ public class HandViewPanel extends JPanel implements GameView {
                 int index = i;
                 cardButton.addActionListener(event -> {
                    controller.playCard(index);
+                   drawButton.setEnabled(false);
                    lockButtons();
                    nextTurnButton.setEnabled(true);
+                   nextTurnButton.setBackground(Color.GREEN);
                 });
             }
             else {
@@ -107,6 +111,8 @@ public class HandViewPanel extends JPanel implements GameView {
             }
             buttons.add(cardButton);
         }
+
+        System.out.println("Top card: " + game.getTopCard());
     }
 
     private void lockButtons() {
@@ -148,6 +154,7 @@ public class HandViewPanel extends JPanel implements GameView {
         game.addPlayer(new Player("Player 1", new ArrayList<Card>()));
         game.addPlayer(new Player("Player 2", new ArrayList<Card>()));
 
+        game.shuffleDeck();
         game.dealCards();
 
         GameViewFrame frame = new GameViewFrame(game);
