@@ -3,7 +3,6 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Stack;
 
 public class HandViewPanel extends JPanel implements GameView {
@@ -14,29 +13,58 @@ public class HandViewPanel extends JPanel implements GameView {
     private Game game;
 
     private final JLabel playerName;
-    private final JPanel actions;
-    private final JPanel buttons;
+    private final JButton drawButton;
+    private final JButton nextTurnButton;
+    private final JPanel actionPanel;
+    private final JPanel cardPanel;
     private final HandController controller;
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
 
     public HandViewPanel() {
         controller = new HandController();
 
         playerName = new JLabel("", SwingConstants.CENTER);
-        playerName.setFont(new Font("Mono", Font.PLAIN, 24));
+        playerName.setFont(BUTTON_FONT);
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
 
-        actions = new JPanel();
+        actionPanel = new JPanel();
 
-        buttons = new JPanel();
-        buttons.setSize(100, 300);
+        cardPanel = new JPanel();
+        cardPanel.setSize(100, 300);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //this.setSize(300, 60);
-        JScrollPane scrollPane = new JScrollPane(buttons, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        // scrollPane.setPreferredSize(new Dimension(200, 100));
-        //scrollPane.setSize(new Dimension(200, 100));
-        this.add(actions);
+        JScrollPane scrollPane = new JScrollPane(cardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setSize(100, 300);
+
+        // Add next turn button
+        nextTurnButton = new JButton("NEXT TURN");
+        nextTurnButton.setFocusPainted(false);
+        nextTurnButton.setBackground(new Color(255, 255, 255));
+        nextTurnButton.setFont(BUTTON_FONT);
+        nextTurnButton.setEnabled(false);
+
+        nextTurnButton.addActionListener(event -> {
+            controller.nextTurn();
+        });
+        actionPanel.add(nextTurnButton);
+
+        // Add draw card button
+        drawButton = new JButton("DRAW +");
+        drawButton.setFocusPainted(false);
+        drawButton.setBackground(new Color(140, 140, 140));
+        drawButton.setFont(BUTTON_FONT);
+
+        drawButton.addActionListener(event -> {
+            controller.drawCard();
+            drawButton.setEnabled(false);
+            lockHand();
+            nextTurnButton.setEnabled(true);
+            nextTurnButton.setBackground(Color.GREEN);
+        });
+        actionPanel.add(drawButton);
+
+        this.add(actionPanel);
         this.add(scrollPane);
     }
 
@@ -58,43 +86,28 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewTurn(Player player) {
-        System.out.println(player.getName() + "'s turn");
         this.player = player;
-        playerName.setText(player.getName());
+        playerName.setText("Current Player: " + player.getName());
 
         // Reset buttons
-        actions.removeAll(); // TODO: Refactor to remove this
-        buttons.removeAll();
-
-        // Add next turn button
-        JButton nextTurnButton = new JButton("NEXT TURN");
-        nextTurnButton.setFocusPainted(false);
-        nextTurnButton.setBackground(new Color(255, 255, 255));
-        nextTurnButton.setFont(new Font("Mono", Font.PLAIN, 24));
         nextTurnButton.setEnabled(false);
+        drawButton.setEnabled(true);
+        updateCardPanel();
 
-        nextTurnButton.addActionListener(event -> {
-            controller.nextTurn();
-        });
-        actions.add(nextTurnButton);
+        System.out.println("Top card: " + game.getTopCard());
+    }
 
-        // Add draw card button
-        JButton drawButton = new JButton("DRAW +");
-        drawButton.setFocusPainted(false);
-        drawButton.setBackground(new Color(140, 140, 140));
-        drawButton.setFont(new Font("Mono", Font.PLAIN, 24));
-        System.out.println(Arrays.toString(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
+    private void lockHand() {
+        for (Component button: cardPanel.getComponents()) {
+            button.setEnabled(false);
+        }
 
-        drawButton.addActionListener(event -> {
-            controller.drawCard();
-            drawButton.setEnabled(false);
-            lockButtons();
-            nextTurnButton.setEnabled(true);
-            nextTurnButton.setBackground(Color.GREEN);
-        });
-        actions.add(drawButton);
+    }
 
-        // Add button for each card
+    private void updateCardPanel() {
+        cardPanel.setVisible(false);
+        cardPanel.removeAll();
+
         for (int i = 0; i < player.getHand().size(); i++) {
             Card card = player.getHand().get(i);
             JButton cardButton = new JCardButton(card);
@@ -102,32 +115,25 @@ public class HandViewPanel extends JPanel implements GameView {
             if (controller.isValidCard(card)) {
                 int index = i;
                 cardButton.addActionListener(event -> {
-                   controller.playCard(index);
-                   drawButton.setEnabled(false);
-                   lockButtons();
-                   nextTurnButton.setEnabled(true);
-                   nextTurnButton.setBackground(Color.GREEN);
+                    controller.playCard(index);
+                    drawButton.setEnabled(false);
+                    lockHand();
+                    nextTurnButton.setEnabled(true);
+                    nextTurnButton.setBackground(Color.GREEN);
                 });
             }
             else {
                 cardButton.setEnabled(false);
             }
-            buttons.add(cardButton);
+            cardPanel.add(cardButton);
         }
 
-        System.out.println("Top card: " + game.getTopCard());
-    }
-
-    private void lockButtons() {
-        for (Component button: buttons.getComponents()) {
-            button.setEnabled(false);
-        }
-
+        cardPanel.setVisible(true);
     }
 
     @Override
     public void updatePlayCard(Card playedCard, String additionalMessage) {
-
+        updateCardPanel();
     }
 
     @Override

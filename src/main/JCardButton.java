@@ -1,11 +1,15 @@
 package main;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
+import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 public class JCardButton extends JButton {
 
     private Card card;
+    private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 48);
+    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 18);
 
     public JCardButton(Card card) {
         setFocusPainted(false);
@@ -21,12 +25,20 @@ public class JCardButton extends JButton {
     public void setCard(Card card) {
         this.card = card;
         setText(getText(card));
-        setBackground(getColor(card));
+
+        setForeground(Color.WHITE);
 
         if (isNumber(card)) {
-            setFont(new Font("Mono", Font.PLAIN, 24));
+            setFont(NUMBER_CARD_FONT);
         } else {
-            setFont(new Font("Mono", Font.PLAIN, 16));
+            setFont(SPECIAL_CARD_FONT);
+        }
+
+        if (card.getColour() == Card.Colour.WILD) {
+            setBackground(Color.BLACK);
+        } else {
+            setBackground(getColor(card));
+            setBorder(BorderFactory.createCompoundBorder(getBorder(), new MatteBorder(7, 7, 7, 7, Color.WHITE)));
         }
     }
 
@@ -66,7 +78,7 @@ public class JCardButton extends JButton {
         } else if (card.getColour() == Card.Colour.YELLOW) {
             return new Color(236, 212, 7);
         } else {
-            return new Color(20, 20, 20);
+            return new Color(255, 255, 255);
         }
     }
 }
