@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class HandViewPanel extends JPanel implements GameView {
 
@@ -137,5 +139,18 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void updateConfirmColour(Card.Colour colour) {
 
+    }
+
+    public static void main(String[] args) {
+        Stack<Card> deck = GameRunner.createDeck();
+        Game game = new Game(deck);
+
+        game.addPlayer(new Player("Player 1", new ArrayList<Card>()));
+        game.addPlayer(new Player("Player 2", new ArrayList<Card>()));
+
+        game.dealCards();
+
+        GameViewFrame frame = new GameViewFrame(game);
+        game.advanceTurn();
     }
 }

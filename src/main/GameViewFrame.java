@@ -23,6 +23,7 @@ public class GameViewFrame extends JFrame {
 
         // Add hand view
         hand = new HandViewPanel();
+        hand.setGame(game);
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
