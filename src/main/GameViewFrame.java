@@ -8,6 +8,7 @@ import java.util.Stack;
 public class GameViewFrame extends JFrame {
 
     private final Game game;
+    private final NewGameView newGameView;
     private final HandViewPanel hand;
     private final TableViewPanel table;
 
@@ -15,6 +16,11 @@ public class GameViewFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.game = game;
         JFrame frame = new JFrame("UNO");
+
+        // Add new game view
+        newGameView = new NewGameView(this);
+        game.addView(newGameView);
+        frame.add(newGameView, BorderLayout.CENTER);
 
         // Add table view
         table = new TableViewPanel();
@@ -33,18 +39,41 @@ public class GameViewFrame extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public static void main(String[] args) {
-        Stack<Card> deck = new Stack<>();
-        Game g = new Game(deck);
+    /**
+     * @return the number of players in the game
+     */
+    public int requestPlayerCount(){
+        return newGameView.requestPlayerCount(game.PLAYER_MIN, game.PLAYER_MAX);
+    }
 
-        ArrayList<Card> h = new ArrayList<>();
-        h.add(new Card(Card.Colour.BLUE, Card.Symbol.ONE));
-        h.add(new Card(Card.Colour.RED, Card.Symbol.FOUR));
-        h.add(new Card(Card.Colour.GREEN, Card.Symbol.SKIP));
-        h.add(new Card(Card.Colour.WILD, Card.Symbol.WILD));
-        Player p = new Player("Player 1", h);
-        g.addPlayer(p);
-        JFrame f = new GameViewFrame(g);
+    /**
+     * Adds playerCount players to the game
+     *
+     * @param playerCount number of players in the game
+     */
+    public void addPlayers(int playerCount){
+        for(int i = 0; i < playerCount; i++){
+            game.addPlayer(new Player(newGameView.requestPlayerName(i+1), new ArrayList<Card>()));
+        }
+    }
+
+    public static void main(String[] args) {
+        Stack<Card> deck = GameRunner.createDeck();
+        Game g = new Game(deck);
+        GameViewFrame f = new GameViewFrame(g);
+
+        int playerCount = f.requestPlayerCount();
+        System.out .println("The number of players is" + playerCount);
+
+        g.shuffleDeck();
+        g.dealCards();
+
+        f.addPlayers(playerCount);
+        System.out.println("The players in the game are as follows: ");
+        for(Player player: g.getPlayers()){
+            System.out.println("Name: " + player.getName());
+            System.out.println("Hand: " + player.getHand());
+        }
 
         g.advanceTurn();
     }
