@@ -8,18 +8,45 @@ public class JCardButton extends JButton {
     private Card card;
 
     public JCardButton(Card card) {
+        setFocusPainted(false);
         if (card != null) {
             setCard(card);
         }
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+        setText(getText(card));
+        setBackground(getColor(card));
+
+        if (isNumber(card)) {
+            setFont(new Font("Mono", Font.PLAIN, 24));
+        } else {
+            setFont(new Font("Mono", Font.PLAIN, 16));
+        }
+    }
+
+    private static boolean isNumber(Card card) {
+        Card.Symbol symbol = card.getSymbol();
+        return !(symbol == Card.Symbol.DRAW_ONE
+                || symbol == Card.Symbol.WILD_DRAW_TWO
+                || symbol == Card.Symbol.WILD
+                || symbol == Card.Symbol.SKIP
+                || symbol == Card.Symbol.REVERSE
+        );
+    }
+
     private static String getText(Card card) {
         if (card.getSymbol() == Card.Symbol.DRAW_ONE) {
-            return "Draw\n One";
+            return "<html>Draw" + "<br>" + "One</html>";
         } else if (card.getSymbol() == Card.Symbol.WILD) {
             return "Wild";
         } else if (card.getSymbol() == Card.Symbol.WILD_DRAW_TWO) {
-            return "Wild\nDraw\nTwo";
+            return "<html>Wild" + "<br>" + "Draw" + "<br>" + "Two</html>";
         } else if (card.getSymbol() == Card.Symbol.SKIP) {
             return "Skip";
         } else if (card.getSymbol() == Card.Symbol.REVERSE) {
@@ -41,15 +68,5 @@ public class JCardButton extends JButton {
         } else {
             return new Color(20, 20, 20);
         }
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-        this.setText(getText(card));
-        this.setBackground(getColor(card));
     }
 }

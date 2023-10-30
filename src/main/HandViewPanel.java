@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class HandViewPanel extends JPanel implements GameView {
@@ -67,6 +68,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
         // Add next turn button
         JButton nextTurnButton = new JButton("NEXT TURN");
+        nextTurnButton.setFocusPainted(false);
         nextTurnButton.setBackground(new Color(255, 255, 255));
         nextTurnButton.setFont(new Font("Mono", Font.PLAIN, 24));
         nextTurnButton.setEnabled(false);
@@ -77,9 +79,11 @@ public class HandViewPanel extends JPanel implements GameView {
         actions.add(nextTurnButton);
 
         // Add draw card button
-        JButton drawButton = new JButton("DRAW");
-        drawButton.setBackground(new Color(100, 100, 100));
+        JButton drawButton = new JButton("DRAW +");
+        drawButton.setFocusPainted(false);
+        drawButton.setBackground(new Color(140, 140, 140));
         drawButton.setFont(new Font("Mono", Font.PLAIN, 24));
+        System.out.println(Arrays.toString(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
 
         drawButton.addActionListener(event -> {
             controller.drawCard();
@@ -94,7 +98,6 @@ public class HandViewPanel extends JPanel implements GameView {
         for (int i = 0; i < player.getHand().size(); i++) {
             Card card = player.getHand().get(i);
             JButton cardButton = new JCardButton(card);
-            cardButton.setFont(new Font("Mono", Font.PLAIN, 24));
             cardButton.setPreferredSize(new Dimension(CARD_WIDTH, CARD_WIDTH * 100/70)); // Card ratio
             if (controller.isValidCard(card)) {
                 int index = i;
