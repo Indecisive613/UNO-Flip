@@ -65,10 +65,10 @@ public class GameViewFrame extends JFrame {
         int playerCount = f.requestPlayerCount();
         System.out .println("The number of players is" + playerCount);
 
+        f.addPlayers(playerCount); //players are added with empty hands so still need to deal
         g.shuffleDeck();
         g.dealCards();
 
-        f.addPlayers(playerCount);
         System.out.println("The players in the game are as follows: ");
         for(Player player: g.getPlayers()){
             System.out.println("Name: " + player.getName());
