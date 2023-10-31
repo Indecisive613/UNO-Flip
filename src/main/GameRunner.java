@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -111,6 +112,42 @@ public class GameRunner {
      */
     public static Stack<Card> createDeck() {
         Stack<Card> cards = new Stack<Card>();
+        ArrayList<Card.Symbol> plainNumbers = new ArrayList<Card.Symbol>(Arrays.asList(Card.Symbol.ONE, Card.Symbol.TWO, Card.Symbol.THREE, Card.Symbol.FOUR,
+                Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
+
+        try{
+            for(Card.Colour colour : Card.nonWildColours){
+                //add 2 of each number
+                for(Card.Symbol symbol : plainNumbers) {
+                    Card card1 = new NormalCard(colour, symbol);
+                    Card card2 = new NormalCard(colour, symbol);
+                    cards.push(card1);
+                    cards.push(card2);
+                }
+                //add 2 of each special card
+                cards.push(new DrawOneCard(colour));
+                cards.push(new DrawOneCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new SkipCard(colour));
+                cards.push(new SkipCard(colour));
+            }
+
+           //Add four of each wild card
+           for(int i = 0; i < 4; i++){
+               cards.push(new WildCard());
+               cards.push(new WildDrawTwoCard());
+           }
+        } catch(IllegalArgumentException e){
+                System.out.println(e);
+        }
+
+        for(Card card: cards){
+            System.out.print(card + " "); //TODO: REMOVE THIS
+        }
+        return cards;
+
+        /*
 
         for(Card.Colour colour : Card.nonWildColours){
             for(Card.Symbol symbol : Card.nonWildSymbols) {
@@ -145,6 +182,6 @@ public class GameRunner {
                 cards.push(card4);
             }
         }
-        return cards;
+        return cards;*/
     }
 }

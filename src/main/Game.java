@@ -73,6 +73,13 @@ public class Game {
     }
 
     /**
+     * @return The Deck in the game
+     */
+    public Stack<Card> getDeck(){
+        return deck;
+    }
+
+    /**
      * @return The card on top
      */
     public Card getTopCard() {
@@ -304,5 +311,19 @@ public class Game {
         turnOrderReversed = false;
         skipPlayer = false;
         currentPlayerIndex = -1;
+    }
+
+    /**
+     * Reverses the turn order
+     */
+    public void reverseTurn(){
+        turnOrderReversed = !turnOrderReversed;
+    }
+
+    /**
+     * Skips the next player
+     */
+    public void setSkipPlayer(){
+        skipPlayer = true;
     }
 }

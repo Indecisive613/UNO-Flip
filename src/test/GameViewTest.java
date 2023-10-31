@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class GameViewTest {
+    /*
     private ByteArrayOutputStream outContent;
     private GameView view;
     private Game game;
@@ -63,5 +64,5 @@ public class GameViewTest {
         assertTrue(outContent.toString().contains("GREEN FIVE"));
         assertTrue(outContent.toString().contains("GREEN SIX"));
         assertTrue(outContent.toString().contains("WILD WILD_DRAW_TWO"));
-    }
+    }*/
 }

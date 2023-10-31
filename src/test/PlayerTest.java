@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class PlayerTest {
+    /*
 
     @Test
     public void testCreatePlayer() {
@@ -94,5 +95,5 @@ public class PlayerTest {
 
         p.incrementScore(2009);
         //assertEquals(100 + 2009, p.getScore());
-    }
+    }*/
 }

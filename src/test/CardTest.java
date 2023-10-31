@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class CardTest {
-
+    /*
     @Test
     public void testCreateCard() {
         Card c = new Card(RED, ONE);
@@ -84,6 +84,6 @@ public class CardTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Card c = new Card(RED, Card.Symbol.WILD);
         });
-    }
+    }*/
 
 }

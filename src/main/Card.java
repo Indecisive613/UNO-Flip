@@ -8,7 +8,7 @@ import java.util.Arrays;
  *
  * @author Fiona Cheng, Anand Balaram
  */
-public class Card {
+public abstract class Card {
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
     public enum Symbol {
         ONE(1),
@@ -98,4 +98,11 @@ public class Card {
         Card c = (Card) o;
         return this.colour.equals(c.colour) && this.symbol.equals(c.symbol);
     }
+
+    /**
+     * @param game The Game the card belongs to
+     *
+     * @return Whether the card is a wild
+     */
+    public abstract boolean cardAction(Game game);
 }
