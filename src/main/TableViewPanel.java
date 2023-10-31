@@ -8,16 +8,19 @@ public class TableViewPanel extends JPanel implements GameView {
 
     private final JButton deck;
     private ArrayList<JButton> playerButtons;
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
     public TableViewPanel(){
 
         this.setSize(200, 200);
         this.setVisible(true);
         this.setLayout(new GridLayout(3, 3, 10, 10));
 
-        deck = new JButton();
-        deck.setText("Deck");
-        deck.setEnabled(false);
+        deck = new JButton("DECK");
+        deck.setFocusPainted(false);
         deck.setBackground(Color.GRAY);
+        deck.setFont(BUTTON_FONT);
+        deck.setEnabled(false);
+
         playerButtons = new ArrayList<JButton>();
     }
     @Override
@@ -26,10 +29,11 @@ public class TableViewPanel extends JPanel implements GameView {
 
         for(Player selectedPlayer : players) {
 
-            JButton playerButton = new JButton();
-            playerButton.setText(selectedPlayer.getName());
-            playerButton.setEnabled(false);
+            JButton playerButton = new JButton(selectedPlayer.getName());
+            playerButton.setFocusPainted(false);
             playerButton.setBackground(Color.GRAY);
+            playerButton.setFont(BUTTON_FONT);
+            playerButton.setEnabled(false);
 
             playerButton.add(playerButton);
         }
