@@ -47,6 +47,7 @@ public abstract class Card {
      *
      * @param colour The colour of the card, or wild if it's a wild card
      * @param symbol The card number or symbol if it's a special card
+     * @throws IllegalArgumentException if an invalid combination is provided.
      */
     public Card(Colour colour, Symbol symbol) throws IllegalArgumentException{
         this.colour = colour;
