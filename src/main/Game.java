@@ -189,44 +189,19 @@ public class Game {
      * Play a given card and determine its effect
      *
      * @param card The card to play
-     * @return An integer that indicates if and which action card was played
+     * @return Whether or not the card is wild
      */
     public boolean playCard(Card card) {
-        System.out.println("Playing " + card);
         playedCards.push(card);
-        boolean wild = false;
-        String additionalMessage = "";
-        if (!card.getColour().equals(Card.Colour.WILD)){
+        boolean isWild = card.cardAction(this);
+        if(!isWild){
             currentColour = card.getColour();
         }
-        else{
-            wild = true;
-        }
-        if (card.getSymbol().equals(Card.Symbol.DRAW_ONE)){
-            int nextPlayer = nextPlayer();
-            Card drawn = deck.pop();
-            players.get(nextPlayer).dealCard(drawn);
-            additionalMessage += players.get(nextPlayer).getName() + " has to draw a card due to " + card + ": " + drawn;
-        }
-        else if (card.getSymbol().equals(Card.Symbol.SKIP)){
-            skipPlayer = true;
-        }
-        else if (card.getSymbol().equals(Card.Symbol.REVERSE)){
-            turnOrderReversed = !turnOrderReversed;
-        }
-        else if (card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)){
-            int nextPlayer = nextPlayer();
-            skipPlayer = true;
-            Card drawn1 = deck.pop();
-            Card drawn2 = deck.pop();
-            players.get(nextPlayer).dealCard(drawn1);
-            players.get(nextPlayer).dealCard(drawn2);
-            additionalMessage += players.get(nextPlayer).getName() + " has to draw two cards due to " + card + ": " + drawn1 + ", " + drawn2;
-        }
+
         for (GameView view : views) {
-            view.updatePlayCard(card, additionalMessage);
+            view.updatePlayCard(card, "");
         }
-        return wild;
+        return isWild;
     }
 
     /**

@@ -141,47 +141,6 @@ public class GameRunner {
         } catch(IllegalArgumentException e){
                 System.out.println(e);
         }
-
-        for(Card card: cards){
-            System.out.print(card + " "); //TODO: REMOVE THIS
-        }
         return cards;
-
-        /*
-
-        for(Card.Colour colour : Card.nonWildColours){
-            for(Card.Symbol symbol : Card.nonWildSymbols) {
-                Card card1, card2;
-                try {
-                    card1 = new Card(colour, symbol);
-                    card2 = new Card(colour, symbol);
-                } catch(IllegalArgumentException e){
-                    System.out.println(e);
-                    continue;
-                }
-                cards.push(card1);
-                cards.push(card2);
-            }
-        }
-
-        for(Card.Colour colour : Card.wildColours){
-            for(Card.Symbol symbol : Card.wildSymbols) {
-                Card card1, card2, card3, card4;
-                try {
-                    card1 = new Card(colour, symbol);
-                    card2 = new Card(colour, symbol);
-                    card3 = new Card(colour, symbol);
-                    card4 = new Card(colour, symbol);
-                } catch(IllegalArgumentException e){
-                    System.out.println(e);
-                    continue;
-                }
-                cards.push(card1);
-                cards.push(card2);
-                cards.push(card3);
-                cards.push(card4);
-            }
-        }
-        return cards;*/
     }
 }
