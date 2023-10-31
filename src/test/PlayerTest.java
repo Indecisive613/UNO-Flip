@@ -1,6 +1,7 @@
 package test;
 
 import main.Card;
+import main.NormalCard;
 import main.Player;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class PlayerTest {
-    /*
 
     @Test
     public void testCreatePlayer() {
@@ -31,7 +31,7 @@ public class PlayerTest {
         ArrayList<Card> hand = new ArrayList<>();
         Player p = new Player("Test Name", hand);
 
-        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         p.dealCard(card);
 
         assertEquals(1, p.getHand().size());
@@ -41,7 +41,7 @@ public class PlayerTest {
     @Test
     public void testPlayCard() {
         ArrayList<Card> hand= new ArrayList<>();
-        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         hand.add(card);
         Player p = new Player("Test Name", hand);
 
@@ -52,9 +52,9 @@ public class PlayerTest {
     @Test
     public void testPlayMultipleCard() {
         ArrayList<Card> hand= new ArrayList<>();
-        Card c1 = new Card(Card.Colour.RED, Card.Symbol.ONE);
-        Card c2 = new Card(Card.Colour.BLUE, Card.Symbol.TWO);
-        Card c3 = new Card(Card.Colour.GREEN, Card.Symbol.THREE);
+        Card c1 = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
+        Card c2 = new NormalCard(Card.Colour.BLUE, Card.Symbol.TWO);
+        Card c3 = new NormalCard(Card.Colour.GREEN, Card.Symbol.THREE);
         hand.add(c1);
         hand.add(c2);
         hand.add(c3);
@@ -74,7 +74,7 @@ public class PlayerTest {
     @Test
     public void testInvalidPlayCard() {
         ArrayList<Card> hand= new ArrayList<>();
-        Card card = new Card(Card.Colour.RED, Card.Symbol.ONE);
+        Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         hand.add(card);
         Player p = new Player("Test Name", hand);
         assertThrows(IllegalArgumentException.class, () -> {
@@ -95,5 +95,5 @@ public class PlayerTest {
 
         p.incrementScore(2009);
         //assertEquals(100 + 2009, p.getScore());
-    }*/
+    }
 }

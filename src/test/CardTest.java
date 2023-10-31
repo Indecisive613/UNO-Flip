@@ -1,6 +1,7 @@
 package test;
 
-import main.Card;
+import main.*;
+
 import static main.Card.Symbol.*;
 import static main.Card.Colour.*;
 
@@ -13,10 +14,9 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class CardTest {
-    /*
     @Test
     public void testCreateCard() {
-        Card c = new Card(RED, ONE);
+        Card c = new NormalCard(RED, ONE);
         assertEquals(1, c.getPointValue());
         assertEquals(RED, c.getColour());
         assertEquals(ONE, c.getSymbol());
@@ -24,7 +24,7 @@ public class CardTest {
 
     @Test
     public void testCreateWildCard() {
-        Card c = new Card(Card.Colour.WILD, Card.Symbol.WILD);
+        Card c = new WildCard();
         assertEquals(40, c.getPointValue());
         assertEquals(Card.Colour.WILD, c.getColour());
         assertEquals(Card.Symbol.WILD, c.getSymbol());
@@ -32,7 +32,7 @@ public class CardTest {
 
     @Test
     public void testCreateSkip() {
-        Card c = new Card(GREEN, SKIP);
+        Card c = new SkipCard(GREEN);
         assertEquals(20, c.getPointValue());
         assertEquals(GREEN, c.getColour());
         assertEquals(SKIP, c.getSymbol());
@@ -40,7 +40,7 @@ public class CardTest {
 
     @Test
     public void testCreateReverse() {
-        Card c = new Card(BLUE, REVERSE);
+        Card c = new ReverseCard(BLUE);
         assertEquals(20, c.getPointValue());
         assertEquals(BLUE, c.getColour());
         assertEquals(REVERSE, c.getSymbol());
@@ -48,7 +48,7 @@ public class CardTest {
 
     @Test
     public void testCreateDrawOne() {
-        Card c = new Card(BLUE, DRAW_ONE);
+        Card c = new DrawOneCard(BLUE);
         assertEquals(10, c.getPointValue());
         assertEquals(BLUE, c.getColour());
         assertEquals(DRAW_ONE, c.getSymbol());
@@ -56,34 +56,34 @@ public class CardTest {
 
     @Test
     public void testCardPointValues() {
-        assertEquals(1, new Card(RED, ONE).getPointValue());
-        assertEquals(2, new Card(RED, TWO).getPointValue());
-        assertEquals(3, new Card(RED, THREE).getPointValue());
-        assertEquals(4, new Card(RED, FOUR).getPointValue());
-        assertEquals(5, new Card(RED, FIVE).getPointValue());
-        assertEquals(6, new Card(RED, SIX).getPointValue());
-        assertEquals(7, new Card(RED, SEVEN).getPointValue());
-        assertEquals(8, new Card(RED, EIGHT).getPointValue());
-        assertEquals(9, new Card(RED, NINE).getPointValue());
-        assertEquals(10, new Card(RED, DRAW_ONE).getPointValue());
-        assertEquals(20, new Card(RED, REVERSE).getPointValue());
-        assertEquals(20, new Card(RED, SKIP).getPointValue());
-        assertEquals(40, new Card(Card.Colour.WILD, Card.Symbol.WILD).getPointValue());
-        assertEquals(50, new Card(Card.Colour.WILD, WILD_DRAW_TWO).getPointValue());
+        assertEquals(1, new NormalCard(RED, ONE).getPointValue());
+        assertEquals(2, new NormalCard(RED, TWO).getPointValue());
+        assertEquals(3, new NormalCard(RED, THREE).getPointValue());
+        assertEquals(4, new NormalCard(RED, FOUR).getPointValue());
+        assertEquals(5, new NormalCard(RED, FIVE).getPointValue());
+        assertEquals(6, new NormalCard(RED, SIX).getPointValue());
+        assertEquals(7, new NormalCard(RED, SEVEN).getPointValue());
+        assertEquals(8, new NormalCard(RED, EIGHT).getPointValue());
+        assertEquals(9, new NormalCard(RED, NINE).getPointValue());
+        assertEquals(10, new DrawOneCard(RED).getPointValue());
+        assertEquals(20, new ReverseCard(RED).getPointValue());
+        assertEquals(20, new SkipCard(RED).getPointValue());
+        assertEquals(40, new WildCard().getPointValue());
+        assertEquals(50, new WildDrawTwoCard().getPointValue());
     }
 
     @Test
     public void testInvalidWildCombo() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Card c = new Card(Card.Colour.WILD, ONE);
+            Card c = new NormalCard(Card.Colour.WILD, ONE);
         });
     }
 
     @Test
     public void testInvalidColourCombo() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Card c = new Card(RED, Card.Symbol.WILD);
+            Card c = new NormalCard(RED, Card.Symbol.WILD);
         });
-    }*/
+    }
 
 }

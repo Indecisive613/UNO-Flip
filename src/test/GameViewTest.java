@@ -17,7 +17,6 @@ import static org.junit.Assert.*;
  * @author Jackie Smolkin-Lerner
  */
 public class GameViewTest {
-    /*
     private ByteArrayOutputStream outContent;
     private GameView view;
     private Game game;
@@ -28,14 +27,14 @@ public class GameViewTest {
         System.setOut(new PrintStream(outContent));
 
         Stack<Card> deck = new Stack<>();
-        deck.push(new Card(Card.Colour.WILD, Card.Symbol.WILD));
-        deck.push(new Card(Card.Colour.RED, Card.Symbol.ONE));
-        deck.push(new Card(Card.Colour.RED, Card.Symbol.TWO));
-        deck.push(new Card(Card.Colour.BLUE, Card.Symbol.THREE));
-        deck.push(new Card(Card.Colour.BLUE, Card.Symbol.FOUR));
-        deck.push(new Card(Card.Colour.GREEN, Card.Symbol.FIVE));
-        deck.push(new Card(Card.Colour.GREEN, Card.Symbol.SIX));
-        deck.push(new Card(Card.Colour.WILD, Card.Symbol.WILD_DRAW_TWO));
+        deck.push(new WildCard());
+        deck.push(new NormalCard(Card.Colour.RED, Card.Symbol.ONE));
+        deck.push(new NormalCard(Card.Colour.RED, Card.Symbol.TWO));
+        deck.push(new NormalCard(Card.Colour.BLUE, Card.Symbol.THREE));
+        deck.push(new NormalCard(Card.Colour.BLUE, Card.Symbol.FOUR));
+        deck.push(new NormalCard(Card.Colour.GREEN, Card.Symbol.FIVE));
+        deck.push(new NormalCard(Card.Colour.GREEN, Card.Symbol.SIX));
+        deck.push(new WildDrawTwoCard());
         game = new Game(deck);
 
         ArrayList<Card> hand = new ArrayList<>();
@@ -64,5 +63,5 @@ public class GameViewTest {
         assertTrue(outContent.toString().contains("GREEN FIVE"));
         assertTrue(outContent.toString().contains("GREEN SIX"));
         assertTrue(outContent.toString().contains("WILD WILD_DRAW_TWO"));
-    }*/
+    }
 }
