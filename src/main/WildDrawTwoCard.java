@@ -13,6 +13,8 @@ public class WildDrawTwoCard extends Card{
         game.getPlayers().get(nextPlayer).dealCard(drawnCard1);
         game.getPlayers().get(nextPlayer).dealCard(drawnCard2);
 
+        game.setSkipPlayer();
+
         return true;
     }
 }
