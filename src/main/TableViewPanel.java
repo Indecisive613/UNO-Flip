@@ -6,56 +6,51 @@ import java.util.ArrayList;
 
 public class TableViewPanel extends JPanel implements GameView {
 
+    private Game game;
     private final JButton deck;
+    private JButton topCard;
+    private JPanel cardPanel;
+    private JPanel playerPanel;
     private ArrayList<JButton> playerButtons;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 100);
     public TableViewPanel(){
 
         this.setSize(200, 200);
         this.setVisible(true);
-        this.setLayout(new GridLayout(3, 3, 10, 10));
+        this.setLayout(new GridLayout(2, 1, 0, 0));
 
-        deck = new JButton("DECK");
+        cardPanel = new JPanel();
+        cardPanel.setSize(100,100);
+        cardPanel.setVisible(true);
+        cardPanel.setLayout(new GridLayout(1, 2));
+
+        deck = new JButton("REMAINING CARDS");
         deck.setFocusPainted(false);
         deck.setBackground(Color.GRAY);
         deck.setFont(BUTTON_FONT);
         deck.setEnabled(false);
+        cardPanel.add(deck);
+
+        topCard = new JCardButton(null);
+        topCard.setFocusPainted(false);
+        topCard.setBackground(Color.GRAY);
+        topCard.setFont(BUTTON_FONT);
+        topCard.setEnabled(false);
+        cardPanel.add(topCard);
+
+        playerPanel = new JPanel();
+        playerPanel.setSize(100,100);
+        playerPanel.setVisible(true);
+        playerPanel.setLayout(new GridLayout(1, 4));
+
+        this.add(cardPanel);
+        this.add(playerPanel);
 
         playerButtons = new ArrayList<JButton>();
     }
     @Override
     public void setGame(Game game) {
-        ArrayList<Player> players = game.getPlayers();
-
-        for(Player selectedPlayer : players) {
-
-            JButton playerButton = new JButton(selectedPlayer.getName());
-            playerButton.setFocusPainted(false);
-            playerButton.setBackground(Color.GRAY);
-            playerButton.setFont(BUTTON_FONT);
-            playerButton.setEnabled(false);
-
-            playerButton.add(playerButton);
-        }
-
-        if(playerButtons.size() == 2) {
-            this.add(playerButtons.get(0), BorderLayout.WEST);
-            this.add(playerButtons.get(1), BorderLayout.NORTH);
-            this.add(deck, BorderLayout.CENTER);
-        }
-        else if(playerButtons.size() == 3) {
-            this.add(playerButtons.get(0), BorderLayout.WEST);
-            this.add(playerButtons.get(1), BorderLayout.NORTH);
-            this.add(playerButtons.get(2), BorderLayout.EAST);
-            this.add(deck, BorderLayout.CENTER);
-        }
-        else if(playerButtons.size() == 4) {
-            this.add(playerButtons.get(0), BorderLayout.WEST);
-            this.add(playerButtons.get(1), BorderLayout.NORTH);
-            this.add(playerButtons.get(2), BorderLayout.EAST);
-            this.add(playerButtons.get(3), BorderLayout.SOUTH);
-            this.add(deck, BorderLayout.CENTER);
-        }
+        this.game = game;
     }
 
     @Override
@@ -71,18 +66,37 @@ public class TableViewPanel extends JPanel implements GameView {
     @Override
     public void handleNewTurn(Player player) {
 
+        ArrayList<Player> players = game.getPlayers();
+
+        for(Player selectedPlayer : players) {
+            JButton playerButton = new JButton(selectedPlayer.getName());
+            playerButton.setFocusPainted(false);
+            playerButton.setBackground(Color.GRAY);
+            playerButton.setFont(BUTTON_FONT);
+            playerButton.setEnabled(false);
+            playerButtons.add(playerButton);
+        }
+
         for(JButton playerButton : playerButtons) {
             playerButton.setBackground(Color.GRAY);
 
+            if (playerButtons.size() == players.size()) {
+                playerPanel.add(playerButton);
+            }
+
             if (playerButton.getText().equals(player.getName())) {
-                playerButton.setBackground(Color.BLUE);
+                playerButton.setBackground(Color.ORANGE);
             }
         }
     }
 
     @Override
     public void updatePlayCard(Card playedCard, String additionalMessage) {
-
+        cardPanel.remove(1);
+        topCard = new JCardButton(playedCard);
+        topCard.setFont(BUTTON_FONT);
+        topCard.setEnabled(false);
+        cardPanel.add(topCard);
     }
 
     @Override
