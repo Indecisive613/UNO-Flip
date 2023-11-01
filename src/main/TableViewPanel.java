@@ -74,20 +74,25 @@ public class TableViewPanel extends JPanel implements GameView {
             playerButton.setBackground(Color.GRAY);
             playerButton.setFont(BUTTON_FONT);
             playerButton.setEnabled(false);
-            playerButtons.add(playerButton);
+
+            if (playerButtons.size() < players.size()) {
+                playerButtons.add(playerButton);
+            }
         }
 
         for(JButton playerButton : playerButtons) {
             playerButton.setBackground(Color.GRAY);
 
-            if (playerButtons.size() == players.size()) {
-                playerPanel.add(playerButton);
-            }
+            playerPanel.add(playerButton);
 
             if (playerButton.getText().equals(player.getName())) {
                 playerButton.setBackground(Color.ORANGE);
             }
         }
+
+        int deckSize = game.getDeck().size();
+        deck.setText("REMAINING CARDS:" + deckSize);
+
     }
 
     @Override
