@@ -69,4 +69,13 @@ public class InfoViewPanel extends JPanel implements GameView {
     public void updateConfirmColour(Card.Colour colour) {
 
     }
+
+    public void updateScores(){
+        String scores = "";
+        for (Player player: players){
+            String playerName = player.getName();
+            scores += playerName + ": " + player.getScore() + "\n";
+        }
+        score.setText(scores);
+    }
 }
