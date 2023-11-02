@@ -47,7 +47,7 @@ public class NewGameView extends JPanel implements GameView{
             }
         }
         while(playerCount < min || playerCount > max){
-            JOptionPane.showMessageDialog(superFrame, "Please enter a valid player count", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(superFrame, "Please enter a valid player count (2-4)", "Error", JOptionPane.ERROR_MESSAGE);
             input = JOptionPane.showInputDialog("Enter the number of players:");
             if(input != null && !input.isEmpty()){
                 try {
