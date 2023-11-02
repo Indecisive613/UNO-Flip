@@ -13,7 +13,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private JPanel cardPanel;
     private JPanel playerPanel;
     private ArrayList<JButton> playerButtons;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 100);
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 48);
     public TableViewPanel(){
 
         this.setSize(200, 200);
@@ -66,6 +66,16 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewTurn(Player player) {
+
+        Card startTopCard = game.getTopCard();
+
+        cardPanel.remove(1);
+        topCard = new JCardButton(startTopCard);
+        cardPanel.add(topCard);
+        topCard.setText(startTopCard.getSymbol().toString());
+        topCard.setFont(BUTTON_FONT);
+        topCard.setEnabled(false);
+
         ArrayList<Player> players = game.getPlayers();
 
         for(Player selectedPlayer : players) {
