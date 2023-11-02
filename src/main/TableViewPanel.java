@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class TableViewPanel extends JPanel implements GameView {
 
     private Game game;
-    private final JButton deck;
+    private JButton deck;
     private JButton topCard;
     private JPanel cardPanel;
     private JPanel playerPanel;
@@ -65,7 +65,6 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewTurn(Player player) {
-
         ArrayList<Player> players = game.getPlayers();
 
         for(Player selectedPlayer : players) {
@@ -82,31 +81,31 @@ public class TableViewPanel extends JPanel implements GameView {
 
         for(JButton playerButton : playerButtons) {
             playerButton.setBackground(Color.GRAY);
-
             playerPanel.add(playerButton);
 
             if (playerButton.getText().equals(player.getName())) {
                 playerButton.setBackground(Color.ORANGE);
             }
         }
-
-        int deckSize = game.getDeck().size();
-        deck.setText("REMAINING CARDS:" + deckSize);
-
     }
 
     @Override
     public void updatePlayCard(Card playedCard, String additionalMessage) {
         cardPanel.remove(1);
         topCard = new JCardButton(playedCard);
+        cardPanel.add(topCard);
+        topCard.setText(playedCard.getSymbol().toString());
         topCard.setFont(BUTTON_FONT);
         topCard.setEnabled(false);
-        cardPanel.add(topCard);
+
+        int deckSize = game.getDeck().size();
+        deck.setText("REMAINING CARDS:" + deckSize);
     }
 
     @Override
     public void updateDrawCard(Card drawnCard) {
-
+        int deckSize = game.getDeck().size();
+        deck.setText("REMAINING CARDS:" + deckSize);
     }
 
     @Override
