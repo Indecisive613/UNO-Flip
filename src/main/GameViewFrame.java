@@ -24,6 +24,7 @@ public class GameViewFrame extends JFrame {
 
         // Add table view
         table = new TableViewPanel();
+        table.setGame(game);
         game.addView(table);
         frame.add(table, BorderLayout.CENTER);
 

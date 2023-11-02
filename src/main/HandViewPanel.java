@@ -138,7 +138,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void updateDrawCard(Card drawnCard) {
-
+        updateCardPanel();
     }
 
     @Override
