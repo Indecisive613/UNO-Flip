@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Gathers player count and player names.
@@ -37,27 +38,16 @@ public class NewGameView extends JPanel implements GameView{
      * @return the number of players in the game
      */
     public int requestPlayerCount(int min, int max){
-        int playerCount = 0;
-        String input = JOptionPane.showInputDialog("Enter the number of players:");
-        if(input != null && !input.isEmpty()){
-            try {
-                playerCount = Integer.parseInt(input);
-            } catch (NumberFormatException e){
-                System.out.print(e); //or could also do nothing
-            }
+        ArrayList<Integer> options = new ArrayList<Integer>();
+        for(int i = min; i <= max; i++) {
+            options.add((Integer)i);
         }
-        while(playerCount < min || playerCount > max){
-            JOptionPane.showMessageDialog(superFrame, "Please enter a valid player count", "Error", JOptionPane.ERROR_MESSAGE);
-            input = JOptionPane.showInputDialog("Enter the number of players:");
-            if(input != null && !input.isEmpty()){
-                try {
-                    playerCount = Integer.parseInt(input);
-                } catch (NumberFormatException e){
-                    System.out.print(e); //or could also do nothing
-                }
-            }
+        Integer[] optionsArr = options.toArray(new Integer[0]);
+        int input = -1;
+        while(input == -1) {
+            input = JOptionPane.showOptionDialog(null, "Choose the number of players", "Input Panel", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, optionsArr, optionsArr[0]);
         }
-        return playerCount;
+        return input + min;
     }
     @Override
     public void setGame(Game game) {

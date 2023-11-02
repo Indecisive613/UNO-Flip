@@ -27,7 +27,6 @@ public class InfoViewPanel extends JPanel implements GameView {
         this.add(direction, BorderLayout.EAST);
     }
     public void setGame(Game game) {
-
     }
 
     public void updateGetPlayerName(int index) {
