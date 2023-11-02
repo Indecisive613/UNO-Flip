@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class TableViewPanel extends JPanel implements GameView {
 
     private Game game;
+    private int deckSize;
     private JButton deck;
     private JButton topCard;
     private JPanel cardPanel;
@@ -98,13 +99,13 @@ public class TableViewPanel extends JPanel implements GameView {
         topCard.setFont(BUTTON_FONT);
         topCard.setEnabled(false);
 
-        int deckSize = game.getDeck().size();
+        deckSize = game.getDeck().size();
         deck.setText("REMAINING CARDS:" + deckSize);
     }
 
     @Override
     public void updateDrawCard(Card drawnCard) {
-        int deckSize = game.getDeck().size();
+        deckSize = game.getDeck().size();
         deck.setText("REMAINING CARDS:" + deckSize);
     }
 
