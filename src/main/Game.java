@@ -197,6 +197,9 @@ public class Game {
         if(!isWild){
             currentColour = card.getColour();
         }
+        else{
+            new WildPopUp(this);
+        }
 
         for (GameView view : views) {
             view.updatePlayCard(card, "");
