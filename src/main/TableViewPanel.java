@@ -15,7 +15,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private JPanel cardPanel;
     private JPanel playerPanel;
     private ArrayList<JButton> playerButtons;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 48);
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 50);
     public TableViewPanel(){
 
         this.setSize(200, 200);
@@ -27,10 +27,11 @@ public class TableViewPanel extends JPanel implements GameView {
         cardPanel.setVisible(true);
         cardPanel.setLayout(new GridLayout(1, 2));
 
-        deck = new JButton("REMAINING CARDS");
+        deck = new JCardButton(null);
         deck.setFocusPainted(false);
-        deck.setBackground(Color.GRAY);
+        deck.setBackground(Color.DARK_GRAY);
         deck.setFont(BUTTON_FONT);
+        deck.setText("REMAINING CARDS");
         deck.setEnabled(false);
         cardPanel.add(deck);
 
@@ -83,6 +84,9 @@ public class TableViewPanel extends JPanel implements GameView {
         topCard.setFont(BUTTON_FONT);
         topCard.setEnabled(false);
 
+        deckSize = game.getDeck().size();
+        deck.setText("REMAINING CARDS:" + deckSize);
+
         ArrayList<Player> players = game.getPlayers();
 
         for(Player selectedPlayer : players) {
@@ -98,11 +102,11 @@ public class TableViewPanel extends JPanel implements GameView {
         }
 
         for(JButton playerButton : playerButtons) {
-            playerButton.setBackground(Color.GRAY);
+            playerButton.setBackground(Color.LIGHT_GRAY);
             playerPanel.add(playerButton);
 
             if (playerButton.getText().equals(player.getName())) {
-                playerButton.setBackground(Color.ORANGE);
+                playerButton.setBackground(Color.MAGENTA);
             }
         }
     }
