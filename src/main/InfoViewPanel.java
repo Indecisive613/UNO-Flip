@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,6 +29,11 @@ public class InfoViewPanel extends JPanel implements GameView {
         this.add(direction, BorderLayout.EAST);
     }
     public void setGame(Game game) {
+    }
+
+    @Override
+    public void handleNewGame() {
+
     }
 
     public void updateGetPlayerName(int index) {

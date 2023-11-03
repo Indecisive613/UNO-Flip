@@ -1,4 +1,7 @@
-package main;
+package main.cards;
+
+import main.Game;
+import main.cards.Card;
 
 /**
  * A Skip card in a game of UNO Flip.
@@ -6,7 +9,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class SkipCard extends Card{
+public class SkipCard extends Card {
     /**
      * Creates a new Uno Skip card with the specified color.
      *

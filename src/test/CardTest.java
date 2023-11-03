@@ -1,10 +1,9 @@
 package test;
 
-import main.*;
+import static main.cards.Card.Symbol.*;
+import static main.cards.Card.Colour.*;
 
-import static main.Card.Symbol.*;
-import static main.Card.Colour.*;
-
+import main.cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

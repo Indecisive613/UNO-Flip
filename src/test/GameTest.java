@@ -2,13 +2,13 @@ package test;
 
 import main.*;
 
-import static main.Card.Colour.WILD;
-import static main.Card.Symbol.*;
-import static main.Card.Colour.*;
+import static main.cards.Card.Symbol.*;
+import static main.cards.Card.Colour.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
+import main.cards.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

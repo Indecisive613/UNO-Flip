@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 
 public class WildPopUp extends JOptionPane implements GameView {
@@ -14,6 +16,11 @@ public class WildPopUp extends JOptionPane implements GameView {
         }
     }
     public void setGame(Game game) {
+    }
+
+    @Override
+    public void handleNewGame() {
+
     }
 
     public void updateGetPlayerName(int index) {

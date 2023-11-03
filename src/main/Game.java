@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
@@ -26,6 +28,7 @@ public class Game {
     private boolean skipPlayer;
     private int currentPlayerIndex = -1; // set to -1 for first increment
     private Card.Colour currentColour;
+    private boolean running = false;
 
     /**
      * Create a new UNO Game given a deck of cards
@@ -154,7 +157,11 @@ public class Game {
      * @return If the game is running
      */
     public boolean isRunning() {
-        return true;
+        return this.running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     /**

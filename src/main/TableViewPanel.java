@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,6 +54,11 @@ public class TableViewPanel extends JPanel implements GameView {
     @Override
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    @Override
+    public void handleNewGame() {
+
     }
 
     @Override

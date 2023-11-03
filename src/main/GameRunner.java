@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
@@ -12,98 +14,82 @@ import java.util.Stack;
 public class GameRunner {
 
     private final Game game;
-    private final GameController controller;
+    private final ArrayList<GameView> views;
+
+    private int playerCount;
 
     /**
      * Create a GameRunner with a specific Game and GameController
      *
      * @param game The Game to run
-     * @param controller The GameController to get user input with
      */
-    public GameRunner(Game game, GameController controller) {
+    public GameRunner(Game game) {
         this.game = game;
-        this.controller = controller;
+        this.views = new ArrayList<>();
     }
 
-    /**
-     * The Main method to create a new UNO game
-     *
-     * @param args Main args - not used
-     */
-    public static void main(String[] args) {
-        GameView view = new GameDebugView();
-        GameController controller = new GameController(view);
-        Game game = new Game(createDeck());
-        game.addView(view);
-        view.setGame(game);
-
-        GameRunner runner = new GameRunner(game, controller);
-        runner.initGame();
-        while(!game.hasWonGame()){
-            runner.playGame();
-        }
-        System.out.println(game.getCurrentPlayer().getName() + " has won the game!!!");
-        System.out.println(game.getCurrentPlayer().getName() + " scored " + game.getCurrentPlayer().getScore() + " points this game.");
+    public void addView(GameView view) {
+        views.add(view);
     }
 
     public void initGame(){
-        int playerCount = controller.requestPlayerCount();
-        for (int i = 0; i < playerCount; i++) {
-            ArrayList<Card> hand = new ArrayList<>();
-            String name = controller.requestPlayerName(i);
-            Player player = new Player(name, hand);
-            game.addPlayer(player);
+        for (GameView view : views) {
+            view.handleNewGame();
         }
+        while (!game.isRunning());
+        game.shuffleDeck();
+        game.dealCards();
+        game.advanceTurn();
     }
 
     /**
      * Start the UNO game
      */
-    public void playGame() {
-        for(Player player: game.getPlayers()){
-            game.addToDeck(player.clearHand());
-        }
-        game.shuffleDeck();
-        game.dealCards();
-        game.resetGame();
-        int i = 0;
-        for (Player player: game.getPlayers()){
-            System.out.println(player.getName() + " has " + player.getScore() + " points.");
-            i++;
-        }
-
-        while (game.isRunning()) {
-            game.advanceTurn();
-            Player currentPlayer = game.getCurrentPlayer();
-
-            Card card = null;
-            while (true) {
-                int action = controller.requestPlayerAction(currentPlayer.getHand().size());
-
-                if (action == Game.DRAW_CARD_ACTION) {
-                    game.drawCard(currentPlayer);
-                    break;
-                }
-
-                card = currentPlayer.getHand().get(action - 1);
-                if (game.canPlayCard(card)) {
-                    boolean wild = game.playCard(currentPlayer.playCard(action - 1));
-                    if (wild) {
-                        game.setCurrentColour(controller.requestColour());
-                    }
-                    break;
-                }
-                System.out.println("Card doesn't match the top card. Try again.");
-            }
-
-            if (currentPlayer.getHand().isEmpty()) {
-                System.out.println(currentPlayer.getName() + " has won!");
-                System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
-                game.assignScore();
-                break;
-            }
-        }
-    }
+//    public void playGame() {
+//        for(Player player: game.getPlayers()){
+//            game.addToDeck(player.clearHand());
+//        }
+//        game.shuffleDeck();
+//        game.dealCards();
+//        game.resetGame();
+//        int i = 0;
+//        for (Player player: game.getPlayers()){
+//            System.out.println(player.getName() + " has " + player.getScore() + " points.");
+//            i++;
+//        }
+//
+//        while (game.isRunning()) {
+//            game.advanceTurn();
+//            Player currentPlayer = game.getCurrentPlayer();
+//
+//            Card card = null;
+//            while (true) {
+//                int action = controller.requestPlayerAction(currentPlayer.getHand().size());
+//
+//                if (action == Game.DRAW_CARD_ACTION) {
+//                    game.drawCard(currentPlayer);
+//                    break;
+//                }
+//
+//                card = currentPlayer.getHand().get(action - 1);
+//                if (game.canPlayCard(card)) {
+//                    boolean wild = game.playCard(currentPlayer.playCard(action - 1));
+//                    if (wild) {
+//                        game.setCurrentColour(controller.requestColour());
+//                    }
+//                    break;
+//                }
+//                System.out.println("Card doesn't match the top card. Try again.");
+//            }
+//
+//            if (currentPlayer.getHand().isEmpty()) {
+//                System.out.println(currentPlayer.getName() + " has won!");
+//                System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
+//                game.assignScore();
+//                break;
+//            }
+//        }
+//    }
 
     /**
      * Create and return a deck of UNO cards

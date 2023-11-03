@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 
 public class NewGameView extends JPanel implements GameView{
     private GameViewFrame superFrame;
+    private Game game;
 
     public NewGameView(GameViewFrame superFrame){
         this.superFrame = superFrame;
@@ -51,7 +54,18 @@ public class NewGameView extends JPanel implements GameView{
     }
     @Override
     public void setGame(Game game) {
+        this.game = game;
 
+    }
+
+    @Override
+    public void handleNewGame() {
+        int playerCount = requestPlayerCount(Game.PLAYER_MIN, Game.PLAYER_MAX);
+        // TODO: Move to controller
+        for(int i = 0; i < playerCount; i++){
+            game.addPlayer(new Player(requestPlayerName(i+1), new ArrayList<>()));
+        }
+        game.setRunning(true);
     }
 
     @Override

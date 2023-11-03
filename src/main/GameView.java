@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 /**
  * A View interface for Game to update and display an UNO game
  *
@@ -13,6 +15,8 @@ public interface GameView {
      * @param game the current UNO game
      */
     public void setGame(Game game);
+
+    public void handleNewGame();
 
     /**
      * Display instructions for the user(s) to enter the name of a specific player

@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class GameViewFrame extends JFrame {
         // Add new game view
         newGameView = new NewGameView(this);
         game.addView(newGameView);
+        newGameView.setGame(game);
         frame.add(newGameView, BorderLayout.CENTER);
 
         // Add table view
@@ -61,21 +64,9 @@ public class GameViewFrame extends JFrame {
     public static void main(String[] args) {
         Stack<Card> deck = GameRunner.createDeck();
         Game g = new Game(deck);
+        GameRunner runner = new GameRunner(g);
         GameViewFrame f = new GameViewFrame(g);
-
-        int playerCount = f.requestPlayerCount();
-        System.out.println("The number of players is " + playerCount);
-
-        f.addPlayers(playerCount); //players are added with empty hands so still need to deal
-        g.shuffleDeck();
-        g.dealCards();
-
-        System.out.println("The players in the game are as follows: ");
-        for(Player player: g.getPlayers()){
-            System.out.println("Name: " + player.getName());
-            System.out.println("Hand: " + player.getHand());
-        }
-
-        g.advanceTurn();
+        runner.addView(f.newGameView);
+        runner.initGame();
     }
 }

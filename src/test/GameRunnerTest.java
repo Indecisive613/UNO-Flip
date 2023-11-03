@@ -1,13 +1,8 @@
 package test;
 
-import main.*;
-
-import java.util.Arrays;
 import java.util.Stack;
-import java.util.ArrayList;
-import java.util.Collections;
 
-import org.junit.Before;
+import main.cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

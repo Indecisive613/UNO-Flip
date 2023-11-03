@@ -1,6 +1,10 @@
 package test;
 
 import main.*;
+import main.cards.Card;
+import main.cards.NormalCard;
+import main.cards.WildCard;
+import main.cards.WildDrawTwoCard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +46,6 @@ public class GameViewTest {
 
         game.addPlayer(currentPlayer);
 
-        view = new GameDebugView();
         view.setGame(game);
         game.addView(view);
     }

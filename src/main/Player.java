@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import java.util.ArrayList;
 
 /**

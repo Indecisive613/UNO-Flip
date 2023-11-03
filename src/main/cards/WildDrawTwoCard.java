@@ -1,4 +1,7 @@
-package main;
+package main.cards;
+
+import main.Game;
+import main.cards.Card;
 
 /**
  * A wild draw two card in a game of UNO Flip.
@@ -6,7 +9,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class WildDrawTwoCard extends Card{
+public class WildDrawTwoCard extends Card {
     /**
      * Creates an UNO wild draw two card with the specified color.
      *

@@ -1,4 +1,6 @@
-package main;
+package main.cards;
+
+import main.Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;

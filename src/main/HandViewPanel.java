@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class HandViewPanel extends JPanel implements GameView {
         // Add draw card button
         drawButton = new JButton("DRAW +");
         drawButton.setFocusPainted(false);
-        drawButton.setBackground(new Color(140, 140, 140));
+        drawButton.setBackground(Color.GREEN);
         drawButton.setFont(BUTTON_FONT);
 
         drawButton.addActionListener(event -> {
@@ -72,6 +74,11 @@ public class HandViewPanel extends JPanel implements GameView {
     public void setGame(Game game) {
         this.game = game;
         controller.setGame(game);
+    }
+
+    @Override
+    public void handleNewGame() {
+
     }
 
     @Override

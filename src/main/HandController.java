@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 public class HandController {
     private Game game;
 
