@@ -1,4 +1,7 @@
-package main;
+package main.cards;
+
+import main.Game;
+import main.cards.Card;
 
 /**
  * A plain wild card in a game of UNO Flip.
@@ -6,7 +9,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class WildCard extends Card{
+public class WildCard extends Card {
     /**
      * Creates an UNO wild card with the specified color.
      *

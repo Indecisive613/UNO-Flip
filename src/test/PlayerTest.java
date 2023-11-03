@@ -1,7 +1,7 @@
 package test;
 
-import main.Card;
-import main.NormalCard;
+import main.cards.Card;
+import main.cards.NormalCard;
 import main.Player;
 
 import java.util.ArrayList;

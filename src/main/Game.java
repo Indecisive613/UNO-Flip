@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
@@ -13,7 +15,7 @@ public class Game {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
-    public static final int STARTING_HAND_SIZE = 7;
+    public static final int STARTING_HAND_SIZE = 2;
     public static final int DRAW_CARD_ACTION = 0;
 
     private final ArrayList<GameView> views;
@@ -26,6 +28,7 @@ public class Game {
     private boolean skipPlayer;
     private int currentPlayerIndex = -1; // set to -1 for first increment
     private Card.Colour currentColour;
+    private boolean running = false;
 
     /**
      * Create a new UNO Game given a deck of cards
@@ -154,7 +157,11 @@ public class Game {
      * @return If the game is running
      */
     public boolean isRunning() {
-        return true;
+        return this.running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     /**
@@ -202,7 +209,7 @@ public class Game {
         }
 
         for (GameView view : views) {
-            view.updatePlayCard(card, "");
+            view.handlePlayCard(card, "");
         }
         return isWild;
     }
@@ -219,7 +226,7 @@ public class Game {
         Card drawnCard = deck.pop();
         player.dealCard(drawnCard);
         for (GameView view : views) {
-            view.updateDrawCard(drawnCard);
+            view.handleDrawCard(drawnCard);
         }
     }
 

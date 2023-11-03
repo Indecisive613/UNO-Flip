@@ -1,4 +1,7 @@
-package main;
+package main.cards;
+
+import main.Game;
+import main.cards.Card;
 
 /**
  * A Reverse card in a game of UNO Flip.
@@ -6,7 +9,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class ReverseCard extends Card{
+public class ReverseCard extends Card {
     /**
      * Creates a new Reverse card with the specified color.
      *

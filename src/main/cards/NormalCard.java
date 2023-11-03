@@ -1,4 +1,6 @@
-package main;
+package main.cards;
+
+import main.Game;
 
 /**
  * A numbered card in a game of UNO Flip.
@@ -6,7 +8,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class NormalCard extends Card{
+public class NormalCard extends Card {
     /**
      * Creates a numbered Uno card with the specified color and number.
      *

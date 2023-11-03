@@ -1,5 +1,7 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,6 +31,11 @@ public class InfoViewPanel extends JPanel implements GameView {
     public void setGame(Game game) {
     }
 
+    @Override
+    public void handleNewGame() {
+
+    }
+
     public void updateGetPlayerName(int index) {
 
     }
@@ -49,11 +56,11 @@ public class InfoViewPanel extends JPanel implements GameView {
         score.setText(turnOrder);
     }
 
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard, String additionalMessage) {
 
     }
 
-    public void updateDrawCard(Card drawnCard) {
+    public void handleDrawCard(Card drawnCard) {
 
     }
 
@@ -61,7 +68,7 @@ public class InfoViewPanel extends JPanel implements GameView {
 
     }
 
-    public void updateGetColour() {
+    public void handleGetColour() {
 
     }
 

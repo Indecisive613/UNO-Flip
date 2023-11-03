@@ -1,4 +1,7 @@
-package main;
+package main.cards;
+
+import main.Game;
+import main.cards.Card;
 
 /**
  * A Draw One card in a game of UNO Flip.
@@ -6,7 +9,7 @@ package main;
  * @author Fiona Cheng
  */
 
-public class DrawOneCard extends Card{
+public class DrawOneCard extends Card {
     /**
      * Creates a new Uno Draw One card with the specified color.
      *

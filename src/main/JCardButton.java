@@ -1,8 +1,9 @@
 package main;
 
+import main.cards.Card;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 public class JCardButton extends JButton {
