@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class TableViewPanel extends JPanel implements GameView {
 
+    private static final int CARD_WIDTH = 100;
     private Game game;
     private int deckSize;
     private JButton deck;
@@ -13,17 +14,17 @@ public class TableViewPanel extends JPanel implements GameView {
     private JPanel cardPanel;
     private JPanel playerPanel;
     private ArrayList<JButton> playerButtons;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 50);
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 40);
     public TableViewPanel(){
 
-        this.setSize(200, 200);
+        this.setSize(100, 100);
         this.setVisible(true);
-        this.setLayout(new GridLayout(2, 1, 0, 0));
+        this.setLayout(new GridLayout(2, 1, 100, 100));
 
         cardPanel = new JPanel();
-        cardPanel.setSize(100,100);
+        cardPanel.setSize(50,50);
         cardPanel.setVisible(true);
-        cardPanel.setLayout(new GridLayout(1, 2));
+        cardPanel.setLayout(new GridLayout(1, 4, 200, 100));
 
         deck = new JCardButton(null);
         deck.setFocusPainted(false);
@@ -41,9 +42,9 @@ public class TableViewPanel extends JPanel implements GameView {
         cardPanel.add(topCard);
 
         playerPanel = new JPanel();
-        playerPanel.setSize(100,100);
+        playerPanel.setSize(50,50);
         playerPanel.setVisible(true);
-        playerPanel.setLayout(new GridLayout(1, 4));
+        playerPanel.setLayout(new GridLayout(1, 4, 100, 100));
 
         this.add(cardPanel);
         this.add(playerPanel);

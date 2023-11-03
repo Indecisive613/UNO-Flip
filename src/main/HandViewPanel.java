@@ -14,7 +14,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
     private final JLabel playerName;
     private final JButton drawButton;
-    private final JButton nextTurnButton;
+    private final JButton endTurn;
     private final JPanel actionPanel;
     private final JPanel cardPanel;
     private final HandController controller;
@@ -37,17 +37,17 @@ public class HandViewPanel extends JPanel implements GameView {
         JScrollPane scrollPane = new JScrollPane(cardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setSize(100, 300);
 
-        // Add next turn button
-        nextTurnButton = new JButton("NEXT TURN");
-        nextTurnButton.setFocusPainted(false);
-        nextTurnButton.setBackground(new Color(255, 255, 255));
-        nextTurnButton.setFont(BUTTON_FONT);
-        nextTurnButton.setEnabled(false);
+        // Add end turn button
+        endTurn = new JButton("END TURN");
+        endTurn.setFocusPainted(false);
+        endTurn.setBackground(new Color(255, 255, 255));
+        endTurn.setFont(BUTTON_FONT);
+        endTurn.setEnabled(false);
 
-        nextTurnButton.addActionListener(event -> {
+        endTurn.addActionListener(event -> {
             controller.nextTurn();
         });
-        actionPanel.add(nextTurnButton);
+        actionPanel.add(endTurn);
 
         // Add draw card button
         drawButton = new JButton("DRAW +");
@@ -59,8 +59,8 @@ public class HandViewPanel extends JPanel implements GameView {
             controller.drawCard();
             drawButton.setEnabled(false);
             lockHand();
-            nextTurnButton.setEnabled(true);
-            nextTurnButton.setBackground(Color.GREEN);
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
         });
         actionPanel.add(drawButton);
 
@@ -90,7 +90,8 @@ public class HandViewPanel extends JPanel implements GameView {
         playerName.setText("Current Player: " + player.getName());
 
         // Reset buttons
-        nextTurnButton.setEnabled(false);
+        endTurn.setEnabled(false);
+        endTurn.setBackground(new Color(255, 255, 255));
         drawButton.setEnabled(true);
         updateCardPanel();
 
@@ -118,8 +119,8 @@ public class HandViewPanel extends JPanel implements GameView {
                     controller.playCard(index);
                     drawButton.setEnabled(false);
                     lockHand();
-                    nextTurnButton.setEnabled(true);
-                    nextTurnButton.setBackground(Color.GREEN);
+                    endTurn.setEnabled(true);
+                    endTurn.setBackground(Color.GREEN);
                 });
             }
             else {
