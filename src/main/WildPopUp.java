@@ -35,11 +35,11 @@ public class WildPopUp extends JOptionPane implements GameView {
 
     }
 
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard, String additionalMessage) {
 
     }
 
-    public void updateDrawCard(Card drawnCard) {
+    public void handleDrawCard(Card drawnCard) {
 
     }
 
@@ -47,7 +47,7 @@ public class WildPopUp extends JOptionPane implements GameView {
 
     }
 
-    public void updateGetColour() {
+    public void handleGetColour() {
 
     }
 

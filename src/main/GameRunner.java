@@ -16,8 +16,6 @@ public class GameRunner {
     private final Game game;
     private final ArrayList<GameView> views;
 
-    private int playerCount;
-
     /**
      * Create a GameRunner with a specific Game and GameController
      *
@@ -36,60 +34,10 @@ public class GameRunner {
         for (GameView view : views) {
             view.handleNewGame();
         }
-        while (!game.isRunning());
         game.shuffleDeck();
         game.dealCards();
         game.advanceTurn();
     }
-
-    /**
-     * Start the UNO game
-     */
-//    public void playGame() {
-//        for(Player player: game.getPlayers()){
-//            game.addToDeck(player.clearHand());
-//        }
-//        game.shuffleDeck();
-//        game.dealCards();
-//        game.resetGame();
-//        int i = 0;
-//        for (Player player: game.getPlayers()){
-//            System.out.println(player.getName() + " has " + player.getScore() + " points.");
-//            i++;
-//        }
-//
-//        while (game.isRunning()) {
-//            game.advanceTurn();
-//            Player currentPlayer = game.getCurrentPlayer();
-//
-//            Card card = null;
-//            while (true) {
-//                int action = controller.requestPlayerAction(currentPlayer.getHand().size());
-//
-//                if (action == Game.DRAW_CARD_ACTION) {
-//                    game.drawCard(currentPlayer);
-//                    break;
-//                }
-//
-//                card = currentPlayer.getHand().get(action - 1);
-//                if (game.canPlayCard(card)) {
-//                    boolean wild = game.playCard(currentPlayer.playCard(action - 1));
-//                    if (wild) {
-//                        game.setCurrentColour(controller.requestColour());
-//                    }
-//                    break;
-//                }
-//                System.out.println("Card doesn't match the top card. Try again.");
-//            }
-//
-//            if (currentPlayer.getHand().isEmpty()) {
-//                System.out.println(currentPlayer.getName() + " has won!");
-//                System.out.println(currentPlayer.getName() + " scored " + game.getCurrentScore() + " points this round.");
-//                game.assignScore();
-//                break;
-//            }
-//        }
-//    }
 
     /**
      * Create and return a deck of UNO cards

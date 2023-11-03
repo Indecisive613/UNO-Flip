@@ -56,11 +56,11 @@ public class InfoViewPanel extends JPanel implements GameView {
         score.setText(turnOrder);
     }
 
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard, String additionalMessage) {
 
     }
 
-    public void updateDrawCard(Card drawnCard) {
+    public void handleDrawCard(Card drawnCard) {
 
     }
 
@@ -68,7 +68,7 @@ public class InfoViewPanel extends JPanel implements GameView {
 
     }
 
-    public void updateGetColour() {
+    public void handleGetColour() {
 
     }
 

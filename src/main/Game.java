@@ -15,7 +15,7 @@ public class Game {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
-    public static final int STARTING_HAND_SIZE = 7;
+    public static final int STARTING_HAND_SIZE = 2;
     public static final int DRAW_CARD_ACTION = 0;
 
     private final ArrayList<GameView> views;
@@ -209,7 +209,7 @@ public class Game {
         }
 
         for (GameView view : views) {
-            view.updatePlayCard(card, "");
+            view.handlePlayCard(card, "");
         }
         return isWild;
     }
@@ -226,7 +226,7 @@ public class Game {
         Card drawnCard = deck.pop();
         player.dealCard(drawnCard);
         for (GameView view : views) {
-            view.updateDrawCard(drawnCard);
+            view.handleDrawCard(drawnCard);
         }
     }
 

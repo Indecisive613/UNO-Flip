@@ -140,12 +140,12 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard, String additionalMessage) {
         updateCardPanel();
     }
 
     @Override
-    public void updateDrawCard(Card drawnCard) {
+    public void handleDrawCard(Card drawnCard) {
         updateCardPanel();
     }
 
@@ -155,7 +155,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updateGetColour() {
+    public void handleGetColour() {
 
     }
 

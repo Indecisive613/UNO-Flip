@@ -84,12 +84,12 @@ public class NewGameView extends JPanel implements GameView{
     }
 
     @Override
-    public void updatePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard, String additionalMessage) {
 
     }
 
     @Override
-    public void updateDrawCard(Card drawnCard) {
+    public void handleDrawCard(Card drawnCard) {
 
     }
 
@@ -99,7 +99,7 @@ public class NewGameView extends JPanel implements GameView{
     }
 
     @Override
-    public void updateGetColour() {
+    public void handleGetColour() {
 
     }
 
