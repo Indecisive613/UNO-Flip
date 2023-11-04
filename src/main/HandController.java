@@ -28,4 +28,7 @@ public class HandController {
     public void nextTurn() {
         game.advanceTurn();
     }
+
+    //
+    public void sayUNO(boolean UNO) { game.sayUNO(UNO); }
 }

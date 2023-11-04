@@ -167,6 +167,7 @@ public class Game {
      * Advance the turn to the next player
      */
     public void advanceTurn() {
+
         currentPlayerIndex = nextPlayer();
         skipPlayer = false;
 
@@ -309,5 +310,21 @@ public class Game {
      */
     public void setSkipPlayer(){
         skipPlayer = true;
+    }
+
+    /**
+     * Check if the player said UNO
+     *
+     * @param UNO Whether a player said UNO when they had an empty hand
+     */
+    public void sayUNO(boolean UNO) {
+
+        if (UNO == false) {
+            drawCard(this.getCurrentPlayer());
+            drawCard(this.getCurrentPlayer());
+        }
+        else {
+            hasWonGame();
+        }
     }
 }

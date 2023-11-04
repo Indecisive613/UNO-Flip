@@ -17,6 +17,10 @@ public class HandViewPanel extends JPanel implements GameView {
     private final JLabel playerName;
     private final JButton drawButton;
     private final JButton endTurn;
+
+    //
+    private final JButton UNOButton;
+
     private final JPanel actionPanel;
     private final JPanel cardPanel;
     private final HandController controller;
@@ -51,6 +55,19 @@ public class HandViewPanel extends JPanel implements GameView {
         });
         actionPanel.add(endTurn);
 
+        //
+        // Add uno button
+        UNOButton = new JButton("UNO");
+        UNOButton.setFocusPainted(false);
+        UNOButton.setBackground(new Color(255, 255, 255));
+        UNOButton.setFont(BUTTON_FONT);
+        UNOButton.setEnabled(false);
+
+        UNOButton.addActionListener(event -> {
+            controller.sayUNO(true);
+        });
+        actionPanel.add(UNOButton);
+
         // Add draw card button
         drawButton = new JButton("DRAW +");
         drawButton.setFocusPainted(false);
@@ -60,6 +77,10 @@ public class HandViewPanel extends JPanel implements GameView {
         drawButton.addActionListener(event -> {
             controller.drawCard();
             drawButton.setEnabled(false);
+
+            //
+            UNOButton.setEnabled(false);
+
             lockHand();
             endTurn.setEnabled(true);
             endTurn.setBackground(Color.GREEN);
@@ -83,12 +104,18 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewTurn(Player player) {
+
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
 
         // Reset buttons
         endTurn.setEnabled(false);
         endTurn.setBackground(new Color(255, 255, 255));
+
+        //
+        UNOButton.setEnabled(false);
+        UNOButton.setBackground(new Color(255, 255, 255));
+
         drawButton.setEnabled(true);
         updateCardPanel();
 
@@ -127,6 +154,11 @@ public class HandViewPanel extends JPanel implements GameView {
         }
 
         cardPanel.setVisible(true);
+
+        //
+        if (player.getHand().size() == 0) {
+            handleUNO();
+        }
     }
 
     @Override
@@ -142,5 +174,29 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void handleGetColour() {
 
+    }
+
+    public void handleUNO() {
+
+        boolean endTurnPressed = endTurn.getModel().isPressed();
+        boolean UNOButtonPressed = UNOButton.getModel().isPressed();
+
+        UNOButton.setEnabled(true);
+        UNOButton.setBackground(Color.GREEN);
+
+        UNOButton.addActionListener(event -> {
+
+            if (endTurnPressed == true && UNOButtonPressed == false) {
+                controller.sayUNO(false);
+            }
+            else if (endTurnPressed == true && UNOButtonPressed == true) {
+                controller.sayUNO(true);
+                endTurn.setEnabled(true);
+                endTurn.setBackground(Color.GREEN);
+            }
+
+            UNOButton.setEnabled(false);
+            UNOButton.setBackground(new Color(255, 255, 255));
+        });
     }
 }
