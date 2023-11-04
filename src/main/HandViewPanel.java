@@ -82,16 +82,6 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updateGetPlayerName(int index) {
-
-    }
-
-    @Override
-    public void updateInvalidInput(String message) {
-
-    }
-
-    @Override
     public void handleNewTurn(Player player) {
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
@@ -150,31 +140,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updateGetCard() {
-
-    }
-
-    @Override
     public void handleGetColour() {
 
-    }
-
-    @Override
-    public void updateConfirmColour(Card.Colour colour) {
-
-    }
-
-    public static void main(String[] args) {
-        Stack<Card> deck = GameRunner.createDeck();
-        Game game = new Game(deck);
-
-        game.addPlayer(new Player("Player 1", new ArrayList<Card>()));
-        game.addPlayer(new Player("Player 2", new ArrayList<Card>()));
-
-        game.shuffleDeck();
-        game.dealCards();
-
-        GameViewFrame frame = new GameViewFrame(game);
-        game.advanceTurn();
     }
 }

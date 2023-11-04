@@ -17,7 +17,7 @@ public class GameRunner {
     private final ArrayList<GameView> views;
 
     /**
-     * Create a GameRunner with a specific Game and GameController
+     * Create a GameRunner with a specific Game
      *
      * @param game The Game to run
      */
@@ -34,9 +34,9 @@ public class GameRunner {
         for (GameView view : views) {
             view.handleNewGame();
         }
-        game.shuffleDeck();
-        game.dealCards();
-        game.advanceTurn();
+            game.shuffleDeck();
+            game.dealCards();
+            game.advanceTurn();
     }
 
     /**
