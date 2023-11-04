@@ -64,16 +64,6 @@ public class TableViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updateGetPlayerName(int index) {
-
-    }
-
-    @Override
-    public void updateInvalidInput(String message) {
-
-    }
-
-    @Override
     public void handleNewTurn(Player player) {
 
         Card startTopCard = game.getTopCard();
@@ -132,17 +122,7 @@ public class TableViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void updateGetCard() {
-
-    }
-
-    @Override
     public void handleGetColour() {
-
-    }
-
-    @Override
-    public void updateConfirmColour(Card.Colour colour) {
 
     }
 }
