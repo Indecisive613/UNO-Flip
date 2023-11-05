@@ -319,12 +319,12 @@ public class Game {
      */
     public void sayUNO(boolean UNO) {
 
-        if (UNO == false) {
-            drawCard(this.getCurrentPlayer());
-            drawCard(this.getCurrentPlayer());
+        if (UNO) {
+            hasWonGame();
         }
         else {
-            hasWonGame();
+            drawCard(this.getCurrentPlayer());
+            drawCard(this.getCurrentPlayer());
         }
     }
 }
