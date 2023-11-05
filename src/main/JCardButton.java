@@ -9,8 +9,8 @@ import java.awt.*;
 public class JCardButton extends JButton {
 
     private Card card;
-    private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 48);
-    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 18);
+    private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 90);
+    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 40);
 
     public JCardButton(Card card) {
         setFocusPainted(false);
