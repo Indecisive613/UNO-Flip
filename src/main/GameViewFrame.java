@@ -8,14 +8,12 @@ import java.util.Stack;
 
 public class GameViewFrame extends JFrame {
 
-    private final Game game;
+    public static final Dimension GAME_SIZE = new Dimension(1920, 1080);
+
     private final NewGameView newGameView;
-    private final HandViewPanel hand;
-    private final TableViewPanel table;
 
     public GameViewFrame(Game game) {
         this.setLayout(new BorderLayout());
-        this.game = game;
         JFrame frame = new JFrame("UNO");
 
         // Add new game view
@@ -24,18 +22,18 @@ public class GameViewFrame extends JFrame {
         frame.add(newGameView, BorderLayout.CENTER);
 
         // Add table view
-        table = new TableViewPanel();
+        TableViewPanel table = new TableViewPanel();
         table.setGame(game);
         game.addView(table);
         frame.add(table, BorderLayout.CENTER);
 
         // Add hand view
-        hand = new HandViewPanel();
+        HandViewPanel hand = new HandViewPanel();
         hand.setGame(game);
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
-        frame.setSize(800, 600);
+        frame.setSize(GAME_SIZE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

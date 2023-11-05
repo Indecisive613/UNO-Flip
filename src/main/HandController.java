@@ -5,10 +5,6 @@ import main.cards.Card;
 public class HandController {
     private Game game;
 
-    public HandController() {
-
-    }
-
     public void setGame(Game game) {
         this.game = game;
     }
@@ -29,6 +25,5 @@ public class HandController {
         game.advanceTurn();
     }
 
-    //
     public void sayUNO(boolean UNO) { game.sayUNO(UNO); }
 }

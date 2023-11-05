@@ -4,27 +4,22 @@ import main.cards.Card;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Stack;
 
 public class HandViewPanel extends JPanel implements GameView {
 
-    private static final int CARD_WIDTH = 100;
-
-    private Player player;
-    private Game game;
+    private static final int CARD_WIDTH = 200;
+    private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
 
     private final JLabel playerName;
     private final JButton drawButton;
     private final JButton endTurn;
-
-    //
     private final JButton UNOButton;
-
-    private final JPanel actionPanel;
     private final JPanel cardPanel;
     private final HandController controller;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
+
+    private Player player;
+    private Game game;
 
     public HandViewPanel() {
         controller = new HandController();
@@ -34,14 +29,12 @@ public class HandViewPanel extends JPanel implements GameView {
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
 
-        actionPanel = new JPanel();
+        JPanel actionPanel = new JPanel();
 
         cardPanel = new JPanel();
-        cardPanel.setSize(100, 300);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(cardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setSize(100, 300);
 
         // Add end turn button
         endTurn = new JButton("END TURN");
@@ -55,7 +48,6 @@ public class HandViewPanel extends JPanel implements GameView {
         });
         actionPanel.add(endTurn);
 
-        //
         // Add uno button
         UNOButton = new JButton("UNO");
         UNOButton.setFocusPainted(false);
@@ -76,12 +68,10 @@ public class HandViewPanel extends JPanel implements GameView {
 
         drawButton.addActionListener(event -> {
             controller.drawCard();
-            drawButton.setEnabled(false);
 
-            //
+            drawButton.setEnabled(false);
             UNOButton.setEnabled(false);
 
-            lockHand();
             endTurn.setEnabled(true);
             endTurn.setBackground(Color.GREEN);
         });
@@ -99,7 +89,6 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewGame() {
-
     }
 
     @Override
@@ -112,57 +101,19 @@ public class HandViewPanel extends JPanel implements GameView {
         endTurn.setEnabled(false);
         endTurn.setBackground(new Color(255, 255, 255));
 
-        //
         UNOButton.setEnabled(false);
         UNOButton.setBackground(new Color(255, 255, 255));
 
         drawButton.setEnabled(true);
         updateCardPanel();
-
-        System.out.println("Top card: " + game.getTopCard());
-    }
-
-    private void lockHand() {
-        for (Component button: cardPanel.getComponents()) {
-            button.setEnabled(false);
-        }
-
-    }
-
-    private void updateCardPanel() {
-        cardPanel.setVisible(false);
-        cardPanel.removeAll();
-
-        for (int i = 0; i < player.getHand().size(); i++) {
-            Card card = player.getHand().get(i);
-            JButton cardButton = new JCardButton(card);
-            cardButton.setPreferredSize(new Dimension(CARD_WIDTH, CARD_WIDTH * 100/70)); // Card ratio
-            if (controller.isValidCard(card)) {
-                int index = i;
-                cardButton.addActionListener(event -> {
-                    controller.playCard(index);
-                    drawButton.setEnabled(false);
-                    lockHand();
-                    endTurn.setEnabled(true);
-                    endTurn.setBackground(Color.GREEN);
-                });
-            }
-            else {
-                cardButton.setEnabled(false);
-            }
-            cardPanel.add(cardButton);
-        }
-
-        cardPanel.setVisible(true);
-
-        //
-        if (player.getHand().size() == 1) {
-            handleUNO();
-        }
     }
 
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
+        if (player.getHand().size() == 1) {
+            handleUNO();
+        }
+
         updateCardPanel();
     }
 
@@ -176,8 +127,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
     }
 
-    public void handleUNO() {
-
+    private void handleUNO() {
         UNOButton.setEnabled(true);
         UNOButton.setBackground(Color.GREEN);
 
@@ -190,12 +140,43 @@ public class HandViewPanel extends JPanel implements GameView {
         });
 
         endTurn.addActionListener(event -> {
-            if(UNOButton.getModel().isEnabled() == true) {
-                controller.sayUNO(false);
-            }
-            else {
-                controller.sayUNO(true);
-            }
+            controller.sayUNO(!UNOButton.isEnabled());
         });
     }
+
+    private void lockHand() {
+        for (Component button : cardPanel.getComponents()) {
+            button.setEnabled(false);
+        }
+
+    }
+
+    private void updateCardPanel() {
+        cardPanel.setVisible(false);
+        cardPanel.removeAll();
+
+        for (int i = 0; i < player.getHand().size(); i++) {
+            Card card = player.getHand().get(i);
+            JButton cardButton = new JCardButton(card);
+            cardButton.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+            if (controller.isValidCard(card)) {
+                int index = i;
+                cardButton.addActionListener(event -> {
+                    controller.playCard(index);
+                    drawButton.setEnabled(false);
+                    lockHand();
+                    endTurn.setEnabled(true);
+                    endTurn.setBackground(Color.GREEN);
+                });
+            } else {
+                cardButton.setEnabled(false);
+            }
+            cardPanel.add(cardButton);
+        }
+
+        cardPanel.setVisible(true);
+
+    }
+
+
 }

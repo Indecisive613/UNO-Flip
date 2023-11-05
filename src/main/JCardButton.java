@@ -9,8 +9,8 @@ import java.awt.*;
 public class JCardButton extends JButton {
 
     private Card card;
-    private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 48);
-    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 18);
+    private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 90);
+    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 40);
 
     public JCardButton(Card card) {
         setFocusPainted(false);
@@ -39,7 +39,7 @@ public class JCardButton extends JButton {
             setBackground(Color.BLACK);
         } else {
             setBackground(getColor(card));
-            setBorder(BorderFactory.createCompoundBorder(getBorder(), new MatteBorder(7, 7, 7, 7, Color.WHITE)));
+            setBorder(BorderFactory.createCompoundBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK), new MatteBorder(7, 7, 7, 7, Color.WHITE)));
         }
     }
 
