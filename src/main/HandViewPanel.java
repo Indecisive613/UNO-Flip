@@ -8,7 +8,7 @@ import java.awt.*;
 public class HandViewPanel extends JPanel implements GameView {
 
     private static final int CARD_WIDTH = 100;
-    private static final int CARD_HEIGHT = CARD_WIDTH;
+    private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
     private final JLabel playerName;
     private final JButton drawButton;

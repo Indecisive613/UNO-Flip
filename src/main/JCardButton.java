@@ -39,7 +39,7 @@ public class JCardButton extends JButton {
             setBackground(Color.BLACK);
         } else {
             setBackground(getColor(card));
-            setBorder(BorderFactory.createCompoundBorder(getBorder(), new MatteBorder(7, 7, 7, 7, Color.WHITE)));
+            setBorder(BorderFactory.createCompoundBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK), new MatteBorder(7, 7, 7, 7, Color.WHITE)));
         }
     }
 
