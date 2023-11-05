@@ -10,12 +10,14 @@ public class HandViewPanel extends JPanel implements GameView {
     private static final int CARD_WIDTH = 100;
     private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 24);
+
     private final JLabel playerName;
     private final JButton drawButton;
     private final JButton endTurn;
     private final JButton UNOButton;
     private final JPanel cardPanel;
     private final HandController controller;
+
     private Player player;
     private Game game;
 
@@ -87,7 +89,6 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewGame() {
-
     }
 
     @Override
@@ -105,8 +106,6 @@ public class HandViewPanel extends JPanel implements GameView {
 
         drawButton.setEnabled(true);
         updateCardPanel();
-
-        System.out.println("Top card: " + game.getTopCard());
     }
 
     @Override
@@ -141,7 +140,7 @@ public class HandViewPanel extends JPanel implements GameView {
         });
 
         endTurn.addActionListener(event -> {
-            controller.sayUNO(!UNOButton.getModel().isEnabled());
+            controller.sayUNO(!UNOButton.isEnabled());
         });
     }
 
@@ -159,7 +158,7 @@ public class HandViewPanel extends JPanel implements GameView {
         for (int i = 0; i < player.getHand().size(); i++) {
             Card card = player.getHand().get(i);
             JButton cardButton = new JCardButton(card);
-            cardButton.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT)); // Card ratio
+            cardButton.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
             if (controller.isValidCard(card)) {
                 int index = i;
                 cardButton.addActionListener(event -> {

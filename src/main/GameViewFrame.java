@@ -9,14 +9,10 @@ import java.util.Stack;
 
 public class GameViewFrame extends JFrame {
 
-    private final Game game;
     private final NewGameView newGameView;
-    private final HandViewPanel hand;
-    private final TableViewPanel table;
 
     public GameViewFrame(Game game) {
         this.setLayout(new BorderLayout());
-        this.game = game;
         JFrame frame = new JFrame("UNO");
 
         // Add new game view
@@ -26,13 +22,13 @@ public class GameViewFrame extends JFrame {
         frame.add(newGameView, BorderLayout.CENTER);
 
         // Add table view
-        table = new TableViewPanel();
+        TableViewPanel table = new TableViewPanel();
         table.setGame(game);
         game.addView(table);
         frame.add(table, BorderLayout.CENTER);
 
         // Add hand view
-        hand = new HandViewPanel();
+        HandViewPanel hand = new HandViewPanel();
         hand.setGame(game);
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
@@ -41,24 +37,6 @@ public class GameViewFrame extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    /**
-     * @return the number of players in the game
-     */
-    public int requestPlayerCount(){
-        return newGameView.requestPlayerCount(game.PLAYER_MIN, game.PLAYER_MAX);
-    }
-
-    /**
-     * Adds playerCount players to the game
-     *
-     * @param playerCount number of players in the game
-     */
-    public void addPlayers(int playerCount){
-        for(int i = 0; i < playerCount; i++){
-            game.addPlayer(new Player(newGameView.requestPlayerName(i+1), new ArrayList<Card>()));
-        }
     }
 
     public static void main(String[] args) {
