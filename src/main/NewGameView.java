@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Gathers player count and player names.
+ * The portion of the UNO interface that gathers player count and player names.
  *
  * @author Fiona Cheng
  */
@@ -14,58 +14,57 @@ import java.util.ArrayList;
 public class NewGameView extends JPanel implements GameView{
     private GameViewFrame superFrame;
     private Game game;
+    private NewGameController controller;
 
-    public NewGameView(GameViewFrame superFrame){
+    /**
+     * Create a NewGameView
+     *
+     * @param superFrame The parent frame
+     * @param game The UNO game
+     */
+    public NewGameView(GameViewFrame superFrame, Game game){
         this.superFrame = superFrame;
+        this.game = game;
+        controller = new NewGameController(game, this);
     }
 
     /**
-     * @param number The number associated with the player
+     * Asks the user to enter a name for a player
      *
-     * @return the name of the player
+     * @param number The current player number
+     * @return The name of the current player
      */
-    public String requestPlayerName(int number){
-        String name = "";
-        name = JOptionPane.showInputDialog("Enter a name for player " + number + ":");
-        while(name == null || name.length() == 0) {
-            JOptionPane.showMessageDialog(superFrame, "Please enter a valid name", "Error", JOptionPane.ERROR_MESSAGE);
-            name = JOptionPane.showInputDialog("Enter a name for player " + number + ":");
-        }
-        return name;
+    public String showInputPanel(int number){
+        return  JOptionPane.showInputDialog("Enter a name for player " + number + ":");
     }
 
     /**
-     * @param min The minimum player count
-     * @param max The maximum player count
+     * Asks the user to enter the number of players in the UNO game
      *
-     * @return the number of players in the game
+     * @param optionsArr The possible player counts
+     * @return The number of players in the UNO game
      */
-    public int requestPlayerCount(int min, int max){
-        ArrayList<Integer> options = new ArrayList<Integer>();
-        for(int i = min; i <= max; i++) {
-            options.add((Integer)i);
-        }
-        Integer[] optionsArr = options.toArray(new Integer[0]);
-        int input = -1;
-        while(input == -1) {
-            input = JOptionPane.showOptionDialog(null, "Choose the number of players", "Input Panel", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, optionsArr, optionsArr[0]);
-        }
-        return input + min;
+    public int getPlayerCountInput(Integer[] optionsArr){
+        return JOptionPane.showOptionDialog(superFrame, "Choose the number of players", "Input Panel", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, optionsArr, optionsArr[0]);
     }
+
+    /**
+     * Displays a custom error message
+     *
+     * @param message The error message to be displayed
+     */
+    public void showErrorMessage(String message){
+        JOptionPane.showMessageDialog(superFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     @Override
     public void setGame(Game game) {
         this.game = game;
-
     }
 
     @Override
     public void handleNewGame() {
-        int playerCount = requestPlayerCount(Game.PLAYER_MIN, Game.PLAYER_MAX);
-        // TODO: Move to controller
-        for(int i = 0; i < playerCount; i++){
-            game.addPlayer(new Player(requestPlayerName(i+1), new ArrayList<>()));
-        }
-        game.setRunning(true);
+        controller.handleNewGame();
     }
 
     @Override
