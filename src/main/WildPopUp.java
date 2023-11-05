@@ -11,9 +11,13 @@ public class WildPopUp extends JOptionPane implements GameView {
         int choice = JOptionPane.showOptionDialog(null, "Choose one of the buttons below:", "Custom Option Pane",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
 
-        if (choice >= 0) {
-            game.setCurrentColour(colours[choice]);
+        while(choice < 0){
+            JOptionPane.showMessageDialog(null, "Choosing a colour for the wild is mandatory", "Error", JOptionPane.ERROR_MESSAGE);
+            choice = JOptionPane.showOptionDialog(null, "Choose one of the buttons below:", "Custom Option Pane",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
         }
+
+        game.setCurrentColour(colours[choice]);
     }
     public void setGame(Game game) {
     }
