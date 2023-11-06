@@ -33,6 +33,15 @@ public class GameViewFrame extends JFrame {
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
+        /*
+        JLabel label = new JLabel("Test");
+        frame.add(label, BorderLayout.PAGE_START);
+*/
+        InfoViewPanel info = new InfoViewPanel();
+        info.setGame(game);
+        game.addView(info);
+        frame.add(info, BorderLayout.PAGE_START);
+
         frame.setSize(GAME_SIZE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

@@ -205,7 +205,7 @@ public class Game {
             currentColour = card.getColour();
         }
         else{
-            new WildPopUp(this);
+            new WildViewPopUp(this);
         }
 
         for (GameView view : views) {
