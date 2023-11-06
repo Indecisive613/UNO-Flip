@@ -14,6 +14,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private JButton deck;
     private JButton topCard;
     private JPanel cardPanel;
+    private JPanel gameInfo; // Current Direction, Current Color
     private JPanel playerPanel;
     private ArrayList<JButton> playerButtons;
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 40);
@@ -37,9 +38,6 @@ public class TableViewPanel extends JPanel implements GameView {
         cardPanel.add(deck);
 
         topCard = new JCardButton(null);
-        topCard.setFocusPainted(false);
-        topCard.setBackground(Color.GRAY);
-        topCard.setFont(BUTTON_FONT);
         topCard.setEnabled(false);
         cardPanel.add(topCard);
 
@@ -71,8 +69,6 @@ public class TableViewPanel extends JPanel implements GameView {
         cardPanel.remove(1);
         topCard = new JCardButton(startTopCard);
         cardPanel.add(topCard);
-        topCard.setText(startTopCard.getSymbol().toString());
-        topCard.setFont(BUTTON_FONT);
         topCard.setEnabled(false);
 
         deckSize = game.getDeck().size();
@@ -107,8 +103,7 @@ public class TableViewPanel extends JPanel implements GameView {
         cardPanel.remove(1);
         topCard = new JCardButton(playedCard);
         cardPanel.add(topCard);
-        topCard.setText(playedCard.getSymbol().toString());
-        topCard.setFont(BUTTON_FONT);
+        topCard.setFont(new Font("Mono", Font.BOLD, 90));
         topCard.setEnabled(false);
 
         deckSize = game.getDeck().size();
