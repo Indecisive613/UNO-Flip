@@ -86,4 +86,9 @@ public class NewGameView extends JPanel implements GameView{
     public void handleGetColour() {
 
     }
+
+    @Override
+    public void handleUpdateTurnOrder(boolean turnReversed) {
+
+    }
 }

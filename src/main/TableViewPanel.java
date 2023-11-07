@@ -16,6 +16,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private JLabel currentColor;
     private JLabel remainingCards;
     private JButton topCard;
+    private JPanel topCardPanel;
     private JPanel playerPanel;
     private Game game;
 
@@ -48,7 +49,12 @@ public class TableViewPanel extends JPanel implements GameView {
         topCard = new JCardButton(null);
         topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         topCard.setEnabled(false);
-        this.add(topCard);
+        //this.add(topCard);
+
+        JPanel topCardPanel = new JPanel();
+        topCardPanel.setSize(400, 400);
+        topCardPanel.add(topCard);
+        this.add(topCardPanel);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
@@ -127,6 +133,11 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleGetColour() {
+
+    }
+
+    @Override
+    public void handleUpdateTurnOrder(boolean turnReversed) {
 
     }
 }

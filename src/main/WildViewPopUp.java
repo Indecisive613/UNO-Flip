@@ -57,6 +57,11 @@ public class WildViewPopUp extends JOptionPane implements GameView {
 
     }
 
+    @Override
+    public void handleUpdateTurnOrder(boolean turnReversed) {
+
+    }
+
     public void updateConfirmColour(Card.Colour colour) {
 
     }
