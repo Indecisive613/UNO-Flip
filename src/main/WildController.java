@@ -14,6 +14,11 @@ public class WildController implements ActionListener {
         this.view = view;
     }
 
+    /**
+     * Gets the new colour of the pile
+     *
+     * @return the name of the player
+     */
     public Card.Colour requestWildColour(){
         String[] strOptions = {"Red", "Blue", "Green", "Yellow"};
         Card.Colour[] colours = {Card.Colour.RED, Card.Colour.BLUE, Card.Colour.GREEN, Card.Colour.YELLOW};
