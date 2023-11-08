@@ -44,4 +44,6 @@ public interface GameView {
      * Display instructions to the current player about what colour to pick
      */
     void handleGetColour();
+
+    void handleUpdateTurnOrder(boolean turnReversed);
 }

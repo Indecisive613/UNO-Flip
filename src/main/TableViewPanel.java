@@ -8,50 +8,57 @@ import java.util.ArrayList;
 
 public class TableViewPanel extends JPanel implements GameView {
 
-    private static final int CARD_WIDTH = 100;
-    private Game game;
-    private int deckSize;
-    private JButton deck;
+    private static final int CARD_WIDTH = 200;
+    private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
+    private static final Dimension PLAYER_SIZE = new Dimension(200, 200);
+    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
+    private JLabel currentDirection;
+    private JLabel currentColor;
+    private JLabel remainingCards;
+    private JPanel gameStatusPanel;
     private JButton topCard;
-    private JPanel cardPanel;
+    private JPanel topCardPanel;
     private JPanel playerPanel;
-    private ArrayList<JButton> playerButtons;
-    private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 40);
+    private Game game;
+
     public TableViewPanel(){
 
-        this.setSize(100, 100);
-        this.setVisible(true);
-        this.setLayout(new GridLayout(2, 1, 100, 100));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        cardPanel = new JPanel();
-        cardPanel.setSize(50,50);
-        cardPanel.setVisible(true);
-        cardPanel.setLayout(new GridLayout(1, 4, 200, 100));
+        gameStatusPanel = new JPanel();
 
-        deck = new JCardButton(null);
-        deck.setFocusPainted(false);
-        deck.setBackground(Color.DARK_GRAY);
-        deck.setFont(BUTTON_FONT);
-        deck.setText("REMAINING CARDS");
-        deck.setEnabled(false);
-        cardPanel.add(deck);
+        // initialize the current direction
+        currentDirection = new JLabel(" --- Current Direction: Clockwise", SwingConstants.CENTER);
+        currentDirection.setFont(BUTTON_FONT);
+        currentDirection.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameStatusPanel.add(currentDirection);
 
-        topCard = new JCardButton(null);
-        topCard.setFocusPainted(false);
-        topCard.setBackground(Color.GRAY);
-        topCard.setFont(BUTTON_FONT);
-        topCard.setEnabled(false);
-        cardPanel.add(topCard);
+        // initialize the current color
+        currentColor = new JLabel(" --- Current Color: ", SwingConstants.CENTER);
+        currentColor.setFont(BUTTON_FONT);
+        currentColor.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameStatusPanel.add(currentColor);
 
+        // initialize the number of remaining cards
+        remainingCards = new JLabel(" --- Remaining Cards: ", SwingConstants.CENTER);
+        remainingCards.setFont(BUTTON_FONT);
+        remainingCards.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameStatusPanel.add(remainingCards);
+
+        this.add(gameStatusPanel);
+
+        // initialize the players
         playerPanel = new JPanel();
-        playerPanel.setSize(50,50);
-        playerPanel.setVisible(true);
-        playerPanel.setLayout(new GridLayout(1, 4, 100, 100));
-
-        this.add(cardPanel);
+        playerPanel.setSize(400, 400);
         this.add(playerPanel);
 
-        playerButtons = new ArrayList<JButton>();
+        // initialize the top card
+        topCardPanel = new JPanel();
+        topCard = new JCardButton(null);
+        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+        topCard.setEnabled(false);
+        topCardPanel.add(topCard);
+        this.add(topCardPanel);
     }
     @Override
     public void setGame(Game game) {
@@ -66,30 +73,31 @@ public class TableViewPanel extends JPanel implements GameView {
     @Override
     public void handleNewTurn(Player player) {
 
-        Card startTopCard = game.getTopCard();
+        topCardPanel.removeAll();
+        topCard = new JCardButton(game.getTopCard());
 
-        cardPanel.remove(1);
-        topCard = new JCardButton(startTopCard);
-        cardPanel.add(topCard);
-        topCard.setText(startTopCard.getSymbol().toString());
-        topCard.setFont(BUTTON_FONT);
+        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         topCard.setEnabled(false);
+        topCardPanel.add(topCard);
 
-        deckSize = game.getDeck().size();
-        deck.setText("REMAINING CARDS:" + deckSize);
+        this.add(topCardPanel);
 
+        currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
+        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " --- ");
+
+        ArrayList<JButton> playerButtons = new ArrayList<>();
         ArrayList<Player> players = game.getPlayers();
+
+        playerPanel.removeAll();
 
         for(Player selectedPlayer : players) {
             JButton playerButton = new JButton(selectedPlayer.getName());
-            playerButton.setFocusPainted(false);
-            playerButton.setBackground(Color.GRAY);
-            playerButton.setFont(BUTTON_FONT);
-            playerButton.setEnabled(false);
 
-            if (playerButtons.size() < players.size()) {
-                playerButtons.add(playerButton);
-            }
+            playerButton.setFont(BUTTON_FONT);
+            playerButton.setPreferredSize(PLAYER_SIZE);
+            playerButton.setBackground(Color.GRAY);
+            playerButton.setEnabled(false);
+            playerButtons.add(playerButton);
         }
 
         for(JButton playerButton : playerButtons) {
@@ -104,25 +112,36 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
-        cardPanel.remove(1);
-        topCard = new JCardButton(playedCard);
-        cardPanel.add(topCard);
-        topCard.setText(playedCard.getSymbol().toString());
-        topCard.setFont(BUTTON_FONT);
-        topCard.setEnabled(false);
 
-        deckSize = game.getDeck().size();
-        deck.setText("REMAINING CARDS:" + deckSize);
+        topCardPanel.removeAll();
+        topCard = new JCardButton(game.getTopCard());
+
+        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+        topCard.setEnabled(false);
+        topCardPanel.add(topCard);
+
+        // Rerender with new card
+        topCardPanel.setVisible(false);
+        topCardPanel.setVisible(true);
+
+        this.add(topCardPanel);
+
+        currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
+        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " --- ");
     }
 
     @Override
     public void handleDrawCard(Card drawnCard) {
-        deckSize = game.getDeck().size();
-        deck.setText("REMAINING CARDS:" + deckSize);
+        remainingCards.setText("Remaining Cards: " + game.getDeck().size() + " --- ");
     }
 
     @Override
     public void handleGetColour() {
+
+    }
+
+    @Override
+    public void handleUpdateTurnOrder(boolean turnReversed) {
 
     }
 }

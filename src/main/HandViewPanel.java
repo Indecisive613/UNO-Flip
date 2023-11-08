@@ -125,6 +125,11 @@ public class HandViewPanel extends JPanel implements GameView {
 
     }
 
+    @Override
+    public void handleUpdateTurnOrder(boolean turnReversed) {
+
+    }
+
     private void handleUNO() {
         UNOButton.setEnabled(true);
         UNOButton.setBackground(Color.GREEN);
@@ -174,6 +179,4 @@ public class HandViewPanel extends JPanel implements GameView {
         cardPanel.setVisible(true);
 
     }
-
-
 }
