@@ -89,6 +89,11 @@ public class Game {
     }
 
     /**
+     * @return the current colour of the top card
+     */
+    public Card.Colour getCurrentColour() { return currentColour; }
+
+    /**
      * Set the top card
      * TODO: This is for testing, maybe should remove
      */
