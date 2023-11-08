@@ -8,8 +8,6 @@ import java.util.Stack;
 
 public class GameViewFrame extends JFrame {
 
-    public static final Dimension GAME_SIZE = new Dimension(1920, 1080);
-
     private final NewGameView newGameView;
 
     public GameViewFrame(Game game) {
@@ -33,9 +31,10 @@ public class GameViewFrame extends JFrame {
         game.addView(hand);
         frame.add(hand, BorderLayout.SOUTH);
 
-        WildView wildView= new WildView(this, game);
+        WildView wildView = new WildView(this, game);
         game.addView(wildView);
 
+        // Add info view
         InfoViewPanel info = new InfoViewPanel();
         info.setGame(game);
         game.addView(info);
