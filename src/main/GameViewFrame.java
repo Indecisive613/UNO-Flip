@@ -43,7 +43,7 @@ public class GameViewFrame extends JFrame {
         game.addView(info);
         frame.add(info, BorderLayout.PAGE_START);
 
-        frame.setSize(GAME_SIZE);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

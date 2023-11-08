@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static main.JCardButton.CARD_HEIGHT;
+
 public class TableViewPanel extends JPanel implements GameView {
 
-    private static final int CARD_WIDTH = 200;
-    private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
     private static final Dimension PLAYER_SIZE = new Dimension(200, 200);
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
     private JLabel turnOrderReversed;
@@ -55,7 +55,6 @@ public class TableViewPanel extends JPanel implements GameView {
         // initialize the top card
         topCardPanel = new JPanel();
         topCard = new JCardButton(null);
-        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         topCard.setEnabled(false);
         topCardPanel.add(topCard);
         this.add(topCardPanel);
@@ -76,7 +75,6 @@ public class TableViewPanel extends JPanel implements GameView {
         topCardPanel.removeAll();
         topCard = new JCardButton(game.getTopCard());
 
-        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         topCard.setEnabled(false);
         topCardPanel.add(topCard);
 
@@ -116,7 +114,6 @@ public class TableViewPanel extends JPanel implements GameView {
         topCardPanel.removeAll();
         topCard = new JCardButton(game.getTopCard());
 
-        topCard.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         topCard.setEnabled(false);
         topCardPanel.add(topCard);
 

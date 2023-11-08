@@ -8,10 +8,11 @@ import java.awt.*;
 
 public class JCardButton extends JButton {
 
+    public static final int CARD_WIDTH = 150;
+    public static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
+
     private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 90);
-    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 40);
-    private static final int CARD_WIDTH = 200;
-    private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
+    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 30);
 
     private Card card;
 
