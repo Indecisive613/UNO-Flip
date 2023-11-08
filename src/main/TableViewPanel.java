@@ -12,7 +12,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
     private static final Dimension PLAYER_SIZE = new Dimension(200, 200);
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
-    private JLabel currentDirection;
+    private JLabel turnOrderReversed;
     private JLabel currentColor;
     private JLabel remainingCards;
     private JPanel gameStatusPanel;
@@ -28,10 +28,10 @@ public class TableViewPanel extends JPanel implements GameView {
         gameStatusPanel = new JPanel();
 
         // initialize the current direction
-        currentDirection = new JLabel(" --- Current Direction: Clockwise", SwingConstants.CENTER);
-        currentDirection.setFont(BUTTON_FONT);
-        currentDirection.setAlignmentX(Component.CENTER_ALIGNMENT);
-        gameStatusPanel.add(currentDirection);
+        turnOrderReversed = new JLabel(" -------------------- Turn Order Reversed: false", SwingConstants.CENTER);
+        turnOrderReversed.setFont(BUTTON_FONT);
+        turnOrderReversed.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gameStatusPanel.add(turnOrderReversed);
 
         // initialize the current color
         currentColor = new JLabel(" --- Current Color: ", SwingConstants.CENTER);
@@ -40,7 +40,7 @@ public class TableViewPanel extends JPanel implements GameView {
         gameStatusPanel.add(currentColor);
 
         // initialize the number of remaining cards
-        remainingCards = new JLabel(" --- Remaining Cards: ", SwingConstants.CENTER);
+        remainingCards = new JLabel(" --- Remaining Cards: -------------------- ", SwingConstants.CENTER);
         remainingCards.setFont(BUTTON_FONT);
         remainingCards.setAlignmentX(Component.CENTER_ALIGNMENT);
         gameStatusPanel.add(remainingCards);
@@ -83,7 +83,7 @@ public class TableViewPanel extends JPanel implements GameView {
         this.add(topCardPanel);
 
         currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
-        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " --- ");
+        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " -------------------- ");
 
         ArrayList<JButton> playerButtons = new ArrayList<>();
         ArrayList<Player> players = game.getPlayers();
@@ -127,12 +127,12 @@ public class TableViewPanel extends JPanel implements GameView {
         this.add(topCardPanel);
 
         currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
-        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " --- ");
+        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " -------------------- ");
     }
 
     @Override
     public void handleDrawCard(Card drawnCard) {
-        remainingCards.setText("Remaining Cards: " + game.getDeck().size() + " --- ");
+        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " -------------------- ");
     }
 
     @Override
@@ -142,6 +142,6 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleUpdateTurnOrder(boolean turnReversed) {
-
+        turnOrderReversed.setText(" -------------------- Turn Order Reversed: " + turnReversed);
     }
 }

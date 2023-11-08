@@ -45,5 +45,10 @@ public interface GameView {
      */
     void handleGetColour();
 
+    /**
+     * Update the status of the turn order for the players whenever a reverse card is played
+     *
+     * @param turnReversed whether the turn order of the players has been reversed
+     */
     void handleUpdateTurnOrder(boolean turnReversed);
 }

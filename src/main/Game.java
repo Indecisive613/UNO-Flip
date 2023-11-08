@@ -308,6 +308,9 @@ public class Game {
      */
     public void reverseTurn(){
         turnOrderReversed = !turnOrderReversed;
+        for (GameView view : views) {
+            view.handleUpdateTurnOrder(turnOrderReversed);
+        }
     }
 
     /**
