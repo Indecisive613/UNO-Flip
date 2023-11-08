@@ -43,6 +43,7 @@ public class WildView extends JOptionPane implements GameView{
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
         if (additionalMessage.equals("WILD")){
+            // TODO: Remove direct call to game
             game.setCurrentColour(controller.requestWildColour());
         }
     }
