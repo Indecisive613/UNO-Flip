@@ -15,7 +15,7 @@ public class Game {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
-    public static final int STARTING_HAND_SIZE = 2;
+    public static final int STARTING_HAND_SIZE = 5;
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
@@ -206,15 +206,16 @@ public class Game {
     public boolean playCard(Card card) {
         playedCards.push(card);
         boolean isWild = card.cardAction(this);
+        String message = "";
         if(!isWild){
             currentColour = card.getColour();
         }
         else{
-            new WildViewPopUp(this);
+            message = "WILD";
         }
 
         for (GameView view : views) {
-            view.handlePlayCard(card, "");
+            view.handlePlayCard(card, message);
         }
         return isWild;
     }
