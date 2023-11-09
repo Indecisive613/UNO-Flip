@@ -320,17 +320,4 @@ public class Game {
     public void setSkipPlayer(){
         skipPlayer = true;
     }
-
-    /**
-     * Check if the player said UNO
-     *
-     * @param UNO Whether a player said UNO when they had one card remaining before skipping their turn
-     */
-    public void sayUNO(boolean UNO) {
-
-        if (!UNO) {
-            drawCard(this.getCurrentPlayer());
-            drawCard(this.getCurrentPlayer());
-        }
-    }
 }

@@ -12,7 +12,6 @@ public class HandViewPanel extends JPanel implements GameView {
     private final JLabel playerName;
     private final JButton drawButton;
     private final JButton endTurn;
-    private final JButton UNOButton;
     private final JPanel cardPanel;
     private final HandController controller;
 
@@ -46,18 +45,6 @@ public class HandViewPanel extends JPanel implements GameView {
         });
         actionPanel.add(endTurn);
 
-        // Add uno button
-        UNOButton = new JButton("UNO");
-        UNOButton.setFocusPainted(false);
-        UNOButton.setBackground(new Color(255, 255, 255));
-        UNOButton.setFont(BUTTON_FONT);
-        UNOButton.setEnabled(false);
-
-        UNOButton.addActionListener(event -> {
-            controller.sayUNO(true);
-        });
-        actionPanel.add(UNOButton);
-
         // Add draw card button
         drawButton = new JButton("DRAW +");
         drawButton.setFocusPainted(false);
@@ -68,7 +55,6 @@ public class HandViewPanel extends JPanel implements GameView {
             controller.drawCard();
 
             drawButton.setEnabled(false);
-            UNOButton.setEnabled(false);
 
             endTurn.setEnabled(true);
             endTurn.setBackground(Color.GREEN);
@@ -99,19 +85,12 @@ public class HandViewPanel extends JPanel implements GameView {
         endTurn.setEnabled(false);
         endTurn.setBackground(new Color(255, 255, 255));
 
-        UNOButton.setEnabled(false);
-        UNOButton.setBackground(new Color(255, 255, 255));
-
         drawButton.setEnabled(true);
         updateCardPanel();
     }
 
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
-        if (player.getHand().size() == 1) {
-            handleUNO();
-        }
-
         updateCardPanel();
     }
 
@@ -128,23 +107,6 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void handleUpdateTurnOrder(boolean turnReversed) {
 
-    }
-
-    private void handleUNO() {
-        UNOButton.setEnabled(true);
-        UNOButton.setBackground(Color.GREEN);
-
-        endTurn.setEnabled(true);
-        endTurn.setBackground(Color.GREEN);
-
-        UNOButton.addActionListener(event -> {
-            UNOButton.setEnabled(false);
-            UNOButton.setBackground(new Color(255, 255, 255));
-        });
-
-        endTurn.addActionListener(event -> {
-            controller.sayUNO(!UNOButton.isEnabled());
-        });
     }
 
     private void lockHand() {
