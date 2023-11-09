@@ -15,7 +15,7 @@ public class Game {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
-    public static final int STARTING_HAND_SIZE = 5;
+    public static final int STARTING_HAND_SIZE = 7;
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;

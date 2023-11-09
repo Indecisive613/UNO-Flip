@@ -11,25 +11,25 @@ public class GameViewFrame extends JFrame {
     private final NewGameView newGameView;
 
     public GameViewFrame(Game game) {
+        super("UNO");
         this.setLayout(new BorderLayout());
-        JFrame frame = new JFrame("UNO");
 
         // Add new game view
         newGameView = new NewGameView(this, game);
         game.addView(newGameView);
-        frame.add(newGameView, BorderLayout.CENTER);
+        this.add(newGameView, BorderLayout.CENTER);
 
         // Add table view
         TableViewPanel table = new TableViewPanel();
         table.setGame(game);
         game.addView(table);
-        frame.add(table, BorderLayout.CENTER);
+        this.add(table, BorderLayout.CENTER);
 
         // Add hand view
         HandViewPanel hand = new HandViewPanel();
         hand.setGame(game);
         game.addView(hand);
-        frame.add(hand, BorderLayout.SOUTH);
+        this.add(hand, BorderLayout.SOUTH);
 
         WildView wildView = new WildView(this, game);
         game.addView(wildView);
@@ -38,12 +38,12 @@ public class GameViewFrame extends JFrame {
         InfoViewPanel info = new InfoViewPanel();
         info.setGame(game);
         game.addView(info);
-        frame.add(info, BorderLayout.PAGE_START);
+        this.add(info, BorderLayout.PAGE_START);
 
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
