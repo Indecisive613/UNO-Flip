@@ -36,7 +36,7 @@ To draw a card, click the "DRAW +" button:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/5960e5b2-200c-477d-82b5-051fdca41d0f)
 
 When you play a WILD card, you will be prompted to choose a colour:
-![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/251c0ca0-1382-495e-8468-189ee8f4ee74)
+![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/9fa43350-d413-4027-9637-984b23781dce)
 
 The direction of play, the current color, and the remaining cards can be seen in a panel at the top of the interface:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/8fab1561-8467-4c1c-aa41-fa16d5c8b8f3)
@@ -62,6 +62,7 @@ Someone fix end game!!
 ## Credits
 Milestone 1 Completion: October 22, 2023  
 Milestone 2 Completion: November 14, 2023  
+
 Authors: 
 * Anand Balaram - 101217776
 * Fiona Cheng - 101234672
