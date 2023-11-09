@@ -1,0 +1,5 @@
+To effectively implement the graphical user interface for Milestone 2, we used the MVC deisgn pattern. Using models, views, and controllers helped us separate the logic into three distinct parts: the model that handles the game logic; the views displays the uno table and various components, and the controllers handle the interactions. We chose to have multiple views with their separate controllers in order to have higher cohesion among the classes and to allow for team members to work on parts independently. 
+
+To implement the players hand, we used a custom JPanel, HandViewPanel that contains JCardButtons for cards. Using JCardButtons allows for the user to easily click on cards, and having JCarButtons allowed us to create consistent card objects for the whole game. We also added a NewGameView and NewGameController to facillitate game setup.
+
+To simplify the logic in the Game class, we decided to implement the Strategy pattern for the cards. Now, the logic for each type of card is confined to it's own private class. This design change should also help facilitate the addition of the dark side UNO cards in future Milestones.
