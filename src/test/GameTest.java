@@ -43,6 +43,8 @@ public class GameTest {
         game.addPlayer(player2);
         game.addPlayer(player3);
         game.addPlayer(player4);
+
+        game.setRunning(true);
     }
 
     @Test
@@ -343,6 +345,11 @@ public class GameTest {
         assertEquals(new WildDrawTwoCard(), game.getTopCard());
         assertEquals(6, player3.getHand().size());
 
+        // sets the current colour to GREEN
+        game.setCurrentColour(GREEN);
+        // checks that the current colour was correctly changed
+        assertEquals(game.getCurrentColour(), GREEN);
+
         // skip player3
 
         // test playing WILD WILD_DRAW_TWO from the hand of player2
@@ -354,6 +361,11 @@ public class GameTest {
         assertEquals(4, player2.getHand().size());
         assertEquals(new WildDrawTwoCard(), game.getTopCard());
         assertEquals(7, player1.getHand().size());
+
+        // sets the current colour to BLUE
+        game.setCurrentColour(BLUE);
+        // checks that the current colour was correctly changed
+        assertEquals(game.getCurrentColour(), BLUE);
 
         // skip player1
 
@@ -380,6 +392,7 @@ public class GameTest {
 
     @Test
     public void testScore() {
+
 
         // create hand for player1 with some number and action cards
         player1.dealCard(new NormalCard(RED, ONE));
