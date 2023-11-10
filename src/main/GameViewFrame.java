@@ -6,6 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
 
+/**
+ * the view to store and update the new game view, the table view, the hand view, and the info view of the current UNO game
+ *
+ * @author Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram, Jake Siushansian
+ */
 public class GameViewFrame extends JFrame {
 
     private final NewGameView newGameView;

@@ -6,6 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Display the current scores of all of the players in the current UNO game
+ *
+ * @author Anand Balaram, Jackie Smolkin-Lerner
+ */
 public class InfoViewPanel extends JLabel implements GameView {
     ArrayList<Player> players;
     Game game;

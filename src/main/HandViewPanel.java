@@ -114,6 +114,9 @@ public class HandViewPanel extends JPanel implements GameView {
 
     }
 
+    /**
+     * Prevent the current player from playing any cards in their hand
+     */
     private void lockHand() {
         for (Component button : cardPanel.getComponents()) {
             button.setEnabled(false);
@@ -121,6 +124,9 @@ public class HandViewPanel extends JPanel implements GameView {
 
     }
 
+    /**
+     * Update the card panel to display the contents of their
+     */
     private void updateCardPanel() {
         cardPanel.setVisible(false);
         cardPanel.removeAll();

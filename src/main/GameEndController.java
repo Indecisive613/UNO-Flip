@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * The controller for the portion of the UNO interface that ends the current UNO game
  *
  * @author Anand Balaram
  */

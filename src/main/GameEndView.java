@@ -5,6 +5,12 @@ import main.cards.Card;
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 
+/**
+ * A view to represent the end of the current UNO game
+ *
+ * @author Anand Balaram
+ */
+
 public class GameEndView extends JOptionPane implements GameView{
     private Game game;
     private GameEndController controller;
@@ -15,7 +21,6 @@ public class GameEndView extends JOptionPane implements GameView{
         this.superFrame = superFrame;
         controller = new GameEndController(game, this);
     }
-
 
     /**
      * Displays a custom error message
@@ -37,6 +42,12 @@ public class GameEndView extends JOptionPane implements GameView{
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
     }
 
+    /**
+     * announce the winner of the current UNO game
+     *
+     * @param winner the winner of the current UNO game
+     * @return the showOptionDialog box
+     */
     public int hasWonGame(Player winner){
         String displayMessage = winner.getName() + " has won the game!!\nPress the button to end the program";
         String[] strOptions = {"End"};
@@ -45,6 +56,9 @@ public class GameEndView extends JOptionPane implements GameView{
 
     }
 
+    /**
+     * close the UNO game program
+     */
     public void closeProgram(){
         superFrame.dispatchEvent(new WindowEvent(superFrame, WindowEvent.WINDOW_CLOSING));
     }

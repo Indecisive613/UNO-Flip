@@ -5,6 +5,11 @@ import main.cards.Card;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The controller to control the portion of the UNO interface that pops up if a Wild card is played
+ *
+ * @author Anand Balaram
+ */
 public class WildController implements ActionListener {
     private Game game;
     private WildView view;

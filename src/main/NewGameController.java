@@ -9,7 +9,6 @@ import java.util.ArrayList;
  *
  * @author Fiona Cheng
  */
-
 public class NewGameController implements ActionListener {
 
     private Game game;

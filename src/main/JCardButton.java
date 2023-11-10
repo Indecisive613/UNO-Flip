@@ -6,6 +6,12 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
+/**
+ * Create JButtons to represent Cards in the HandView interface of the UNO game
+ * The cards have a set size and appearance
+ *
+ * @author Jackie Smolkin-Lerner
+ */
 public class JCardButton extends JButton {
 
     public static final int CARD_WIDTH = 150;
@@ -24,10 +30,16 @@ public class JCardButton extends JButton {
         setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
     }
 
+    /**
+     * @return the card
+     */
     public Card getCard() {
         return card;
     }
 
+    /**
+     * @param card the card that is being initialized
+     */
     public void setCard(Card card) {
         this.card = card;
         setText(getText(card));

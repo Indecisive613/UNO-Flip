@@ -26,6 +26,11 @@ public class GameRunner {
         this.views = new ArrayList<>();
     }
 
+    /**
+     * Add a view to the GameRunner
+     *
+      * @param view the view to be added
+     */
     public void addView(GameView view) {
         views.add(view);
     }

@@ -81,6 +81,12 @@ public class Player {
         hand.remove(index);
         return card;
     }
+
+    /**
+     * Clear the hand of a player in the current UNO game
+     *
+     * @return the temporary hand
+     */
     public ArrayList<Card> clearHand(){
         ArrayList<Card> tempHand = hand;
         hand.clear();
