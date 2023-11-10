@@ -34,9 +34,9 @@ public class GameRunner {
         for (GameView view : views) {
             view.handleNewGame();
         }
-            game.shuffleDeck();
-            game.dealCards();
-            game.advanceTurn();
+        game.shuffleDeck();
+        game.dealCards();
+        game.advanceTurn();
     }
 
     /**

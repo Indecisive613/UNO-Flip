@@ -213,6 +213,9 @@ public class Game {
         else{
             message = "WILD";
         }
+        if (players.get(currentPlayerIndex).getHand().size() == 0){
+            message = "Done game";
+        }
 
         for (GameView view : views) {
             view.handlePlayCard(card, message);
