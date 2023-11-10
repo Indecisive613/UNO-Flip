@@ -38,7 +38,7 @@ public class GameEndView extends JOptionPane implements GameView{
     }
 
     public int hasWonGame(Player winner){
-        String displayMessage = winner.getName() + "has won the game!!\nPress the button to end the program";
+        String displayMessage = winner.getName() + " has won the game!!\nPress the button to end the program";
         String[] strOptions = {"End"};
         return this.showOptionDialog(superFrame, displayMessage, "Custom Option Pane",
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
@@ -67,6 +67,7 @@ public class GameEndView extends JOptionPane implements GameView{
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
         if (additionalMessage.equals("Done game")){
+            System.out.println("reached");
             controller.requestNewGame();
         }
     }

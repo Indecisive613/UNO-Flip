@@ -34,6 +34,9 @@ public class GameViewFrame extends JFrame {
         WildView wildView = new WildView(this, game);
         game.addView(wildView);
 
+        GameEndView gameEndView = new GameEndView(this, game);
+        game.addView(gameEndView);
+
         // Add info view
         InfoViewPanel info = new InfoViewPanel();
         info.setGame(game);
