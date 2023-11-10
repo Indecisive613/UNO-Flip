@@ -16,6 +16,9 @@ public interface GameView {
      */
     void setGame(Game game);
 
+    /**
+     * Handle the new UNO game
+     */
     void handleNewGame();
 
     /**

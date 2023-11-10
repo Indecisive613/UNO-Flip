@@ -5,6 +5,11 @@ import main.cards.Card;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A view to display the hand of the current player of the current UNO game.
+ *
+ * @authors Jackie Smolkin-Lerner, Jake Siushansian
+ */
 public class HandViewPanel extends JPanel implements GameView {
 
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);

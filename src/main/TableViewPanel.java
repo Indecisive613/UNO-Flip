@@ -5,8 +5,13 @@ import main.cards.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
 import static main.JCardButton.CARD_HEIGHT;
+
+/**
+ * A view to display the table of the current UNO game.
+ *
+ * @authors Jackie Smolkin-Lerner, Jake Siushansian
+ */
 
 public class TableViewPanel extends JPanel implements GameView {
 
