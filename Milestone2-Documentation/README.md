@@ -11,7 +11,7 @@ This project contains the following deliverables:
 * UNO-Flip executable
 * UML Sequence diagrams
 * UML class diagram
-* Data structure explanation
+* Design explanation
 
 ## Installation
 Install Java version 8 or ensure your java version can run java version 8.
@@ -70,14 +70,14 @@ Authors:
 * Jake Siushansian - 101226956
 
 ## Class Diagram
-<tbd>
+TBD
 
 ## Sequence Diagrams
 ### Initialize
-<tbd>
+TBD
 
 ### Start Game
-<tbd>
+TBD
 
 ### Playing Game
-<tbd>
+TBD
