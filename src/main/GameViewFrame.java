@@ -24,6 +24,9 @@ public class GameViewFrame extends JFrame {
         game.addView(newGameView);
         this.add(newGameView, BorderLayout.CENTER);
 
+        WildView wildView = new WildView(this, game);
+        game.addView(wildView);
+
         // Add table view
         TableViewPanel table = new TableViewPanel();
         table.setGame(game);
@@ -35,9 +38,6 @@ public class GameViewFrame extends JFrame {
         hand.setGame(game);
         game.addView(hand);
         this.add(hand, BorderLayout.SOUTH);
-
-        WildView wildView = new WildView(this, game);
-        game.addView(wildView);
 
         GameEndView gameEndView = new GameEndView(this, game);
         game.addView(gameEndView);

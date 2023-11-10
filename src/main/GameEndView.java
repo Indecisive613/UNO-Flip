@@ -81,7 +81,6 @@ public class GameEndView extends JOptionPane implements GameView{
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
         if (additionalMessage.equals("Done game")){
-            System.out.println("reached");
             controller.requestNewGame();
         }
     }

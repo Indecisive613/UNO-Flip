@@ -20,14 +20,15 @@ public class Game {
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
 
-    private final Stack<Card> playedCards;
-    private final Stack<Card> deck;
+    private Stack<Card> playedCards;
+    private Stack<Card> deck;
 
     private boolean turnOrderReversed;
     private boolean skipPlayer;
     private int currentPlayerIndex = -1; // set to -1 for first increment
     private Card.Colour currentColour;
     private boolean running = false;
+    private int roundNumber;
 
     /**
      * Create a new UNO Game given a deck of cards
@@ -41,6 +42,7 @@ public class Game {
         views = new ArrayList<>();
         turnOrderReversed = false;
         skipPlayer = false;
+        roundNumber = 0;
     }
 
     /**
@@ -305,9 +307,13 @@ public class Game {
      * Resets the state of the game
      */
     public void resetGame(){
+        roundNumber++;
+        Stack<Card> deck = GameRunner.createDeck();
+        setDeck(deck);
+        this.playedCards = new Stack<Card>();
         turnOrderReversed = false;
         skipPlayer = false;
-        currentPlayerIndex = -1;
+        currentPlayerIndex = 0;
         for (GameView view : views) {
             view.handleNewGame();
         }
@@ -331,5 +337,13 @@ public class Game {
      */
     public void setSkipPlayer(){
         skipPlayer = true;
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setDeck(Stack<Card> deck){
+        this.deck = deck;
     }
 }
