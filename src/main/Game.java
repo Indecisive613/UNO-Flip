@@ -305,6 +305,12 @@ public class Game {
         turnOrderReversed = false;
         skipPlayer = false;
         currentPlayerIndex = -1;
+        for (GameView view : views) {
+            view.handleNewGame();
+        }
+        shuffleDeck();
+        dealCards();
+        advanceTurn();
     }
 
     /**

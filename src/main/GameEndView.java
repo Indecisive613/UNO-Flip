@@ -32,7 +32,7 @@ public class GameEndView extends JOptionPane implements GameView{
      * @param strOptions The options for the popup
      */
     public int getNewGameConfirmation(String strOptions[], Player winner){
-        String displayMessage = winner.getName() + "has won the round!\nPress the button to start a new game";
+        String displayMessage = winner.getName() + " has won the round!\nPress the button to start a new game";
         return this.showOptionDialog(superFrame, displayMessage, "Custom Option Pane",
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
     }
