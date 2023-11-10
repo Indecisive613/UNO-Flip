@@ -563,7 +563,6 @@ public class GameTest {
 
         // test that the game reset properly and the
         assertTrue(game.isRunning());
-        game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
         assertTrue(game.isRunning());
         game.advanceTurn();

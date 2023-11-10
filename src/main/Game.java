@@ -102,7 +102,6 @@ public class Game {
         return playedCards.push(card);
     }
 
-
     /**
      * Add a new Player to the Game
      *
@@ -164,6 +163,10 @@ public class Game {
         return this.running;
     }
 
+    /**
+     *
+     * @param running the status of whether the game is running
+     */
     public void setRunning(boolean running) {
         this.running = running;
     }

@@ -5,6 +5,12 @@ import main.cards.Card;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ *
+ * @author Anand Balaram
+ */
+
 public class GameEndController implements ActionListener {
     private Game game;
     private GameEndView view;

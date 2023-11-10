@@ -2,6 +2,13 @@ package main;
 
 import main.cards.Card;
 
+/**
+ * The controller for the portion of the UNO interface that displays the current player's hand
+ * and the actions available for the current player
+ *
+ * @author Jackie Smolkin-Lerner
+ */
+
 public class HandController {
     private Game game;
 
