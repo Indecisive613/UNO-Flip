@@ -337,13 +337,23 @@ public class Game {
         skipPlayer = true;
     }
 
+    /**
+     * @return The number of the current round
+     */
     public int getRoundNumber() {
         return roundNumber;
     }
 
+    /** Sets the deck of cards to be used in play
+     * @param deck The deck of cards
+     */
     public void setDeck(Stack<Card> deck){
         this.deck = deck;
     }
+
+    /**
+     * @return If the current player has won
+     */
     public boolean hasWonRound(){
         return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().size() == 0;
     }

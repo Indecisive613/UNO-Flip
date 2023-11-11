@@ -8,7 +8,6 @@ import main.cards.Card;
  *
  * @author Fiona Cheng
  */
-
 public class WildCard extends Card {
     /**
      * Creates an UNO wild card with the specified color.

@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * A view to display the hand of the current player of the current UNO game.
  *
- * @authors Jackie Smolkin-Lerner, Jake Siushansian
+ * @author Jackie Smolkin-Lerner, Jake Siushansian
  */
 public class HandViewPanel extends JPanel implements GameView {
 
@@ -23,6 +23,9 @@ public class HandViewPanel extends JPanel implements GameView {
     private Player player;
     private Game game;
 
+    /**
+     * Create a new HandViewPanel, along with its contents, and controller
+     */
     public HandViewPanel() {
         controller = new HandController();
 
@@ -125,7 +128,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     /**
-     * Update the card panel to display the contents of their
+     * Update the card panel to display the current players hand
      */
     private void updateCardPanel() {
         cardPanel.setVisible(false);

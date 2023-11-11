@@ -8,7 +8,6 @@ import main.cards.Card;
  *
  * @author Fiona Cheng
  */
-
 public class DrawOneCard extends Card {
     /**
      * Creates a new Uno Draw One card with the specified color.

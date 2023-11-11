@@ -8,7 +8,6 @@ import main.cards.Card;
  *
  * @author Fiona Cheng
  */
-
 public class SkipCard extends Card {
     /**
      * Creates a new Uno Skip card with the specified color.

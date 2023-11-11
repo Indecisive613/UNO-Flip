@@ -35,6 +35,9 @@ public class GameRunner {
         views.add(view);
     }
 
+    /**
+     * Initialize a new game
+     */
     public void initGame(){
         for (GameView view : views) {
             view.handleNewGame();

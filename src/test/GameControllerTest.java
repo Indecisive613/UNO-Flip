@@ -12,9 +12,8 @@ import java.io.ByteArrayInputStream;
 /**
  * A class to test GameController
  *
- * @authors Fiona Cheng, Jackie Smolkin-Lerner
+ * @author Fiona Cheng, Jackie Smolkin-Lerner
  */
-
 //public class GameControllerTest {
 //
 //    ByteArrayInputStream testInput;;

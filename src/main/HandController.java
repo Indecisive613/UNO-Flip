@@ -8,7 +8,6 @@ import main.cards.Card;
  *
  * @author Jackie Smolkin-Lerner
  */
-
 public class HandController {
     private Game game;
 

@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
  *
  * @author Anand Balaram
  */
-
 public class GameEndView extends JOptionPane implements GameView{
     private Game game;
     private GameEndController controller;

@@ -5,7 +5,7 @@ import main.cards.Card;
 /**
  * A View interface for Game to update and display an UNO game
  *
- * @authors Jackie Smolkin-Lerner, Anand Balaram
+ * @author Jackie Smolkin-Lerner, Anand Balaram
  */
 public interface GameView {
 

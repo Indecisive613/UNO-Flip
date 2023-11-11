@@ -7,7 +7,6 @@ import main.Game;
  *
  * @author Fiona Cheng
  */
-
 public class NormalCard extends Card {
     /**
      * Creates a numbered Uno card with the specified color and number.

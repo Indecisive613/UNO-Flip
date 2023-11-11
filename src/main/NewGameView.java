@@ -10,7 +10,6 @@ import java.util.ArrayList;
  *
  * @author Fiona Cheng
  */
-
 public class NewGameView extends JPanel implements GameView{
     private GameViewFrame superFrame;
     private Game game;

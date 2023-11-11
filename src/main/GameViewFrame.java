@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Stack;
 
 /**
- * the view to store and update the new game view, the table view, the hand view, and the info view of the current UNO game
+ * The parent view to display and run the entire UNO game.
  *
  * @author Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram, Jake Siushansian
  */
@@ -15,6 +15,9 @@ public class GameViewFrame extends JFrame {
 
     private final NewGameView newGameView;
 
+    /** Create a new GameViewFrame.
+     * @param game The UNO game to display
+     */
     public GameViewFrame(Game game) {
         super("UNO");
         this.setLayout(new BorderLayout());
@@ -54,6 +57,9 @@ public class GameViewFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /** Start an UNO game
+     * @param args Main args - not used
+     */
     public static void main(String[] args) {
         Stack<Card> deck = GameRunner.createDeck();
         Game g = new Game(deck);

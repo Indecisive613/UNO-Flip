@@ -7,8 +7,8 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 /**
- * Create JButtons to represent Cards in the HandView interface of the UNO game
- * The cards have a set size and appearance
+ * Create JButtons to represent Cards in the HandView interface of the UNO game.
+ * The cards have a set size and appearance.
  *
  * @author Jackie Smolkin-Lerner
  */
@@ -31,7 +31,7 @@ public class JCardButton extends JButton {
     }
 
     /**
-     * @return the card
+     * @return The contained card
      */
     public Card getCard() {
         return card;
@@ -60,6 +60,10 @@ public class JCardButton extends JButton {
         }
     }
 
+    /**
+     * @param card An UNO card
+     * @return If the card is a number card, and not a special card
+     */
     private static boolean isNumber(Card card) {
         Card.Symbol symbol = card.getSymbol();
         return !(symbol == Card.Symbol.DRAW_ONE
@@ -70,6 +74,10 @@ public class JCardButton extends JButton {
         );
     }
 
+    /**
+     * @param card An UNO card
+     * @return The textual representation of a card
+     */
     private static String getText(Card card) {
         if (card.getSymbol() == Card.Symbol.DRAW_ONE) {
             return "<html>Draw" + "<br>" + "One</html>";
@@ -86,6 +94,10 @@ public class JCardButton extends JButton {
         }
     }
 
+    /**
+     * @param card An UNO card
+     * @return The colour of the card, or white if it's a wild card
+     */
     private static Color getColor(Card card) {
         if (card.getColour() == Card.Colour.RED) {
             return new Color(215, 38, 0);

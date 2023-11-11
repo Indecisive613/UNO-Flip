@@ -8,7 +8,6 @@ import main.cards.Card;
  *
  * @author Fiona Cheng
  */
-
 public class ReverseCard extends Card {
     /**
      * Creates a new Reverse card with the specified color.

@@ -8,8 +8,8 @@ import main.cards.Card;
  *
  * @author Fiona Cheng
  */
-
 public class WildDrawTwoCard extends Card {
+
     /**
      * Creates an UNO wild draw two card with the specified color.
      *
@@ -18,6 +18,7 @@ public class WildDrawTwoCard extends Card {
     public WildDrawTwoCard() throws IllegalArgumentException{
         super(Card.Colour.WILD, Symbol.WILD_DRAW_TWO);
     }
+
     @Override
     public boolean cardAction(Game game) {
         int nextPlayer = game.nextPlayer();

@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
  *
  * @author Anand Balaram, Fiona Cheng
  */
-
 public class GameRunnerTest {
 
     @Test

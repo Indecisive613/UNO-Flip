@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * A Player with a name, score, and hand of cards
  *
- * @authors Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram
+ * @author Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram
  */
 public class Player {
 
