@@ -144,13 +144,17 @@ public class GameTest {
 
         assertTrue(game.isRunning()); // the game should be running
 
+        player1.dealCard(deck.pop());
+
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer()); // the current player should be player2
         assertEquals(7, player2.getHand().size());
         game.addToDeck(player2.getHand()); // put all the cards in player2's hand back in the deck
         player2.clearHand(); // clear player2's hand
         assertEquals(0, player2.getHand().size());
-        assertEquals(104 - 7*2 - 1, deck.size());
+        assertEquals(104 - 7*2 - 2*1, deck.size());
+
+        player2.dealCard(deck.pop());
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -160,7 +164,9 @@ public class GameTest {
         game.addToDeck(player3.getHand()); // put all the cards in player3's hand back in the deck
         player3.clearHand(); // clear player3's hand
         assertEquals(0, player3.clearHand().size());
-        assertEquals(104 - 7 - 1, deck.size());
+        assertEquals(104 - 7 - 3*1, deck.size());
+
+        player3.dealCard(deck.pop());
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -170,7 +176,7 @@ public class GameTest {
         game.addToDeck(player4.getHand()); // put all the cards in player4's hand back in the deck
         player4.clearHand(); // clear player4's hand
         assertEquals(0, player4.getHand().size());
-        assertEquals(104 - 1, deck.size());
+        assertEquals(104 - 4*1, deck.size());
 
         assertNotEquals(null, game.getTopCard());
     }
@@ -533,7 +539,7 @@ public class GameTest {
         // update the score for player2
         assertTrue(game.isRunning());
         game.advanceTurn();
-        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(player2, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(324, game.getCurrentScore() - 240);
         assertEquals(324, game.getCurrentPlayer().getScore() - 240);
