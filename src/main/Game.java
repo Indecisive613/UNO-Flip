@@ -16,6 +16,7 @@ public class Game {
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
     public static final int STARTING_HAND_SIZE = 2; // TODO: Change to 7
+    public static final int POINTS_TO_WIN = 100; // TODO: Change to 500
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
@@ -177,7 +178,12 @@ public class Game {
      * Advance the turn to the next player
      */
     public void advanceTurn() {
-
+        if(hasWonRound()){
+            for (GameView view : views) {
+                view.handleNewTurn(players.get(currentPlayerIndex));
+            }
+            return;
+        }
         currentPlayerIndex = nextPlayer();
         skipPlayer = false;
 
@@ -217,9 +223,6 @@ public class Game {
         }
         else{
             message = "WILD";
-        }
-        if (players.get(currentPlayerIndex).getHand().size() == 0){
-            message = "Done game";
         }
 
         for (GameView view : views) {
@@ -273,7 +276,7 @@ public class Game {
      */
     public boolean hasWonGame(){
         for (Player player : players){
-            if (player.getScore() >= 500){
+            if (player.getScore() >= POINTS_TO_WIN){
                 return true;
             }
         }
@@ -313,7 +316,11 @@ public class Game {
         this.playedCards = new Stack<Card>();
         turnOrderReversed = false;
         skipPlayer = false;
-        currentPlayerIndex = 0;
+        currentPlayerIndex = -1;
+        for (Player player: players){
+            player.clearHand();
+        }
+
         for (GameView view : views) {
             view.handleNewGame();
         }
@@ -345,5 +352,8 @@ public class Game {
 
     public void setDeck(Stack<Card> deck){
         this.deck = deck;
+    }
+    public boolean hasWonRound(){
+        return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().size() == 0;
     }
 }

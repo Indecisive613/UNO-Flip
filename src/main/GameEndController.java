@@ -45,7 +45,7 @@ public class GameEndController implements ActionListener {
             view.showErrorMessage("Starting a new game is mandatory");
             input = view.getNewGameConfirmation(strOptions, winner);
         }
-        game.resetGame(); // TODO: figure out how to reset the game...using GameRunner.initGame()?
+        game.resetGame();
     }
 
     @Override

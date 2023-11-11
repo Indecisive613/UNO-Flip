@@ -75,14 +75,13 @@ public class GameEndView extends JOptionPane implements GameView{
 
     @Override
     public void handleNewTurn(Player player) {
-
+        if (player.getHand().size() == 0){
+            controller.requestNewGame();
+        }
     }
 
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
-        if (additionalMessage.equals("Done game")){
-            controller.requestNewGame();
-        }
     }
 
     @Override

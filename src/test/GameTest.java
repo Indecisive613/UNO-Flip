@@ -533,7 +533,7 @@ public class GameTest {
         // update the score for player2
         assertTrue(game.isRunning());
         game.advanceTurn();
-        assertEquals(player2, game.getCurrentPlayer());
+        assertEquals(player1, game.getCurrentPlayer());
         game.assignScore();
         assertEquals(324, game.getCurrentScore() - 240);
         assertEquals(324, game.getCurrentPlayer().getScore() - 240);
