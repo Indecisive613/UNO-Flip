@@ -38,7 +38,7 @@ public class GameEndView extends JOptionPane implements GameView{
      */
     public int getNewGameConfirmation(String strOptions[], Player winner){
         String displayMessage = winner.getName() + " has won the round!\nPress the button to start a new game";
-        return this.showOptionDialog(superFrame, displayMessage, "Custom Option Pane",
+        return this.showOptionDialog(superFrame, displayMessage, "Round Completed",
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
     }
 
@@ -51,7 +51,7 @@ public class GameEndView extends JOptionPane implements GameView{
     public int hasWonGame(Player winner){
         String displayMessage = winner.getName() + " has won the game!!\nPress the button to end the program";
         String[] strOptions = {"End"};
-        return this.showOptionDialog(superFrame, displayMessage, "Custom Option Pane",
+        return this.showOptionDialog(superFrame, displayMessage, "Game Completed",
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
 
     }

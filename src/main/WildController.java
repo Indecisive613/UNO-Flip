@@ -24,7 +24,7 @@ public class WildController implements ActionListener {
      *
      * @return the name of the player
      */
-    public Card.Colour requestWildColour(){
+    public void requestWildColour(){
         String[] strOptions = {"Red", "Blue", "Green", "Yellow"};
         Card.Colour[] colours = {Card.Colour.RED, Card.Colour.BLUE, Card.Colour.GREEN, Card.Colour.YELLOW};
 
@@ -33,7 +33,7 @@ public class WildController implements ActionListener {
             view.showErrorMessage("Selecting a colour is mandatory.");
             input = view.getColour(strOptions);
         }
-        return colours[input];
+        game.setCurrentColour(colours[input]);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class WildView extends JOptionPane implements GameView{
      * @param strOptions The options for the popup
      */
     public int getColour(String strOptions[]){
-        return this.showOptionDialog(superFrame, "Choose one of the buttons below:", "Custom Option Pane",
+        return this.showOptionDialog(superFrame, "Choose one of the buttons below:", "WILD card selection",
                 this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
     }
 
@@ -57,8 +57,7 @@ public class WildView extends JOptionPane implements GameView{
     @Override
     public void handlePlayCard(Card playedCard, String additionalMessage) {
         if (additionalMessage.equals("WILD")){
-            // TODO: Remove direct call to game
-            game.setCurrentColour(controller.requestWildColour());
+            controller.requestWildColour();
         }
     }
 
