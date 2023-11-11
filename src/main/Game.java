@@ -15,8 +15,8 @@ public class Game {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
-    public static final int STARTING_HAND_SIZE = 7; // TODO: Change to 7
-    public static final int POINTS_TO_WIN = 500; // TODO: Change to 500
+    public static final int STARTING_HAND_SIZE = 7;
+    public static final int POINTS_TO_WIN = 500;
 
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
@@ -95,15 +95,6 @@ public class Game {
      * @return the current colour of the top card
      */
     public Card.Colour getCurrentColour() { return currentColour; }
-
-    /**
-     * Set the top card
-     * TODO: This is for testing, maybe should remove
-     */
-    public Card setTopCard(Card card) {
-        currentColour = card.getColour();
-        return playedCards.push(card);
-    }
 
     /**
      * Add a new Player to the Game
