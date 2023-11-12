@@ -78,10 +78,10 @@ TBD
 
 ## Sequence Diagrams
 ### Initialize
-TBD
+![Milestone 2 Sequence Diagram Initialize Game.png](Milestone%202%20Sequence%20Diagram%20Initialize%20Game.png)
 
 ### Start Game
-TBD
+![Milestone 2 Sequence Diagram Starting Game.png](Milestone%202%20Sequence%20Diagram%20Starting%20Game.png)
 
 ### Playing Game
-TBD
+![Milestone 2 Sequence Diagram Playing Game.png](Milestone%202%20Sequence%20Diagram%20Playing%20Game.png)
