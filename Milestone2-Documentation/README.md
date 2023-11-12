@@ -47,8 +47,11 @@ The current player is shown above the "END TURN" Button, as well as in a magenta
 Players do not need to say UNO when they only have 1 card left:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/1191297f-6adb-49aa-bdc4-b06ab9d1421d)
 
-Once a player plays their last card, the round will end and the players scores, which are found at the top of the frame, will be updated:
-Someone fix end game!!
+Once a player plays their last card, the round will end:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/d98fa83e-941e-4741-8ef6-a782e35f1f55)
+
+When you hit continue, then a new game will begin and the scores will be updated:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/d349868c-3765-4c64-aa63-e21c8c30ecb7)
 
 ## Assumptions
 * If the starting card is not a normal card, ignore the effect but can still play on the color/pick any color if it is a wild
@@ -58,6 +61,7 @@ Someone fix end game!!
 * Choosing player count, player names, and WILD cards colours are mandatory
 * You may play WILD cards any time
 * Players do not need to say UNO
+* A new round begins with player 1
 
 ## Credits
 Milestone 1 Completion: October 22, 2023  
