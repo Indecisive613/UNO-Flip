@@ -20,23 +20,6 @@ public class InfoViewPanel extends JLabel implements GameView {
         this.setVisible(true);
         this.setFont(new Font("Arial", Font.PLAIN, 24)); // Set font
         this.setHorizontalAlignment(JLabel.CENTER); // Set horizontal alignment
-        /*
-        this.players = players;
-        //this.setSize(200, 200);
-        this.setVisible(true);
-        this.setLayout(new BorderLayout());
-        String initialScore = "";
-        String turnOrder = "";
-        for (Player player: players){
-            String playerName = player.getName();
-            initialScore += playerName + ": 0" + "\n";
-            turnOrder += playerName + "\n";
-        }
-        score = new JTextArea(initialScore);
-        direction = new JTextArea(turnOrder);
-        this.add(score, BorderLayout.WEST);
-        this.add(direction, BorderLayout.EAST);
-        */
     }
     public void setGame(Game game) {
         this.game = game;
