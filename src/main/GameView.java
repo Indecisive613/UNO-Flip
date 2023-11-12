@@ -44,6 +44,11 @@ public interface GameView {
     void handleDrawCard(Card drawnCard);
 
     /**
+     * Display instructions to the current player about what colour to pick
+     */
+    void handleGetColour();
+
+    /**
      * Update the status of the turn order for the players whenever a reverse card is played
      *
      * @param turnReversed whether the turn order of the players has been reversed
