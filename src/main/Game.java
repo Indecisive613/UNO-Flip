@@ -314,6 +314,7 @@ public class Game {
 
         for (GameView view : views) {
             view.handleNewGame();
+            view.handleUpdateTurnOrder(false);
         }
         shuffleDeck();
         dealCards();
