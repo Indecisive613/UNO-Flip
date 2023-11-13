@@ -65,18 +65,20 @@ public class NewGameController implements ActionListener {
      * Asks for the player count and the names of the players. Adds the players to the UNO game.
      */
     public void handleNewGame() {
-        int playerCount = requestPlayerCount(Game.PLAYER_MIN, Game.PLAYER_MAX);
-        ArrayList<String> allNames = new ArrayList<String>();
-        for(int i = 0; i < playerCount; i++){
-            String name = requestPlayerName(i+1);
-            while(allNames.contains(name)){
-                view.showErrorMessage("That name has already been taken.");
-                name = requestPlayerName(i+1);
+        if (game.getRoundNumber() == 0) {
+            int playerCount = requestPlayerCount(Game.PLAYER_MIN, Game.PLAYER_MAX);
+            ArrayList<String> allNames = new ArrayList<String>();
+            for (int i = 0; i < playerCount; i++) {
+                String name = requestPlayerName(i + 1);
+                while (allNames.contains(name)) {
+                    view.showErrorMessage("That name has already been taken.");
+                    name = requestPlayerName(i + 1);
+                }
+                allNames.add(name);
+                game.addPlayer(new Player(name, new ArrayList<>()));
             }
-            allNames.add(name);
-            game.addPlayer(new Player(name, new ArrayList<>()));
+            game.setRunning(true);
         }
-        game.setRunning(true);
     }
     public void actionPerformed(ActionEvent e){
     }
