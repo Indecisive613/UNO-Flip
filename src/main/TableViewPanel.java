@@ -23,6 +23,7 @@ public class TableViewPanel extends JPanel implements GameView {
     private final JPanel playerPanel;
     private JButton topCard;
     private Game game;
+    private TableController controller;
 
     public TableViewPanel(){
 
@@ -65,6 +66,7 @@ public class TableViewPanel extends JPanel implements GameView {
     @Override
     public void setGame(Game game) {
         this.game = game;
+        controller = new TableController(game, this);
     }
 
     @Override
@@ -76,18 +78,18 @@ public class TableViewPanel extends JPanel implements GameView {
     public void handleNewTurn(Player player) {
 
         topCardPanel.removeAll();
-        topCard = new JCardButton(game.getTopCard());
+        topCard = new JCardButton(controller.getTopCard());
 
         topCard.setEnabled(false);
         topCardPanel.add(topCard);
 
         this.add(topCardPanel);
 
-        currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
-        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " ---");
+        currentColor.setText(" --- Current Color: " + controller.getCurrentColour());
+        remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
 
         ArrayList<JButton> playerButtons = new ArrayList<>();
-        ArrayList<Player> players = game.getPlayers();
+        ArrayList<Player> players = controller.getPlayers();
 
         playerPanel.removeAll();
 
@@ -115,7 +117,7 @@ public class TableViewPanel extends JPanel implements GameView {
     public void handlePlayCard(Card playedCard, String additionalMessage) {
 
         topCardPanel.removeAll();
-        topCard = new JCardButton(game.getTopCard());
+        topCard = new JCardButton(controller.getTopCard());
 
         topCard.setEnabled(false);
         topCardPanel.add(topCard);
@@ -126,13 +128,13 @@ public class TableViewPanel extends JPanel implements GameView {
 
         this.add(topCardPanel);
 
-        currentColor.setText(" --- Current Color: " + game.getCurrentColour().toString());
-        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " ---");
+        currentColor.setText(" --- Current Color: " + controller.getCurrentColour());
+        remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
     }
 
     @Override
     public void handleDrawCard(Card drawnCard) {
-        remainingCards.setText(" --- Remaining Cards: " + game.getDeck().size() + " ---");
+        remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
     }
 
     @Override
