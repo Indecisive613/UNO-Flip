@@ -74,7 +74,7 @@ Authors:
 * Jake Siushansian - 101226956
 
 ## Class Diagram
-![Milestone 2 UML Class Diagram](https://github.com/Indecisive613/UNO-Flip/blob/7299b71c402e6a0a89deeab2617a6d95bb9a15fa/Milestone2-Documentation/milestone_2.png)
+![Milestone 2 UML Class Diagram](https://github.com/Indecisive613/UNO-Flip/blob/2cd17b518fa797ad67f6cc502003e35d11279e23/Milestone2-Documentation/milestone_2.png)
 
 ## Sequence Diagrams
 ### Initialize
