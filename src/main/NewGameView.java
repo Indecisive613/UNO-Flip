@@ -63,9 +63,7 @@ public class NewGameView extends JPanel implements GameView{
 
     @Override
     public void handleNewGame() {
-        if (game.getRoundNumber() == 0) {
-            controller.handleNewGame();
-        }
+        controller.handleNewGame();
     }
 
     @Override
