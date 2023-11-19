@@ -92,7 +92,6 @@ public class HandViewPanel extends JPanel implements GameView {
         // Reset buttons
         endTurn.setEnabled(false);
         endTurn.setBackground(new Color(255, 255, 255));
-
         drawButton.setEnabled(true);
         updateCardPanel();
     }

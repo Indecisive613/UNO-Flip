@@ -102,7 +102,16 @@ public class Game {
      * @param player The Player to add
      */
     public void addPlayer(Player player) {
-        players.add(player);
+
+        if (player.getIsAI()) {
+            AiPlayer aiPlayer = new AiPlayer (player.getName(), player.getHand(), player.getIsAI());
+            players.add(aiPlayer);
+        }
+        else {
+            players.add(player);
+        }
+
+        //players.add(player);
     }
 
     /**

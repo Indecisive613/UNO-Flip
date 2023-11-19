@@ -27,6 +27,7 @@ public class Player {
         this.name = name;
         this.hand = hand;
         this.isAI = isAI;
+
         score = 0;
     }
 
@@ -43,6 +44,11 @@ public class Player {
     public int getScore() {
         return score;
     }
+
+    /**
+     * @return The Player's status as
+     */
+    public boolean getIsAI() { return isAI; }
 
     /**
      * Increment the Player's score by a given amount
