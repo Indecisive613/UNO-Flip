@@ -174,7 +174,7 @@ public class GameRunner {
      *
      * @return A deck of UNO Flip cards
      */
-    public static Stack<DoubleSidedCard> createDoubleSidedDeck() {
+    public static Stack<DoubleSidedCard> createDoubleSidedDeck() throws RuntimeException{
         Stack<DoubleSidedCard> cards = new Stack<DoubleSidedCard>();
 
         Stack<Card> lightDeck = createLightDeck();
@@ -182,7 +182,6 @@ public class GameRunner {
         Collections.shuffle(lightDeck);
         Collections.shuffle(darkDeck);
 
-        System.out.println(lightDeck.size() + " is light. Dark: " + darkDeck.size());
         if(lightDeck.size() != darkDeck.size()){
             throw new RuntimeException("The size of the light and dark decks do not match.");
         }
@@ -194,7 +193,7 @@ public class GameRunner {
     }
 
     public static void main(String[] args) {
-        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck(); //TODO delete this
+        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck(); //TODO delete this once we are happy the double sided deck is being correctly created
         for(DoubleSidedCard card: finalDeck){
             System.out.println(card);
         }
