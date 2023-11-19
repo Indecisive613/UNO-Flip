@@ -48,7 +48,7 @@ public class GameRunner {
     }
 
     /**
-     * Create and return a deck of UNO cards
+     * Create and return a deck of UNO cards //TODO delete this one once the double sided deck works in the game
      *
      * @return A deck of UNO cards
      */
@@ -82,6 +82,84 @@ public class GameRunner {
            }
         } catch(IllegalArgumentException e){
                 System.out.println(e);
+        }
+        return cards;
+    }
+
+    /**
+     * Create and return a deck of light side UNO cards
+     *
+     * @return A deck of light side UNO cards
+     */
+    public static Stack<Card> createLightDeck() {
+        Stack<Card> cards = new Stack<Card>();
+        ArrayList<Card.Symbol> plainNumbers = new ArrayList<Card.Symbol>(Arrays.asList(Card.Symbol.ONE, Card.Symbol.TWO, Card.Symbol.THREE, Card.Symbol.FOUR,
+                Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
+
+        try{
+            for(Card.Colour colour : Card.nonWildColours){
+                //add 2 of each number
+                for(Card.Symbol symbol : plainNumbers) {
+                    Card card1 = new NormalCard(colour, symbol);
+                    Card card2 = new NormalCard(colour, symbol);
+                    cards.push(card1);
+                    cards.push(card2);
+                }
+                //add 2 of each special card
+                cards.push(new DrawOneCard(colour));
+                cards.push(new DrawOneCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new SkipCard(colour));
+                cards.push(new SkipCard(colour));
+            }
+
+            //Add four of each wild card
+            for(int i = 0; i < 4; i++){
+                cards.push(new WildCard());
+                cards.push(new WildDrawTwoCard());
+            }
+        } catch(IllegalArgumentException e){
+            System.out.println(e);
+        }
+        return cards;
+    }
+
+    /**
+     * Create and return a deck of dark side UNO cards
+     *
+     * @return A deck of dark side UNO cards
+     */
+    public static Stack<Card> createDarkDeck() {
+        Stack<Card> cards = new Stack<Card>();
+        ArrayList<Card.Symbol> plainNumbers = new ArrayList<Card.Symbol>(Arrays.asList(Card.Symbol.ONE, Card.Symbol.TWO, Card.Symbol.THREE, Card.Symbol.FOUR,
+                Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
+
+        try{
+            for(Card.Colour colour : Card.nonWildColours){
+                //add 2 of each number
+                for(Card.Symbol symbol : plainNumbers) {
+                    Card card1 = new NormalCard(colour, symbol);
+                    Card card2 = new NormalCard(colour, symbol);
+                    cards.push(card1);
+                    cards.push(card2);
+                }
+                //add 2 of each special card
+                cards.push(new DrawOneCard(colour));
+                cards.push(new DrawOneCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new SkipCard(colour));
+                cards.push(new SkipCard(colour));
+            }
+
+            //Add four of each wild card
+            for(int i = 0; i < 4; i++){
+                cards.push(new WildCard());
+                cards.push(new WildDrawTwoCard());
+            }
+        } catch(IllegalArgumentException e){
+            System.out.println(e);
         }
         return cards;
     }
