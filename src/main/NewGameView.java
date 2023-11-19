@@ -3,6 +3,7 @@ package main;
 import main.cards.Card;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +36,34 @@ public class NewGameView extends JPanel implements GameView{
      */
     public String showInputPanel(int number){
         return  JOptionPane.showInputDialog("Enter a name for player " + number + ":");
+    }
+
+    /**
+     * Asks the user to enter which players are AIs via a collection of checkboxes.
+     *
+     * @param numPlayers The number of players
+     * @param names The names of the players
+     * @return A list of which players are AIs
+     */
+    public boolean[] showCheckboxPopup(int numPlayers, ArrayList<String> names){
+        boolean[] isAI = new boolean[numPlayers]; //isAI[0] corresponds to whether or not names[0] is an AI, etc.
+        JCheckBox[] checkBoxes = new JCheckBox[numPlayers];
+
+        for(int i = 0; i < numPlayers; i++){
+            JCheckBox checkBox = new JCheckBox(names.get(i) + " is an AI");
+            checkBoxes[i] = checkBox;
+        }
+
+        int pressOk = JOptionPane.showConfirmDialog(superFrame, checkBoxes, "Choose AI Players", JOptionPane.OK_CANCEL_OPTION);
+        while(pressOk != 0){
+            showErrorMessage("You must decide if players are AI. (click OK)");
+            pressOk = JOptionPane.showConfirmDialog(superFrame, checkBoxes, "Choose AI Players", JOptionPane.OK_CANCEL_OPTION);
+        }
+
+        for(int i = 0; i < numPlayers; i++){
+            isAI[i] = checkBoxes[i].isSelected();
+        }
+        return isAI;
     }
 
     /**

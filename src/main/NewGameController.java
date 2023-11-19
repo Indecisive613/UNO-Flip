@@ -62,7 +62,7 @@ public class NewGameController implements ActionListener {
     }
 
     /**
-     * Asks for the player count and the names of the players. Adds the players to the UNO game.
+     * Asks for the player count, the names of the players, and whether they are AIs. Adds the players to the UNO game.
      */
     public void handleNewGame() {
         if (game.getRoundNumber() == 0) {
@@ -75,7 +75,11 @@ public class NewGameController implements ActionListener {
                     name = requestPlayerName(i + 1);
                 }
                 allNames.add(name);
-                game.addPlayer(new Player(name, new ArrayList<>()));
+            }
+            boolean[] isAI = view.showCheckboxPopup(playerCount, allNames);
+            for(int i = 0; i < playerCount; i++){
+                System.out.println("Creating a player named " + allNames.get(i) + " Is AI?" + isAI[i]);
+                game.addPlayer(new Player(allNames.get(i), new ArrayList<>(), isAI[i]));
             }
             game.setRunning(true);
         }

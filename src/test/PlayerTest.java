@@ -19,7 +19,7 @@ public class PlayerTest {
     @Test
     public void testCreatePlayer() {
         ArrayList<Card> hand = new ArrayList<>();
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
 
         assertEquals("Test Name", p.getName());
         assertEquals(0, p.getScore());
@@ -29,7 +29,7 @@ public class PlayerTest {
     @Test
     public void testDealCard() {
         ArrayList<Card> hand = new ArrayList<>();
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
 
         Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         p.dealCard(card);
@@ -43,7 +43,7 @@ public class PlayerTest {
         ArrayList<Card> hand= new ArrayList<>();
         Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         hand.add(card);
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
 
         assertEquals(card, p.playCard(0));
         assertEquals(0, p.getHand().size());
@@ -58,7 +58,7 @@ public class PlayerTest {
         hand.add(c1);
         hand.add(c2);
         hand.add(c3);
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
 
         System.out.println(p.getHand().size());
         assertEquals(c2, p.playCard(1));
@@ -76,7 +76,7 @@ public class PlayerTest {
         ArrayList<Card> hand= new ArrayList<>();
         Card card = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
         hand.add(card);
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
         assertThrows(IllegalArgumentException.class, () -> {
             p.playCard(-1);
         });
@@ -88,7 +88,7 @@ public class PlayerTest {
     @Test
     public void testIncrementScore() {
         ArrayList<Card> hand = new ArrayList<>();
-        Player p = new Player("Test Name", hand);
+        Player p = new Player("Test Name", hand, false);
 
         p.incrementScore(100);
         //assertEquals(100, p.getScore());

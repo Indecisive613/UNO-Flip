@@ -14,17 +14,19 @@ public class Player {
     private final String name;
     private int score;
     private ArrayList<Card> hand;
-
+    private boolean isAI;
 
     /**
      * Create a Player with a given name and hand of cards
      *
      * @param name The name of the Player
      * @param hand The Player's hand of cards
+     * @param isAI Whether the player is an AI
      */
-    public Player(String name, ArrayList<Card> hand) throws IllegalArgumentException {
+    public Player(String name, ArrayList<Card> hand, boolean isAI) throws IllegalArgumentException {
         this.name = name;
         this.hand = hand;
+        this.isAI = isAI;
         score = 0;
     }
 

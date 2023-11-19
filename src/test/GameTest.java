@@ -30,10 +30,10 @@ public class GameTest {
         ArrayList<Card> hand2 = new ArrayList<Card>(); // create empty hand for player2
         ArrayList<Card> hand3 = new ArrayList<Card>(); // create empty hand for player3
         ArrayList<Card> hand4 = new ArrayList<Card>(); // empty create hand for player4
-        player1 = new Player("Homer", hand1); // create player1
-        player2 = new Player("Marge", hand2); // create player2
-        player3 = new Player("Bart", hand3); // create player3
-        player4 = new Player("Lisa", hand4); // create player4
+        player1 = new Player("Homer", hand1, false); // create player1
+        player2 = new Player("Marge", hand2, false); // create player2
+        player3 = new Player("Bart", hand3, false); // create player3
+        player4 = new Player("Lisa", hand4, false); // create player4
 
         deck = GameRunner.createDeck(); // create the deck
         game = new Game(deck); // create the game with the players and the deck
