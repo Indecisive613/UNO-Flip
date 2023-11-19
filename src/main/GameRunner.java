@@ -4,6 +4,7 @@ import main.cards.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -69,8 +70,8 @@ public class GameRunner {
                 //add 2 of each special card
                 cards.push(new DrawOneCard(colour));
                 cards.push(new DrawOneCard(colour));
-                cards.push(new ReverseCard(colour));
-                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
+                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
                 cards.push(new SkipCard(colour));
                 cards.push(new SkipCard(colour));
             }
@@ -78,7 +79,7 @@ public class GameRunner {
            //Add four of each wild card
            for(int i = 0; i < 4; i++){
                cards.push(new WildCard(Card.Side.LIGHT));
-               cards.push(new WildDrawTwoCard(Card.Side.LIGHT));
+               cards.push(new WildDrawTwoCard());
            }
         } catch(IllegalArgumentException e){
                 System.out.println(e);
@@ -108,8 +109,8 @@ public class GameRunner {
                 //add 2 of each special card
                 cards.push(new DrawOneCard(colour));
                 cards.push(new DrawOneCard(colour));
-                cards.push(new ReverseCard(colour));
-                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
+                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
                 cards.push(new SkipCard(colour));
                 cards.push(new SkipCard(colour));
                 cards.push(new Flip(colour, Card.Side.LIGHT));
@@ -119,7 +120,7 @@ public class GameRunner {
             //Add four of each wild card
             for(int i = 0; i < 4; i++){
                 cards.push(new WildCard(Card.Side.LIGHT));
-                cards.push(new WildDrawTwoCard(Card.Side.LIGHT));
+                cards.push(new WildDrawTwoCard());
             }
         } catch(IllegalArgumentException e){
             System.out.println(e);
@@ -151,6 +152,8 @@ public class GameRunner {
                 cards.push(new DrawFive(colour));
                 cards.push(new SkipEveryone(colour));
                 cards.push(new SkipEveryone(colour));
+                cards.push(new ReverseCard(colour, Card.Side.DARK));
+                cards.push(new ReverseCard(colour, Card.Side.DARK));
                 cards.push(new Flip(colour, Card.Side.DARK));
                 cards.push(new Flip(colour, Card.Side.DARK));
             }
@@ -158,10 +161,34 @@ public class GameRunner {
             //Add four of each wild card
             for(int i = 0; i < 4; i++){
                 cards.push(new WildCard(Card.Side.DARK));
-                cards.push(new WildDrawColour(Card.Side.DARK));
+                cards.push(new WildDrawColour());
             }
         } catch(IllegalArgumentException e){
             System.out.println(e);
+        }
+        return cards;
+    }
+
+    /**
+     * Create and returns a double-sided UNO Flip deck
+     *
+     * @return A deck of UNO Flip cards
+     */
+    public static Stack<DoubleSidedCard> createDoubleSidedDeck() {
+        Stack<DoubleSidedCard> cards = new Stack<DoubleSidedCard>();
+
+        Stack<Card> lightDeck = createLightDeck();
+        Stack<Card> darkDeck = createDarkDeck();
+        Collections.shuffle(lightDeck);
+        Collections.shuffle(darkDeck);
+
+        System.out.println(lightDeck.size() + " is light. Dark: " + darkDeck.size());
+        if(lightDeck.size() != darkDeck.size()){
+            throw new RuntimeException("The size of the light and dark decks do not match.");
+        }
+
+        for(Card lightCard: lightDeck){
+            cards.push(new DoubleSidedCard(lightCard, darkDeck.pop()));
         }
         return cards;
     }
@@ -174,6 +201,11 @@ public class GameRunner {
 
         deck = createDarkDeck();
         for(Card card: deck){
+            System.out.println(card);
+        }
+
+        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck();
+        for(DoubleSidedCard card: finalDeck){
             System.out.println(card);
         }
     }

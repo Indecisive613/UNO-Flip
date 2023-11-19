@@ -13,11 +13,10 @@ public class WildDrawTwoCard extends Card {
     /**
      * Creates an UNO wild draw two card with the specified color.
      *
-     * @param cardSide The side of the card
      * @throws IllegalArgumentException if an invalid card is created.
      */
-    public WildDrawTwoCard(Card.Side cardSide) throws IllegalArgumentException{
-        super(Card.Colour.WILD, Symbol.WILD_DRAW_TWO, cardSide);
+    public WildDrawTwoCard() throws IllegalArgumentException{
+        super(Colour.WILD, Symbol.WILD_DRAW_TWO, Side.LIGHT);
     }
 
     @Override

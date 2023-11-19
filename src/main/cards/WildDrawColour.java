@@ -11,11 +11,10 @@ public class WildDrawColour extends Card {
     /**
      * Creates a wild draw colour card
      *
-     * @param cardSide The side of the card
      * @throws IllegalArgumentException if an invalid color is provided.
      */
-    public WildDrawColour(Card.Side cardSide) throws IllegalArgumentException{
-        super(Card.Colour.WILD, Symbol.WILD_DRAW_COLOUR, cardSide);
+    public WildDrawColour() throws IllegalArgumentException{
+        super(Card.Colour.WILD, Card.Symbol.WILD_DRAW_COLOUR, Card.Side.DARK);
     }
     @Override
     public boolean cardAction(Game game) {

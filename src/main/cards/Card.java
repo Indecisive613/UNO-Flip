@@ -51,7 +51,7 @@ public abstract class Card {
     public static final ArrayList<Colour> lightColours = new ArrayList<Colour>(Arrays.asList(Colour.GREEN, Colour.RED, Colour.YELLOW, Colour.BLUE));
     public static final ArrayList<Colour> darkColours = new ArrayList<Colour>(Arrays.asList(Colour.TEAL, Colour.PINK, Colour.PURPLE, Colour.ORANGE));
     public static final ArrayList<Symbol> lightSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_TWO, Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_ONE, Symbol.SKIP, Symbol.REVERSE, Symbol.FLIP));
-    public static final ArrayList<Symbol> darkSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_COLOUR, Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_FIVE, Symbol.FLIP, Symbol.SKIP_EVERYONE));
+    public static final ArrayList<Symbol> darkSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_COLOUR, Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_FIVE, Symbol.FLIP, Symbol.SKIP_EVERYONE, Symbol.REVERSE));
 
     /**
      * An UNO card with a colour, face value, and side type.
