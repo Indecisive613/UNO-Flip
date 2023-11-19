@@ -78,7 +78,6 @@ public class NewGameController implements ActionListener {
             }
             boolean[] isAI = view.showCheckboxPopup(playerCount, allNames);
             for(int i = 0; i < playerCount; i++){
-                System.out.println("Creating a player named " + allNames.get(i) + " Is AI?" + isAI[i]);
                 game.addPlayer(new Player(allNames.get(i), new ArrayList<>(), isAI[i]));
             }
             game.setRunning(true);
