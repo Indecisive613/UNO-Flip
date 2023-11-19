@@ -7,14 +7,14 @@ import main.Game;
  *
  * @author Fiona Cheng
  */
-public class Flip extends Card {
+public class FlipCard extends Card {
     /**
      * Creates a Flip card
      *
      * @param cardSide The side of the card
      * @throws IllegalArgumentException if an invalid color is provided.
      */
-    public Flip(Card.Colour colour, Card.Side cardSide) throws IllegalArgumentException{
+    public FlipCard(Card.Colour colour, Card.Side cardSide) throws IllegalArgumentException{
         super(colour, Symbol.FLIP, cardSide);
     }
     @Override

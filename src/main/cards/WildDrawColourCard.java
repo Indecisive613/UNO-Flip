@@ -7,13 +7,13 @@ import main.Game;
  *
  * @author Fiona Cheng
  */
-public class WildDrawColour extends Card {
+public class WildDrawColourCard extends Card {
     /**
      * Creates a wild draw colour card
      *
      * @throws IllegalArgumentException if an invalid color is provided.
      */
-    public WildDrawColour() throws IllegalArgumentException{
+    public WildDrawColourCard() throws IllegalArgumentException{
         super(Card.Colour.WILD, Card.Symbol.WILD_DRAW_COLOUR, Card.Side.DARK);
     }
     @Override

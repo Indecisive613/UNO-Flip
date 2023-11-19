@@ -92,7 +92,7 @@ public class GameRunner {
      *
      * @return A deck of light side UNO cards
      */
-    public static Stack<Card> createLightDeck() {
+    private static Stack<Card> createLightDeck() {
         Stack<Card> cards = new Stack<Card>();
         ArrayList<Card.Symbol> plainNumbers = new ArrayList<Card.Symbol>(Arrays.asList(Card.Symbol.ONE, Card.Symbol.TWO, Card.Symbol.THREE, Card.Symbol.FOUR,
                 Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
@@ -113,8 +113,8 @@ public class GameRunner {
                 cards.push(new ReverseCard(colour, Card.Side.LIGHT));
                 cards.push(new SkipCard(colour));
                 cards.push(new SkipCard(colour));
-                cards.push(new Flip(colour, Card.Side.LIGHT));
-                cards.push(new Flip(colour, Card.Side.LIGHT));
+                cards.push(new FlipCard(colour, Card.Side.LIGHT));
+                cards.push(new FlipCard(colour, Card.Side.LIGHT));
             }
 
             //Add four of each wild card
@@ -133,7 +133,7 @@ public class GameRunner {
      *
      * @return A deck of dark side UNO cards
      */
-    public static Stack<Card> createDarkDeck() {
+    private static Stack<Card> createDarkDeck() {
         Stack<Card> cards = new Stack<Card>();
         ArrayList<Card.Symbol> plainNumbers = new ArrayList<Card.Symbol>(Arrays.asList(Card.Symbol.ONE, Card.Symbol.TWO, Card.Symbol.THREE, Card.Symbol.FOUR,
                 Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
@@ -148,20 +148,20 @@ public class GameRunner {
                     cards.push(card2);
                 }
                 //add 2 of each special card
-                cards.push(new DrawFive(colour));
-                cards.push(new DrawFive(colour));
-                cards.push(new SkipEveryone(colour));
-                cards.push(new SkipEveryone(colour));
+                cards.push(new DrawFiveCard(colour));
+                cards.push(new DrawFiveCard(colour));
+                cards.push(new SkipEveryoneCard(colour));
+                cards.push(new SkipEveryoneCard(colour));
                 cards.push(new ReverseCard(colour, Card.Side.DARK));
                 cards.push(new ReverseCard(colour, Card.Side.DARK));
-                cards.push(new Flip(colour, Card.Side.DARK));
-                cards.push(new Flip(colour, Card.Side.DARK));
+                cards.push(new FlipCard(colour, Card.Side.DARK));
+                cards.push(new FlipCard(colour, Card.Side.DARK));
             }
 
             //Add four of each wild card
             for(int i = 0; i < 4; i++){
                 cards.push(new WildCard(Card.Side.DARK));
-                cards.push(new WildDrawColour());
+                cards.push(new WildDrawColourCard());
             }
         } catch(IllegalArgumentException e){
             System.out.println(e);
@@ -194,17 +194,7 @@ public class GameRunner {
     }
 
     public static void main(String[] args) {
-        Stack<Card> deck = createLightDeck();
-        for(Card card: deck){
-            System.out.println(card);
-        }
-
-        deck = createDarkDeck();
-        for(Card card: deck){
-            System.out.println(card);
-        }
-
-        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck();
+        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck(); //TODO delete this
         for(DoubleSidedCard card: finalDeck){
             System.out.println(card);
         }

@@ -7,14 +7,14 @@ import main.Game;
  *
  * @author Fiona Cheng
  */
-public class DrawFive extends Card {
+public class DrawFiveCard extends Card {
     /**
      * Creates a draw 5 card with the specified color.
      *
      * @param colour The color of the card.
      * @throws IllegalArgumentException if an invalid color is provided.
      */
-    public DrawFive(Card.Colour colour) throws IllegalArgumentException{
+    public DrawFiveCard(Card.Colour colour) throws IllegalArgumentException{
         super(colour, Symbol.DRAW_FIVE, Card.getSideFromColour(colour));
     }
     @Override
