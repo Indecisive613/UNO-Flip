@@ -1,4 +1,4 @@
-package test;
+/*package test;
 
 import main.cards.Card;
 import main.GameView;
@@ -13,7 +13,7 @@ import java.io.ByteArrayInputStream;
  * A class to test GameController
  *
  * @author Fiona Cheng, Jackie Smolkin-Lerner
- */
+ *
 //public class GameControllerTest {
 //
 //    ByteArrayInputStream testInput;;
@@ -92,4 +92,4 @@ import java.io.ByteArrayInputStream;
 //
 //        System.out.println();
 //    }
-//}
+//}*/

@@ -11,7 +11,8 @@ import java.util.Arrays;
  * @author Fiona Cheng, Anand Balaram
  */
 public abstract class Card {
-    public enum Colour { RED, GREEN, BLUE, YELLOW, WILD }
+    public enum Side { LIGHT, DARK}
+    public enum Colour { RED, GREEN, BLUE, YELLOW, WILD, PINK, TEAL, PURPLE, ORANGE}
     public enum Symbol {
         ONE(1),
         TWO(2),
@@ -26,7 +27,11 @@ public abstract class Card {
         SKIP(20),
         REVERSE(20),
         WILD(40),
-        WILD_DRAW_TWO(50);
+        WILD_DRAW_TWO(50),
+        SKIP_EVERYONE(30),
+        DRAW_FIVE(20),
+        FLIP(20),
+        WILD_DRAW_COLOUR(60);
 
         private final int pointValue;
 

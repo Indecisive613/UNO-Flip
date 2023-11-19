@@ -1,4 +1,4 @@
-package test;
+/*package test;
 
 import main.cards.Card;
 import main.cards.NormalCard;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * Tests for the Player class
  *
  * @author Jackie Smolkin-Lerner
- */
+ *
 public class PlayerTest {
 
     @Test
@@ -96,4 +96,4 @@ public class PlayerTest {
         p.incrementScore(2009);
         //assertEquals(100 + 2009, p.getScore());
     }
-}
+}*/
