@@ -77,8 +77,8 @@ public class GameRunner {
 
            //Add four of each wild card
            for(int i = 0; i < 4; i++){
-               cards.push(new WildCard());
-               cards.push(new WildDrawTwoCard());
+               cards.push(new WildCard(Card.Side.LIGHT));
+               cards.push(new WildDrawTwoCard(Card.Side.LIGHT));
            }
         } catch(IllegalArgumentException e){
                 System.out.println(e);
@@ -97,7 +97,7 @@ public class GameRunner {
                 Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
 
         try{
-            for(Card.Colour colour : Card.nonWildColours){
+            for(Card.Colour colour : Card.lightColours){
                 //add 2 of each number
                 for(Card.Symbol symbol : plainNumbers) {
                     Card card1 = new NormalCard(colour, symbol);
@@ -112,12 +112,14 @@ public class GameRunner {
                 cards.push(new ReverseCard(colour));
                 cards.push(new SkipCard(colour));
                 cards.push(new SkipCard(colour));
+                cards.push(new Flip(colour, Card.Side.LIGHT));
+                cards.push(new Flip(colour, Card.Side.LIGHT));
             }
 
             //Add four of each wild card
             for(int i = 0; i < 4; i++){
-                cards.push(new WildCard());
-                cards.push(new WildDrawTwoCard());
+                cards.push(new WildCard(Card.Side.LIGHT));
+                cards.push(new WildDrawTwoCard(Card.Side.LIGHT));
             }
         } catch(IllegalArgumentException e){
             System.out.println(e);
@@ -136,7 +138,7 @@ public class GameRunner {
                 Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
 
         try{
-            for(Card.Colour colour : Card.nonWildColours){
+            for(Card.Colour colour : Card.darkColours){
                 //add 2 of each number
                 for(Card.Symbol symbol : plainNumbers) {
                     Card card1 = new NormalCard(colour, symbol);
@@ -145,22 +147,34 @@ public class GameRunner {
                     cards.push(card2);
                 }
                 //add 2 of each special card
-                cards.push(new DrawOneCard(colour));
-                cards.push(new DrawOneCard(colour));
-                cards.push(new ReverseCard(colour));
-                cards.push(new ReverseCard(colour));
-                cards.push(new SkipCard(colour));
-                cards.push(new SkipCard(colour));
+                cards.push(new DrawFive(colour));
+                cards.push(new DrawFive(colour));
+                cards.push(new SkipEveryone(colour));
+                cards.push(new SkipEveryone(colour));
+                cards.push(new Flip(colour, Card.Side.DARK));
+                cards.push(new Flip(colour, Card.Side.DARK));
             }
 
             //Add four of each wild card
             for(int i = 0; i < 4; i++){
-                cards.push(new WildCard());
-                cards.push(new WildDrawTwoCard());
+                cards.push(new WildCard(Card.Side.DARK));
+                cards.push(new WildDrawColour(Card.Side.DARK));
             }
         } catch(IllegalArgumentException e){
             System.out.println(e);
         }
         return cards;
+    }
+
+    public static void main(String[] args) {
+        Stack<Card> deck = createLightDeck();
+        for(Card card: deck){
+            System.out.println(card);
+        }
+
+        deck = createDarkDeck();
+        for(Card card: deck){
+            System.out.println(card);
+        }
     }
 }

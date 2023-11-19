@@ -16,7 +16,7 @@ public class NormalCard extends Card {
      * @throws IllegalArgumentException if an invalid color is provided.
      */
     public NormalCard(Card.Colour colour, Card.Symbol symbol) throws IllegalArgumentException{
-        super(colour, symbol);
+        super(colour, symbol, Card.getSideFromColour(colour));
     }
     @Override
     public boolean cardAction(Game game) {

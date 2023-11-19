@@ -16,7 +16,7 @@ public class SkipCard extends Card {
      * @throws IllegalArgumentException if an invalid color is provided.
      */
     public SkipCard(Card.Colour colour) throws IllegalArgumentException{
-        super(colour, Card.Symbol.SKIP);
+        super(colour, Card.Symbol.SKIP, Card.getSideFromColour(colour));
     }
     @Override
     public boolean cardAction(Game game) {

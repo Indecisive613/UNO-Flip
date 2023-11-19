@@ -42,22 +42,23 @@ public abstract class Card {
     private final Colour colour;
     private final Symbol symbol;
     private final int pointValue;
-    private final Side cardSide;
+    private Side cardSide;
 
     public static final ArrayList<Symbol> wildSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_TWO, Symbol.WILD_DRAW_COLOUR));
     public static final ArrayList<Symbol> nonWildSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_ONE, Symbol.SKIP, Symbol.REVERSE, Symbol.DRAW_FIVE, Symbol.FLIP, Symbol.SKIP_EVERYONE));
     public static final ArrayList<Colour> wildColours = new ArrayList<Colour>(Arrays.asList(Colour.WILD));
     public static final ArrayList<Colour> nonWildColours = new ArrayList<Colour>(Arrays.asList(Colour.RED, Colour.GREEN, Colour.BLUE, Colour.YELLOW, Colour.PINK, Colour.ORANGE, Colour.TEAL, Colour.PURPLE));
-    public static final ArrayList<Colour> lightColours = new ArrayList<Colour>(Arrays.asList(Colour.WILD, Colour.GREEN, Colour.RED, Colour.YELLOW, Colour.BLUE));
-    public static final ArrayList<Colour> darkColours = new ArrayList<Colour>(Arrays.asList(Colour.WILD, Colour.TEAL, Colour.PINK, Colour.PURPLE, Colour.ORANGE));
+    public static final ArrayList<Colour> lightColours = new ArrayList<Colour>(Arrays.asList(Colour.GREEN, Colour.RED, Colour.YELLOW, Colour.BLUE));
+    public static final ArrayList<Colour> darkColours = new ArrayList<Colour>(Arrays.asList(Colour.TEAL, Colour.PINK, Colour.PURPLE, Colour.ORANGE));
     public static final ArrayList<Symbol> lightSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_TWO, Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_ONE, Symbol.SKIP, Symbol.REVERSE, Symbol.FLIP));
     public static final ArrayList<Symbol> darkSymbols = new ArrayList<Symbol>(Arrays.asList(Symbol.WILD, Symbol.WILD_DRAW_COLOUR, Symbol.ONE, Symbol.TWO, Symbol.THREE, Symbol.FOUR, Symbol.FIVE, Symbol.SIX, Symbol.SEVEN, Symbol.EIGHT, Symbol.NINE, Symbol.DRAW_FIVE, Symbol.FLIP, Symbol.SKIP_EVERYONE));
 
     /**
-     * An UNO card with a colour and face value
+     * An UNO card with a colour, face value, and side type.
      *
      * @param colour The colour of the card, or wild if it's a wild card
      * @param symbol The card number or symbol if it's a special card
+     * @param cardSide The side type of the card
      * @throws IllegalArgumentException if an invalid combination is provided.
      */
     public Card(Colour colour, Symbol symbol, Side cardSide) throws IllegalArgumentException{
@@ -80,25 +81,11 @@ public abstract class Card {
         }
     }
 
-    /**
-     * An UNO card with a colour and face value
-     *
-     * @param colour The colour of the card, or wild if it's a wild card
-     * @param symbol The card number or symbol if it's a special card
-     * @throws IllegalArgumentException if an invalid combination is provided. //TODO Delete this one later
-     */
-    public Card(Colour colour, Symbol symbol) throws IllegalArgumentException{
-        this.colour = colour;
-        this.symbol = symbol;
-        this.pointValue = symbol.pointValue;
-
-        if(wildColours.contains(colour) && nonWildSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a wild card can not be in " + nonWildSymbols);
+    public static Side getSideFromColour(Colour colour) throws IllegalArgumentException{
+        if(lightColours.contains(colour)){
+            return Side.LIGHT;
         }
-        if(nonWildColours.contains(colour) && wildSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a coloured card can not be in " + wildSymbols);
-        }
-        cardSide = Side.LIGHT;
+        return Side.DARK;
     }
 
     /**
@@ -116,6 +103,13 @@ public abstract class Card {
     }
 
     /**
+     * @return The side of the card
+     */
+    public Side getSide() {
+        return cardSide;
+    }
+
+    /**
      * @return The point value of the card
      */
     public int getPointValue() {
@@ -124,7 +118,7 @@ public abstract class Card {
 
     @Override
     public String toString() {
-        return colour + " " + symbol;
+        return colour + " " + symbol + " " + cardSide;
     }
 
     @Override

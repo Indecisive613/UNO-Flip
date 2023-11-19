@@ -16,7 +16,7 @@ public class ReverseCard extends Card {
      * @throws IllegalArgumentException if an invalid color is provided.
      */
     public ReverseCard(Card.Colour colour) throws IllegalArgumentException{
-        super(colour, Card.Symbol.REVERSE);
+        super(colour, Card.Symbol.REVERSE, Card.getSideFromColour(colour));
     }
     @Override
     public boolean cardAction(Game game) {
