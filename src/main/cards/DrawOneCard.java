@@ -16,7 +16,7 @@ public class DrawOneCard extends Card {
      * @throws IllegalArgumentException if an invalid color is provided.
      */
     public DrawOneCard(Card.Colour colour) throws IllegalArgumentException{
-        super(colour, Card.Symbol.DRAW_ONE);
+        super(colour, Card.Symbol.DRAW_ONE, Card.getSideFromColour(colour));
     }
     @Override
     public boolean cardAction(Game game) {

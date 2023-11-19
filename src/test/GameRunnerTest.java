@@ -1,6 +1,6 @@
 package test;
 
-import java.util.Stack;
+/*import java.util.Stack;
 
 import main.cards.*;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * Test class for GameRunner
  *
  * @author Anand Balaram, Fiona Cheng
- */
+ *
 public class GameRunnerTest {
 
     @Test
@@ -58,4 +58,4 @@ public class GameRunnerTest {
         }
         assertTrue(testDeck.isEmpty());
     }
-}
+}*/

@@ -16,7 +16,7 @@ public class WildDrawTwoCard extends Card {
      * @throws IllegalArgumentException if an invalid card is created.
      */
     public WildDrawTwoCard() throws IllegalArgumentException{
-        super(Card.Colour.WILD, Symbol.WILD_DRAW_TWO);
+        super(Colour.WILD, Symbol.WILD_DRAW_TWO, Side.LIGHT);
     }
 
     @Override
