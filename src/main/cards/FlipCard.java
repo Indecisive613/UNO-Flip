@@ -19,6 +19,7 @@ public class FlipCard extends Card {
     }
     @Override
     public boolean cardAction(Game game) {
+        game.flip();
         return false;
-    } //TODO for Anand
+    }
 }

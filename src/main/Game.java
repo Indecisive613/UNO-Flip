@@ -31,6 +31,7 @@ public class Game {
     private Card.Colour currentColour;
     private boolean running = false;
     private int roundNumber;
+    private boolean dark = false;
 
     /**
      * Create a new UNO Game given a deck of cards
@@ -380,5 +381,17 @@ public class Game {
      */
     public boolean hasWonRound(){
         return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().size() == 0;
+    }
+
+    public boolean isDark() {
+        return dark;
+    }
+
+    public void setDark(boolean dark) {
+        this.dark = dark;
+    }
+
+    public void flip(){
+        dark = !dark;
     }
 }
