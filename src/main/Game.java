@@ -26,6 +26,7 @@ public class Game {
 
     private boolean turnOrderReversed;
     private boolean skipPlayer;
+    private boolean skipEveryone;
     private int currentPlayerIndex = -1; // set to -1 for first increment
     private Card.Colour currentColour;
     private boolean running = false;
@@ -43,6 +44,7 @@ public class Game {
         views = new ArrayList<>();
         turnOrderReversed = false;
         skipPlayer = false;
+        skipEveryone = false;
         roundNumber = 0;
     }
 
@@ -177,6 +179,7 @@ public class Game {
         }
         currentPlayerIndex = nextPlayer();
         skipPlayer = false;
+        skipEveryone = false;
 
         for (GameView view : views) {
             view.handleNewTurn(players.get(currentPlayerIndex));
@@ -246,6 +249,9 @@ public class Game {
     public int nextPlayer(){
         int playerCount = players.size();
 
+        if(skipEveryone) {
+            return currentPlayerIndex;
+        }
         if (turnOrderReversed && skipPlayer) {
             return ((currentPlayerIndex - 2) % playerCount + playerCount) % playerCount;
         }
@@ -307,6 +313,7 @@ public class Game {
         this.playedCards = new Stack<Card>();
         turnOrderReversed = false;
         skipPlayer = false;
+        skipEveryone = false;
         currentPlayerIndex = -1;
         for (Player player: players){
             player.clearHand();
@@ -336,6 +343,13 @@ public class Game {
      */
     public void setSkipPlayer(){
         skipPlayer = true;
+    }
+
+    /**
+     * Skips everyone
+     */
+    public void setSkipEveryone(){
+        skipEveryone = true;
     }
 
     /**

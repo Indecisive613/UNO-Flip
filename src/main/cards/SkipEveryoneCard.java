@@ -19,6 +19,8 @@ public class SkipEveryoneCard extends Card {
     }
     @Override
     public boolean cardAction(Game game) {
+        game.setSkipEveryone();
+
         return false;
     }
 }

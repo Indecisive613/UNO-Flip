@@ -20,5 +20,5 @@ public class FlipCard extends Card {
     @Override
     public boolean cardAction(Game game) {
         return false;
-    }
+    } //TODO for Anand
 }

@@ -21,5 +21,5 @@ public class WildCard extends Card {
     @Override
     public boolean cardAction(Game game) {
         return true;
-    }
+    } //TODO also for Anand?
 }
