@@ -59,7 +59,7 @@ public class GameRunner {
                 Card.Symbol.FIVE, Card.Symbol.SIX, Card.Symbol.SEVEN, Card.Symbol.EIGHT, Card.Symbol.NINE));
 
         try{
-            for(Card.Colour colour : Card.nonWildColours){
+            for(Card.Colour colour : Card.lightColours){
                 //add 2 of each number
                 for(Card.Symbol symbol : plainNumbers) {
                     Card card1 = new NormalCard(colour, symbol);

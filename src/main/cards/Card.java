@@ -68,16 +68,16 @@ public abstract class Card {
         this.cardSide = cardSide;
 
         if(wildColours.contains(colour) && nonWildSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a wild card can not be in " + nonWildSymbols);
+            throw new IllegalArgumentException("The symbol for a wild card can not be in " + nonWildSymbols + ". The bad card was: " + colour + " " + symbol + " " + cardSide);
         }
         if(nonWildColours.contains(colour) && wildSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a coloured card can not be in " + wildSymbols);
+            throw new IllegalArgumentException("The symbol for a coloured card can not be in " + wildSymbols + ". The bad card was: " + colour + " " + symbol + " " + cardSide);
         }
         if(lightColours.contains(colour) && !lightSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a light side card must be in " + lightSymbols);
+            throw new IllegalArgumentException("The symbol for a light side card must be in " + lightSymbols + ". The bad card was: " + colour + " " + symbol + " " + cardSide);
         }
         if(darkColours.contains(colour) && !darkSymbols.contains(symbol)) {
-            throw new IllegalArgumentException("The symbol for a dark side card must be in " + darkSymbols);
+            throw new IllegalArgumentException("The symbol for a dark side card must be in " + darkSymbols + ". The bad card was: " + colour + " " + symbol + " " + cardSide);
         }
     }
 
