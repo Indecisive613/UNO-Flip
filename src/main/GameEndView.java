@@ -97,4 +97,10 @@ public class GameEndView extends JOptionPane implements GameView{
     public void handleUpdateTurnOrder(boolean turnReversed) {
 
     }
+
+    @Override
+    public void handleAiPlayerTurn() {
+
+    }
+
 }

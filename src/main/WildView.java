@@ -75,4 +75,10 @@ public class WildView extends JOptionPane implements GameView{
     public void handleUpdateTurnOrder(boolean turnReversed) {
 
     }
+
+    @Override
+    public void handleAiPlayerTurn() {
+
+    }
+
 }

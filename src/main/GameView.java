@@ -54,4 +54,9 @@ public interface GameView {
      * @param turnReversed whether the turn order of the players has been reversed
      */
     void handleUpdateTurnOrder(boolean turnReversed);
+
+    /**
+     * Handle the turn of an AI player
+     */
+    void handleAiPlayerTurn();
 }

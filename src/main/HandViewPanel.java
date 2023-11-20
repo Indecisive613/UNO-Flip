@@ -154,4 +154,10 @@ public class HandViewPanel extends JPanel implements GameView {
         cardPanel.setVisible(true);
 
     }
+
+    @Override
+    public void handleAiPlayerTurn() {
+
+    }
+
 }

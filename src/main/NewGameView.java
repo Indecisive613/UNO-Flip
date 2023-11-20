@@ -119,4 +119,10 @@ public class NewGameView extends JPanel implements GameView{
     public void handleUpdateTurnOrder(boolean turnReversed) {
 
     }
+
+    @Override
+    public void handleAiPlayerTurn() {
+
+    }
+
 }

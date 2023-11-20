@@ -146,4 +146,10 @@ public class TableViewPanel extends JPanel implements GameView {
     public void handleUpdateTurnOrder(boolean turnReversed) {
         turnOrderReversed.setText("--- Turn Order Reversed: " + turnReversed);
     }
+
+    @Override
+    public void handleAiPlayerTurn() {
+
+    }
+
 }
