@@ -1,6 +1,7 @@
 package main;
 
 import main.cards.Card;
+import main.cards.DoubleSidedCard;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class Player {
 
     private final String name;
     private int score;
+    private ArrayList<DoubleSidedCard> completeHand;
+    private boolean dark = false;
     private ArrayList<Card> hand;
     private boolean isAI;
 
@@ -23,10 +26,14 @@ public class Player {
      * @param hand The Player's hand of cards
      * @param isAI Whether the player is an AI
      */
-    public Player(String name, ArrayList<Card> hand, boolean isAI) throws IllegalArgumentException {
+    public Player(String name, ArrayList<DoubleSidedCard> hand, boolean isAI) throws IllegalArgumentException {
         this.name = name;
-        this.hand = hand;
+        this.completeHand = hand;
         this.isAI = isAI;
+        this.hand = new ArrayList<Card>();
+        for (DoubleSidedCard doubleSidedCard: completeHand){
+            this.hand.add(doubleSidedCard.getLightSideCard());
+        }
 
         score = 0;
     }
@@ -99,5 +106,19 @@ public class Player {
         ArrayList<Card> tempHand = hand;
         hand.clear();
         return tempHand;
+    }
+    public void flip(){
+        dark = !dark;
+        hand.clear();
+        if(dark) {
+            for (DoubleSidedCard doubleSidedCard : completeHand) {
+                this.hand.add(doubleSidedCard.getDarkSideCard());
+            }
+        }
+        else{
+            for (DoubleSidedCard doubleSidedCard : completeHand) {
+                this.hand.add(doubleSidedCard.getLightSideCard());
+            }
+        }
     }
 }
