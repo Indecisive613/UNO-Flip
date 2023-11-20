@@ -100,6 +100,11 @@ public class Game {
     public Card.Colour getCurrentColour() { return currentColour; }
 
     /**
+     * @return the current symbol of the top card
+     */
+    public Card.Symbol getCurrentSymbol() { return getTopCard().getSymbol(); }
+
+    /**
      * Add a new Player to the Game
      *
      * @param player The Player to add

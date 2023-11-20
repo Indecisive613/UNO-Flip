@@ -1,7 +1,10 @@
 package main;
 
 import main.cards.Card;
+import main.cards.DoubleSidedCard;
+import main.cards.NormalCard;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class AiPlayer extends Player {
@@ -10,6 +13,7 @@ public class AiPlayer extends Player {
 
     //TODO put these methods into HandController?
     //TODO figure out AI logic in more depth
+
     public AiPlayer(String name, ArrayList<Card> hand, boolean isAI, Game game) {
         super(name, hand, isAI);
         this.game = game;
@@ -33,15 +37,24 @@ public class AiPlayer extends Player {
 
     /**
      * Determine which card to play based on the current top card and the AI player's current hand
+     *
+     * @param playerHand the current hand of the AI player
+     * @return the index of the highest playable card
      */
-    public int chooseCard() {
-        ArrayList<Card> playerHand = super.getHand();
+    public int chooseCard(ArrayList<Card> playerHand) {
+        Card highestCard = getHighestValidCard(playerHand);
 
-        if (validCards(playerHand)) {
-            Card highestCard = getHighestValidCard(playerHand);
+        if (highestCard == null) {
+
+            if (hasWild(playerHand)) {
+                Card highestCard = getWildCard(playerHand);
+            }
+        }
+        else {
             int highestCardIndex = super.getHand().indexOf(highestCard);
             return highestCardIndex;
         }
+
     }
 
     /**
@@ -61,11 +74,41 @@ public class AiPlayer extends Player {
      */
     public boolean hasWild(ArrayList<Card> playerHand) {
         for (Card card: playerHand) {
-            if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)) {
+            if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_COLOUR)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Check if the current card in the current hand of the AI player is a Wild card
+     *
+     * @param currentCard the current card in the current hand of the AI player
+     * @return Whether the current card is a Wild card
+     */
+    public boolean isWild(Card currentCard) {
+        Card.Symbol currentCardSymbol = currentCard.getSymbol();
+
+        if (currentCardSymbol.equals(Card.Symbol.WILD)) { return true; }
+        else if (currentCardSymbol.equals(Card.Symbol.WILD_DRAW_TWO)) { return true; }
+        else if (currentCardSymbol.equals(Card.Symbol.WILD_DRAW_COLOUR)) { return true; }
+        else { return false; }
+    }
+
+    /**
+     * Return the first Wild card found in the current hand of the AI player
+     *
+     * @param playerHand the current hand of the AI player
+     * @return the first Wild card found in the hand
+     */
+    public Card getWild(ArrayList<Card> playerHand) {
+        for (Card card: playerHand) {
+            if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_COLOUR)) {
+                return card;
+            }
+        }
+        return null;
     }
 
     /**
@@ -145,26 +188,35 @@ public class AiPlayer extends Player {
      */
     public Card getHighestValidCard(ArrayList<Card> playerHand) {
 
-        Card hiValCard = playerHand.get(0);
+        Card placeHolder = new NormalCard(Card.Colour.RED, Card.Symbol.ONE);
+        Card hiValCard = placeHolder;
 
         Card topCard = game.getTopCard();
-        Card.Symbol topCardSymbol = game.getTopCard().getSymbol();
-        Card.Colour topCardColour = game.getTopCard().getColour();
+        Card.Symbol currentGameSymbol = game.getCurrentSymbol();
+        Card.Colour currentGameColour = game.getCurrentColour();
 
-        for (Card currentCard: playerHand) {
-
+        for (Card currentCard : playerHand) {
             Card.Symbol currentCardSymbol = currentCard.getSymbol();
             Card.Colour currentCardColour = currentCard.getColour();
 
             // determine if the current card is valid (symbol or colour match the symbol or colour of the top card)
-            if (currentCardSymbol.equals(topCardSymbol) || currentCardColour.equals(topCardColour)) {
-
+            if ((currentCardSymbol.equals(currentGameSymbol) || currentCardColour.equals(currentGameColour)) && !isWild(currentCard)) {
                 // determine if the valid current card has a greater point value than the current highest valid card
                 if (currentCard.getPointValue() > hiValCard.getPointValue()) {
                     hiValCard = currentCard;
                 }
             }
         }
-        return hiValCard;
+
+        if (hiValCard == placeHolder) {
+            // determine if there is a wild card that can be played
+            if (hasWild(playerHand)) {
+                return getWild(playerHand);
+            }
+        }
+        else {
+            return hiValCard;
+        }
+
     }
 }
