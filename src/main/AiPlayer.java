@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 public class AiPlayer extends Player {
 
+    public Game game;
+
     //TODO put these methods into HandController?
-    public AiPlayer(String name, ArrayList<Card> hand, boolean isAI) {
+    //TODO figure out AI logic in more depth
+    public AiPlayer(String name, ArrayList<Card> hand, boolean isAI, Game game) {
         super(name, hand, isAI);
+        this.game = game;
     }
 
     /**
@@ -19,23 +23,25 @@ public class AiPlayer extends Player {
      */
     @Override
     public Card playCard(int index) throws IllegalArgumentException {
+        if (index < 0 || index > super.getHand().size() - 1) {
+            throw new IllegalArgumentException("You must play a card between 0 and " + super.getHand().size());
+        }
+        Card card = super.getHand().get(index);
+        super.getHand().remove(index);
+        return card;
+    }
 
-        // Check top card
+    /**
+     * Determine which card to play based on the current top card and the AI player's current hand
+     */
+    public int chooseCard() {
+        ArrayList<Card> playerHand = super.getHand();
 
-        // If the colour of the top card matches the colour of a card in the hand play that card
-            // Play high cards before low cards
-            // Play number cards before special cards
-
-        // If possible . . .
-                // Play Draw One before Skip
-                // Play Skip before Reverse
-
-        // Else if the number of hte top card matches the number of a card in the hand play that card
-            // Play high cards before low cards
-
-        // If the player cannot play any other card, play a Wild card
-            // Select the colour of the top card based on colour that appears most in the deck
-
+        if (validCards(playerHand)) {
+            Card highestCard = getHighestValidCard(playerHand);
+            int highestCardIndex = super.getHand().indexOf(highestCard);
+            return highestCardIndex;
+        }
     }
 
     /**
@@ -43,18 +49,18 @@ public class AiPlayer extends Player {
      *
      * @return The current number of cards in the AI player's hand
      */
-    public int getNumCards(ArrayList<Card> hand) {
-        return hand.size();
+    public int getNumCards(ArrayList<Card> playerHand) {
+        return playerHand.size();
     }
 
     /**
      * Check if the AI player has a Wild Card in their current hand
      *
-     * @param hand the current hand of the AI player
+     * @param playerHand the current hand of the AI player
      * @return whether the current hand of the AI player contains a Wild Card
      */
-    public boolean haveWild(ArrayList<Card> hand) {
-        for (Card card: hand) {
+    public boolean hasWild(ArrayList<Card> playerHand) {
+        for (Card card: playerHand) {
             if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO)) {
                 return true;
             }
@@ -65,11 +71,11 @@ public class AiPlayer extends Player {
     /**
      * Check if the AI player has a Reverse Card in their current hand
      *
-     * @param hand the current hand of the AI player
+     * @param playerHand the current hand of the AI player
      * @return whether the current hand of the AI player contains a Skip Card
      */
-    public boolean hasReverse(ArrayList<Card> hand) {
-        for (Card card: hand) {
+    public boolean hasReverse(ArrayList<Card> playerHand) {
+        for (Card card: playerHand) {
             if (card.getSymbol().equals(Card.Symbol.REVERSE)) {
                 return true;
             }
@@ -80,11 +86,11 @@ public class AiPlayer extends Player {
     /**
      * Check if the AI player has a Skip Card in their current hand
      *
-     * @param hand the current hand of the AI player
+     * @param playerHand the current hand of the AI player
      * @return whether the current hand of the AI player contains a Reverse Card
      */
-    public boolean hasSkip(ArrayList<Card> hand) {
-        for (Card card: hand) {
+    public boolean hasSkip(ArrayList<Card> playerHand) {
+        for (Card card: playerHand) {
             if (card.getSymbol().equals(Card.Symbol.REVERSE)) {
                 return true;
             }
@@ -95,15 +101,70 @@ public class AiPlayer extends Player {
     /**
      * Check if the AI player has a Draw One Card in their current hand
      *
-     * @param hand the current hand of the AI player
+     * @param playerHand the current hand of the AI player
      * @return whether the current hand of the AI player contains a Draw One Card
      */
-    public boolean hasDrawOne(ArrayList<Card> hand) {
-        for (Card card: hand) {
+    public boolean hasDrawOne(ArrayList<Card> playerHand) {
+        for (Card card: playerHand) {
             if (card.getSymbol().equals(Card.Symbol.DRAW_ONE)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Determine whether there are any valid cards in the current hand of the AI player
+     *
+     * @param playerHand the current hand of the AI player
+     * @return Whether there is a valid card in the current hand
+     */
+    public boolean validCards(ArrayList<Card> playerHand) {
+
+        Card topCard = game.getTopCard();
+        Card.Symbol topCardSymbol = game.getTopCard().getSymbol();
+        Card.Colour topCardColour = game.getTopCard().getColour();
+
+        for (Card currentCard: playerHand) {
+
+            Card.Symbol currentCardSymbol = currentCard.getSymbol();
+            Card.Colour currentCardColour = currentCard.getColour();
+
+            if (currentCardSymbol.equals(topCardSymbol) || currentCardColour.equals(topCardColour)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Return the highest value valid card in the AI player's hand
+     *
+     * @param playerHand the current hand of the AI player
+     * @return the highest value valid card in the AI player's hand
+     */
+    public Card getHighestValidCard(ArrayList<Card> playerHand) {
+
+        Card hiValCard = playerHand.get(0);
+
+        Card topCard = game.getTopCard();
+        Card.Symbol topCardSymbol = game.getTopCard().getSymbol();
+        Card.Colour topCardColour = game.getTopCard().getColour();
+
+        for (Card currentCard: playerHand) {
+
+            Card.Symbol currentCardSymbol = currentCard.getSymbol();
+            Card.Colour currentCardColour = currentCard.getColour();
+
+            // determine if the current card is valid (symbol or colour match the symbol or colour of the top card)
+            if (currentCardSymbol.equals(topCardSymbol) || currentCardColour.equals(topCardColour)) {
+
+                // determine if the valid current card has a greater point value than the current highest valid card
+                if (currentCard.getPointValue() > hiValCard.getPointValue()) {
+                    hiValCard = currentCard;
+                }
+            }
+        }
+        return hiValCard;
     }
 }

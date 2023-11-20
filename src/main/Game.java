@@ -107,7 +107,7 @@ public class Game {
     public void addPlayer(Player player) {
 
         if (player.getIsAI()) {
-            AiPlayer aiPlayer = new AiPlayer (player.getName(), player.getHand(), player.getIsAI());
+            AiPlayer aiPlayer = new AiPlayer (player.getName(), player.getHand(), player.getIsAI(), this);
             players.add(aiPlayer);
         }
         else {
