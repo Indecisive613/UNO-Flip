@@ -87,12 +87,20 @@ public class HandViewPanel extends JPanel implements GameView {
     public void handleNewTurn(Player player) {
 
         this.player = player;
-        playerName.setText("Current Player: " + player.getName());
+        if (player.getIsAI()) {
+            playerName.setText("Current Player: " + player.getName() + " (AI)");
+            // Reset buttons
+            endTurn.setEnabled(true);
+            endTurn.setBackground(new Color(255, 255, 255));
+            drawButton.setEnabled(false);
+        } else {
+            playerName.setText("Current Player: " + player.getName());
+            // Reset buttons
+            endTurn.setEnabled(false);
+            endTurn.setBackground(new Color(255, 255, 255));
+            drawButton.setEnabled(true);
+        }
 
-        // Reset buttons
-        endTurn.setEnabled(false);
-        endTurn.setBackground(new Color(255, 255, 255));
-        drawButton.setEnabled(true);
         updateCardPanel();
     }
 

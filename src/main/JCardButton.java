@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
+import static main.cards.Card.Side.LIGHT;
+
 /**
  * Create JButtons to represent Cards in the HandView interface of the UNO game.
  * The cards have a set size and appearance.
@@ -79,19 +81,14 @@ public class JCardButton extends JButton {
      * @return The textual representation of a card
      */
     private static String getText(Card card) {
-        if (card.getSymbol() == Card.Symbol.DRAW_ONE) {
-            return "<html>Draw" + "<br>" + "One</html>";
-        } else if (card.getSymbol() == Card.Symbol.WILD) {
-            return "Wild";
-        } else if (card.getSymbol() == Card.Symbol.WILD_DRAW_TWO) {
-            return "<html>Wild" + "<br>" + "Draw" + "<br>" + "Two</html>";
-        } else if (card.getSymbol() == Card.Symbol.SKIP) {
-            return "Skip";
-        } else if (card.getSymbol() == Card.Symbol.REVERSE) {
-            return "Reverse";
-        } else {
-            return Integer.toString(card.getPointValue());
-        }
+        return switch (card.getSymbol()) {
+            case DRAW_ONE -> "<html>Draw" + "<br>" + "One</html>";
+            case WILD -> "Wild";
+            case WILD_DRAW_TWO -> "<html>Wild" + "<br>" + "Draw" + "<br>" + "Two</html>";
+            case SKIP -> "Skip";
+            case REVERSE -> "Reverse";
+            default -> Integer.toString(card.getPointValue());
+        };
     }
 
     /**
@@ -99,16 +96,22 @@ public class JCardButton extends JButton {
      * @return The colour of the card, or white if it's a wild card
      */
     private static Color getColor(Card card) {
-        if (card.getColour() == Card.Colour.RED) {
-            return new Color(215, 38, 0);
-        } else if (card.getColour() == Card.Colour.GREEN) {
-            return new Color(55, 151, 17);
-        } else if (card.getColour() == Card.Colour.BLUE) {
-            return new Color(9, 86, 191);
-        } else if (card.getColour() == Card.Colour.YELLOW) {
-            return new Color(236, 212, 7);
+        if (card.getSide() == LIGHT) {
+            return switch(card.getColour()) {
+                case RED -> new Color(215, 38, 0);
+                case GREEN -> new Color(55, 151, 17);
+                case BLUE -> new Color(9, 86, 191);
+                case YELLOW -> new Color(236, 212, 7);
+                default -> new Color(255, 255, 255);
+            };
         } else {
-            return new Color(255, 255, 255);
+            return switch (card.getColour()) {
+                case PINK -> Color.PINK;
+                case TEAL -> new Color(33, 150, 174);
+                case PURPLE -> new Color(60, 0, 45);
+                case ORANGE -> new Color(220, 100, 0);
+                default -> new Color(255, 255, 255);
+            };
         }
     }
 }
