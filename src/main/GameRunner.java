@@ -30,7 +30,7 @@ public class GameRunner {
     /**
      * Add a view to the GameRunner
      *
-      * @param view the view to be added
+     * @param view the view to be added
      */
     public void addView(GameView view) {
         views.add(view);
@@ -76,13 +76,13 @@ public class GameRunner {
                 cards.push(new SkipCard(colour));
             }
 
-           //Add four of each wild card
-           for(int i = 0; i < 4; i++){
-               cards.push(new WildCard(Card.Side.LIGHT));
-               cards.push(new WildDrawTwoCard());
-           }
+            //Add four of each wild card
+            for(int i = 0; i < 4; i++){
+                cards.push(new WildCard(Card.Side.LIGHT));
+                cards.push(new WildDrawTwoCard());
+            }
         } catch(IllegalArgumentException e){
-                System.out.println(e);
+            System.out.println(e);
         }
         return cards;
     }

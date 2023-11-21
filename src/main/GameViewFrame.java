@@ -1,6 +1,7 @@
 package main;
 
 import main.cards.Card;
+import main.cards.DoubleSidedCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +62,7 @@ public class GameViewFrame extends JFrame {
      * @param args Main args - not used
      */
     public static void main(String[] args) {
-        Stack<Card> deck = GameRunner.createDeck();
+        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
         Game g = new Game(deck);
         GameRunner runner = new GameRunner(g);
         GameViewFrame f = new GameViewFrame(g);

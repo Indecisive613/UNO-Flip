@@ -14,9 +14,7 @@ public class Player {
 
     private final String name;
     private int score;
-    private ArrayList<DoubleSidedCard> completeHand;
-    private boolean dark = false;
-    private ArrayList<Card> hand;
+    private ArrayList<DoubleSidedCard> hand;
     private boolean isAI;
 
     /**
@@ -28,12 +26,8 @@ public class Player {
      */
     public Player(String name, ArrayList<DoubleSidedCard> hand, boolean isAI) throws IllegalArgumentException {
         this.name = name;
-        this.completeHand = hand;
+        this.hand = hand;
         this.isAI = isAI;
-        this.hand = new ArrayList<Card>();
-        for (DoubleSidedCard doubleSidedCard: completeHand){
-            this.hand.add(doubleSidedCard.getLightSideCard());
-        }
 
         score = 0;
     }
@@ -69,8 +63,19 @@ public class Player {
     /**
      * @return The Player's hand
      */
-    public ArrayList<Card> getHand() {
+    public ArrayList<DoubleSidedCard> getHand() {
         return hand;
+    }
+
+    /**
+     * @return The Player's active hand
+     */
+    public ArrayList<Card> getActiveHand() {
+        ArrayList<Card> activeHand = new ArrayList<>();
+        for(DoubleSidedCard card: hand){
+            activeHand.add(card.getActiveSide());
+        }
+        return activeHand;
     }
 
     /**
@@ -78,7 +83,7 @@ public class Player {
      *
      * @param card The dealt card
      */
-    public void dealCard(Card card) {
+    public void dealCard(DoubleSidedCard card) {
         hand.add(card);
     }
 
@@ -88,11 +93,11 @@ public class Player {
      * @param index The index of the card to be played from the players hand
      * @return The card at index
      */
-    public Card playCard(int index) throws IllegalArgumentException {
+    public DoubleSidedCard playCard(int index) throws IllegalArgumentException {
         if(index < 0 || index > hand.size() - 1) {
             throw new IllegalArgumentException("You must play a card between 0 and " + hand.size());
         }
-        Card card = hand.get(index);
+        DoubleSidedCard card = hand.get(index);
         hand.remove(index);
         return card;
     }
@@ -102,23 +107,12 @@ public class Player {
      *
      * @return the temporary hand
      */
-    public ArrayList<Card> clearHand(){
-        ArrayList<Card> tempHand = hand;
+    public void clearHand(){
         hand.clear();
-        return tempHand;
     }
     public void flip(){
-        dark = !dark;
-        hand.clear();
-        if(dark) {
-            for (DoubleSidedCard doubleSidedCard : completeHand) {
-                this.hand.add(doubleSidedCard.getDarkSideCard());
-            }
-        }
-        else{
-            for (DoubleSidedCard doubleSidedCard : completeHand) {
-                this.hand.add(doubleSidedCard.getLightSideCard());
-            }
+        for (DoubleSidedCard card:hand){
+            card.flip();
         }
     }
 }

@@ -10,6 +10,8 @@ import main.Game;
 public class DoubleSidedCard {
     private Card lightSideCard;
     private Card darkSideCard;
+    private Card activeSide;
+    //private boolean dark = false;
 
     /**
      * Creates a double-sided UNO Flip card
@@ -29,6 +31,7 @@ public class DoubleSidedCard {
         } else{
             throw new IllegalArgumentException("The dark side card is not valid." + darkCard);
         }
+        activeSide = lightCard;
     }
 
     /**
@@ -48,5 +51,18 @@ public class DoubleSidedCard {
     @Override
     public String toString(){
         return lightSideCard + " | " + darkSideCard;
+    }
+
+    public Card getActiveSide() {
+        return activeSide;
+    }
+
+    public void flip() {
+        if (activeSide.equals(lightSideCard)) {
+            this.activeSide = darkSideCard;
+        }
+        else{
+            this.activeSide = lightSideCard;
+        }
     }
 }
