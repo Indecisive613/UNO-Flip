@@ -134,7 +134,7 @@ public class HandViewPanel extends JPanel implements GameView {
         cardPanel.removeAll();
 
         for (int i = 0; i < player.getHand().size(); i++) {
-            Card card = player.getHand().get(i);
+            Card card = player.getHand().get(i).getActiveSide();
             JButton cardButton = new JCardButton(card);
             if (controller.isValidCard(card)) {
                 int index = i;

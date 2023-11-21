@@ -19,12 +19,12 @@ public class WildDrawColourCard extends Card {
     @Override
     public boolean cardAction(Game game) {
         int nextPlayer = game.nextPlayer();
-        Card drawnCard;
+        DoubleSidedCard drawnCard;
         Colour currentColour = game.getCurrentColour();
         do {
             drawnCard = game.getDeck().pop();
             game.getPlayers().get(nextPlayer).dealCard(drawnCard);
-        } while (!drawnCard.getColour().equals(currentColour));
+        } while (!drawnCard.getActiveSide().getColour().equals(currentColour));
         game.setSkipPlayer();
         return true;
     }

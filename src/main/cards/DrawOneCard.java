@@ -21,7 +21,7 @@ public class DrawOneCard extends Card {
     @Override
     public boolean cardAction(Game game) {
         int nextPlayer = game.nextPlayer();
-        Card drawnCard = game.getDeck().pop();
+        DoubleSidedCard drawnCard = game.getDeck().pop();
 
         game.getPlayers().get(nextPlayer).dealCard(drawnCard);
 

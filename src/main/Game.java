@@ -1,10 +1,9 @@
 package main;
 
 import main.cards.Card;
+import main.cards.DoubleSidedCard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * A light side UNO Flip game that has players, cards, and contains the logic required to play a game of light side UNO Flip.
@@ -21,8 +20,8 @@ public class Game {
     private final ArrayList<GameView> views;
     private final ArrayList<Player> players;
 
-    private Stack<Card> playedCards;
-    private Stack<Card> deck;
+    private Stack<DoubleSidedCard> playedCards;
+    private Stack<DoubleSidedCard> deck;
 
     private boolean turnOrderReversed;
     private boolean skipPlayer;
@@ -38,9 +37,9 @@ public class Game {
      *
      * @param deck The decks of cards to use in this game
      */
-    public Game(Stack<Card> deck) {
+    public Game(Stack<DoubleSidedCard> deck) {
         this.deck = deck;
-        this.playedCards = new Stack<Card>();
+        this.playedCards = new Stack<DoubleSidedCard>();
         players = new ArrayList<>();
         views = new ArrayList<>();
         turnOrderReversed = false;
@@ -65,7 +64,7 @@ public class Game {
     public int getCurrentScore() {
         int score = 0;
         for (Player player : players) {
-            for (Card card : player.getHand()) {
+            for (Card card : player.getActiveHand()) {
                 score += card.getPointValue();
             }
         }
@@ -83,7 +82,7 @@ public class Game {
     /**
      * @return The Deck in the game
      */
-    public Stack<Card> getDeck(){
+    public Stack<DoubleSidedCard> getDeck(){
         return deck;
     }
 
@@ -91,7 +90,7 @@ public class Game {
      * @return The card on top
      */
     public Card getTopCard() {
-        return playedCards.peek();
+        return playedCards.peek().getActiveSide();
     }
 
     /**
@@ -137,7 +136,7 @@ public class Game {
     public void shuffleDeck() {
         //Puts cards in played cards into discard and reshuffles
         if(!playedCards.isEmpty()) {
-            Card topCard = playedCards.pop();
+            DoubleSidedCard topCard = playedCards.pop();
             while (!playedCards.isEmpty()) {
                 deck.push(playedCards.pop());
             }
@@ -162,9 +161,9 @@ public class Game {
         if(deck.isEmpty()){
             shuffleDeck();
         }
-        Card topCard = deck.pop();
+        DoubleSidedCard topCard = deck.pop();
         playedCards.push(topCard);
-        currentColour = topCard.getColour();
+        currentColour = topCard.getActiveSide().getColour();
     }
 
     /**
@@ -208,7 +207,7 @@ public class Game {
      * @return If the given Card can be played
      */
     public boolean canPlayCard(Card card) {
-        Card topCard = playedCards.peek();
+        Card topCard = playedCards.peek().getActiveSide();
 
         return (card == null
                 || card.getColour().equals(Card.Colour.WILD)
@@ -223,19 +222,20 @@ public class Game {
      * @param card The card to play
      * @return Whether or not the card is wild
      */
-    public boolean playCard(Card card) {
+    public boolean playCard(DoubleSidedCard card) {
         playedCards.push(card);
-        boolean isWild = card.cardAction(this);
+        Card activeSide = card.getActiveSide();
+        boolean isWild = activeSide.cardAction(this);
         String message = "";
         if(!isWild){
-            currentColour = card.getColour();
+            currentColour = activeSide.getColour();
         }
         else{
             message = "WILD";
         }
 
         for (GameView view : views) {
-            view.handlePlayCard(card, message);
+            view.handlePlayCard(activeSide, message);
         }
         return isWild;
     }
@@ -249,10 +249,10 @@ public class Game {
         if(deck.isEmpty()){
             shuffleDeck();
         }
-        Card drawnCard = deck.pop();
+        DoubleSidedCard drawnCard = deck.pop();
         player.dealCard(drawnCard);
         for (GameView view : views) {
-            view.handleDrawCard(drawnCard);
+            view.handleDrawCard(drawnCard.getActiveSide());
         }
     }
 
@@ -312,8 +312,8 @@ public class Game {
     /**
      * Puts all the cards in a given hand back into the deck
      */
-    public void addToDeck(ArrayList<Card> hand){
-        for (Card card: hand){
+    public void addToDeck(ArrayList<DoubleSidedCard> hand){
+        for (DoubleSidedCard card: hand){
             deck.push(card);
         }
     }
@@ -323,9 +323,9 @@ public class Game {
      */
     public void resetGame(){
         roundNumber++;
-        Stack<Card> deck = GameRunner.createDeck();
+        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
         setDeck(deck);
-        this.playedCards = new Stack<Card>();
+        this.playedCards = new Stack<DoubleSidedCard>();
         turnOrderReversed = false;
         skipPlayer = false;
         skipEveryone = false;
@@ -377,7 +377,7 @@ public class Game {
     /** Sets the deck of cards to be used in play
      * @param deck The deck of cards
      */
-    public void setDeck(Stack<Card> deck){
+    public void setDeck(Stack<DoubleSidedCard> deck){
         this.deck = deck;
     }
 
@@ -398,5 +398,19 @@ public class Game {
 
     public void flip(){
         dark = !dark;
+        for (Player player:players){
+            player.flip();
+        }
+        flipStack(deck);
+        flipStack(playedCards);
+    }
+    private void flipStack(Stack<DoubleSidedCard> stack){
+        Queue<DoubleSidedCard> queue = new LinkedList<>();
+        while(!stack.isEmpty()){
+            queue.add(stack.pop());
+        }
+        while(!queue.isEmpty()){
+            stack.add(queue.remove());
+        }
     }
 }

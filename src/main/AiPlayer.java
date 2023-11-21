@@ -14,7 +14,7 @@ public class AiPlayer extends Player {
     //TODO put these methods into HandController?
     //TODO figure out AI logic in more depth
 
-    public AiPlayer(String name, ArrayList<Card> hand, boolean isAI, Game game) {
+    public AiPlayer(String name, ArrayList<DoubleSidedCard> hand, boolean isAI, Game game) {
         super(name, hand, isAI);
         this.game = game;
     }
@@ -26,11 +26,11 @@ public class AiPlayer extends Player {
      * @return The card at index
      */
     @Override
-    public Card playCard(int index) throws IllegalArgumentException {
+    public DoubleSidedCard playCard(int index) throws IllegalArgumentException {
         if (index < 0 || index > super.getHand().size() - 1) {
             throw new IllegalArgumentException("You must play a card between 0 and " + super.getHand().size());
         }
-        Card card = super.getHand().get(index);
+        DoubleSidedCard card = super.getHand().get(index);
         super.getHand().remove(index);
         return card;
     }
