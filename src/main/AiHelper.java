@@ -1,6 +1,7 @@
 package main;
 
 import main.cards.Card;
+import main.cards.DoubleSidedCard;
 import main.cards.NormalCard;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class AiHelper {
     //TODO figure out AI logic in more depth
 
     private Card currentTopCard;
-    private ArrayList<Card> currentHand;
+    private ArrayList<DoubleSidedCard> currentHand;
     private Card.Colour currentColour;
     private Card.Symbol currentSymbol;
 
@@ -23,7 +24,7 @@ public class AiHelper {
      * @param currentColour
      * @param currentSymbol
      */
-    public AiHelper(Card currentTopCard, ArrayList<Card> currentHand, Card.Colour currentColour, Card.Symbol currentSymbol) {
+    public AiHelper(Card currentTopCard, ArrayList<DoubleSidedCard> currentHand, Card.Colour currentColour, Card.Symbol currentSymbol) {
         this.currentTopCard = currentTopCard;
         this.currentHand = currentHand;
         this.currentColour = currentColour;
