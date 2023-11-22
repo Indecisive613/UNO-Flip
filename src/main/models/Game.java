@@ -242,7 +242,7 @@ public class Game {
      *
      * @param player The Player whose turn it is
      */
-    public void drawCard(Player player) {
+    public DoubleSidedCard drawCard(Player player) {
         if(deck.isEmpty()){
             shuffleDeck();
         }
@@ -251,6 +251,7 @@ public class Game {
         for (GameView view : views) {
             view.handleDrawCard(drawnCard.getActiveSide());
         }
+        return drawnCard;
     }
 
     /**
@@ -398,16 +399,27 @@ public class Game {
         for (Player player:players){
             player.flip();
         }
+        reverseStack(deck);
         flipStack(deck);
+
+        reverseStack(playedCards);
         flipStack(playedCards);
+
+        this.currentColour = playedCards.peek().getActiveSide().getColour();
     }
-    private void flipStack(Stack<DoubleSidedCard> stack){
+    private void reverseStack(Stack<DoubleSidedCard> stack){
         Queue<DoubleSidedCard> queue = new LinkedList<>();
         while(!stack.isEmpty()){
             queue.add(stack.pop());
         }
         while(!queue.isEmpty()){
             stack.add(queue.remove());
+        }
+    }
+
+    private void flipStack(Stack<DoubleSidedCard> stack){
+        for (DoubleSidedCard card: stack){
+            card.flip();
         }
     }
 }
