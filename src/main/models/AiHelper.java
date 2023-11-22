@@ -1,8 +1,8 @@
-package main;
+package main.models;
 
-import main.cards.Card;
-import main.cards.DoubleSidedCard;
-import main.cards.NormalCard;
+import main.models.cards.Card;
+import main.models.cards.DoubleSidedCard;
+
 import java.util.ArrayList;
 
 public class AiHelper {

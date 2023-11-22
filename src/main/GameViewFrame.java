@@ -1,7 +1,9 @@
 package main;
 
-import main.cards.Card;
-import main.cards.DoubleSidedCard;
+import main.models.GameRunner;
+import main.views.*;
+import main.models.cards.DoubleSidedCard;
+import main.models.Game;
 
 import javax.swing.*;
 import java.awt.*;

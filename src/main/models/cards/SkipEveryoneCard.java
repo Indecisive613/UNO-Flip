@@ -1,6 +1,6 @@
-package main.cards;
+package main.models.cards;
 
-import main.Game;
+import main.models.Game;
 
 /**
  * A skip everyone card in a game of UNO Flip.

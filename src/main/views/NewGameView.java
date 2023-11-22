@@ -1,9 +1,12 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.GameViewFrame;
+import main.controllers.NewGameController;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.Player;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Fiona Cheng
  */
-public class NewGameView extends JPanel implements GameView{
+public class NewGameView extends JPanel implements GameView {
     private GameViewFrame superFrame;
     private Game game;
     private NewGameController controller;

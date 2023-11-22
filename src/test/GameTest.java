@@ -2,13 +2,13 @@
 
 import main.*;
 
-import static main.cards.Card.Symbol.*;
-import static main.cards.Card.Colour.*;
+import static main.models.cards.Card.Symbol.*;
+import static main.models.cards.Card.Colour.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-import main.cards.*;
+import main.models.cards.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

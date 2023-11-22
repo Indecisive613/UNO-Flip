@@ -1,6 +1,10 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.GameViewFrame;
+import main.controllers.WildController;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.Player;
 
 import javax.swing.*;
 
@@ -9,7 +13,7 @@ import javax.swing.*;
  *
  * @author Anand Balaram
  */
-public class WildView extends JOptionPane implements GameView{
+public class WildView extends JOptionPane implements GameView {
     private Game game;
     private WildController controller;
     private GameViewFrame superFrame;

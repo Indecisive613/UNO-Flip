@@ -1,4 +1,8 @@
-package main;
+package main.controllers;
+
+import main.models.Game;
+import main.models.Player;
+import main.views.NewGameView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

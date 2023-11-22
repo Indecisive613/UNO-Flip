@@ -1,7 +1,7 @@
 /*package test;
 
-import main.cards.Card;
-import main.GameView;
+import main.models.cards.Card;
+import main.views.GameView;
 
 import org.junit.Before;
 import org.junit.Test;

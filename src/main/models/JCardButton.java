@@ -1,12 +1,12 @@
-package main;
+package main.models;
 
-import main.cards.Card;
+import main.models.cards.Card;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
-import static main.cards.Card.Side.LIGHT;
+import static main.models.cards.Card.Side.LIGHT;
 
 /**
  * Create JButtons to represent Cards in the HandView interface of the UNO game.

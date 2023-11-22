@@ -1,7 +1,6 @@
-package main.cards;
+package main.models.cards;
 
-import main.Game;
-import main.cards.Card;
+import main.models.Game;
 
 /**
  * A Draw One card in a game of UNO Flip.

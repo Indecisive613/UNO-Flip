@@ -1,6 +1,6 @@
-package main.cards;
+package main.models.cards;
 
-import main.Game;
+import main.models.Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;

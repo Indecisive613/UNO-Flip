@@ -1,9 +1,9 @@
 /*package test;
 
-import static main.cards.Card.Symbol.*;
-import static main.cards.Card.Colour.*;
+import static main.models.cards.Card.Symbol.*;
+import static main.models.cards.Card.Colour.*;
 
-import main.cards.*;
+import main.models.cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

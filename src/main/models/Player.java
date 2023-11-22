@@ -1,7 +1,7 @@
-package main;
+package main.models;
 
-import main.cards.Card;
-import main.cards.DoubleSidedCard;
+import main.models.cards.Card;
+import main.models.cards.DoubleSidedCard;
 
 import java.util.ArrayList;
 

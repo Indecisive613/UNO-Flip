@@ -1,6 +1,7 @@
-package main;
+package main.models;
 
-import main.cards.*;
+import main.models.cards.*;
+import main.views.GameView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

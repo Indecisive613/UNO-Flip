@@ -1,6 +1,8 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.models.Player;
+import main.models.cards.Card;
+import main.models.Game;
 
 /**
  * A View interface for Game to update and display an UNO game

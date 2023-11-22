@@ -1,8 +1,8 @@
 /*package test;
 
-import main.cards.Card;
-import main.cards.NormalCard;
-import main.Player;
+import main.models.cards.Card;
+import main.models.cards.NormalCard;
+import main.models.Player;
 
 import java.util.ArrayList;
 

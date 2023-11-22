@@ -1,6 +1,7 @@
-package main;
+package main.controllers;
 
-import main.cards.Card;
+import main.models.cards.Card;
+import main.models.Game;
 
 /**
  * The controller for the portion of the UNO interface that displays the current player's hand

@@ -1,6 +1,8 @@
-package main;
+package main.controllers;
 
-import main.cards.Card;
+import main.models.cards.Card;
+import main.models.Game;
+import main.views.WildView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

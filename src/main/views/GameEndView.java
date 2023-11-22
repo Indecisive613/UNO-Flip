@@ -1,6 +1,10 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.GameViewFrame;
+import main.controllers.GameEndController;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.Player;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
@@ -10,7 +14,7 @@ import java.awt.event.WindowEvent;
  *
  * @author Anand Balaram
  */
-public class GameEndView extends JOptionPane implements GameView{
+public class GameEndView extends JOptionPane implements GameView {
     private Game game;
     private GameEndController controller;
     private GameViewFrame superFrame;

@@ -1,6 +1,9 @@
-package main;
+package main.controllers;
 
-import main.cards.Card;
+import main.views.TableViewPanel;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.Player;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,14 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.controllers.TableController;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.JCardButton;
+import main.models.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import static main.JCardButton.CARD_HEIGHT;
 
 /**
  * A view to display the table of the current UNO game.

@@ -1,6 +1,4 @@
-package main.cards;
-
-import main.Game;
+package main.models.cards;
 
 /**
  * A double-sided UNO Flip card

@@ -2,7 +2,7 @@ package test;
 
 /*import java.util.Stack;
 
-import main.cards.*;
+import main.models.cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,8 +15,8 @@ public class GameRunnerTest {
 
     @Test
     public void testCreateDeck(){
-        assertTrue(main.GameRunner.createDeck() instanceof Stack);
-        Stack<Card> deck = main.GameRunner.createDeck();
+        assertTrue(main.models.GameRunner.createDeck() instanceof Stack);
+        Stack<Card> deck = main.models.GameRunner.createDeck();
         assertEquals(104, deck.size());
 
         Stack<Card> testDeck = new Stack<Card>();

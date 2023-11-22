@@ -1,6 +1,8 @@
-package main;
+package main.views;
 
-import main.cards.Card;
+import main.models.cards.Card;
+import main.models.Game;
+import main.models.Player;
 
 import javax.swing.*;
 import java.awt.*;
