@@ -176,6 +176,9 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
 
+        cardPanel.setVisible(false);
+        cardPanel.removeAll();
+
         String card;
         // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
         if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
@@ -203,8 +206,6 @@ public class HandViewPanel extends JPanel implements GameView {
             cardPanel.add(cardButton);
         }
         cardPanel.setVisible(true);
-
-        return;
     }
 
 }
