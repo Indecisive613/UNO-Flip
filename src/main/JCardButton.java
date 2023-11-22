@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
+import static main.cards.Card.Side.LIGHT;
+
 /**
  * Create JButtons to represent Cards in the HandView interface of the UNO game.
  * The cards have a set size and appearance.
@@ -18,7 +20,7 @@ public class JCardButton extends JButton {
     public static final int CARD_HEIGHT = CARD_WIDTH * 100/70;
 
     private final static Font NUMBER_CARD_FONT = new Font("Mono", Font.BOLD, 90);
-    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 30);
+    private final static Font SPECIAL_CARD_FONT = new Font("Mono", Font.BOLD, 28);
 
     private Card card;
 
@@ -65,13 +67,7 @@ public class JCardButton extends JButton {
      * @return If the card is a number card, and not a special card
      */
     private static boolean isNumber(Card card) {
-        Card.Symbol symbol = card.getSymbol();
-        return !(symbol == Card.Symbol.DRAW_ONE
-                || symbol == Card.Symbol.WILD_DRAW_TWO
-                || symbol == Card.Symbol.WILD
-                || symbol == Card.Symbol.SKIP
-                || symbol == Card.Symbol.REVERSE
-        );
+        return (Card.numberSymbols.contains(card.getSymbol()));
     }
 
     /**
@@ -79,19 +75,18 @@ public class JCardButton extends JButton {
      * @return The textual representation of a card
      */
     private static String getText(Card card) {
-        if (card.getSymbol() == Card.Symbol.DRAW_ONE) {
-            return "<html>Draw" + "<br>" + "One</html>";
-        } else if (card.getSymbol() == Card.Symbol.WILD) {
-            return "Wild";
-        } else if (card.getSymbol() == Card.Symbol.WILD_DRAW_TWO) {
-            return "<html>Wild" + "<br>" + "Draw" + "<br>" + "Two</html>";
-        } else if (card.getSymbol() == Card.Symbol.SKIP) {
-            return "Skip";
-        } else if (card.getSymbol() == Card.Symbol.REVERSE) {
-            return "Reverse";
-        } else {
-            return Integer.toString(card.getPointValue());
-        }
+        return switch (card.getSymbol()) {
+            case DRAW_ONE -> "<html>Draw" + "<br>" + "One</html>";
+            case DRAW_FIVE -> "<html>Draw" + "<br>" + "Five</html>";
+            case WILD -> "Wild";
+            case WILD_DRAW_TWO -> "<html>Wild" + "<br>" + "Draw" + "<br>" + "Two</html>";
+            case WILD_DRAW_COLOUR-> "<html>Wild" + "<br>" + "Draw" + "<br>" + "Colour</html>";
+            case SKIP -> "Skip";
+            case FLIP -> "Flip";
+            case SKIP_EVERYONE-> "<html>Skip" + "<br>" + "Everyone" + "<br></html>";
+            case REVERSE -> "Reverse";
+            default -> Integer.toString(card.getPointValue());
+        };
     }
 
     /**
@@ -99,16 +94,22 @@ public class JCardButton extends JButton {
      * @return The colour of the card, or white if it's a wild card
      */
     private static Color getColor(Card card) {
-        if (card.getColour() == Card.Colour.RED) {
-            return new Color(215, 38, 0);
-        } else if (card.getColour() == Card.Colour.GREEN) {
-            return new Color(55, 151, 17);
-        } else if (card.getColour() == Card.Colour.BLUE) {
-            return new Color(9, 86, 191);
-        } else if (card.getColour() == Card.Colour.YELLOW) {
-            return new Color(236, 212, 7);
+        if (card.getSide() == LIGHT) {
+            return switch(card.getColour()) {
+                case RED -> new Color(215, 38, 0);
+                case GREEN -> new Color(55, 151, 17);
+                case BLUE -> new Color(9, 86, 191);
+                case YELLOW -> new Color(236, 212, 7);
+                default -> new Color(255, 255, 255);
+            };
         } else {
-            return new Color(255, 255, 255);
+            return switch (card.getColour()) {
+                case PINK -> new Color(234, 18, 115);
+                case TEAL -> new Color(5, 170, 189);
+                case PURPLE -> new Color(137, 38, 128);
+                case ORANGE -> new Color(236, 82, 32);
+                default -> new Color(255, 255, 255);
+            };
         }
     }
 }
