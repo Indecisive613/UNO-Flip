@@ -116,7 +116,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handlePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard) {
         updateCardPanel();
     }
 

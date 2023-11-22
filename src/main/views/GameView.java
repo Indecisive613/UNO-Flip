@@ -35,9 +35,8 @@ public interface GameView {
      * Display information about the card that was played and additional useful information
      *
      * @param playedCard        the card that has been played
-     * @param additionalMessage a message that provides useful information to the players
      */
-    void handlePlayCard(Card playedCard, String additionalMessage);
+    void handlePlayCard(Card playedCard);
 
     /**
      * Display information about the card that was drawn by a player

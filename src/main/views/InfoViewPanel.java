@@ -45,7 +45,7 @@ public class InfoViewPanel extends JLabel implements GameView {
         this.setText(display);
     }
 
-    public void handlePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard) {
 
     }
 

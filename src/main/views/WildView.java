@@ -60,10 +60,7 @@ public class WildView extends JOptionPane implements GameView {
     }
 
     @Override
-    public void handlePlayCard(Card playedCard, String additionalMessage) {
-        if (additionalMessage.equals("WILD")){
-            controller.requestWildColour();
-        }
+    public void handlePlayCard(Card playedCard) {
     }
 
     @Override
@@ -73,7 +70,7 @@ public class WildView extends JOptionPane implements GameView {
 
     @Override
     public void handleGetColour() {
-        //controller.requestWildColour();
+        controller.requestWildColour();
     }
 
     @Override

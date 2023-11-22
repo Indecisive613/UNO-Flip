@@ -85,7 +85,7 @@ public class GameEndView extends JOptionPane implements GameView {
     }
 
     @Override
-    public void handlePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard) {
     }
 
     @Override

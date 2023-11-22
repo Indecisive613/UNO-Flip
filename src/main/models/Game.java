@@ -226,17 +226,25 @@ public class Game {
     public void playCard(DoubleSidedCard card) {
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
-        boolean isWild = activeSide.cardAction(this);
-        String message = "";
-        if(!isWild){
-            currentColour = playedCards.peek().getActiveSide().getColour();
+
+        boolean isWild = false; // = activeSide.getSymbol().equals(Card.Colour.WILD);//activeSide.cardAction(this);
+        if(activeSide.getColour().equals(Card.Colour.WILD)){
+            isWild = true;
+        }
+
+        if(isWild){
+            for (GameView view : views) {
+                view.handleGetColour();
+            }
+            activeSide.cardAction(this);
         }
         else{
-            message = "WILD";
+            activeSide.cardAction(this);
+            currentColour = playedCards.peek().getActiveSide().getColour();
         }
 
         for (GameView view : views) {
-            view.handlePlayCard(activeSide, message);
+            view.handlePlayCard(activeSide);
         }
 
         if (getCurrentPlayer().getIsAI()) {

@@ -118,7 +118,7 @@ public class TableViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handlePlayCard(Card playedCard, String additionalMessage) {
+    public void handlePlayCard(Card playedCard) {
 
         topCardPanel.removeAll();
         topCard = new JCardButton(controller.getTopCard());
