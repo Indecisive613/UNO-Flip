@@ -231,7 +231,7 @@ public class Game {
         }
         // if (getCurrentPlayer().getIsAI()) { TODO: Add if when AI is implemented
         for (GameView view : views) {
-            view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
+            view.handleAiPlayerTurn(getCurrentPlayer(), activeSide, currentColour);
         }
         // }
         return isWild;

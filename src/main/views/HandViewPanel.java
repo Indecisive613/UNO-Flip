@@ -169,18 +169,18 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
+    public void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour) {
         String card;
         // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
-        if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
-            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
-                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
+        if (playedCard.getColour() == Card.Colour.WILD) {
+            card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
+                    .limit(playedCard.toString().split("\\s+|_").length - 2)
                     .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                     .collect(Collectors.joining(" "));
             card += " and set the colour to " + currentColour;
         } else {
-            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
-                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+            card = Arrays.stream(playedCard.toString().split("\\s+|_"))
+                    .limit(playedCard.toString().split("\\s+|_").length - 1)
                     .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                     .collect(Collectors.joining(" "));
         }
