@@ -4,6 +4,7 @@ import main.controllers.HandController;
 import main.models.Game;
 import main.models.JCardButton;
 import main.models.Player;
+import main.models.AiHelper;
 import main.models.cards.Card;
 import main.models.cards.DoubleSidedCard;
 
@@ -102,6 +103,11 @@ public class HandViewPanel extends JPanel implements GameView {
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
 
+        //
+        if (player.getIsAI()) {
+            playerName.setText("Current Player: " + player.getName() + " (AI Player)");
+        }
+
         // Reset buttons
         endTurn.setEnabled(false);
         endTurn.setBackground(new Color(255, 255, 255));
@@ -163,28 +169,42 @@ public class HandViewPanel extends JPanel implements GameView {
             }
             cardPanel.add(cardButton);
         }
-
         cardPanel.setVisible(true);
 
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour) {
+    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
+
         String card;
         // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
-        if (playedCard.getColour() == Card.Colour.WILD) {
-            card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
-                    .limit(playedCard.toString().split("\\s+|_").length - 2)
+        if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
+            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
+                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
                     .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                     .collect(Collectors.joining(" "));
             card += " and set the colour to " + currentColour;
         } else {
-            card = Arrays.stream(playedCard.toString().split("\\s+|_"))
-                    .limit(playedCard.toString().split("\\s+|_").length - 1)
+            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
+                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
                     .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                     .collect(Collectors.joining(" "));
         }
         aiTurnMessage.setText(currentPlayer.getName() + " played a " + card);
+
+        for (int i = 0; i < player.getHand().size(); i++) {
+            Card currentCard = player.getHand().get(i).getActiveSide();
+            JButton cardButton = new JCardButton(currentCard);
+            drawButton.setEnabled(false);
+            lockHand();
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
+            cardButton.setEnabled(false);
+            cardPanel.add(cardButton);
+        }
+        cardPanel.setVisible(true);
+
+        return;
     }
 
 }

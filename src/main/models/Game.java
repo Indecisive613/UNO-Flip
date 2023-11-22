@@ -190,6 +190,16 @@ public class Game {
         for (GameView view : views) {
             view.handleNewTurn(players.get(currentPlayerIndex));
         }
+        if (getCurrentPlayer().getIsAI()) {
+            main.models.AiHelper aiHelper = new main.models.AiHelper(getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+            int action = aiHelper.chooseCard();
+            if (action != -1) {
+                playCard(getCurrentPlayer().playCard(action));
+            }
+            else {
+                drawCard(getCurrentPlayer());
+            }
+        }
     }
 
     /**
@@ -229,9 +239,15 @@ public class Game {
         for (GameView view : views) {
             view.handlePlayCard(activeSide, message);
         }
-        // if (getCurrentPlayer().getIsAI()) { TODO: Add if when AI is implemented
+
+        if (getCurrentPlayer().getIsAI()) {
+            main.models.AiHelper aiHelper = new main.models.AiHelper(getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+            Card.Colour colour = aiHelper.getMaxCardColour();
+            setCurrentColour(colour);
+        }
+
         for (GameView view : views) {
-            view.handleAiPlayerTurn(getCurrentPlayer(), activeSide, currentColour);
+            view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
         }
         // }
         return isWild;

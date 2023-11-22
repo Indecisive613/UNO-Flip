@@ -1,17 +1,14 @@
 package main.models;
 
 import main.models.cards.Card;
-import main.models.cards.DoubleSidedCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AiHelper {
 
-    //TODO put these methods into HandController?
-    //TODO figure out AI logic in more depth
-
     private Card currentTopCard;
-    private ArrayList<DoubleSidedCard> currentHand;
+    private ArrayList<Card> currentHand;
     private Card.Colour currentColour;
     private Card.Symbol currentSymbol;
 
@@ -24,7 +21,7 @@ public class AiHelper {
      * @param currentColour
      * @param currentSymbol
      */
-    public AiHelper(Card currentTopCard, ArrayList<DoubleSidedCard> currentHand, Card.Colour currentColour, Card.Symbol currentSymbol) {
+    public AiHelper(Card currentTopCard, ArrayList<Card> currentHand, Card.Colour currentColour, Card.Symbol currentSymbol) {
         this.currentTopCard = currentTopCard;
         this.currentHand = currentHand;
         this.currentColour = currentColour;
@@ -34,24 +31,23 @@ public class AiHelper {
     /**
      * Determine which card to play based on the current top card and the AI player's current hand
      *
-     * @param playerHand the current hand of the AI player
      * @return the index of the highest playable card or -1 if there is no card that can be played
      */
-    public int chooseCard(ArrayList<Card> playerHand) {
+    public int chooseCard() {
 
         // determine if any of the cards in the current hand (excluding wild) can be played
-        boolean canPlay = validCard(playerHand);
+        boolean canPlay = validCard();
 
         if (canPlay) {
             // there is a card in the current hand that can be played and that is not a wild card
-            if (!hasWild(playerHand)) {
-                return getHighestValidCard(playerHand);
-            }
+            return getHighestValidCard();
+        }
+        else if (!canPlay && hasWild()) {
             // there is a card in the current hand that can be played that is a wild card
-            else if (hasWild(playerHand)) {
-                return getWild(playerHand);
-            }
-
+            return getWild();
+        }
+        else if (!canPlay && !hasWild()) {
+            return -1;
         }
         return -1;
     }
@@ -59,31 +55,23 @@ public class AiHelper {
     /**
      * Determine whether there are any valid cards (excluding wilds) in the current hand of the AI player
      *
-     * @param playerHand the current hand of the AI player
      * @return Whether there is a valid card in the current hand
      */
-    public boolean validCard(ArrayList<Card> playerHand) {
+    public boolean validCard() {
 
         // compare the current card in the player's hand to the current colour and the current symbol in the game
         Card.Symbol topCardSymbol = currentSymbol;
         Card.Colour topCardColour = currentColour;
 
         // iterate through the current hand of the player
-        for (Card currentCard: playerHand) {
+        for (Card currentCard: currentHand) {
 
             Card.Symbol currentCardSymbol = currentCard.getSymbol();
             Card.Colour currentCardColour = currentCard.getColour();
 
-            // check whether the current card is a wild card
-            if (isWild(currentCard)) {
-                return false;
-            }
-            // the current card is not a wild card
-            else {
-                // the current card can be played on the current top card
-                if (currentCardSymbol.equals(topCardSymbol) || currentCardColour.equals(topCardColour)) {
-                    return true;
-                }
+            // the current card can be played on the current top card and is not a wild card
+            if ((currentCardSymbol.equals(topCardSymbol) || currentCardColour.equals(topCardColour)) && !isWild(currentCard)) {
+                return true;
             }
         }
         // there are no cards (excluding wild cards) in the current hand that can be played on the current top card
@@ -106,11 +94,10 @@ public class AiHelper {
     /**
      * Return the first valid card found in the current hand of the AI player
      *
-     * @param playerHand the current card in the current hand of the AI player
      * @return the first valid card found in the hand
      */
-    public Card getValid(ArrayList<Card> playerHand) {
-        for (Card card: playerHand) {
+    public Card getValid() {
+        for (Card card: currentHand) {
             if (isValid(card) && !isWild(card)) {
                 return card;
             }
@@ -136,13 +123,12 @@ public class AiHelper {
     /**
      * Return the index of the first Wild card found in the current hand of the AI player
      *
-     * @param playerHand the current hand of the AI player
      * @return the index of the first Wild card found in the hand
      */
-    public int getWild(ArrayList<Card> playerHand) {
-        for (Card card: playerHand) {
+    public int getWild() {
+        for (Card card: currentHand) {
             if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_COLOUR)) {
-                return playerHand.indexOf(card);
+                return currentHand.indexOf(card);
             }
         }
         return 0;
@@ -151,11 +137,10 @@ public class AiHelper {
     /**
      * Check if the AI player has a Wild Card in their current hand
      *
-     * @param playerHand the current hand of the AI player
      * @return whether the current hand of the AI player contains a Wild Card
      */
-    public boolean hasWild(ArrayList<Card> playerHand) {
-        for (Card card: playerHand) {
+    public boolean hasWild() {
+        for (Card card: currentHand) {
             if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_COLOUR)) {
                 return true;
             }
@@ -166,18 +151,17 @@ public class AiHelper {
     /**
      * Return the index of the highest value valid card (excluding wild cards) in the AI player's hand
      *
-     * @param playerHand the current hand of the AI player
      * @return the index of the highest value valid card in the AI player's hand
      */
-    public int getHighestValidCard(ArrayList<Card> playerHand) {
+    public int getHighestValidCard() {
 
-        Card highestValidCard = getValid(playerHand);
+        Card highestValidCard = getValid();
 
         if (highestValidCard == null) {
             return -1;
         }
 
-        for (Card currentCard : playerHand) {
+        for (Card currentCard : currentHand) {
 
             // determine if the current card is valid (symbol or colour match the symbol or colour of the top card)
             if (isValid(currentCard) && !isWild(currentCard)) {
@@ -188,6 +172,56 @@ public class AiHelper {
                 }
             }
         }
-        return playerHand.indexOf(highestValidCard);
+        return currentHand.indexOf(highestValidCard);
+    }
+
+    /**
+     * Return the card colour that appears the most in the current hand of the AI player
+     *
+     * @return the card colour that appears the most in the current hand of the AI player
+     */
+    public Card.Colour getMaxCardColour() {
+
+        HashMap<Card.Colour, Integer> colourNumCards = new HashMap<>();
+        colourNumCards.put(Card.Colour.RED, 0);
+        colourNumCards.put(Card.Colour.BLUE, 0);
+        colourNumCards.put(Card.Colour.GREEN, 0);
+        colourNumCards.put(Card.Colour.YELLOW, 0);
+
+        Integer maxInteger = 0;
+        Card.Colour maxColour = null;
+
+
+        for (Card currentCard : currentHand) {
+            if (currentCard.getColour().equals(Card.Colour.RED)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.RED);
+                colourNumCards.replace(Card.Colour.RED, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.BLUE)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.BLUE);
+                colourNumCards.replace(Card.Colour.BLUE, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.GREEN)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.GREEN);
+                colourNumCards.replace(Card.Colour.GREEN, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.YELLOW)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.YELLOW);
+                colourNumCards.replace(Card.Colour.YELLOW, currentValue, currentValue+1);
+            }
+        }
+
+        for (HashMap.Entry<Card.Colour, Integer> currentColourNumCards : colourNumCards.entrySet()) {
+
+            if (maxColour == null) {
+                maxInteger = currentColourNumCards.getValue();
+                maxColour = currentColourNumCards.getKey();
+            }
+            else if (currentColourNumCards.getValue() > maxInteger) {
+                maxInteger = currentColourNumCards.getValue();
+                maxColour = currentColourNumCards.getKey();
+            }
+        }
+        return maxColour;
     }
 }

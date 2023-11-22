@@ -3,6 +3,7 @@ package main.views;
 import main.models.Player;
 import main.models.cards.Card;
 import main.models.Game;
+import main.models.cards.DoubleSidedCard;
 
 /**
  * A View interface for Game to update and display an UNO game
@@ -60,5 +61,5 @@ public interface GameView {
     /**
      * Handle the turn of an AI player
      */
-    void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour);
+    void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour);
 }
