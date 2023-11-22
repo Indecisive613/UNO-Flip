@@ -37,13 +37,13 @@ public class HandViewPanel extends JPanel implements GameView {
     public HandViewPanel() {
         controller = new HandController();
 
-        playerName = new JLabel("", SwingConstants.CENTER);
+        playerName = new JLabel(" ", SwingConstants.CENTER);
         playerName.setFont(BUTTON_FONT);
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
 
-        aiTurnMessage = new JLabel("", SwingConstants.CENTER);
-        aiTurnMessage.setFont(BUTTON_FONT);
+        aiTurnMessage = new JLabel(" ", SwingConstants.CENTER);
+        aiTurnMessage.setFont(new Font("Mono", Font.PLAIN, 24));
         aiTurnMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(aiTurnMessage);
 
@@ -174,7 +174,7 @@ public class HandViewPanel extends JPanel implements GameView {
         // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
         if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
             card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
-                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
                     .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                     .collect(Collectors.joining(" "));
             card += " and set the colour to " + currentColour;
