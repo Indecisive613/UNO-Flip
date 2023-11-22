@@ -73,7 +73,7 @@ public class WildView extends JOptionPane implements GameView {
 
     @Override
     public void handleGetColour() {
-
+        //controller.requestWildColour();
     }
 
     @Override

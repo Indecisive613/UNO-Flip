@@ -222,9 +222,8 @@ public class Game {
      * Play a given card and determine its effect
      *
      * @param card The card to play
-     * @return Whether or not the card is wild
      */
-    public boolean playCard(DoubleSidedCard card) {
+    public void playCard(DoubleSidedCard card) {
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
         boolean isWild = activeSide.cardAction(this);
@@ -249,8 +248,6 @@ public class Game {
         for (GameView view : views) {
             view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
         }
-        // }
-        return isWild;
     }
 
     /**
