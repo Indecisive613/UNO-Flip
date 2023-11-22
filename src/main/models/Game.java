@@ -220,7 +220,7 @@ public class Game {
         boolean isWild = activeSide.cardAction(this);
         String message = "";
         if(!isWild){
-            currentColour = activeSide.getColour();
+            currentColour = playedCards.peek().getActiveSide().getColour();
         }
         else{
             message = "WILD";
@@ -405,7 +405,7 @@ public class Game {
         reverseStack(playedCards);
         flipStack(playedCards);
 
-        this.currentColour = playedCards.peek().getActiveSide().getColour();
+        setCurrentColour(playedCards.peek().getActiveSide().getColour());
     }
     private void reverseStack(Stack<DoubleSidedCard> stack){
         Queue<DoubleSidedCard> queue = new LinkedList<>();
