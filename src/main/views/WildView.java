@@ -5,6 +5,7 @@ import main.controllers.WildController;
 import main.models.cards.Card;
 import main.models.Game;
 import main.models.Player;
+import main.models.cards.DoubleSidedCard;
 
 import javax.swing.*;
 
@@ -81,7 +82,7 @@ public class WildView extends JOptionPane implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn() {
+    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
 
     }
 

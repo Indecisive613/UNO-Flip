@@ -22,6 +22,7 @@ public class WildDrawColourCard extends Card {
         DoubleSidedCard drawnCard;
         Colour currentColour = game.getCurrentColour();
         do {
+            // TODO: Replace this with game.drawCard() to avoid errors
             drawnCard = game.getDeck().pop();
             game.getPlayers().get(nextPlayer).dealCard(drawnCard);
         } while (!drawnCard.getActiveSide().getColour().equals(currentColour));

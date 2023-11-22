@@ -20,6 +20,7 @@ public class DrawOneCard extends Card {
     @Override
     public boolean cardAction(Game game) {
         int nextPlayer = game.nextPlayer();
+        // TODO: Replace this with game.drawCard() to avoid errors
         DoubleSidedCard drawnCard = game.getDeck().pop();
 
         game.getPlayers().get(nextPlayer).dealCard(drawnCard);

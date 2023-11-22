@@ -1,13 +1,16 @@
 package main.views;
 
 import main.controllers.HandController;
-import main.models.cards.Card;
 import main.models.Game;
 import main.models.JCardButton;
 import main.models.Player;
+import main.models.cards.Card;
+import main.models.cards.DoubleSidedCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * A view to display the hand of the current player of the current UNO game.
@@ -19,6 +22,7 @@ public class HandViewPanel extends JPanel implements GameView {
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
 
     private final JLabel playerName;
+    private final JLabel aiTurnMessage;
     private final JButton drawButton;
     private final JButton endTurn;
     private final JPanel cardPanel;
@@ -37,6 +41,11 @@ public class HandViewPanel extends JPanel implements GameView {
         playerName.setFont(BUTTON_FONT);
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
+
+        aiTurnMessage = new JLabel("", SwingConstants.CENTER);
+        aiTurnMessage.setFont(BUTTON_FONT);
+        aiTurnMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(aiTurnMessage);
 
         JPanel actionPanel = new JPanel();
 
@@ -160,8 +169,22 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn() {
-
+    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
+        String card;
+        // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
+        if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
+            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
+                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+                    .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                    .collect(Collectors.joining(" "));
+            card += " and set the colour to " + currentColour;
+        } else {
+            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
+                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+                    .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                    .collect(Collectors.joining(" "));
+        }
+        aiTurnMessage.setText(currentPlayer.getName() + " played a " + card);
     }
 
 }

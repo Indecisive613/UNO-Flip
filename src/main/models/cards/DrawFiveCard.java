@@ -22,6 +22,7 @@ public class DrawFiveCard extends Card {
         int nextPlayer = game.nextPlayer();
 
         for(int i = 0; i < 5; i++){
+            // TODO: Replace this with game.drawCard() to avoid errors
             DoubleSidedCard drawnCard = game.getDeck().pop();
             game.getPlayers().get(nextPlayer).dealCard(drawnCard);
         }

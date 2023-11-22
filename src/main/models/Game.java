@@ -229,6 +229,11 @@ public class Game {
         for (GameView view : views) {
             view.handlePlayCard(activeSide, message);
         }
+        // if (getCurrentPlayer().getIsAI()) { TODO: Add if when AI is implemented
+        for (GameView view : views) {
+            view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
+        }
+        // }
         return isWild;
     }
 
