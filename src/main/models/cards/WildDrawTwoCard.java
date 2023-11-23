@@ -20,14 +20,9 @@ public class WildDrawTwoCard extends Card {
 
     @Override
     public boolean cardAction(Game game) {
-        int nextPlayer = game.nextPlayer();
-        // TODO: Replace this with game.drawCard() to avoid errors
-        DoubleSidedCard drawnCard1 = game.getDeck().pop();
-        DoubleSidedCard drawnCard2 = game.getDeck().pop();
-
-        game.getPlayers().get(nextPlayer).dealCard(drawnCard1);
-        game.getPlayers().get(nextPlayer).dealCard(drawnCard2);
-
+        for(int i = 0; i < 2; i++){
+            game.drawCard(game.getPlayers().get(game.nextPlayer()));
+        }
         game.setSkipPlayer();
 
         return true;

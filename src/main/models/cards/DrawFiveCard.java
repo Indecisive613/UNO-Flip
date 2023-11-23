@@ -19,13 +19,10 @@ public class DrawFiveCard extends Card {
     }
     @Override
     public boolean cardAction(Game game) {
-        int nextPlayer = game.nextPlayer();
-
         for(int i = 0; i < 5; i++){
-            // TODO: Replace this with game.drawCard() to avoid errors
-            DoubleSidedCard drawnCard = game.getDeck().pop();
-            game.getPlayers().get(nextPlayer).dealCard(drawnCard);
+            game.drawCard(game.getPlayers().get(game.nextPlayer()));
         }
+
         return false;
     }
 }
