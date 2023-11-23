@@ -413,37 +413,11 @@ public class Game {
         return dark;
     }
 
-    public void setDark(boolean dark) {
-        this.dark = dark;
-    }
-
     public void flip(){
         DoubleSidedCard.flip();
         dark = !dark;
-//        for (Player player:players){
-//            player.flip();
-//        }
-        reverseStack(deck);
-//        flipStack(deck);
-//
-//        reverseStack(playedCards);
-//        flipStack(playedCards);
-
+        Collections.reverse(deck);
+        Collections.reverse(playedCards);
         setCurrentColour(playedCards.peek().getActiveSide().getColour());
-    }
-    private void reverseStack(Stack<DoubleSidedCard> stack){
-        Queue<DoubleSidedCard> queue = new LinkedList<>();
-        while(!stack.isEmpty()){
-            queue.add(stack.pop());
-        }
-        while(!queue.isEmpty()){
-            stack.add(queue.remove());
-        }
-    }
-
-    private void flipStack(Stack<DoubleSidedCard> stack){
-        for (DoubleSidedCard card: stack){
-            card.flip();
-        }
     }
 }
