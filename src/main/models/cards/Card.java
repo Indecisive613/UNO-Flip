@@ -136,8 +136,6 @@ public abstract class Card {
 
     /**
      * @param game The Game the card belongs to
-     *
-     * @return Whether the card is a wild
      */
-    public abstract boolean cardAction(Game game);
+    public void cardAction(Game game) {}
 }

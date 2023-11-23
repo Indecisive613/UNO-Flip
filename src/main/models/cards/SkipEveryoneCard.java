@@ -18,9 +18,7 @@ public class SkipEveryoneCard extends Card {
         super(colour, Symbol.SKIP_EVERYONE, Card.getSideFromColour(colour));
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         game.setSkipEveryone();
-
-        return false;
     }
 }

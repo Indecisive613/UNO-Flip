@@ -18,11 +18,9 @@ public class DrawFiveCard extends Card {
         super(colour, Symbol.DRAW_FIVE, Card.getSideFromColour(colour));
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         for(int i = 0; i < 5; i++){
             game.drawCard(game.getPlayers().get(game.nextPlayer()));
         }
-
-        return false;
     }
 }

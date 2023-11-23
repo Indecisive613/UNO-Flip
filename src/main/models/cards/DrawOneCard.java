@@ -19,9 +19,7 @@ public class DrawOneCard extends Card {
     }
 
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         game.drawCard(game.getPlayers().get(game.nextPlayer()));
-
-        return false;
     }
 }

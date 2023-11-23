@@ -19,9 +19,7 @@ public class ReverseCard extends Card {
         super(colour, Card.Symbol.REVERSE, cardSide);
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         game.reverseTurn();
-
-        return false;
     }
 }

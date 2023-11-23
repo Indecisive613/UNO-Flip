@@ -18,7 +18,6 @@ public class WildCard extends Card {
         super(Card.Colour.WILD, Card.Symbol.WILD, cardSide);
     }
     @Override
-    public boolean cardAction(Game game) {
-        return true;
-    } //TODO also for Anand?
+    public void cardAction(Game game) {
+    }
 }

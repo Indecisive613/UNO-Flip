@@ -1,7 +1,6 @@
 package main.models.cards;
 
 import main.models.Game;
-import main.views.GameView;
 
 /**
  * A wild draw colour card in a game of UNO Flip.
@@ -18,7 +17,7 @@ public class WildDrawColourCard extends Card {
         super(Card.Colour.WILD, Card.Symbol.WILD_DRAW_COLOUR, Card.Side.DARK);
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         int nextPlayer = game.nextPlayer();
         DoubleSidedCard drawnCard;
         Colour currentColour = game.getCurrentColour();
@@ -26,6 +25,5 @@ public class WildDrawColourCard extends Card {
             drawnCard = game.drawCard(game.getPlayers().get(nextPlayer));
         } while (!drawnCard.getActiveSide().getColour().equals(currentColour));
         game.setSkipPlayer();
-        return true;
     }
 }

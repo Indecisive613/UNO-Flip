@@ -18,9 +18,7 @@ public class SkipCard extends Card {
         super(colour, Card.Symbol.SKIP, Card.getSideFromColour(colour));
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         game.setSkipPlayer();
-
-        return false;
     }
 }

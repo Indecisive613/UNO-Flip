@@ -18,8 +18,7 @@ public class FlipCard extends Card {
         super(colour, Symbol.FLIP, cardSide);
     }
     @Override
-    public boolean cardAction(Game game) {
+    public void cardAction(Game game) {
         game.flip();
-        return false;
     }
 }

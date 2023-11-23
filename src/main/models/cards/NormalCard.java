@@ -19,7 +19,6 @@ public class NormalCard extends Card {
         super(colour, symbol, Card.getSideFromColour(colour));
     }
     @Override
-    public boolean cardAction(Game game) {
-        return false;
+    public void cardAction(Game game) {
     }
 }
