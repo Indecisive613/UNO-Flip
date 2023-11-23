@@ -64,6 +64,18 @@ public class AiHelper {
      */
     public boolean validCard() {
 
+        Card topCard = currentTopCard;
+
+        for (Card currentCard: currentHand) {
+            if (currentCard.getColour().equals(Card.Colour.WILD)
+                || currentCard.getColour().equals(currentColour)
+                || currentCard.getSymbol().equals(currentSymbol)
+                || currentColour.equals(Card.Colour.WILD)) {
+                return true; }
+        }
+        return false;
+
+    /*
         // compare the current card in the player's hand to the current colour and the current symbol in the game
         Card.Symbol topCardSymbol = currentSymbol;
         Card.Colour topCardColour = currentColour;
@@ -81,6 +93,7 @@ public class AiHelper {
         }
         // there are no cards (excluding wild cards) in the current hand that can be played on the current top card
         return false;
+     */
     }
 
     /**
