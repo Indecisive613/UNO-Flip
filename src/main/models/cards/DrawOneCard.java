@@ -17,13 +17,10 @@ public class DrawOneCard extends Card {
     public DrawOneCard(Card.Colour colour) throws IllegalArgumentException{
         super(colour, Card.Symbol.DRAW_ONE, Card.getSideFromColour(colour));
     }
+
     @Override
     public boolean cardAction(Game game) {
-        int nextPlayer = game.nextPlayer();
-        // TODO: Replace this with game.drawCard() to avoid errors
-        DoubleSidedCard drawnCard = game.getDeck().pop();
-
-        game.getPlayers().get(nextPlayer).dealCard(drawnCard);
+        game.drawCard(game.getPlayers().get(game.nextPlayer()));
 
         return false;
     }

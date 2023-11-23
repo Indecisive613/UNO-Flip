@@ -110,9 +110,4 @@ public class Player {
     public void clearHand(){
         hand.clear();
     }
-    public void flip(){
-        for (DoubleSidedCard card:hand){
-            card.flip();
-        }
-    }
 }
