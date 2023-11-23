@@ -43,11 +43,10 @@ public class DoubleSidedCard {
         return darkSideCard;
     }
 
-    @Override
-    public String toString(){
-        return lightSideCard + " | " + darkSideCard;
-    }
 
+    /**
+     * @return The Card on the active side (Light or Dark)
+     */
     public Card getActiveSide() {
         if (activeSide == Card.Side.LIGHT) {
             return getLightSideCard();
@@ -56,6 +55,9 @@ public class DoubleSidedCard {
         }
     }
 
+    /**
+     * Flip the side of all Cards
+     */
     public static void flip() {
         if (activeSide == Card.Side.LIGHT) {
             DoubleSidedCard.activeSide = Card.Side.DARK;
@@ -63,5 +65,10 @@ public class DoubleSidedCard {
         else{
             DoubleSidedCard.activeSide = Card.Side.LIGHT;
         }
+    }
+
+    @Override
+    public String toString(){
+        return lightSideCard + " | " + darkSideCard;
     }
 }
