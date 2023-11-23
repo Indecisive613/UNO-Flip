@@ -5,6 +5,11 @@ import main.models.cards.Card;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Allows the AI to determine what card to play based on the current hand, the current colour, and the current symbol
+ *
+ * @author Jake Siushansian, Jackie Smolkin-Lerner
+ */
 public class AiHelper {
 
     private Card currentTopCard;
@@ -188,6 +193,11 @@ public class AiHelper {
         colourNumCards.put(Card.Colour.GREEN, 0);
         colourNumCards.put(Card.Colour.YELLOW, 0);
 
+        colourNumCards.put(Card.Colour.ORANGE, 0);
+        colourNumCards.put(Card.Colour.TEAL, 0);
+        colourNumCards.put(Card.Colour.PURPLE, 0);
+        colourNumCards.put(Card.Colour.PINK, 0);
+
         Integer maxInteger = 0;
         Card.Colour maxColour = null;
 
@@ -208,6 +218,22 @@ public class AiHelper {
             else if (currentCard.getColour().equals(Card.Colour.YELLOW)) {
                 Integer currentValue = colourNumCards.get(Card.Colour.YELLOW);
                 colourNumCards.replace(Card.Colour.YELLOW, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.ORANGE)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.ORANGE);
+                colourNumCards.replace(Card.Colour.ORANGE, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.TEAL)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.TEAL);
+                colourNumCards.replace(Card.Colour.TEAL, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.PURPLE)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.PURPLE);
+                colourNumCards.replace(Card.Colour.PURPLE, currentValue, currentValue+1);
+            }
+            else if (currentCard.getColour().equals(Card.Colour.PINK)) {
+                Integer currentValue = colourNumCards.get(Card.Colour.PINK);
+                colourNumCards.replace(Card.Colour.PINK, currentValue, currentValue+1);
             }
         }
 

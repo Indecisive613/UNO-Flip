@@ -179,6 +179,18 @@ public class HandViewPanel extends JPanel implements GameView {
         cardPanel.setVisible(false);
         cardPanel.removeAll();
 
+        for (int i = 0; i < player.getHand().size(); i++) {
+            Card currentCard = player.getHand().get(i).getActiveSide();
+            JButton cardButton = new JCardButton(currentCard);
+            drawButton.setEnabled(false);
+            lockHand();
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
+            cardButton.setEnabled(false);
+            cardPanel.add(cardButton);
+        }
+        cardPanel.setVisible(true);
+
         String card;
         // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
         if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
@@ -194,18 +206,6 @@ public class HandViewPanel extends JPanel implements GameView {
                     .collect(Collectors.joining(" "));
         }
         aiTurnMessage.setText(currentPlayer.getName() + " played a " + card);
-
-        for (int i = 0; i < player.getHand().size(); i++) {
-            Card currentCard = player.getHand().get(i).getActiveSide();
-            JButton cardButton = new JCardButton(currentCard);
-            drawButton.setEnabled(false);
-            lockHand();
-            endTurn.setEnabled(true);
-            endTurn.setBackground(Color.GREEN);
-            cardButton.setEnabled(false);
-            cardPanel.add(cardButton);
-        }
-        cardPanel.setVisible(true);
     }
 
 }

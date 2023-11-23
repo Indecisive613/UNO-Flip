@@ -227,12 +227,13 @@ public class Game {
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
+        // TODO figure out how to implement AI such that the AI player chooses the new game colour
         boolean isWild = false; // = activeSide.getSymbol().equals(Card.Colour.WILD);//activeSide.cardAction(this);
         if(activeSide.getColour().equals(Card.Colour.WILD)){
             isWild = true;
         }
 
-        if(isWild){
+        if(isWild) {
             for (GameView view : views) {
                 view.handleGetColour();
             }
@@ -256,6 +257,7 @@ public class Game {
         for (GameView view : views) {
             view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
         }
+
     }
 
     /**
