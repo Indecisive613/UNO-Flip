@@ -6,10 +6,9 @@ package main.models.cards;
  * @author Fiona Cheng
  */
 public class DoubleSidedCard {
-    private Card lightSideCard;
-    private Card darkSideCard;
-    private Card activeSide;
-    //private boolean dark = false;
+    private final Card lightSideCard;
+    private final Card darkSideCard;
+    private static Card.Side activeSide = Card.Side.LIGHT;
 
     /**
      * Creates a double-sided UNO Flip card
@@ -19,17 +18,15 @@ public class DoubleSidedCard {
      * @throws IllegalArgumentException if a card does not match its description
      */
     public DoubleSidedCard(Card lightCard, Card darkCard) throws IllegalArgumentException{
-        if(lightCard.getSide() == Card.Side.LIGHT){
-            this.lightSideCard = lightCard;
-        } else{
-            throw new IllegalArgumentException("The light side card is not valid.");
+        if(lightCard.getSide() != Card.Side.LIGHT){
+            throw new IllegalArgumentException("The light side card is not valid: " + lightCard);
         }
-        if(darkCard.getSide() == Card.Side.DARK){
-            this.darkSideCard = darkCard;
-        } else{
-            throw new IllegalArgumentException("The dark side card is not valid." + darkCard);
+        if(darkCard.getSide() != Card.Side.DARK){
+            throw new IllegalArgumentException("The dark side card is not valid: " + darkCard);
         }
-        activeSide = lightCard;
+
+        this.lightSideCard = lightCard;
+        this.darkSideCard = darkCard;
     }
 
     /**
@@ -52,15 +49,19 @@ public class DoubleSidedCard {
     }
 
     public Card getActiveSide() {
-        return activeSide;
+        if (activeSide == Card.Side.LIGHT) {
+            return getLightSideCard();
+        } else {
+            return getDarkSideCard();
+        }
     }
 
-    public void flip() {
-        if (activeSide.equals(lightSideCard)) {
-            this.activeSide = darkSideCard;
+    public static void flip() {
+        if (activeSide == Card.Side.LIGHT) {
+            DoubleSidedCard.activeSide = Card.Side.DARK;
         }
         else{
-            this.activeSide = lightSideCard;
+            DoubleSidedCard.activeSide = Card.Side.LIGHT;
         }
     }
 }

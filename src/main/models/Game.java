@@ -418,15 +418,16 @@ public class Game {
     }
 
     public void flip(){
+        DoubleSidedCard.flip();
         dark = !dark;
-        for (Player player:players){
-            player.flip();
-        }
+//        for (Player player:players){
+//            player.flip();
+//        }
         reverseStack(deck);
-        flipStack(deck);
-
-        reverseStack(playedCards);
-        flipStack(playedCards);
+//        flipStack(deck);
+//
+//        reverseStack(playedCards);
+//        flipStack(playedCards);
 
         setCurrentColour(playedCards.peek().getActiveSide().getColour());
     }
