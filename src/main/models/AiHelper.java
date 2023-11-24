@@ -103,7 +103,7 @@ public class AiHelper {
      * @return Whether the current card can be played on the top card
      */
     public boolean isValid(Card currentCard) {
-        if (currentCard.getColour().equals(currentColour) || currentCard.getSymbol().equals(currentSymbol)) {
+        if (currentCard.getColour().equals(currentColour) || currentCard.getSymbol().equals(currentSymbol) || currentColour.equals(Card.Colour.WILD)) {
             return true;
         }
         return false;
