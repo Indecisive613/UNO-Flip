@@ -255,7 +255,7 @@ public class Game {
         }
 
         for (GameView view : views) {
-            view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour);
+            view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour, );
         }
 
     }

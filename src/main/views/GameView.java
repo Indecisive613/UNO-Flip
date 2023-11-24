@@ -60,5 +60,5 @@ public interface GameView {
     /**
      * Handle the turn of an AI player
      */
-    void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour);
+    void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard);
 }

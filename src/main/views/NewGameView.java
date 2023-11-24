@@ -125,7 +125,7 @@ public class NewGameView extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
+    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard) {
 
     }
 

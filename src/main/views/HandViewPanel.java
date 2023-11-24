@@ -4,7 +4,6 @@ import main.controllers.HandController;
 import main.models.Game;
 import main.models.JCardButton;
 import main.models.Player;
-import main.models.AiHelper;
 import main.models.cards.Card;
 import main.models.cards.DoubleSidedCard;
 
@@ -174,7 +173,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour) {
+    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard) {
 
         cardPanel.setVisible(false);
         cardPanel.removeAll();
