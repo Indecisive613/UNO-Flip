@@ -174,37 +174,33 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard) {
+        lockHand();
+        drawButton.setEnabled(false);
+        endTurn.setEnabled(true);
+        endTurn.setBackground(Color.GREEN);
 
-        cardPanel.setVisible(false);
-        cardPanel.removeAll();
-
-        for (int i = 0; i < player.getHand().size(); i++) {
-            Card currentCard = player.getHand().get(i).getActiveSide();
-            JButton cardButton = new JCardButton(currentCard);
-            drawButton.setEnabled(false);
-            lockHand();
-            endTurn.setEnabled(true);
-            endTurn.setBackground(Color.GREEN);
-            cardButton.setEnabled(false);
-            cardPanel.add(cardButton);
-        }
-        cardPanel.setVisible(true);
-
-        String card;
-        // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
-        if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
-            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
-                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
-                    .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                    .collect(Collectors.joining(" "));
-            card += " and set the colour to " + currentColour;
+        StringBuilder sb = new StringBuilder();
+        sb.append(currentPlayer.getName());
+        if (drewCard && playedCard == null) {
+            sb.append(" drew a card");
         } else {
-            card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
-                    .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
-                    .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                    .collect(Collectors.joining(" "));
+            String card;
+            // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
+            if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
+                card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
+                        .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+                card += " and set the colour to " + currentColour;
+            } else {
+                card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
+                        .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+            }
+            sb.append(" played a ").append(card);
         }
-        aiTurnMessage.setText(currentPlayer.getName() + " played a " + card);
+        aiTurnMessage.setText(sb.toString());
     }
 
 }
