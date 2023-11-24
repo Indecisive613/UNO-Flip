@@ -104,8 +104,6 @@ public class Player {
 
     /**
      * Clear the hand of a player in the current UNO game
-     *
-     * @return the temporary hand
      */
     public void clearHand(){
         hand.clear();
