@@ -192,13 +192,21 @@ public class Game {
         }
         if (getCurrentPlayer().getIsAI()) {
             DoubleSidedCard playedCard = null;
-            AiHelper aiHelper = new AiHelper(getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+            AiHelper aiHelper = new AiHelper(this, getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
             int action = aiHelper.chooseCard();
             boolean drewCard = false;
 
             if (action == -1) {
                 drawCard(getCurrentPlayer());
                 drewCard = true;
+
+                // the AI player can check if their drawn card can be played
+                int secondAction = aiHelper.chooseCard();
+
+                if (secondAction != -1) {
+                    playedCard = getCurrentPlayer().playCard(secondAction);
+                    playCard(playedCard);
+                }
             }
             else {
                 playedCard = getCurrentPlayer().playCard(action);
@@ -223,7 +231,7 @@ public class Game {
                 || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(currentColour)
                 || card.getSymbol().equals(topCard.getSymbol())
-//                || currentColour.equals(Card.Colour.WILD)
+                // || currentColour.equals(Card.Colour.WILD)
         );
     }
 
@@ -250,9 +258,12 @@ public class Game {
 
             // AI: Update choose colour
             if (getCurrentPlayer().getIsAI()) {
-                AiHelper aiHelper = new AiHelper(getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
-                Card.Colour colour = aiHelper.getMaxCardColour();
-                setCurrentColour(colour);
+                AiHelper aiHelper = new AiHelper(this, getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+
+                if (card.getActiveSide().getColour().equals(Card.Colour.WILD)) {
+                    Card.Colour colour = aiHelper.getMaxCardColour();
+                    setCurrentColour(colour);
+                }
             }
         }
         else{
@@ -263,13 +274,13 @@ public class Game {
         for (GameView view : views) {
             view.handlePlayCard(activeSide);
         }
-
+        /*
         if (getCurrentPlayer().getIsAI()) {
-            main.models.AiHelper aiHelper = new main.models.AiHelper(getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+            main.models.AiHelper aiHelper = new main.models.AiHelper(this, getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
             Card.Colour colour = aiHelper.getMaxCardColour();
             setCurrentColour(colour);
         }
-
+        */
         for (GameView view : views) {
             view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour, false);
         }

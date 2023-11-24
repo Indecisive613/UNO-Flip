@@ -186,6 +186,7 @@ public class HandViewPanel extends JPanel implements GameView {
         } else {
             String card;
             // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
+            // The bug where the wrong card is stated to have been played might be found here
             if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
                 card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
                         .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
