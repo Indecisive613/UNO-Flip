@@ -40,21 +40,16 @@ public class AiHelper {
      *
      * @return the index of the highest playable card or -1 if there is no card that can be played
      */
-    public int chooseCard() {
+    public int getAiAction() {
 
         // determine if any of the cards in the current hand (excluding wild) can be played
-        boolean canPlay = anyValidCards();
-
-        if (canPlay) {
+        if (hasValidNonWildCards()) {
             // there is a card in the current hand that can be played and that is not a wild card
             return getHighestValidCard();
         }
-        else if (!canPlay && hasWild()) {
+        else if (hasWild()) {
             // there is a card in the current hand that can be played that is a wild card
             return getWild();
-        }
-        else if (!canPlay && !hasWild()) {
-            return -1;
         }
         return -1;
     }
@@ -64,10 +59,10 @@ public class AiHelper {
      *
      * @return Whether there is a valid card in the current hand
      */
-    private boolean anyValidCards() {
+    private boolean hasValidNonWildCards() {
 
         for (Card currentCard: currentHand) {
-            if (currentGame.canPlayCard(currentCard)) {
+            if (currentGame.canPlayCard(currentCard) && currentCard.getColour() != Card.Colour.WILD) {
                 return true;
             }
         }
@@ -122,70 +117,29 @@ public class AiHelper {
      *
      * @return the card colour that appears the most in the current hand of the AI player
      */
-    public Card.Colour getMaxCardColour() {
+    public Card.Colour getMostCommonColour() {
 
         HashMap<Card.Colour, Integer> colourNumCards = new HashMap<>();
-        colourNumCards.put(Card.Colour.RED, 0);
-        colourNumCards.put(Card.Colour.BLUE, 0);
-        colourNumCards.put(Card.Colour.GREEN, 0);
-        colourNumCards.put(Card.Colour.YELLOW, 0);
-
-        colourNumCards.put(Card.Colour.ORANGE, 0);
-        colourNumCards.put(Card.Colour.TEAL, 0);
-        colourNumCards.put(Card.Colour.PURPLE, 0);
-        colourNumCards.put(Card.Colour.PINK, 0);
-
-        Integer maxInteger = 0;
-        Card.Colour maxColour = null;
-
+        for (Card.Colour colour : Card.Colour.values()) {
+            colourNumCards.put(colour, 0);
+        }
 
         for (Card currentCard : currentHand) {
-            if (currentCard.getColour().equals(Card.Colour.RED)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.RED);
-                colourNumCards.replace(Card.Colour.RED, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.BLUE)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.BLUE);
-                colourNumCards.replace(Card.Colour.BLUE, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.GREEN)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.GREEN);
-                colourNumCards.replace(Card.Colour.GREEN, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.YELLOW)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.YELLOW);
-                colourNumCards.replace(Card.Colour.YELLOW, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.ORANGE)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.ORANGE);
-                colourNumCards.replace(Card.Colour.ORANGE, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.TEAL)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.TEAL);
-                colourNumCards.replace(Card.Colour.TEAL, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.PURPLE)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.PURPLE);
-                colourNumCards.replace(Card.Colour.PURPLE, currentValue, currentValue+1);
-            }
-            else if (currentCard.getColour().equals(Card.Colour.PINK)) {
-                Integer currentValue = colourNumCards.get(Card.Colour.PINK);
-                colourNumCards.replace(Card.Colour.PINK, currentValue, currentValue+1);
+            colourNumCards.put(currentCard.getColour(), colourNumCards.get(currentCard.getColour()) + 1);
+        }
+
+        int count = 0;
+        Card.Colour mostCommonColour = Card.Colour.RED;
+
+        for (Card.Colour colour : Card.Colour.values()) {
+            int colourCount = colourNumCards.get(colour);
+            if (colourCount > count) {
+                count = colourCount;
+                mostCommonColour = colour;
             }
         }
 
-        for (HashMap.Entry<Card.Colour, Integer> currentColourNumCards : colourNumCards.entrySet()) {
-
-            if (maxColour == null) {
-                maxInteger = currentColourNumCards.getValue();
-                maxColour = currentColourNumCards.getKey();
-            }
-            else if (currentColourNumCards.getValue() > maxInteger) {
-                maxInteger = currentColourNumCards.getValue();
-                maxColour = currentColourNumCards.getKey();
-            }
-        }
-        return maxColour;
+        return mostCommonColour;
     }
 
     /**
@@ -195,11 +149,11 @@ public class AiHelper {
      */
     private int getWild() {
         for (Card card: currentHand) {
-            if (card.getSymbol().equals(Card.Symbol.WILD) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_TWO) || card.getSymbol().equals(Card.Symbol.WILD_DRAW_COLOUR)) {
+            if (card.getColour() == Card.Colour.WILD) {
                 return currentHand.indexOf(card);
             }
         }
-        return 0;
+        return -1;
     }
 
     /**
@@ -209,7 +163,7 @@ public class AiHelper {
      */
     private boolean hasWild() {
         for (Card card: currentHand) {
-            if (card.getColour().equals(Card.Colour.WILD)) {
+            if (card.getColour() == Card.Colour.WILD) {
                 return true;
             }
         }
