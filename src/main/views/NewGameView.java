@@ -59,15 +59,36 @@ public class NewGameView extends JPanel implements GameView {
         }
 
         int pressOk = JOptionPane.showConfirmDialog(superFrame, checkBoxes, "Choose AI Players", JOptionPane.OK_CANCEL_OPTION);
-        while(pressOk != 0){
-            showErrorMessage("You must decide if players are AI. (click OK)");
-            pressOk = JOptionPane.showConfirmDialog(superFrame, checkBoxes, "Choose AI Players", JOptionPane.OK_CANCEL_OPTION);
-        }
-
         for(int i = 0; i < numPlayers; i++){
             isAI[i] = checkBoxes[i].isSelected();
         }
+
+        while(pressOk != 0 || numRegularPlayers(isAI) == 0){
+            showErrorMessage("You must decide if players are AI. There must be at least one regular player.");
+            pressOk = JOptionPane.showConfirmDialog(superFrame, checkBoxes, "Choose AI Players", JOptionPane.OK_CANCEL_OPTION);
+
+            for(int i = 0; i < numPlayers; i++){
+                isAI[i] = checkBoxes[i].isSelected();
+            }
+        }
+
         return isAI;
+    }
+
+    /**
+     * Returns the number of regular players
+     *
+     * @param isAI Whether each of the players is an AI
+     * @return the number of regular players
+     */
+    private int numRegularPlayers(boolean[] isAI){
+        int count = 0;
+        for(int i = 0; i < isAI.length; i++){
+            if(!isAI[i]){
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
