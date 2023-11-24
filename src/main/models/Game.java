@@ -231,7 +231,7 @@ public class Game {
                 || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(currentColour)
                 || card.getSymbol().equals(topCard.getSymbol())
-                // || currentColour.equals(Card.Colour.WILD)
+                // || currentColour.equals(Card.Colour.WILD) // TODO: Maybe remove this
         );
     }
 
