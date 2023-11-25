@@ -144,7 +144,7 @@ public class AiHelper {
 
         for (Card.Colour colour : Card.Colour.values()) {
             int colourCount = colourNumCards.get(colour);
-            if (colourCount > count) {
+            if (colourCount > count && (colour != Card.Colour.WILD)) {
                 count = colourCount;
                 mostCommonColour = colour;
             }
