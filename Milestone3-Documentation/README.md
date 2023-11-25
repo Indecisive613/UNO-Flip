@@ -38,6 +38,12 @@ To draw a card, click the "DRAW +" button:
 When you play a WILD card, you will be prompted to choose a colour:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/9fa43350-d413-4027-9637-984b23781dce)
 
+A Flip card flips all the cards in the game from Light to Dark or from Dark to Light:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/3346cd8c-0c6a-485f-99f0-0a0be70fccf2)
+
+After the Flip card is played:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/9c3fd710-d0cb-451a-8c07-979821a8d39e)
+
 The direction of play, the current color, and the remaining cards can be seen in a panel at the top of the interface:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/8fab1561-8467-4c1c-aa41-fa16d5c8b8f3)
 
