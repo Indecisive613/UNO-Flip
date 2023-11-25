@@ -134,7 +134,13 @@ public class AiHelper {
         }
 
         int count = 0;
-        Card.Colour mostCommonColour = Card.Colour.RED;
+        Card.Colour mostCommonColour;
+
+        if(currentGame.getTopCard().getSide() == Card.Side.LIGHT) {
+            mostCommonColour = Card.Colour.RED;
+        } else{
+            mostCommonColour = Card.Colour.TEAL;
+        }
 
         for (Card.Colour colour : Card.Colour.values()) {
             int colourCount = colourNumCards.get(colour);
