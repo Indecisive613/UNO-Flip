@@ -45,7 +45,7 @@ public class GameRunner {
             view.handleNewGame();
         }
         game.shuffleDeck();
-        game.dealCards();
+        game.dealCards(Game.STARTING_HAND_SIZE);
         game.advanceTurn();
     }
 

@@ -140,8 +140,8 @@ public class Game {
     /**
      * Deal STARTING_HAND_SIZE cards to each player
      */
-    public void dealCards() {
-        for (int i = 0; i < STARTING_HAND_SIZE; i++) {
+    public void dealCards(int hand_size) {
+        for (int i = 0; i < hand_size; i++) {
             for (Player p : players) {
                 if(deck.isEmpty()){
                     shuffleDeck();
@@ -375,7 +375,7 @@ public class Game {
             view.handleUpdateTurnOrder(false);
         }
         shuffleDeck();
-        dealCards();
+        dealCards(STARTING_HAND_SIZE);
         advanceTurn();
     }
 
