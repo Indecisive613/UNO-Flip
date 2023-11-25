@@ -38,6 +38,12 @@ To draw a card, click the "DRAW +" button:
 When you play a WILD card, you will be prompted to choose a colour:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/9fa43350-d413-4027-9637-984b23781dce)
 
+A Flip card flips all the cards in the game from Light to Dark or from Dark to Light:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/3346cd8c-0c6a-485f-99f0-0a0be70fccf2)
+
+After the Flip card is played:
+![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/9c3fd710-d0cb-451a-8c07-979821a8d39e)
+
 The direction of play, the current color, and the remaining cards can be seen in a panel at the top of the interface:
 ![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/8fab1561-8467-4c1c-aa41-fa16d5c8b8f3)
 
@@ -81,10 +87,14 @@ In the event that an AI player chooses to play a flip card, the game will clarif
 * You may play WILD cards any time
 * Players do not need to say UNO
 * A new round begins with player 1
+* The max number of players is still 4
+* Any number of the players can be AI as long as there is still at least 1 non-AI player
+* If a player is playing the last card in their hand, the card's effect will take place before the end of a round
+* The game allows a player to play any valid card from their hand after they draw, not just the drawn card
 
 ## Credits
 Milestone 1 Completion: October 22, 2023  
-Milestone 2 Completion: November 14, 2023
+Milestone 2 Completion: November 14, 2023  
 Milestone 3 Completion: November 26, 2023
 
 Authors:
