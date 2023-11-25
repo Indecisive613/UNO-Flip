@@ -55,22 +55,22 @@ When you hit continue, then a new game will begin and the scores will be updated
 
 ## AI Player Implementation
 After you have chosen the number of players and the name of each player, you are prompted to choose which players will be AI players:
-![Screenshot (264).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28264%29.png)
+![img_4.png](img_4.png)
 
 You are free to choose from the list of players which players will be AI players:
-![Screenshot (266).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28266%29.png)
+![img_3.png](img_3.png)
 
 You will be prevented from starting a game where every player is an AI player:
-![Screenshot (267).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28267%29.png)
+![img_2.png](img_2.png)
 
 The game will display a player's status as an AI player and, if a player is an AI player, their action this turn:
-![Screenshot (269).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28269%29.png)
+![img_5.png](img_5.png)
 
 In the event that an AI player chooses to play a wild card, the game will clarify this action accordingly:
-![Screenshot (270).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28270%29.png)
+![img_6.png](img_6.png)
 
 In the event that an AI player chooses to play a flip card, the game will clarify this action accordingly:
-![Screenshot (271).png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FScreenshot%20%28271%29.png)
+![img_7.png](img_7.png)
 
 ## Assumptions
 * If the starting card is not a normal card, ignore the effect but can still play on the color/pick any color if it is a wild
@@ -95,16 +95,15 @@ Authors:
 
 ## Class Diagram
 
-
 ## Sequence Diagrams
 ### Initialize
-![Milestone 3 Sequence Diagram Initializing Game.png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FMilestone%203%20Sequence%20Diagram%20Initializing%20Game.png)
+![Milestone 3 Sequence Diagram Initializing Game.png](Milestone%203%20Sequence%20Diagram%20Initializing%20Game.png)
 
 ### Start Game
-![Milestone 3 Sequence Diagram Starting Game.png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FMilestone%203%20Sequence%20Diagram%20Starting%20Game.png)
+![Milestone 3 Sequence Diagram Starting Game.png](Milestone%203%20Sequence%20Diagram%20Starting%20Game.png)
 
 ### Playing Game
-![Milestone 3 Sequence Diagram Playing Game.png](..%2F..%2FMilestone%203%20Backup%20Violet%20Diagrams%2FMilestone%203%20Sequence%20Diagram%20Playing%20Game.png)![img_8.png](img_8.png)
+![Milestone 3 Sequence Diagram Playing Game.png](Milestone%203%20Sequence%20Diagram%20Playing%20Game.png)
 
 ### AI Player - Play Card
 
