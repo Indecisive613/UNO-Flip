@@ -5,7 +5,6 @@ import main.models.Game;
 import main.models.JCardButton;
 import main.models.Player;
 import main.models.cards.Card;
-import main.models.cards.DoubleSidedCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,18 +97,17 @@ public class HandViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleNewTurn(Player player) {
-
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
+        aiTurnMessage.setText(" ");
 
-        //
         if (player.getIsAI()) {
             playerName.setText("Current Player: " + player.getName() + " (AI Player)");
         }
 
         // Reset buttons
         endTurn.setEnabled(false);
-        endTurn.setBackground(new Color(255, 255, 255));
+        endTurn.setBackground(Color.WHITE);
         drawButton.setEnabled(true);
         updateCardPanel();
     }
@@ -173,7 +171,7 @@ public class HandViewPanel extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard) {
+    public void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour, boolean drewCard) {
         lockHand();
         drawButton.setEnabled(false);
         endTurn.setEnabled(true);
@@ -181,27 +179,29 @@ public class HandViewPanel extends JPanel implements GameView {
 
         StringBuilder sb = new StringBuilder();
         sb.append(currentPlayer.getName());
-        if (drewCard && playedCard == null) {
+        if (playedCard == null) {
             sb.append(" drew a card");
         } else {
             String card;
             // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
             // The bug where the wrong card is stated to have been played might be found here
-            if (playedCard.getActiveSide().getColour() == Card.Colour.WILD) {
-                card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_")).skip(1)
-                        .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 2)
+            if (playedCard.getColour() == Card.Colour.WILD) {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
+                        .limit(playedCard.toString().split("\\s+|_").length - 2)
                         .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                         .collect(Collectors.joining(" "));
                 card += " and set the colour to " + currentColour;
             } else {
-                card = Arrays.stream(playedCard.getActiveSide().toString().split("\\s+|_"))
-                        .limit(playedCard.getActiveSide().toString().split("\\s+|_").length - 1)
+                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
+                        .limit(playedCard.toString().split("\\s+|_").length - 1)
                         .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
                         .collect(Collectors.joining(" "));
             }
             sb.append(" played a ").append(card);
         }
+        if (playedCard != null && playedCard.getSymbol() == Card.Symbol.FLIP) {
+            sb.append(" and flipped the deck ");
+        }
         aiTurnMessage.setText(sb.toString());
     }
-
 }
