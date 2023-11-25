@@ -94,7 +94,7 @@ In the event that an AI player chooses to play a flip card, the game will clarif
 
 ## Credits
 Milestone 1 Completion: October 22, 2023  
-Milestone 2 Completion: November 14, 2023
+Milestone 2 Completion: November 14, 2023  
 Milestone 3 Completion: November 26, 2023
 
 Authors:
