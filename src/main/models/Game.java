@@ -192,7 +192,7 @@ public class Game {
         }
         if (getCurrentPlayer().getIsAI()) {
             DoubleSidedCard playedCard = null;
-            AiHelper aiHelper = new AiHelper(this, getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol());
+            AiHelper aiHelper = new AiHelper(this, getCurrentPlayer().getActiveHand());
             int action = aiHelper.getAiAction();
             boolean drewCard = false;
 
@@ -247,7 +247,7 @@ public class Game {
         if(activeSide.getColour() == Card.Colour.WILD) {
             activeSide.cardAction(this);
             if (getCurrentPlayer().getIsAI()) {
-                AiHelper aiHelper = new AiHelper(this, getTopCard(), getCurrentPlayer().getActiveHand(), getCurrentColour(), getCurrentSymbol()); //TODO since you're passing AiHelper game, just get all these attributes from game
+                AiHelper aiHelper = new AiHelper(this, getCurrentPlayer().getActiveHand());
                 Card.Colour colour = aiHelper.getMostCommonColour();
                 setCurrentColour(colour);
             } else {

@@ -11,28 +11,33 @@ import java.util.HashMap;
  * @author Jake Siushansian, Jackie Smolkin-Lerner
  */
 public class AiHelper {
-
     private Game currentGame;
-    private Card currentTopCard;
     private ArrayList<Card> currentHand;
-    private Card.Colour currentColour;
-    private Card.Symbol currentSymbol;
 
     /**
      * Create an instance of AI Helper to play a card from the AI player's hand based on the current top card,
      * the current colour, and the symbol of the top card
      *
-     * @param currentTopCard
-     * @param currentHand
-     * @param currentColour
-     * @param currentSymbol
+     * @param currentGame the game
+     * @param currentHand the AI player's active hand
      */
-    public AiHelper(Game currentGame, Card currentTopCard, ArrayList<Card> currentHand, Card.Colour currentColour, Card.Symbol currentSymbol) {
+    public AiHelper(Game currentGame, ArrayList<Card> currentHand) {
         this.currentGame = currentGame;
-        this.currentTopCard = currentTopCard;
         this.currentHand = currentHand;
-        this.currentColour = currentColour;
-        this.currentSymbol = currentSymbol;
+    }
+
+    /**
+     * @return the current game
+     */
+    public Game getCurrentGame(){
+        return currentGame;
+    }
+
+    /**
+     * @return the hand of the Ai player
+     */
+    public ArrayList<Card> getCurrentHand(){
+        return currentHand;
     }
 
     /**

@@ -31,7 +31,7 @@ public class AiHelperTest {
     public void testCreateAiHelper() {
         // Create a Non-AI player with light cards
         ArrayList<Card> lightHand = player.getActiveHand();
-        AiHelper helper1 = new AiHelper(game, game.getTopCard(), player.getActiveHand(), game.getCurrentColour(), game.getCurrentSymbol());
+        AiHelper helper1 = new AiHelper(game, player.getActiveHand());
 
 
     }
