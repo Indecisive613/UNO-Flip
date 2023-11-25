@@ -195,6 +195,7 @@ public class Game {
             AiHelper aiHelper = new AiHelper(this, getCurrentPlayer().getActiveHand());
             int action = aiHelper.getAiAction();
             boolean drewCard = false;
+            Card activeCard = null;
 
             if (action == -1) {
                 drawCard(getCurrentPlayer());
@@ -205,15 +206,17 @@ public class Game {
 
                 if (secondAction != -1) {
                     playedCard = getCurrentPlayer().playCard(secondAction);
+                    activeCard = playedCard.getActiveSide();
                     playCard(playedCard);
                 }
             }
             else {
                 playedCard = getCurrentPlayer().playCard(action);
+                activeCard = playedCard.getActiveSide();
                 playCard(playedCard);
             }
             for (GameView view : views) {
-                view.handleAiPlayerTurn(getCurrentPlayer(), playedCard, currentColour, drewCard);
+                view.handleAiPlayerTurn(getCurrentPlayer(), activeCard, currentColour, drewCard);
             }
         }
     }
@@ -231,7 +234,7 @@ public class Game {
                 || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(currentColour)
                 || card.getSymbol().equals(topCard.getSymbol())
-                // || currentColour.equals(Card.Colour.WILD) // TODO: Maybe remove this
+                 || currentColour.equals(Card.Colour.WILD)
         );
     }
 
@@ -263,11 +266,6 @@ public class Game {
 
         for (GameView view : views) {
             view.handlePlayCard(activeSide);
-        }
-        if (getCurrentPlayer().getIsAI()) {
-            for (GameView view : views) {
-                view.handleAiPlayerTurn(getCurrentPlayer(), card, currentColour, false);
-            }
         }
     }
 

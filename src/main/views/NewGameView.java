@@ -5,7 +5,6 @@ import main.controllers.NewGameController;
 import main.models.cards.Card;
 import main.models.Game;
 import main.models.Player;
-import main.models.cards.DoubleSidedCard;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -146,7 +145,7 @@ public class NewGameView extends JPanel implements GameView {
     }
 
     @Override
-    public void handleAiPlayerTurn(Player currentPlayer, DoubleSidedCard playedCard, Card.Colour currentColour, boolean drewCard) {
+    public void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour, boolean drewCard) {
 
     }
 
