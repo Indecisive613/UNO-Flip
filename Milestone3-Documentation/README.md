@@ -81,6 +81,10 @@ In the event that an AI player chooses to play a flip card, the game will clarif
 * You may play WILD cards any time
 * Players do not need to say UNO
 * A new round begins with player 1
+* The max number of players is still 4
+* Any number of the players can be AI as long as there is still at least 1 non-AI player
+* If a player is playing the last card in their hand, the card's effect will take place before the end of a round
+* The game allows a player to play any valid card from their hand after they draw, not just the drawn card
 
 ## Credits
 Milestone 1 Completion: October 22, 2023  
