@@ -22,19 +22,38 @@ public class AiHelperTest {
     Player player;
     @Before
     public void setup(){
-        Player p1 = new Player("Player", new ArrayList<DoubleSidedCard>(), true);
+        player = new Player("Player", new ArrayList<DoubleSidedCard>(), true);
         game = new Game(GameRunner.createDoubleSidedDeck());
-        game.addPlayer(p1);
+        game.addPlayer(player);
         game.dealCards();
     }
     @Test
     public void testCreateAiHelper() {
-        // Create a Non-AI player with light cards
+        player = new Player("Player", new ArrayList<DoubleSidedCard>(), true);
+        game = new Game(GameRunner.createDoubleSidedDeck());
+        game.addPlayer(player);
+        game.dealCards();
+
+        // Test creating AI helper with light side hand
         ArrayList<Card> lightHand = player.getActiveHand();
         AiHelper helper1 = new AiHelper(game, player.getActiveHand());
+        assertEquals(game, helper1.getCurrentGame());
+        assertEquals(lightHand, helper1.getCurrentHand());
 
+        // Test creating AI helper with dark side hand
+        game.flip();
 
+        ArrayList<Card> darkHand = player.getActiveHand();
+        AiHelper helper2 = new AiHelper(game, player.getActiveHand());
+        assertEquals(game, helper2.getCurrentGame());
+        assertEquals(darkHand, helper2.getCurrentHand());
     }
 
-    //test getAiAction
+    @Test
+    public void testGetAiAction(){
+        // If anyone is testing with smaller hand sizes, this part of the test will not run, because it counts on there being 7 cards dealt to the AI
+        if(Game.STARTING_HAND_SIZE != 7){
+            return;
+        }
+    }
 }
