@@ -1,4 +1,4 @@
-/*package test;
+package test;
 
 import main.*;
 
@@ -8,6 +8,9 @@ import static main.models.cards.Card.Colour.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import main.models.Game;
+import main.models.GameRunner;
+import main.models.Player;
 import main.models.cards.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,25 +20,25 @@ import static org.junit.Assert.*;
  * A class to test Game
  *
  * @author Jackie Smolkin-Lerner, Jake Siushansian
- *
+ */
 public class GameTest {
     Game game;
-    Stack<Card> deck;
+    Stack<DoubleSidedCard> deck;
     Player player1, player2,  player3, player4;
 
     @Before
     public void setUp() {
 
-        ArrayList<Card> hand1 = new ArrayList<Card>(); // create empty hand for player1
-        ArrayList<Card> hand2 = new ArrayList<Card>(); // create empty hand for player2
-        ArrayList<Card> hand3 = new ArrayList<Card>(); // create empty hand for player3
-        ArrayList<Card> hand4 = new ArrayList<Card>(); // empty create hand for player4
-        player1 = new Player("Homer", hand1, false); // create player1
-        player2 = new Player("Marge", hand2, false); // create player2
-        player3 = new Player("Bart", hand3, false); // create player3
-        player4 = new Player("Lisa", hand4, false); // create player4
+        ArrayList<DoubleSidedCard> hand1 = new ArrayList<DoubleSidedCard>(); // create empty hand for player1
+        ArrayList<DoubleSidedCard> hand2 = new ArrayList<DoubleSidedCard>(); // create empty hand for player2
+        ArrayList<DoubleSidedCard> hand3 = new ArrayList<DoubleSidedCard>(); // create empty hand for player3
+        ArrayList<DoubleSidedCard> hand4 = new ArrayList<DoubleSidedCard>(); // create empty hand for player4
+        player1 = new Player("A", hand1, false); // create player1
+        player2 = new Player("B", hand2, false); // create player2
+        player3 = new Player("C", hand3, false); // create player3
+        player4 = new Player("D", hand4, false); // create player4
 
-        deck = GameRunner.createDeck(); // create the deck
+        deck = GameRunner.createDoubleSidedDeck(); // create the deck
         game = new Game(deck); // create the game with the players and the deck
 
         // add the players to the game
@@ -63,10 +66,10 @@ public class GameTest {
         assertEquals(0, player2.getHand().size());
         assertEquals(0, player3.getHand().size());
         assertEquals(0, player4.getHand().size());
-        assertEquals(104, deck.size());
+        assertEquals(112, deck.size());
 
         game.shuffleDeck(); // shuffle the deck
-        game.dealCards(); // deal the cards
+        game.dealCards(Game.STARTING_HAND_SIZE); // deal the cards
 
         // test that the players in the game have been dealt their 7 cards at the start of the game
         assertEquals(7, player1.getHand().size());
@@ -75,19 +78,22 @@ public class GameTest {
         assertEquals(7, player4.getHand().size());
 
         // all 4 players are dealt 7 cards + 1 card placed on the table
-        assertEquals(104 - 7*4 - 1, deck.size());
+        assertEquals(112 - 7*4 - 1, deck.size());
 
         assertFalse(game.hasWonGame()); // the game has just started so there should not be a winner
 
         // there should be a top card on the table
         assertNotEquals(null, game.getTopCard());
-    }
 
+        // the game should start on the light side
+        assertEquals(Card.Side.LIGHT, game.getTopCard().getSide());
+    }
+/*
     @Test
     public void testDrawingCards() {
 
         game.shuffleDeck(); // shuffle the deck
-        game.dealCards(); // deal the cards
+        game.dealCards(Game.STARTING_HAND_SIZE); // deal the cards
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -95,7 +101,7 @@ public class GameTest {
         assertEquals(player1, game.getCurrentPlayer()); // the current player should be player1
         game.drawCard(game.getCurrentPlayer()); // player1 draws a card from the deck
         assertEquals(8, player1.getHand().size()); // player1 should have 8 cards
-        assertEquals(104 - 7*4 - 1 - 1, deck.size()); // the deck should have 1 less card
+        assertEquals(112 - 7*4 - 1 - 1, deck.size()); // the deck should have 1 less card
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -103,7 +109,7 @@ public class GameTest {
         assertEquals(player2, game.getCurrentPlayer()); // the current player should be player2
         game.drawCard(game.getCurrentPlayer()); // player2 draws a card from the deck
         assertEquals(8, player2.getHand().size()); // player2 should have 8 cards
-        assertEquals(104 - 7*4 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
+        assertEquals(112 - 7*4 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -111,7 +117,7 @@ public class GameTest {
         assertEquals(player3, game.getCurrentPlayer()); // the current player should be player3
         game.drawCard(game.getCurrentPlayer()); // player3 draws a card from the deck
         assertEquals(8, player3.getHand().size()); // player3 should have 8 cards
-        assertEquals(104 - 7*4 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
+        assertEquals(112 - 7*4 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -119,7 +125,7 @@ public class GameTest {
         assertEquals(player4, game.getCurrentPlayer()); // the current player should be player4
         game.drawCard(game.getCurrentPlayer()); // player4 draws a card from the deck
         assertEquals(8, player4.getHand().size()); // player4 should have 8 cards
-        assertEquals(104 - 7*4 - 1 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
+        assertEquals(112 - 7*4 - 1 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
         assertNotEquals(null, game.getTopCard());
     }
@@ -128,11 +134,11 @@ public class GameTest {
     public void testAddingCards() {
 
         game.shuffleDeck(); // shuffle the deck
-        game.dealCards(); // deal the cards
+        game.dealCards(Game.STARTING_HAND_SIZE); // deal the cards
 
         assertTrue(game.isRunning()); // the game should be running
 
-        assertEquals(104 - 7*4 - 1, deck.size());
+        assertEquals(112 - 7*4 - 1, deck.size());
 
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer()); // the current player should be player1
@@ -140,7 +146,7 @@ public class GameTest {
         game.addToDeck(player1.getHand()); // put all the cards in player1's hand back in the deck
         player1.clearHand(); // clear player1's hand
         assertEquals(0, player1.getHand().size());
-        assertEquals(104 - 7*3 - 1, deck.size());
+        assertEquals(112 - 7*3 - 1, deck.size());
 
         assertTrue(game.isRunning()); // the game should be running
 
@@ -152,7 +158,7 @@ public class GameTest {
         game.addToDeck(player2.getHand()); // put all the cards in player2's hand back in the deck
         player2.clearHand(); // clear player2's hand
         assertEquals(0, player2.getHand().size());
-        assertEquals(104 - 7*2 - 2*1, deck.size());
+        assertEquals(112 - 7*2 - 2*1, deck.size());
 
         player2.dealCard(deck.pop());
 
@@ -163,8 +169,8 @@ public class GameTest {
         assertEquals(7, player3.getHand().size());
         game.addToDeck(player3.getHand()); // put all the cards in player3's hand back in the deck
         player3.clearHand(); // clear player3's hand
-        assertEquals(0, player3.clearHand().size());
-        assertEquals(104 - 7 - 3*1, deck.size());
+        assertEquals(0, player3.getHand().size());
+        assertEquals(112 - 7 - 3*1, deck.size());
 
         player3.dealCard(deck.pop());
 
@@ -176,7 +182,7 @@ public class GameTest {
         game.addToDeck(player4.getHand()); // put all the cards in player4's hand back in the deck
         player4.clearHand(); // clear player4's hand
         assertEquals(0, player4.getHand().size());
-        assertEquals(104 - 4*1, deck.size());
+        assertEquals(112 - 4*1, deck.size());
 
         assertNotEquals(null, game.getTopCard());
     }
@@ -187,16 +193,16 @@ public class GameTest {
         // the cards must be dealt and then returned to the deck ...
         // ... to ensure that there is a top card in the played cards pile
         game.shuffleDeck();
-        game.dealCards();
+        game.dealCards(Game.STARTING_HAND_SIZE);
 
         assertEquals(7, player1.getHand().size());
         assertEquals(7, player2.getHand().size());
         assertEquals(7, player3.getHand().size());
         assertEquals(7, player4.getHand().size());
-        game.addToDeck(player1.clearHand());
-        game.addToDeck(player2.clearHand());
-        game.addToDeck(player3.clearHand());
-        game.addToDeck(player4.clearHand());
+        player1.clearHand();
+        player2.clearHand();
+        player3.clearHand();
+        player4.clearHand();
         assertEquals(0, player1.getHand().size());
         assertEquals(0, player2.getHand().size());
         assertEquals(0, player3.getHand().size());
@@ -205,13 +211,13 @@ public class GameTest {
         assertNotEquals(null, game.getTopCard());
 
         // create hand for player1 with some number and action cards
-        player1.dealCard(new NormalCard(RED, ONE));
-        player1.dealCard(new NormalCard(YELLOW, FIVE));
-        player1.dealCard(new NormalCard(GREEN, TWO));
-        player1.dealCard(new NormalCard(BLUE, ONE));
-        player1.dealCard(new DrawOneCard(RED));
-        player1.dealCard(new SkipCard(GREEN));
-        player1.dealCard(new ReverseCard(RED));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(RED, ONE), new NormalCard(TEAL, TWO)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, FIVE), new SkipEveryoneCard((PINK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(GREEN, TWO), new WildCard(Card.Side.DARK));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(BLUE, ONE), new ReverseCard(PURPLE));
+        player1.dealCard(new DoubleSidedCard(new DrawOneCard(RED));
+        player1.dealCard(new DoubleSidedCard(new SkipCard(GREEN));
+        player1.dealCard(new DoubleSidedCard(new ReverseCard(RED));
         assertEquals(7, player1.getHand().size());
 
         // create hand for player2 with some number, action, and wild cards
@@ -395,7 +401,7 @@ public class GameTest {
         assertEquals(3, player2.getHand().size());
         assertEquals(new DrawOneCard(BLUE), game.getTopCard());
     }
-
+/*
     @Test
     public void testScore() {
 
@@ -579,5 +585,5 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-    }
-}*/
+    }*/
+}

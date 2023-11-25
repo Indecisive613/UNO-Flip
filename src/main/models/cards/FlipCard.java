@@ -11,11 +11,11 @@ public class FlipCard extends Card {
     /**
      * Creates a Flip card
      *
-     * @param cardSide The side of the card
+     * @param colour The colour of the card
      * @throws IllegalArgumentException if an invalid color is provided.
      */
-    public FlipCard(Card.Colour colour, Card.Side cardSide) throws IllegalArgumentException{
-        super(colour, Symbol.FLIP, cardSide);
+    public FlipCard(Card.Colour colour) throws IllegalArgumentException{
+        super(colour, Symbol.FLIP, Card.getSideFromColour(colour));
     }
     @Override
     public void cardAction(Game game) {

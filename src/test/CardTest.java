@@ -87,7 +87,7 @@ public class CardTest {
 
     @Test
     public void testCreateReverseLight() {
-        Card c = new ReverseCard(BLUE, Card.Side.LIGHT);
+        Card c = new ReverseCard(BLUE);
         assertEquals(20, c.getPointValue());
         assertEquals(BLUE, c.getColour());
         assertEquals(REVERSE, c.getSymbol());
@@ -96,7 +96,7 @@ public class CardTest {
 
     @Test
     public void testCreateReverseDark() {
-        Card c = new ReverseCard(ORANGE, Card.Side.DARK);
+        Card c = new ReverseCard(ORANGE);
         assertEquals(20, c.getPointValue());
         assertEquals(ORANGE, c.getColour());
         assertEquals(REVERSE, c.getSymbol());
@@ -133,7 +133,7 @@ public class CardTest {
         assertEquals(8, new NormalCard(RED, EIGHT).getPointValue());
         assertEquals(9, new NormalCard(RED, NINE).getPointValue());
         assertEquals(10, new DrawOneCard(RED).getPointValue());
-        assertEquals(20, new ReverseCard(RED, Card.Side.LIGHT).getPointValue());
+        assertEquals(20, new ReverseCard(RED).getPointValue());
         assertEquals(20, new SkipCard(RED).getPointValue());
         assertEquals(40, new WildCard(Card.Side.LIGHT).getPointValue());
         assertEquals(50, new WildDrawTwoCard().getPointValue());
@@ -151,7 +151,7 @@ public class CardTest {
         assertEquals(8, new NormalCard(TEAL, EIGHT).getPointValue());
         assertEquals(9, new NormalCard(TEAL, NINE).getPointValue());
         assertEquals(20, new DrawFiveCard(TEAL).getPointValue());
-        assertEquals(20, new ReverseCard(TEAL, Card.Side.DARK).getPointValue());
+        assertEquals(20, new ReverseCard(TEAL).getPointValue());
         assertEquals(30, new SkipEveryoneCard(TEAL).getPointValue());
         assertEquals(40, new WildCard(Card.Side.DARK).getPointValue());
         assertEquals(60, new WildDrawColourCard().getPointValue());

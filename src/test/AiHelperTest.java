@@ -49,11 +49,11 @@ public class AiHelperTest {
     @Test
     public void testGetAiActionNoWilds(){
         Stack<DoubleSidedCard> customDeck = new Stack<DoubleSidedCard>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE, Card.Side.LIGHT), new FlipCard(Card.Colour.TEAL, Card.Side.DARK)); //draw pile
+        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE), new FlipCard(Card.Colour.TEAL)); //draw pile
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.SEVEN), new NormalCard(Card.Colour.PURPLE, Card.Symbol.TWO)); //top card
         DoubleSidedCard card3 = new DoubleSidedCard(new SkipCard(Card.Colour.RED), new NormalCard(Card.Colour.PURPLE, Card.Symbol.THREE)); // Index 2 of player hand
         DoubleSidedCard card4 = new DoubleSidedCard(new NormalCard(Card.Colour.BLUE, Card.Symbol.NINE), new SkipEveryoneCard(Card.Colour.ORANGE));
-        DoubleSidedCard card5 = new DoubleSidedCard(new ReverseCard(Card.Colour.RED, Card.Side.LIGHT), new SkipEveryoneCard(Card.Colour.PURPLE)); // Index 0 of player hand
+        DoubleSidedCard card5 = new DoubleSidedCard(new ReverseCard(Card.Colour.RED), new SkipEveryoneCard(Card.Colour.PURPLE)); // Index 0 of player hand
 
         customDeck.push(card1);
         customDeck.push(card2);
@@ -82,7 +82,7 @@ public class AiHelperTest {
     @Test
     public void testGetAiActionWilds(){
         Stack<DoubleSidedCard> customDeck = new Stack<DoubleSidedCard>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE, Card.Side.LIGHT), new FlipCard(Card.Colour.TEAL, Card.Side.DARK)); //draw pile
+        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE), new FlipCard(Card.Colour.TEAL)); //draw pile
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.SEVEN), new NormalCard(Card.Colour.ORANGE, Card.Symbol.TWO)); //top card
         DoubleSidedCard card3 = new DoubleSidedCard(new SkipCard(Card.Colour.RED), new NormalCard(Card.Colour.PURPLE, Card.Symbol.TWO)); // Index 2 of player hand
         DoubleSidedCard card4 = new DoubleSidedCard(new NormalCard(Card.Colour.BLUE, Card.Symbol.NINE), new WildDrawColourCard());
@@ -115,7 +115,7 @@ public class AiHelperTest {
     @Test
     public void testGetMostCommonColourNoWilds(){
         Stack<DoubleSidedCard> customDeck = new Stack<DoubleSidedCard>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE, Card.Side.LIGHT), new FlipCard(Card.Colour.TEAL, Card.Side.DARK)); //draw pile
+        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE), new FlipCard(Card.Colour.TEAL)); //draw pile
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.SEVEN), new NormalCard(Card.Colour.ORANGE, Card.Symbol.TWO)); //top card
         DoubleSidedCard card3 = new DoubleSidedCard(new SkipCard(Card.Colour.RED), new NormalCard(Card.Colour.PURPLE, Card.Symbol.TWO)); // Index 2 of player hand
         DoubleSidedCard card4 = new DoubleSidedCard(new NormalCard(Card.Colour.BLUE, Card.Symbol.NINE), new DrawFiveCard(Card.Colour.TEAL));
@@ -153,7 +153,7 @@ public class AiHelperTest {
     @Test
     public void testGetMostCommonColourWilds(){
         Stack<DoubleSidedCard> customDeck = new Stack<DoubleSidedCard>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE, Card.Side.LIGHT), new FlipCard(Card.Colour.TEAL, Card.Side.DARK)); //draw pile
+        DoubleSidedCard card1 = new DoubleSidedCard(new ReverseCard(Card.Colour.BLUE), new FlipCard(Card.Colour.TEAL)); //draw pile
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.SEVEN), new NormalCard(Card.Colour.ORANGE, Card.Symbol.TWO)); //top card
         DoubleSidedCard card3 = new DoubleSidedCard(new SkipCard(Card.Colour.RED), new WildDrawColourCard()); // Index 2 of player hand
         DoubleSidedCard card4 = new DoubleSidedCard(new WildDrawTwoCard(), new WildDrawColourCard());

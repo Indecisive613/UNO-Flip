@@ -71,12 +71,12 @@ public class GameRunner {
                 //add 2 of each special card
                 cards.push(new DrawOneCard(colour));
                 cards.push(new DrawOneCard(colour));
-                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
-                cards.push(new ReverseCard(colour, Card.Side.LIGHT));
+                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour));
                 cards.push(new SkipCard(colour));
                 cards.push(new SkipCard(colour));
-                cards.push(new FlipCard(colour, Card.Side.LIGHT));
-                cards.push(new FlipCard(colour, Card.Side.LIGHT));
+                cards.push(new FlipCard(colour));
+                cards.push(new FlipCard(colour));
             }
 
             //Add four of each wild card
@@ -114,10 +114,10 @@ public class GameRunner {
                 cards.push(new DrawFiveCard(colour));
                 cards.push(new SkipEveryoneCard(colour));
                 cards.push(new SkipEveryoneCard(colour));
-                cards.push(new ReverseCard(colour, Card.Side.DARK));
-                cards.push(new ReverseCard(colour, Card.Side.DARK));
-                cards.push(new FlipCard(colour, Card.Side.DARK));
-                cards.push(new FlipCard(colour, Card.Side.DARK));
+                cards.push(new ReverseCard(colour));
+                cards.push(new ReverseCard(colour));
+                cards.push(new FlipCard(colour));
+                cards.push(new FlipCard(colour));
             }
 
             //Add four of each wild card

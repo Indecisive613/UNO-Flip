@@ -40,7 +40,7 @@ public class PlayerTest {
     public void testDealCard() {
         ArrayList<DoubleSidedCard> hand1 = new ArrayList<>();
         Player p1 = new Player("Real player", hand1, false);
-        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL, Card.Side.DARK));
+        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL));
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.ONE), new DrawFiveCard(Card.Colour.PINK));
 
         assertEquals(0, p1.getHand().size());
@@ -55,7 +55,7 @@ public class PlayerTest {
     @Test
     public void testPlayCard() {
         ArrayList<DoubleSidedCard> hand= new ArrayList<>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL, Card.Side.DARK));
+        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL));
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.ONE), new DrawFiveCard(Card.Colour.PINK));
         DoubleSidedCard card3 = new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(Card.Colour.TEAL, Card.Symbol.THREE));
         DoubleSidedCard card4 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.SEVEN), new NormalCard(Card.Colour.PURPLE, Card.Symbol.EIGHT));
@@ -112,7 +112,7 @@ public class PlayerTest {
     @Test
     public void testClearHand() {
         ArrayList<DoubleSidedCard> hand= new ArrayList<>();
-        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL, Card.Side.DARK));
+        DoubleSidedCard card1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL));
         DoubleSidedCard card2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.ONE), new DrawFiveCard(Card.Colour.PINK));
         DoubleSidedCard card3 = new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(Card.Colour.TEAL, Card.Symbol.THREE));
         DoubleSidedCard card4 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.SEVEN), new NormalCard(Card.Colour.PURPLE, Card.Symbol.EIGHT));
@@ -132,7 +132,7 @@ public class PlayerTest {
     @Test
     public void testGetActiveHand() {
         ArrayList<DoubleSidedCard> doubleSidedHand = new ArrayList<>();
-        DoubleSidedCard doubleSidedCard1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL, Card.Side.DARK));
+        DoubleSidedCard doubleSidedCard1 = new DoubleSidedCard(new NormalCard(Card.Colour.RED, Card.Symbol.TWO), new ReverseCard(Card.Colour.TEAL));
         DoubleSidedCard doubleSidedCard2 = new DoubleSidedCard(new NormalCard(Card.Colour.GREEN, Card.Symbol.ONE), new DrawFiveCard(Card.Colour.PINK));
         DoubleSidedCard doubleSidedCard3 = new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(Card.Colour.TEAL, Card.Symbol.THREE));
 
@@ -159,7 +159,7 @@ public class PlayerTest {
 
         // Test getting dark side hand
         ArrayList<Card> darkHand = new ArrayList<>();
-        Card darkCard1 = new ReverseCard(Card.Colour.TEAL, Card.Side.DARK);
+        Card darkCard1 = new ReverseCard(Card.Colour.TEAL);
         Card darkCard2 = new DrawFiveCard(Card.Colour.PINK);
         Card darkCard3 = new NormalCard(Card.Colour.TEAL, Card.Symbol.THREE);
 
