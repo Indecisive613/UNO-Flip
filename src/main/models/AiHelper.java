@@ -66,7 +66,6 @@ public class AiHelper {
      * @return Whether there is a valid card in the current hand
      */
     private boolean hasValidNonWildCards() {
-
         for (Card currentCard: currentHand) {
             if (currentGame.canPlayCard(currentCard) && currentCard.getColour() != Card.Colour.WILD) {
                 return true;

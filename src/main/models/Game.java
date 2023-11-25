@@ -202,7 +202,8 @@ public class Game {
                 drewCard = true;
 
                 // the AI player can check if their drawn card can be played
-                int secondAction = aiHelper.getAiAction();
+                AiHelper aiHelperDraw = new AiHelper(this, getCurrentPlayer().getActiveHand());
+                int secondAction = aiHelperDraw.getAiAction();
 
                 if (secondAction != -1) {
                     playedCard = getCurrentPlayer().playCard(secondAction);
@@ -234,7 +235,7 @@ public class Game {
                 || card.getColour().equals(Card.Colour.WILD)
                 || card.getColour().equals(currentColour)
                 || card.getSymbol().equals(topCard.getSymbol())
-                 || currentColour.equals(Card.Colour.WILD)
+                || currentColour.equals(Card.Colour.WILD)
         );
     }
 

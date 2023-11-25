@@ -181,10 +181,27 @@ public class HandViewPanel extends JPanel implements GameView {
         sb.append(currentPlayer.getName());
         if (playedCard == null) {
             sb.append(" drew a card");
+        } else if (playedCard != null && drewCard) {
+            String card;
+            sb.append(" drew a card and played a ");
+
+            if (playedCard.getColour() == Card.Colour.WILD) {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
+                        .limit(playedCard.toString().split("\\s+|_").length - 2)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+                card += " and set the colour to " + currentColour;
+            } else {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
+                        .limit(playedCard.toString().split("\\s+|_").length - 1)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+            }
+            sb.append(card);
+
         } else {
             String card;
             // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
-            // The bug where the wrong card is stated to have been played might be found here
             if (playedCard.getColour() == Card.Colour.WILD) {
                 card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
                         .limit(playedCard.toString().split("\\s+|_").length - 2)
