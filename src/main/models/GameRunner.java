@@ -153,11 +153,4 @@ public class GameRunner {
         }
         return cards;
     }
-
-    public static void main(String[] args) {
-        Stack<DoubleSidedCard> finalDeck = createDoubleSidedDeck(); //TODO delete this once we are happy the double sided deck is being correctly created
-        for(DoubleSidedCard card: finalDeck){
-            System.out.println(card);
-        }
-    }
 }
