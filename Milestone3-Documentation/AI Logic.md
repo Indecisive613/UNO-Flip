@@ -3,11 +3,15 @@ AI Player Implementation
 Terminology Clarifications:
 - AI in this context refers to the attributes, methods, conditional statements, and algorithms that enables the UNO game
 to perform actions on behalf of a specific player without requiring user input.
-- Valid in the context refers to actions that are permitted as per the rules of UNO.
+- Valid in this context refers to actions that are permitted as per the rules of UNO.
 
-AI Implementation - Actions and States
+AI Player Implementation - Actions and States
 When the user starts a new UNO game, they are prompted to select the number of players and input a name for each player.
 The user is then prompted to select which of the players will be an AI player.
+
+The maximum number of AI players is equal to n-1 where n is the total number of players in the current UNO game.
+There must be at least one player whose actions are determined by the user.
+The minium number of AI players is equal to 0.
 
 In this context, an AI player is a player whose actions in an UNO game including: 
 - Play card, 
@@ -21,9 +25,11 @@ are determined through the AiHelper class method using the current state of the 
 - Current player hand
 
 The methods in the Game model class use conditional statements to determine whether the current player is an AI player
-and calls the AiHelper methods 
+and calls the AiHelper methods. 
+The GameView interface also contains a method that allows every View class that implements GameView to display information
+regarding the actions of the AI player.
 
-AI Implementation - Methods:
+AI Player Implementation - Methods:
 There are two principle AiHelper methods that automate two important game actions:
 Select a valid card to play on the current top card
 Select an appropriate game colour after playing a wild card
