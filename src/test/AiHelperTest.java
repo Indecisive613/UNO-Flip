@@ -1,18 +1,19 @@
 package test;
 
-import jdk.swing.interop.LightweightContentWrapper;
+//import jdk.swing.interop.LightweightContentWrapper;
+
 import main.models.AiHelper;
 import main.models.Game;
 import main.models.GameRunner;
-import main.models.cards.*;
 import main.models.Player;
+import main.models.cards.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the Ai Helper class
