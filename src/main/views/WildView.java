@@ -18,6 +18,12 @@ public class WildView extends JOptionPane implements GameView {
     private WildController controller;
     private GameViewFrame superFrame;
 
+    /**
+     * Create a WildView
+     *
+     * @param superFrame The parent frame
+     * @param game The UNO game
+     */
     public WildView(GameViewFrame superFrame, Game game){
         this.game = game;
         this.superFrame = superFrame;

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Tests for the Ai Helper class
+ * A class to test the Ai Helper class
  *
  * @author Fiona Cheng
  */
