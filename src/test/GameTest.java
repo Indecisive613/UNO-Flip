@@ -10,6 +10,7 @@ import main.models.Game;
 import main.models.GameRunner;
 import main.models.Player;
 import main.models.cards.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -539,7 +540,6 @@ public class GameTest {
         // Should flip back to the light side
         assertEquals(Card.Side.LIGHT, game.getTopCard().getSide());
         assertEquals(new FlipCard(YELLOW), game.getTopCard());
-
     }
 
     @Test

@@ -4,6 +4,7 @@ import static main.models.cards.Card.Symbol.*;
 import static main.models.cards.Card.Colour.*;
 
 import main.models.cards.*;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -122,6 +123,24 @@ public class CardTest {
     }
 
     @Test
+    public void testCreateLightFlip() {
+        Card c = new FlipCard(RED);
+        assertEquals(20, c.getPointValue());
+        assertEquals(RED, c.getColour());
+        assertEquals(FLIP, c.getSymbol());
+        assertEquals(Card.Side.LIGHT, c.getSide());
+    }
+
+    @Test
+    public void testCreateDarkFlip() {
+        Card c = new FlipCard(PINK);
+        assertEquals(20, c.getPointValue());
+        assertEquals(PINK, c.getColour());
+        assertEquals(FLIP, c.getSymbol());
+        assertEquals(Card.Side.DARK, c.getSide());
+    }
+
+    @Test
     public void testCardPointValuesLight() {
         assertEquals(1, new NormalCard(RED, ONE).getPointValue());
         assertEquals(2, new NormalCard(RED, TWO).getPointValue());
@@ -135,6 +154,7 @@ public class CardTest {
         assertEquals(10, new DrawOneCard(RED).getPointValue());
         assertEquals(20, new ReverseCard(RED).getPointValue());
         assertEquals(20, new SkipCard(RED).getPointValue());
+        assertEquals(20, new FlipCard(RED).getPointValue());
         assertEquals(40, new WildCard(Card.Side.LIGHT).getPointValue());
         assertEquals(50, new WildDrawTwoCard().getPointValue());
     }
@@ -152,6 +172,7 @@ public class CardTest {
         assertEquals(9, new NormalCard(TEAL, NINE).getPointValue());
         assertEquals(20, new DrawFiveCard(TEAL).getPointValue());
         assertEquals(20, new ReverseCard(TEAL).getPointValue());
+        assertEquals(20, new FlipCard(TEAL).getPointValue());
         assertEquals(30, new SkipEveryoneCard(TEAL).getPointValue());
         assertEquals(40, new WildCard(Card.Side.DARK).getPointValue());
         assertEquals(60, new WildDrawColourCard().getPointValue());

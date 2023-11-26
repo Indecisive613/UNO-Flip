@@ -172,5 +172,7 @@ public class PlayerTest {
         for(int i = 0; i < 3; i++){
             assertEquals(darkHand.get(i), p1.getActiveHand().get(i));
         }
+
+        DoubleSidedCard.flip(); //Need to flip back to light side
     }
 }
