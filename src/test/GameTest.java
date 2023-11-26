@@ -187,7 +187,7 @@ public class GameTest {
     }
 
     @Test
-    public void testPlayingCards() {
+    public void testPlayingLightCards() {
 
         // the cards must be dealt and then returned to the deck ...
         // ... to ensure that there is a top card in the played cards pile
@@ -386,6 +386,162 @@ public class GameTest {
         game.playCard(player2.playCard(2));
         assertEquals(3, player2.getHand().size());
         assertEquals(new DrawOneCard(BLUE), game.getTopCard());
+    }
+
+    @Test
+    public void testPlayingDarkCards() {
+
+        // the cards must be dealt and then returned to the deck ...
+        // ... to ensure that there is a top card in the played cards pile
+        game.shuffleDeck();
+        game.dealCards(0);
+
+        assertNotEquals(null, game.getTopCard());
+
+        // create hand for player1 with some number and action cards
+        player1.dealCard(new DoubleSidedCard(new NormalCard(RED, ONE), new SkipEveryoneCard(TEAL)));
+        player1.dealCard(new DoubleSidedCard(new FlipCard(YELLOW), new SkipEveryoneCard(PINK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(GREEN, TWO), new WildCard(Card.Side.DARK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(BLUE, ONE), new ReverseCard(PURPLE)));
+        player1.dealCard(new DoubleSidedCard(new DrawOneCard(RED), new FlipCard(TEAL)));
+        player1.dealCard(new DoubleSidedCard(new SkipCard(GREEN), new NormalCard(PINK, THREE)));
+        player1.dealCard(new DoubleSidedCard(new ReverseCard(RED), new NormalCard(ORANGE, ONE)));
+        assertEquals(7, player1.getHand().size());
+
+        // create hand for player2 with some number, action, and wild cards
+        player2.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, NINE), new NormalCard(TEAL, ONE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(RED, FIVE), new NormalCard(TEAL, TWO)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(BLUE, EIGHT), new NormalCard(TEAL, THREE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(GREEN, SIX), new NormalCard(TEAL, FOUR)));
+        player2.dealCard(new DoubleSidedCard(new DrawOneCard(BLUE), new NormalCard(TEAL, FIVE)));
+        player2.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(TEAL, SIX)));
+        player2.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new NormalCard(TEAL, SEVEN)));
+        assertEquals(7, player2.getHand().size());
+
+        // create hand for player3 with only number cards
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, FIVE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, TWO), new WildDrawColourCard()));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(BLUE, THREE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, FOUR), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, SIX), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, EIGHT), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, ONE), new WildCard(Card.Side.DARK)));
+        assertEquals(7, player3.getHand().size());
+
+        // create hand for player4 with only action and wild cards
+        player4.dealCard(new DoubleSidedCard(new SkipCard(BLUE), new DrawFiveCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(YELLOW), new WildDrawColourCard()));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(GREEN), new WildCard(Card.Side.DARK)));
+        player4.dealCard(new DoubleSidedCard(new DrawOneCard(GREEN), new NormalCard(ORANGE, ONE)));
+        player4.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new SkipEveryoneCard(TEAL)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new ReverseCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new FlipCard(PINK)));
+        assertEquals(7, player4.getHand().size());
+
+        // sets the current colour to YELLOW so that the first card can be played
+        game.setCurrentColour(YELLOW);
+
+        // test playing YELLOW FLIP from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(1).getActiveSide()));
+        game.playCard(player1.playCard(1));
+        assertEquals(6, player1.getHand().size());
+        assertEquals(Card.Side.DARK, game.getTopCard().getSide());
+
+        // sets the current colour to RED so that the first dark card can be played
+        game.setCurrentColour(TEAL);
+
+        // test playing TEAL SEVEN from the hand of player2
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player2, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player2.getHand().get(6).getActiveSide()));
+        game.playCard(player2.playCard(6));
+        assertEquals(6, player2.getHand().size());
+        assertEquals(new NormalCard(TEAL, SEVEN), game.getTopCard());
+
+        // test playing WILD from the hand of player3
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player3, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        game.playCard(player3.playCard(0));
+        assertEquals(6, player3.getHand().size());
+        assertEquals(new WildCard(Card.Side.DARK), game.getTopCard());
+
+        // Simulates the player picking a colour
+        game.setCurrentColour(PINK);
+        assertEquals(game.getCurrentColour(), PINK);
+
+        // test playing PINK DRAW FIVE from the hand of player4
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player4, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        game.playCard(player4.playCard(0));
+        assertEquals(6, player4.getHand().size());
+        assertEquals(new DrawFiveCard(PINK), game.getTopCard());
+        assertEquals(11, player1.getHand().size());
+
+        // test playing PINK THREE from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(4).getActiveSide()));
+        game.playCard(player1.playCard(4));
+        assertEquals(10, player1.getHand().size());
+        assertEquals(new NormalCard(PINK, THREE), game.getTopCard());
+
+        // test playing TEAL THREE from the hand of player2
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player2, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player2.getHand().get(2).getActiveSide()));
+        game.playCard(player2.playCard(2));
+        assertEquals(5, player2.getHand().size());
+        assertEquals(new NormalCard(TEAL, THREE), game.getTopCard());
+
+        // test playing WILD DRAW COLOUR from the hand of player3
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player3, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        game.playCard(player3.playCard(0));
+        assertEquals(5, player3.getHand().size());
+        assertEquals(new WildDrawColourCard(), game.getTopCard());
+
+        // player3 chose teal, and player4 must draw cards until a TEAL is reached
+        assertEquals(game.getCurrentColour(), TEAL);
+        assertTrue(player4.getHand().size() > 6);
+        assertEquals(TEAL, player4.getHand().get(player4.getHand().size()-1).getActiveSide().getColour());
+
+        //Player 4 is skipped
+
+        // test playing SKIP EVERYONE from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        game.playCard(player1.playCard(0));
+        assertEquals(9, player1.getHand().size());
+        assertEquals(new SkipEveryoneCard(TEAL), game.getTopCard());
+
+        // players 2-4 are skipped
+
+        // test playing FLIP from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveSide()));
+        game.playCard(player1.playCard(2));
+        assertEquals(8, player1.getHand().size());
+
+        // Should flip back to the light side
+        assertEquals(Card.Side.LIGHT, game.getTopCard().getSide());
+        assertEquals(new FlipCard(YELLOW), game.getTopCard());
+
     }
 
     @Test
