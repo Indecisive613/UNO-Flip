@@ -1,13 +1,10 @@
 package test;
 
-//import jdk.swing.interop.LightweightContentWrapper;
-
 import main.models.AiHelper;
 import main.models.Game;
 import main.models.GameRunner;
 import main.models.Player;
 import main.models.cards.*;
-import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;

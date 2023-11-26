@@ -4,7 +4,6 @@ import static main.models.cards.Card.Symbol.*;
 import static main.models.cards.Card.Colour.*;
 
 import main.models.cards.*;
-import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
