@@ -13,3 +13,4 @@ Authors:
 
 - [Milestone 2](./Milestone2-Documentation)
 
+- [Milestone 3](./Milestone3-Documentation)

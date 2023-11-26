@@ -1,9 +1,11 @@
 package test;
 
+import main.models.cards.Card;
+import main.models.cards.DoubleSidedCard;
+import org.junit.Test;
+
 import java.util.Stack;
 
-import main.models.cards.*;
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
@@ -15,8 +17,8 @@ public class GameRunnerTest {
 
     @Test
     public void testCreateDoubleSidedDeck(){
-        assertTrue(main.models.GameRunner.createDoubleSidedDeck() instanceof Stack<DoubleSidedCard>);
         Stack<DoubleSidedCard> deck = main.models.GameRunner.createDoubleSidedDeck();
+        assertNotNull(deck);
         assertEquals(112, deck.size());
 
         // Test that each card has a dark and light side
