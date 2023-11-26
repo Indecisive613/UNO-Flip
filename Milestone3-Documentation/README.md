@@ -117,5 +117,7 @@ Authors:
 ![Milestone 3 Sequence Diagram Playing Game.png](Milestone%203%20Sequence%20Diagram%20Playing%20Game.png)
 
 ### AI Player - Play Card
+![Milestone 3 Sequence Diagram AI Chooses Valid Card.png](Milestone%203%20Sequence%20Diagram%20AI%20Chooses%20Valid%20Card.png) 
 
 ### AI Player - Change Colour
+![Milestone 3 Sequence Diagram AI Chooses Game Colour.png](Milestone%203%20Sequence%20Diagram%20AI%20Chooses%20Game%20Colour.png)
