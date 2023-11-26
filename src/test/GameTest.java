@@ -1,7 +1,5 @@
 package test;
 
-import main.*;
-
 import static main.models.cards.Card.Symbol.*;
 import static main.models.cards.Card.Colour.*;
 
@@ -19,7 +17,7 @@ import static org.junit.Assert.*;
 /**
  * A class to test Game
  *
- * @author Jackie Smolkin-Lerner, Jake Siushansian
+ * @author Jackie Smolkin-Lerner, Jake Siushansian, Fiona Cheng
  */
 public class GameTest {
     Game game;
