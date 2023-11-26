@@ -105,7 +105,7 @@ Authors:
 * Jake Siushansian - 101226956
 
 ## Class Diagram
-![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/72fce517-874d-4a09-86cf-7bde945acf04)
+![image](https://github.com/Indecisive613/UNO-Flip/assets/126517682/7f4a3333-bd0b-4e7e-8df6-50ba974043ca)
 
 ## Sequence Diagrams
 ### Initialize
