@@ -12,9 +12,10 @@ This project contains the following deliverables:
 * UML sequence diagrams
 * UML class diagram
 * Design explanation
+* [AI Logic explanation](AI%20Logic.md)
 
 ## Installation
-Install Java version 8 or ensure your java version can run java version 8.
+This project was compiled with Java 14, so make sure you run it with Java version 14 or ensure your Java version can run Java version 14.
 
 ## Usage
 Navigate to the project folder in the command prompt then enter:

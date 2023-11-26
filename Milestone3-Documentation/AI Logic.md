@@ -11,7 +11,7 @@ The user is then prompted to select which of the players will be an AI player.
 
 The maximum number of AI players is equal to n-1 where n is the total number of players in the current UNO game.
 There must be at least one player whose actions are determined by the user.
-The minium number of AI players is equal to 0.
+The minimum number of AI players is equal to 0.
 
 In this context, an AI player is a player whose actions in an UNO game including: 
 - Play card, 
@@ -44,3 +44,6 @@ The AI will choose the new game colour by identifying the colour that appears th
 in the current hand. 
 - If there are no valid cards, wild or otherwise, then the AI will draw a card from the deck. If this drawn card is a
 valid card, then the AI will play this card.
+
+A human player must manually end an AI player's turn with the "End Turn" button. 
+This makes it easier for the player to understand what actions AI player took on their turn.
