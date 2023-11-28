@@ -1,7 +1,6 @@
 package main.models;
 
-import main.models.cards.Card;
-import main.models.cards.DoubleSidedCard;
+import main.models.cards.*;
 
 import java.util.ArrayList;
 
@@ -107,5 +106,32 @@ public class Player {
      */
     public void clearHand(){
         hand.clear();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Player)) {
+            return false;
+        }
+        Player c = (Player) o;
+
+        if(c.isAI != this.isAI || c.getName() != this.getName() || c.getScore() != this.getScore()){
+            return false;
+        }
+
+        if(c.getHand().size() != this.getHand().size()){
+            return false;
+        }
+
+        for(int i = 0; i < this.getHand().size(); i++){
+            if(!c.getHand().get(i).toString().equals(this.getHand().get(i).toString())){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

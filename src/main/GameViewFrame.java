@@ -1,5 +1,6 @@
 package main;
 
+import main.controllers.GameViewFrameController;
 import main.models.GameRunner;
 import main.views.*;
 import main.models.cards.DoubleSidedCard;
@@ -17,13 +18,36 @@ import java.util.Stack;
 public class GameViewFrame extends JFrame {
 
     private final NewGameView newGameView;
+    private GameViewFrameController controller;
 
     /** Create a new GameViewFrame.
      * @param game The UNO game to display
      */
     public GameViewFrame(Game game) {
         super("UNO");
+
+        this.controller = new GameViewFrameController(this);
+
         this.setLayout(new BorderLayout());
+
+        //Menu bar setup
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu actionMenu = new JMenu("Actions");
+        JMenuItem saveGameMenuItem = new JMenuItem("Save Game");
+        JMenuItem loadGameMenuItem = new JMenuItem("Load Game");
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+
+        actionMenu.add(saveGameMenuItem);
+        actionMenu.add(loadGameMenuItem);
+        actionMenu.add(exitMenuItem);
+
+        menuBar.add(actionMenu);
+        this.setJMenuBar(menuBar);
+
+        saveGameMenuItem.addActionListener(controller);
+        loadGameMenuItem.addActionListener(controller);
+        exitMenuItem.addActionListener(controller);
 
         // Add new game view
         newGameView = new NewGameView(this, game);
