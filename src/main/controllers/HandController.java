@@ -51,4 +51,18 @@ public class HandController {
     public void nextTurn() {
         game.advanceTurn();
     }
+
+    /**
+     * undoes the action of the current player
+     */
+    public void undoAction() {
+
+    }
+
+    /**
+     * redoes the action of the current player
+     */
+    public void redoAction() {
+
+    }
 }

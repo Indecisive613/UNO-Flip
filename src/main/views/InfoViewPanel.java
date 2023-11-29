@@ -65,4 +65,14 @@ public class InfoViewPanel extends JLabel implements GameView {
     public void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour, boolean drewCard) {
 
     }
+
+    @Override
+    public void handleUndoAction() {
+
+    }
+
+    @Override
+    public void handleRedoAction() {
+
+    }
 }

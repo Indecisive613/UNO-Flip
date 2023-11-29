@@ -33,7 +33,7 @@ public interface GameView {
     /**
      * Display information about the card that was played and additional useful information
      *
-     * @param playedCard        the card that has been played
+     * @param playedCard the card that has been played
      */
     void handlePlayCard(Card playedCard);
 
@@ -60,4 +60,14 @@ public interface GameView {
      * Handle the turn of an AI player
      */
     void handleAiPlayerTurn(Player currentPlayer, Card playedCard, Card.Colour currentColour, boolean drewCard);
+
+    /**
+     * Handle the undo action of the current player
+     */
+    void handleUndoAction();
+
+    /**
+     * Handle the redo action of the current player
+     */
+    void handleRedoAction();
 }

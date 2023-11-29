@@ -155,4 +155,14 @@ public class TableViewPanel extends JPanel implements GameView {
 
     }
 
+    @Override
+    public void handleUndoAction() {
+
+    }
+
+    @Override
+    public void handleRedoAction() {
+
+    }
+
 }

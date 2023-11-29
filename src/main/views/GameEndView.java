@@ -107,4 +107,14 @@ public class GameEndView extends JOptionPane implements GameView {
 
     }
 
+    @Override
+    public void handleUndoAction() {
+
+    }
+
+    @Override
+    public void handleRedoAction() {
+
+    }
+
 }

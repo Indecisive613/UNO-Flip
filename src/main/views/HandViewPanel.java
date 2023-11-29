@@ -24,7 +24,13 @@ public class HandViewPanel extends JPanel implements GameView {
     private final JLabel aiTurnMessage;
     private final JButton drawButton;
     private final JButton endTurn;
+
+    //TODO Completely Implement UNDO and REDO Button functionality
+    private final JButton undoButton;
+    private final JButton redoButton;
+
     private final JPanel cardPanel;
+
     private final HandController controller;
 
     private Player player;
@@ -80,6 +86,42 @@ public class HandViewPanel extends JPanel implements GameView {
             endTurn.setBackground(Color.GREEN);
         });
         actionPanel.add(drawButton);
+
+        // Add undo button
+        //TODO Implement undoAction() in HandController
+        undoButton = new JButton("UNDO");
+        undoButton.setFocusPainted(false);
+        undoButton.setBackground(Color.GREEN);
+        undoButton.setFont(BUTTON_FONT);
+
+        undoButton.addActionListener(event -> {
+            controller.undoAction();
+
+            endTurn.setEnabled(false);
+            endTurn.setBackground(Color.WHITE);
+
+            drawButton.setEnabled(true);
+            drawButton.setBackground(Color.GREEN);
+        });
+        actionPanel.add(undoButton);
+
+        // Add redo button
+        //TODO Implement redoAction() in HandController
+        redoButton = new JButton("REDO");
+        redoButton.setFocusPainted(false);
+        redoButton.setBackground(Color.GREEN);
+        redoButton.setFont(BUTTON_FONT);
+
+        redoButton.addActionListener(event -> {
+            controller.redoAction();
+
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
+
+            drawButton.setEnabled(false);
+            drawButton.setBackground(Color.WHITE);
+        });
+        actionPanel.add(redoButton);
 
         this.add(actionPanel);
         this.add(scrollPane);
@@ -220,5 +262,15 @@ public class HandViewPanel extends JPanel implements GameView {
             sb.append(" and flipped the deck ");
         }
         aiTurnMessage.setText(sb.toString());
+    }
+
+    @Override
+    public void handleUndoAction() {
+
+    }
+
+    @Override
+    public void handleRedoAction() {
+
     }
 }
