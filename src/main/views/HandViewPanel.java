@@ -21,7 +21,10 @@ public class HandViewPanel extends JPanel implements GameView {
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
 
     private final JLabel playerName;
-    private final JLabel aiTurnMessage;
+
+    //TODO Completely Implement UNDO and REDO message
+    private final JLabel actionMessage;
+
     private final JButton drawButton;
     private final JButton endTurn;
 
@@ -47,10 +50,10 @@ public class HandViewPanel extends JPanel implements GameView {
         playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(playerName);
 
-        aiTurnMessage = new JLabel(" ", SwingConstants.CENTER);
-        aiTurnMessage.setFont(new Font("Mono", Font.PLAIN, 24));
-        aiTurnMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(aiTurnMessage);
+        actionMessage = new JLabel(" ", SwingConstants.CENTER);
+        actionMessage.setFont(new Font("Mono", Font.PLAIN, 24));
+        actionMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(actionMessage);
 
         JPanel actionPanel = new JPanel();
 
@@ -141,7 +144,7 @@ public class HandViewPanel extends JPanel implements GameView {
     public void handleNewTurn(Player player) {
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
-        aiTurnMessage.setText(" ");
+        actionMessage.setText(" ");
 
         if (player.getIsAI()) {
             playerName.setText("Current Player: " + player.getName() + " (AI Player)");
@@ -261,16 +264,24 @@ public class HandViewPanel extends JPanel implements GameView {
         if (playedCard != null && playedCard.getSymbol() == Card.Symbol.FLIP) {
             sb.append(" and flipped the deck ");
         }
-        aiTurnMessage.setText(sb.toString());
+        actionMessage.setText(sb.toString());
     }
 
     @Override
     public void handleUndoAction() {
+        undoButton.setEnabled(false);
+        redoButton.setEnabled(true);
+        redoButton.setBackground(Color.GREEN);
 
+        actionMessage.setText("The action of " + player.getName() + " was undone");
     }
 
     @Override
     public void handleRedoAction() {
+        redoButton.setEnabled(false);
+        undoButton.setEnabled(true);
+        undoButton.setBackground(Color.GREEN);
 
+        actionMessage.setText("The action of " + player.getName() + " was redone");
     }
 }
