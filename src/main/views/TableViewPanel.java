@@ -1,10 +1,10 @@
 package main.views;
 
 import main.controllers.TableController;
-import main.models.cards.Card;
 import main.models.Game;
 import main.models.JCardButton;
 import main.models.Player;
+import main.models.cards.Card;
 
 import javax.swing.*;
 import java.awt.*;
@@ -157,12 +157,16 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleUndoAction() {
+        handlePlayCard(game.getTopCard());
+        //handleDrawCard();
+        remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
+        handleUpdateTurnOrder(game.getTurnOrderReversed());
 
     }
 
     @Override
     public void handleRedoAction() {
-
+        handleUndoAction();
     }
 
 }

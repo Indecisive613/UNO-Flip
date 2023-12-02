@@ -106,6 +106,11 @@ public class Game {
     public Card.Symbol getCurrentSymbol() { return getTopCard().getSymbol(); }
 
     /**
+     * @return the current turn order of the game
+     */
+    public boolean getTurnOrderReversed() { return turnOrderReversed; }
+
+    /**
      * Add a new Player to the Game
      *
      * @param player The Player to add
@@ -278,6 +283,7 @@ public class Game {
      * @param player The Player whose turn it is
      */
     public DoubleSidedCard drawCard(Player player) {
+        storePriorState();
         if(deck.isEmpty()){
             shuffleDeck();
         }
@@ -457,6 +463,7 @@ public class Game {
         for (DoubleSidedCard card: playedCards){
             priorState.playedCards.push(card);
         }
+
         priorState.turnOrderReversed = turnOrderReversed;
         priorState.skipPlayer = skipPlayer;
         priorState.skipEveryone = skipEveryone;
@@ -468,30 +475,7 @@ public class Game {
         this.previousState = priorState;
     }
 
-    /*
-    public void returnPriorState() {
-        this.turnOrderReversed = previousState.turnOrderReversed;
-        this.skipPlayer = previousState.skipPlayer;
-        this.skipEveryone = previousState.skipEveryone;
-        this.currentPlayerIndex = previousState.currentPlayerIndex;
-        this.currentColour = previousState.currentColour;
-        this.running = previousState.running;
-        this.roundNumber = previousState.roundNumber;
-        this.dark = previousState.dark;
-    }
-    */
-
-    public void undo(){
-        //returnPriorState();
-        //this = previousState;
-        storePriorState();
-        for (Player player:players){
-            player.undo();
-        }
-
-        for (DoubleSidedCard card: previousState.playedCards){
-            playedCards.push(card);
-        }
+    public void restorePriorState() {
         turnOrderReversed = previousState.turnOrderReversed;
         skipPlayer = previousState.skipPlayer;
         skipEveryone = previousState.skipEveryone;
@@ -500,16 +484,30 @@ public class Game {
         running = previousState.running;
         roundNumber = previousState.roundNumber;
         dark = previousState.dark;
+    }
 
+    public void undo(){
+
+        System.out.println(this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
+        restorePriorState();
+
+        for (Player player:players){
+            player.undo();
+        }
+        for (DoubleSidedCard card: previousState.playedCards){
+            playedCards.push(card);
+        }
         for (GameView view: views) {
             view.handleUndoAction();
         }
+        //storePriorState();
+
+        System.out.println(this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
+        System.out.println("------------------------------------------------------------------");
     }
 
     public void redo(){
+        storePriorState();
         undo();
-        for (GameView view: views) {
-            view.handleRedoAction();
-        }
     }
 }
