@@ -468,7 +468,21 @@ public class Game {
         this.previousState = priorState;
     }
 
+    /*
+    public void returnPriorState() {
+        this.turnOrderReversed = previousState.turnOrderReversed;
+        this.skipPlayer = previousState.skipPlayer;
+        this.skipEveryone = previousState.skipEveryone;
+        this.currentPlayerIndex = previousState.currentPlayerIndex;
+        this.currentColour = previousState.currentColour;
+        this.running = previousState.running;
+        this.roundNumber = previousState.roundNumber;
+        this.dark = previousState.dark;
+    }
+    */
+
     public void undo(){
+        //returnPriorState();
         //this = previousState;
         storePriorState();
         for (Player player:players){
@@ -486,9 +500,16 @@ public class Game {
         running = previousState.running;
         roundNumber = previousState.roundNumber;
         dark = previousState.dark;
+
+        for (GameView view: views) {
+            view.handleUndoAction();
+        }
     }
 
     public void redo(){
         undo();
+        for (GameView view: views) {
+            view.handleRedoAction();
+        }
     }
 }
