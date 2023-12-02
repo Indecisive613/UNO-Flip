@@ -32,6 +32,7 @@ public class Game {
     private boolean running = false;
     private int roundNumber;
     private boolean dark = false;
+    private Game previousState;
 
     /**
      * Create a new UNO Game given a deck of cards
@@ -245,6 +246,7 @@ public class Game {
      * @param card The card to play
      */
     public void playCard(DoubleSidedCard card) {
+        storePriorState();
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
@@ -433,5 +435,60 @@ public class Game {
         Collections.reverse(deck);
         Collections.reverse(playedCards);
         setCurrentColour(playedCards.peek().getActiveSide().getColour());
+    }
+
+    public void setPreviousState(Game previousState) {
+        this.previousState = previousState;
+    }
+
+    public void storePriorState(){
+        for (Player player:players){
+            player.storePriorState();
+        }
+
+        Game priorState = new Game(this.deck);
+
+        for (GameView view: views){
+            priorState.addView(view);
+        }
+        for (Player player: players){
+            priorState.addPlayer(player);
+        }
+        for (DoubleSidedCard card: playedCards){
+            priorState.playedCards.push(card);
+        }
+        priorState.turnOrderReversed = turnOrderReversed;
+        priorState.skipPlayer = skipPlayer;
+        priorState.skipEveryone = skipEveryone;
+        priorState.currentPlayerIndex = currentPlayerIndex;
+        priorState.currentColour = currentColour;
+        priorState.running = running;
+        priorState.roundNumber = roundNumber;
+        priorState.dark = dark;
+        this.previousState = priorState;
+    }
+
+    public void undo(){
+        //this = previousState;
+        storePriorState();
+        for (Player player:players){
+            player.undo();
+        }
+
+        for (DoubleSidedCard card: previousState.playedCards){
+            playedCards.push(card);
+        }
+        turnOrderReversed = previousState.turnOrderReversed;
+        skipPlayer = previousState.skipPlayer;
+        skipEveryone = previousState.skipEveryone;
+        currentPlayerIndex = previousState.currentPlayerIndex;
+        currentColour = previousState.currentColour;
+        running = previousState.running;
+        roundNumber = previousState.roundNumber;
+        dark = previousState.dark;
+    }
+
+    public void redo(){
+        undo();
     }
 }
