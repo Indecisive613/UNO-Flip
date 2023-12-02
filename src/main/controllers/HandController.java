@@ -56,13 +56,13 @@ public class HandController {
      * undoes the action of the current player
      */
     public void undoAction() {
-
+        game.undo();
     }
 
     /**
      * redoes the action of the current player
      */
     public void redoAction() {
-
+        game.redo();
     }
 }

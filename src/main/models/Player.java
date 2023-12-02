@@ -15,6 +15,7 @@ public class Player {
     private int score;
     private ArrayList<DoubleSidedCard> hand;
     private boolean isAI;
+    private ArrayList<DoubleSidedCard> previousHand;
 
     /**
      * Create a Player with a given name and hand of cards
@@ -106,6 +107,24 @@ public class Player {
      */
     public void clearHand(){
         hand.clear();
+    }
+
+    public void storePriorState(){
+        this.previousHand = copyHand();
+    }
+
+    public void undo(){
+        ArrayList<DoubleSidedCard> tempHand = copyHand();
+        hand = previousHand;
+        previousHand = tempHand;
+    }
+
+    public ArrayList<DoubleSidedCard> copyHand(){
+        ArrayList<DoubleSidedCard> priorHand = new ArrayList<>();
+        for (DoubleSidedCard card: hand){
+            priorHand.add(card);
+        }
+        return priorHand;
     }
 
     @Override
