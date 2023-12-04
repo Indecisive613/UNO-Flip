@@ -21,14 +21,10 @@ public class HandViewPanel extends JPanel implements GameView {
     private static final Font BUTTON_FONT = new Font("Mono", Font.BOLD, 30);
 
     private final JLabel playerName;
-
-    //TODO Completely Implement UNDO and REDO message
     private final JLabel actionMessage;
 
     private final JButton drawButton;
     private final JButton endTurn;
-
-    //TODO Completely Implement UNDO and REDO Button functionality
     private final JButton undoButton;
     private final JButton redoButton;
 
@@ -95,11 +91,13 @@ public class HandViewPanel extends JPanel implements GameView {
 
             undoButton.setEnabled(true);
             undoButton.setBackground(Color.GREEN);
+
+            redoButton.setEnabled(false);
+            redoButton.setBackground(Color.WHITE);
         });
         actionPanel.add(drawButton);
 
         // Add undo button
-        //TODO Implement undoAction() in HandController
         undoButton.setFocusPainted(false);
         undoButton.setEnabled(false);
         undoButton.setBackground(Color.WHITE);
@@ -117,7 +115,6 @@ public class HandViewPanel extends JPanel implements GameView {
         actionPanel.add(undoButton);
 
         // Add redo button
-        //TODO Implement redoAction() in HandController
         redoButton.setFocusPainted(false);
         redoButton.setEnabled(false);
         redoButton.setBackground(Color.WHITE);
@@ -211,17 +208,15 @@ public class HandViewPanel extends JPanel implements GameView {
                 int index = i;
                 cardButton.addActionListener(event -> {
                     controller.playCard(index);
-
                     drawButton.setEnabled(false);
                     drawButton.setBackground(Color.WHITE);
-
                     lockHand();
-
                     endTurn.setEnabled(true);
                     endTurn.setBackground(Color.GREEN);
-
                     undoButton.setEnabled(true);
                     undoButton.setBackground(Color.GREEN);
+                    redoButton.setEnabled(false);
+                    redoButton.setBackground((Color.WHITE));
                 });
             } else {
                 cardButton.setEnabled(false);
@@ -293,6 +288,11 @@ public class HandViewPanel extends JPanel implements GameView {
     public void handleUndoAction() {
         actionMessage.setText("The action of " + player.getName() + " was undone");
 
+        drawButton.setEnabled(true);
+        drawButton.setBackground(Color.GREEN);
+        endTurn.setEnabled(false);
+        endTurn.setBackground(Color.WHITE);
+
         undoButton.setEnabled(false);
         undoButton.setBackground(Color.WHITE);
         redoButton.setEnabled(true);
@@ -304,6 +304,11 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void handleRedoAction() {
         actionMessage.setText("The action of " + player.getName() + " was redone");
+
+        drawButton.setEnabled(false);
+        drawButton.setBackground(Color.WHITE);
+        endTurn.setEnabled(true);
+        endTurn.setBackground(Color.GREEN);
 
         redoButton.setEnabled(false);
         redoButton.setBackground(Color.WHITE);

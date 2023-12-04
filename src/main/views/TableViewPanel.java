@@ -157,7 +157,7 @@ public class TableViewPanel extends JPanel implements GameView {
 
     @Override
     public void handleUndoAction() {
-        handlePlayCard(game.getTopCard());
+        handlePlayCard(controller.getTopCard());
         //handleDrawCard();
         remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
         handleUpdateTurnOrder(game.getTurnOrderReversed());

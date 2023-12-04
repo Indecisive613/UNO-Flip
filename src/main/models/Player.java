@@ -114,7 +114,8 @@ public class Player {
     }
 
     public void undo(){
-        ArrayList<DoubleSidedCard> tempHand = copyHand();
+        //ArrayList<DoubleSidedCard> tempHand = copyHand();
+        ArrayList<DoubleSidedCard> tempHand = hand;
         hand = previousHand;
         previousHand = tempHand;
     }

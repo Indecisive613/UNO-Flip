@@ -48,6 +48,7 @@ public class Game {
         skipPlayer = false;
         skipEveryone = false;
         roundNumber = 0;
+        previousState = null;
     }
 
     /**
@@ -193,6 +194,8 @@ public class Game {
         skipPlayer = false;
         skipEveryone = false;
 
+        storePriorState();
+
         for (GameView view : views) {
             view.handleNewTurn(players.get(currentPlayerIndex));
         }
@@ -251,7 +254,7 @@ public class Game {
      * @param card The card to play
      */
     public void playCard(DoubleSidedCard card) {
-        storePriorState();
+        //storePriorState();
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
@@ -472,7 +475,7 @@ public class Game {
         priorState.running = running;
         priorState.roundNumber = roundNumber;
         priorState.dark = dark;
-        this.previousState = priorState;
+        setPreviousState(priorState);
     }
 
     public void restorePriorState() {
@@ -487,27 +490,46 @@ public class Game {
     }
 
     public void undo(){
+        System.out.println("Before Undo: " + this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
 
-        System.out.println(this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
-        restorePriorState();
+        System.out.println("In undo (Before):");
+        System.out.println("------------------------------------------------------------------");
+
+        for (DoubleSidedCard card: this.getCurrentPlayer().getHand()) {
+            System.out.println(card.getActiveSide().getColour() + ", " + card.getActiveSide().getSymbol());
+        }
+        System.out.println("------------------------------------------------------------------");
 
         for (Player player:players){
             player.undo();
         }
+
         for (DoubleSidedCard card: previousState.playedCards){
             playedCards.push(card);
         }
         for (GameView view: views) {
             view.handleUndoAction();
         }
-        //storePriorState();
+        restorePriorState();
 
-        System.out.println(this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
+        System.out.println("In undo (After):");
         System.out.println("------------------------------------------------------------------");
+
+        for (DoubleSidedCard card: this.getCurrentPlayer().getHand()) {
+            System.out.println(card.getActiveSide().getColour() + ", " + card.getActiveSide().getSymbol());
+        }
+        System.out.println("------------------------------------------------------------------");
+
+        System.out.println("After Undo: " + this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
+        System.out.println("------------------------------------------------------------------");
+
+        //storePriorState();
     }
 
     public void redo(){
-        storePriorState();
         undo();
+        for (GameView view: views) {
+            view.handleRedoAction();
+        }
     }
 }
