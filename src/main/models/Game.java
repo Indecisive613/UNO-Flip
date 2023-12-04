@@ -508,6 +508,9 @@ public class Game {
         }
         Game tempGame = copyGame();
         restorePriorState();
+        if (tempGame.isDark() != isDark()){
+            DoubleSidedCard.flip();
+        }
 
 
         for (Player player:players){
