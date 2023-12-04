@@ -316,5 +316,6 @@ public class HandViewPanel extends JPanel implements GameView {
         undoButton.setBackground(Color.GREEN);
 
         updateCardPanel();
+        lockHand();
     }
 }
