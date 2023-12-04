@@ -15,6 +15,11 @@ public class Player {
     private int score;
     private ArrayList<DoubleSidedCard> hand;
     private boolean isAI;
+
+    public ArrayList<DoubleSidedCard> getPreviousHand() {
+        return previousHand;
+    }
+
     private ArrayList<DoubleSidedCard> previousHand;
 
     /**
@@ -98,6 +103,7 @@ public class Player {
             throw new IllegalArgumentException("You must play a card between 0 and " + hand.size());
         }
         DoubleSidedCard card = hand.get(index);
+        storePriorState();
         hand.remove(index);
         return card;
     }
@@ -111,19 +117,37 @@ public class Player {
 
     public void storePriorState(){
         this.previousHand = copyHand();
+        if (previousHand == null){
+            System.out.println("what");
+        }
+        else{
+            System.out.println("running");
+        }
     }
 
     public void undo(){
-        //ArrayList<DoubleSidedCard> tempHand = copyHand();
-        ArrayList<DoubleSidedCard> tempHand = hand;
+        if (previousHand == null){
+            System.out.println("it's becoming null...");
+        }
+        ArrayList<DoubleSidedCard> tempHand = copyHand();
+        //ArrayList<DoubleSidedCard> tempHand = hand;
+        if (previousHand == null){
+            System.out.println("issue");
+        }
         hand = previousHand;
         previousHand = tempHand;
     }
 
     public ArrayList<DoubleSidedCard> copyHand(){
         ArrayList<DoubleSidedCard> priorHand = new ArrayList<>();
+        if (hand == null){
+            System.out.println("issue2");
+        }
         for (DoubleSidedCard card: hand){
             priorHand.add(card);
+        }
+        if(priorHand == null){
+            System.out.println("yooo");
         }
         return priorHand;
     }

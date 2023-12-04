@@ -195,6 +195,9 @@ public class Game {
         skipEveryone = false;
 
         storePriorState();
+        for (Player player: players){
+            player.storePriorState();
+        }
 
         for (GameView view : views) {
             view.handleNewTurn(players.get(currentPlayerIndex));
@@ -254,7 +257,12 @@ public class Game {
      * @param card The card to play
      */
     public void playCard(DoubleSidedCard card) {
-        //storePriorState();
+        storePriorState();
+        //int i = 0;
+        Player player = players.get((currentPlayerIndex));
+        if (player.getPreviousHand() == null){
+            System.out.println("getting warmer at play");
+        }
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
@@ -450,11 +458,7 @@ public class Game {
         this.previousState = previousState;
     }
 
-    public void storePriorState(){
-        for (Player player:players){
-            player.storePriorState();
-        }
-
+    private Game copyGame(){
         Game priorState = new Game(this.deck);
 
         for (GameView view: views){
@@ -462,9 +466,12 @@ public class Game {
         }
         for (Player player: players){
             priorState.addPlayer(player);
+            if (player.getHand() == null){
+                System.out.println("wack");
+            }
         }
         for (DoubleSidedCard card: playedCards){
-            priorState.playedCards.push(card);
+            priorState.playedCards.add(card);
         }
 
         priorState.turnOrderReversed = turnOrderReversed;
@@ -475,7 +482,11 @@ public class Game {
         priorState.running = running;
         priorState.roundNumber = roundNumber;
         priorState.dark = dark;
-        setPreviousState(priorState);
+        return priorState;
+    }
+
+    public void storePriorState(){
+        setPreviousState(copyGame());
     }
 
     public void restorePriorState() {
@@ -490,17 +501,19 @@ public class Game {
     }
 
     public void undo(){
-        System.out.println("Before Undo: " + this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
-
-        System.out.println("In undo (Before):");
-        System.out.println("------------------------------------------------------------------");
-
-        for (DoubleSidedCard card: this.getCurrentPlayer().getHand()) {
-            System.out.println(card.getActiveSide().getColour() + ", " + card.getActiveSide().getSymbol());
+        for (Player player:players){
+            if (player.getPreviousHand() == null){
+                System.out.println("getting warmer before");
+            }
         }
-        System.out.println("------------------------------------------------------------------");
+        Game tempGame = copyGame();
+        restorePriorState();
+
 
         for (Player player:players){
+            if (player.getPreviousHand() == null){
+                System.out.println("getting warmer");
+            }
             player.undo();
         }
 
@@ -510,21 +523,7 @@ public class Game {
         for (GameView view: views) {
             view.handleUndoAction();
         }
-        restorePriorState();
-
-        System.out.println("In undo (After):");
-        System.out.println("------------------------------------------------------------------");
-
-        for (DoubleSidedCard card: this.getCurrentPlayer().getHand()) {
-            System.out.println(card.getActiveSide().getColour() + ", " + card.getActiveSide().getSymbol());
-        }
-        System.out.println("------------------------------------------------------------------");
-
-        System.out.println("After Undo: " + this.getTopCard().getColour() + ", " + this.getTopCard().getSymbol());
-        System.out.println("------------------------------------------------------------------");
-
-        //storePriorState();
-        System.out.println("Anand Branch");
+        setPreviousState(tempGame);
     }
 
     public void redo(){
