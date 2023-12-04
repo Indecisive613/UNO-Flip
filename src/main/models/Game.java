@@ -524,6 +524,7 @@ public class Game {
         System.out.println("------------------------------------------------------------------");
 
         //storePriorState();
+        System.out.println("Anand Branch");
     }
 
     public void redo(){
