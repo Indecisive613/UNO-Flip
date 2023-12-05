@@ -43,6 +43,8 @@ public class GameViewFrameController implements ActionListener {
             System.out.println("Save"); //TODO change this to export to a file
         }else if("Load Game".equals(command)){
             System.out.println("Load"); //TODO change this to import from a specified file
+        } else if("Restart".equals(command)){
+            game.resetGame();
         }
     }
 }

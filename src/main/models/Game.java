@@ -459,7 +459,11 @@ public class Game {
     }
 
     private Game copyGame(){
-        Game priorState = new Game(this.deck);
+        Stack<DoubleSidedCard> priorDeck = new Stack<>();
+        for (DoubleSidedCard card:deck){
+            priorDeck.add(card);
+        }
+        Game priorState = new Game(priorDeck);
 
         for (GameView view: views){
             priorState.addView(view);
@@ -519,9 +523,13 @@ public class Game {
             }
             player.undo();
         }
-
+        playedCards.clear();
         for (DoubleSidedCard card: previousState.playedCards){
             playedCards.push(card);
+        }
+        deck.clear();
+        for (DoubleSidedCard card: previousState.deck){
+            deck.push(card);
         }
         for (GameView view: views) {
             view.handleUndoAction();
