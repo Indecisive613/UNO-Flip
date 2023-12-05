@@ -17,6 +17,7 @@ public class NewGameController implements ActionListener {
 
     private Game game;
     private NewGameView view;
+    private boolean alreadyRun = false;
 
     /**
      * Create a NewGameController
@@ -69,7 +70,8 @@ public class NewGameController implements ActionListener {
      * Asks for the player count, the names of the players, and whether they are AIs. Adds the players to the UNO game.
      */
     public void handleNewGame() {
-        if (game.getRoundNumber() == 0) {
+        if (!alreadyRun) {
+            alreadyRun = true;
             int playerCount = requestPlayerCount(Game.PLAYER_MIN, Game.PLAYER_MAX);
             ArrayList<String> allNames = new ArrayList<String>();
             for (int i = 0; i < playerCount; i++) {
