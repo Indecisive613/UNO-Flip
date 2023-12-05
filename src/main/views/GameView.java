@@ -70,4 +70,9 @@ public interface GameView {
      * Handle the redo action of the current player
      */
     void handleRedoAction();
+
+    /**
+     * Handle the end of a round
+     */
+    void handleRestartGame();
 }

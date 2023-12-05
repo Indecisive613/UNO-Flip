@@ -117,4 +117,9 @@ public class GameEndView extends JOptionPane implements GameView {
 
     }
 
+    @Override
+    public void handleRestartGame() {
+        controller.requestNewRound();
+    }
+
 }

@@ -543,4 +543,11 @@ public class Game {
             view.handleRedoAction();
         }
     }
+
+    public void restartGame() {
+
+        for (GameView view: views){
+            view.handleRestartGame();
+        }
+    }
 }

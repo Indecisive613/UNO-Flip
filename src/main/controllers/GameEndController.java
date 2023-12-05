@@ -50,6 +50,10 @@ public class GameEndController implements ActionListener {
         game.resetGame();
     }
 
+    public void requestNewRound(){
+        game.resetGame();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

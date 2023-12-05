@@ -317,4 +317,9 @@ public class HandViewPanel extends JPanel implements GameView {
 
         updateCardPanel();
     }
+
+    @Override
+    public void handleRestartGame() {
+
+    }
 }
