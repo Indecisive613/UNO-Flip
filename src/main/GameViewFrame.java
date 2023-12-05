@@ -37,10 +37,12 @@ public class GameViewFrame extends JFrame {
         JMenuItem saveGameMenuItem = new JMenuItem("Save Game");
         JMenuItem loadGameMenuItem = new JMenuItem("Load Game");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
+        JMenuItem restartMenuItem = new JMenuItem("Restart");
 
         actionMenu.add(saveGameMenuItem);
         actionMenu.add(loadGameMenuItem);
         actionMenu.add(exitMenuItem);
+        actionMenu.add(restartMenuItem);
 
         menuBar.add(actionMenu);
         this.setJMenuBar(menuBar);
