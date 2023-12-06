@@ -290,6 +290,9 @@ public class Game {
      */
     public DoubleSidedCard drawCard(Player player) {
         storePriorState();
+        for (Player itPlayer: players){
+            itPlayer.storePriorState();
+        }
         if(deck.isEmpty()){
             shuffleDeck();
         }
@@ -481,9 +484,6 @@ public class Game {
         }
         for (Player player: players){
             priorState.addPlayer(player);
-            if (player.getHand() == null){
-                System.out.println("wack");
-            }
         }
         for (DoubleSidedCard card: playedCards){
             priorState.playedCards.add(card);
