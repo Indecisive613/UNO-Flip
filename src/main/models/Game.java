@@ -541,7 +541,6 @@ public class Game {
             DoubleSidedCard.flip();
         }
 
-
         for (Player player:players){
             if (player.getPreviousHand() == null){
                 System.out.println("getting warmer");
@@ -569,8 +568,7 @@ public class Game {
         undo();
         for (GameView view: views) {
             view.handleRedoAction();
-        }
-    }
+        }}
 
     /**
      * Restart the game from the start of the most recent round

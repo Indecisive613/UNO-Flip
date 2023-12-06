@@ -160,7 +160,6 @@ public class TableViewPanel extends JPanel implements GameView {
         handlePlayCard(controller.getTopCard());
         remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
         handleUpdateTurnOrder(game.getTurnOrderReversed());
-
     }
 
     @Override
