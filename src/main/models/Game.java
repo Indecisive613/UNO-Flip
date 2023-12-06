@@ -369,9 +369,9 @@ public class Game {
     }
 
     /**
-     * Resets the state of the game
+     * Starts a new round of the game
      */
-    public void resetGame(){
+    public void startNewRound(){
         roundNumber++;
         if (dark){
             flip();
@@ -542,5 +542,35 @@ public class Game {
         for (GameView view: views) {
             view.handleRedoAction();
         }
+    }
+
+    public void restartGame() {
+        System.out.println("here2");
+        if (dark){
+            flip();
+            dark = false;
+        }
+        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
+        setDeck(deck);
+        this.playedCards = new Stack<DoubleSidedCard>();
+        turnOrderReversed = false;
+        skipPlayer = false;
+        skipEveryone = false;
+        currentPlayerIndex = -1;
+        for (Player player: players){
+            player.clearHand();
+        }
+
+        for (GameView view : views) {
+            view.handleNewGame();
+            view.handleUpdateTurnOrder(false);
+        }
+        shuffleDeck();
+        dealCards(STARTING_HAND_SIZE);
+        advanceTurn();
+        for (GameView view: views){
+            view.handleRestartGame();
+        }
+        System.out.println("here");
     }
 }

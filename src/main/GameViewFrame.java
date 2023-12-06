@@ -27,6 +27,7 @@ public class GameViewFrame extends JFrame {
         super("UNO");
 
         this.controller = new GameViewFrameController(this);
+        controller.setGame(game);
 
         this.setLayout(new BorderLayout());
 
@@ -50,6 +51,7 @@ public class GameViewFrame extends JFrame {
         saveGameMenuItem.addActionListener(controller);
         loadGameMenuItem.addActionListener(controller);
         exitMenuItem.addActionListener(controller);
+        restartMenuItem.addActionListener(controller);
 
         // Add new game view
         newGameView = new NewGameView(this, game);

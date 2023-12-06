@@ -75,4 +75,9 @@ public class InfoViewPanel extends JLabel implements GameView {
     public void handleRedoAction() {
 
     }
+
+    @Override
+    public void handleRestartGame() {
+
+    }
 }

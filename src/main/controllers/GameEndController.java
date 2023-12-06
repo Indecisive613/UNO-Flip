@@ -40,14 +40,24 @@ public class GameEndController implements ActionListener {
             return;
         }
         String[] strOptions = {"Continue"};
-        Card.Colour[] colours = {Card.Colour.RED, Card.Colour.BLUE, Card.Colour.GREEN, Card.Colour.YELLOW};
 
         int input = view.getNewGameConfirmation(strOptions, winner);
         while(input == -1) {
             view.showErrorMessage("Starting a new game is mandatory");
             input = view.getNewGameConfirmation(strOptions, winner);
         }
-        game.resetGame();
+        game.startNewRound();
+    }
+
+    public void requestRestart(){
+
+        String[] strOptions = {"Continue"};
+
+        int input = view.getRestartConfirmation(strOptions);
+        while(input == -1) {
+            view.showErrorMessage("Starting a new game is mandatory");
+            input = view.getRestartConfirmation(strOptions);
+        }
     }
 
     @Override

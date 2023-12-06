@@ -159,4 +159,9 @@ public class NewGameView extends JPanel implements GameView {
 
     }
 
+    @Override
+    public void handleRestartGame() {
+
+    }
+
 }

@@ -318,4 +318,9 @@ public class HandViewPanel extends JPanel implements GameView {
         updateCardPanel();
         lockHand();
     }
+
+    @Override
+    public void handleRestartGame() {
+
+    }
 }

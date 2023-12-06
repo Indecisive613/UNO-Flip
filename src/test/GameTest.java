@@ -695,7 +695,7 @@ public class GameTest {
         assertTrue(game.hasWonRound());
         game.assignScore();
         assertFalse(game.hasWonGame());
-        game.resetGame(); // the game should now be reset
+        game.startNewRound(); // the game should now be reset
 
         // test that the game reset properly and the
         assertTrue(game.isRunning());

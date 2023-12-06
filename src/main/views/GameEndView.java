@@ -117,4 +117,14 @@ public class GameEndView extends JOptionPane implements GameView {
 
     }
 
+    @Override
+    public void handleRestartGame() {
+        controller.requestRestart();
+    }
+
+    public int getRestartConfirmation(String[] strOptions) {
+        String displayMessage = "Round has been restarted\nPress the button to start a new game";
+        return this.showOptionDialog(superFrame, displayMessage, "Restart Successful",
+                this.DEFAULT_OPTION, this.PLAIN_MESSAGE, null, strOptions, strOptions[0]);
+    }
 }
