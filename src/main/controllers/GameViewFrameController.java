@@ -44,7 +44,6 @@ public class GameViewFrameController implements ActionListener {
         }else if("Load Game".equals(command)){
             System.out.println("Load"); //TODO change this to import from a specified file
         } else if("Restart".equals(command)){
-            System.out.println("dawg");
             game.restartGame();
         }
     }
