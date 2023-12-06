@@ -121,12 +121,6 @@ public class Player {
      */
     public void storePriorState(){
         this.previousHand = copyHand();
-        if (previousHand == null){
-            System.out.println("what");
-        }
-        else{
-            System.out.println("running");
-        }
     }
 
     /**
@@ -135,14 +129,7 @@ public class Player {
      * the new previous hand
      */
     public void undo(){
-        if (previousHand == null){
-            System.out.println("it's becoming null...");
-        }
         ArrayList<DoubleSidedCard> tempHand = copyHand();
-        //ArrayList<DoubleSidedCard> tempHand = hand;
-        if (previousHand == null){
-            System.out.println("issue");
-        }
         hand = previousHand;
         previousHand = tempHand;
     }
@@ -155,14 +142,8 @@ public class Player {
      */
     public ArrayList<DoubleSidedCard> copyHand(){
         ArrayList<DoubleSidedCard> priorHand = new ArrayList<>();
-        if (hand == null){
-            System.out.println("issue2");
-        }
         for (DoubleSidedCard card: hand){
             priorHand.add(card);
-        }
-        if(priorHand == null){
-            System.out.println("yooo");
         }
         return priorHand;
     }

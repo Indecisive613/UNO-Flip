@@ -258,11 +258,6 @@ public class Game {
      */
     public void playCard(DoubleSidedCard card) {
         storePriorState();
-        //int i = 0;
-        Player player = players.get((currentPlayerIndex));
-        if (player.getPreviousHand() == null){
-            System.out.println("getting warmer at play");
-        }
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
@@ -530,22 +525,13 @@ public class Game {
      * Undo the most recent action of the current player
      */
     public void undo(){
-        for (Player player:players){
-            if (player.getPreviousHand() == null){
-                System.out.println("getting warmer before");
-            }
-        }
         Game tempGame = copyGame();
         restorePriorState();
         if (tempGame.isDark() != isDark()){
             DoubleSidedCard.flip();
         }
 
-
         for (Player player:players){
-            if (player.getPreviousHand() == null){
-                System.out.println("getting warmer");
-            }
             player.undo();
         }
         playedCards.clear();
@@ -576,7 +562,6 @@ public class Game {
      * Restart the game from the start of the most recent round
      */
     public void restartGame() {
-        System.out.println("here2");
         if (dark){
             flip();
             dark = false;
@@ -602,6 +587,5 @@ public class Game {
         for (GameView view: views){
             view.handleRestartGame();
         }
-        System.out.println("here");
     }
 }
