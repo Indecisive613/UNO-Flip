@@ -20,7 +20,7 @@ public class DrawFiveCard extends Card {
     @Override
     public void cardAction(Game game) {
         for(int i = 0; i < 5; i++){
-            game.drawCard(game.getPlayers().get(game.nextPlayer()));
+            game.drawCard(game.getPlayers().get(game.nextPlayer()), false);
         }
     }
 }

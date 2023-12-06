@@ -43,7 +43,7 @@ public class HandController {
     /**
      * draw a card from the deck
      */
-    public void drawCard() { game.drawCard(game.getCurrentPlayer()); }
+    public void drawCard() { game.drawCard(game.getCurrentPlayer(), true); }
 
     /**
      * advances the turn so that the next player in the game can play

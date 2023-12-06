@@ -210,7 +210,7 @@ public class Game {
             Card activeCard = null;
 
             if (action == -1) {
-                drawCard(getCurrentPlayer());
+                drawCard(getCurrentPlayer(), false);
                 drewCard = true;
 
                 // the AI player can check if their drawn card can be played
@@ -258,11 +258,6 @@ public class Game {
      */
     public void playCard(DoubleSidedCard card) {
         storePriorState();
-        //int i = 0;
-        Player player = players.get((currentPlayerIndex));
-        if (player.getPreviousHand() == null){
-            System.out.println("getting warmer at play");
-        }
         playedCards.push(card);
         Card activeSide = card.getActiveSide();
 
@@ -291,10 +286,16 @@ public class Game {
     /**
      * Deal a card from the deck to a given Player
      *
-     * @param player The Player whose turn it is
+     * @param player   The Player whose turn it is
+     * @param storeState
      */
-    public DoubleSidedCard drawCard(Player player) {
-        storePriorState();
+    public DoubleSidedCard drawCard(Player player, boolean storeState) {
+        if (storeState) {
+            storePriorState();
+            for (Player itPlayer : players) {
+                itPlayer.storePriorState();
+            }
+        }
         if(deck.isEmpty()){
             shuffleDeck();
         }
@@ -486,9 +487,6 @@ public class Game {
         }
         for (Player player: players){
             priorState.addPlayer(player);
-            if (player.getHand() == null){
-                System.out.println("wack");
-            }
         }
         for (DoubleSidedCard card: playedCards){
             priorState.playedCards.add(card);
@@ -530,11 +528,6 @@ public class Game {
      * Undo the most recent action of the current player
      */
     public void undo(){
-        for (Player player:players){
-            if (player.getPreviousHand() == null){
-                System.out.println("getting warmer before");
-            }
-        }
         Game tempGame = copyGame();
         restorePriorState();
         if (tempGame.isDark() != isDark()){
@@ -542,9 +535,6 @@ public class Game {
         }
 
         for (Player player:players){
-            if (player.getPreviousHand() == null){
-                System.out.println("getting warmer");
-            }
             player.undo();
         }
         playedCards.clear();
@@ -574,7 +564,6 @@ public class Game {
      * Restart the game from the start of the most recent round
      */
     public void restartGame() {
-        System.out.println("here2");
         if (dark){
             flip();
             dark = false;
@@ -600,6 +589,5 @@ public class Game {
         for (GameView view: views){
             view.handleRestartGame();
         }
-        System.out.println("here");
     }
 }
