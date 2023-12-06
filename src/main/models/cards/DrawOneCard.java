@@ -20,6 +20,6 @@ public class DrawOneCard extends Card {
 
     @Override
     public void cardAction(Game game) {
-        game.drawCard(game.getPlayers().get(game.nextPlayer()));
+        game.drawCard(game.getPlayers().get(game.nextPlayer()), false);
     }
 }

@@ -210,7 +210,7 @@ public class Game {
             Card activeCard = null;
 
             if (action == -1) {
-                drawCard(getCurrentPlayer());
+                drawCard(getCurrentPlayer(), false);
                 drewCard = true;
 
                 // the AI player can check if their drawn card can be played
@@ -286,12 +286,15 @@ public class Game {
     /**
      * Deal a card from the deck to a given Player
      *
-     * @param player The Player whose turn it is
+     * @param player   The Player whose turn it is
+     * @param storeState
      */
-    public DoubleSidedCard drawCard(Player player) {
-        storePriorState();
-        for (Player itPlayer: players){
-            itPlayer.storePriorState();
+    public DoubleSidedCard drawCard(Player player, boolean storeState) {
+        if (storeState) {
+            storePriorState();
+            for (Player itPlayer : players) {
+                itPlayer.storePriorState();
+            }
         }
         if(deck.isEmpty()){
             shuffleDeck();

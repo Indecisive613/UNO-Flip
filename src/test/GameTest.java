@@ -96,7 +96,7 @@ public class GameTest {
 
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer()); // the current player should be player1
-        game.drawCard(game.getCurrentPlayer()); // player1 draws a card from the deck
+        game.drawCard(game.getCurrentPlayer(), true); // player1 draws a card from the deck
         assertEquals(8, player1.getHand().size()); // player1 should have 8 cards
         assertEquals(112 - 7*4 - 1 - 1, deck.size()); // the deck should have 1 less card
 
@@ -104,7 +104,7 @@ public class GameTest {
 
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer()); // the current player should be player2
-        game.drawCard(game.getCurrentPlayer()); // player2 draws a card from the deck
+        game.drawCard(game.getCurrentPlayer(), true); // player2 draws a card from the deck
         assertEquals(8, player2.getHand().size()); // player2 should have 8 cards
         assertEquals(112 - 7*4 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
@@ -112,7 +112,7 @@ public class GameTest {
 
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer()); // the current player should be player3
-        game.drawCard(game.getCurrentPlayer()); // player3 draws a card from the deck
+        game.drawCard(game.getCurrentPlayer(), true); // player3 draws a card from the deck
         assertEquals(8, player3.getHand().size()); // player3 should have 8 cards
         assertEquals(112 - 7*4 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
@@ -120,7 +120,7 @@ public class GameTest {
 
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer()); // the current player should be player4
-        game.drawCard(game.getCurrentPlayer()); // player4 draws a card from the deck
+        game.drawCard(game.getCurrentPlayer(), true); // player4 draws a card from the deck
         assertEquals(8, player4.getHand().size()); // player4 should have 8 cards
         assertEquals(112 - 7*4 - 1 - 1 - 1 - 1 - 1, deck.size()); // the deck should have 1 less card
 
