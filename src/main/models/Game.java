@@ -442,10 +442,16 @@ public class Game {
         return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().size() == 0;
     }
 
+    /**
+     * @return whether the current state of the current game is dark or not
+     */
     public boolean isDark() {
         return dark;
     }
 
+    /**
+     * Flip the UNO deck of the current game
+     */
     public void flip(){
         DoubleSidedCard.flip();
         dark = !dark;
@@ -454,10 +460,20 @@ public class Game {
         setCurrentColour(playedCards.peek().getActiveSide().getColour());
     }
 
+    /**
+     * Set the previous state of the current game
+     *
+     * @param previousState the previous state of the current game
+     */
     public void setPreviousState(Game previousState) {
         this.previousState = previousState;
     }
 
+    /**
+     * Copy the current state of the current game
+     * This copy can later be used to save and load the previous game state
+     * @return the previous state of the current game
+     */
     private Game copyGame(){
         Stack<DoubleSidedCard> priorDeck = new Stack<>();
         for (DoubleSidedCard card:deck){
@@ -489,10 +505,16 @@ public class Game {
         return priorState;
     }
 
+    /**
+     * Store the previous state of the current game
+     */
     public void storePriorState(){
         setPreviousState(copyGame());
     }
 
+    /**
+     * Restore the state of the game prior to the most recent action of the current player
+     */
     public void restorePriorState() {
         turnOrderReversed = previousState.turnOrderReversed;
         skipPlayer = previousState.skipPlayer;
@@ -504,6 +526,9 @@ public class Game {
         dark = previousState.dark;
     }
 
+    /**
+     * Undo the most recent action of the current player
+     */
     public void undo(){
         for (Player player:players){
             if (player.getPreviousHand() == null){
@@ -537,6 +562,9 @@ public class Game {
         setPreviousState(tempGame);
     }
 
+    /**
+     * Redo the most recent action of the current player
+     */
     public void redo(){
         undo();
         for (GameView view: views) {
@@ -544,6 +572,9 @@ public class Game {
         }
     }
 
+    /**
+     * Restart the game from the start of the most recent round
+     */
     public void restartGame() {
         System.out.println("here2");
         if (dark){

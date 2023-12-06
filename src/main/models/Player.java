@@ -115,6 +115,10 @@ public class Player {
         hand.clear();
     }
 
+    /**
+     * Save the current hand of the current player
+     * When the hand is altered by an action, this saved hand will represent the previous hand
+     */
     public void storePriorState(){
         this.previousHand = copyHand();
         if (previousHand == null){
@@ -125,6 +129,11 @@ public class Player {
         }
     }
 
+    /**
+     * Save the current hand of the current player and load the previous hand
+     * When an action is undone, the previous hand will become the new current hand and the current hand will become
+     * the new previous hand
+     */
     public void undo(){
         if (previousHand == null){
             System.out.println("it's becoming null...");
@@ -138,6 +147,12 @@ public class Player {
         previousHand = tempHand;
     }
 
+    /**
+     * Copy the current hand of the current player
+     * This copy can later be used to save and load the previous hand of the current player
+     *
+     * @return the previous hand of the current player
+     */
     public ArrayList<DoubleSidedCard> copyHand(){
         ArrayList<DoubleSidedCard> priorHand = new ArrayList<>();
         if (hand == null){
