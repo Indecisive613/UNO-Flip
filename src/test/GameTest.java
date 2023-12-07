@@ -635,6 +635,155 @@ public class GameTest {
     }
 
     @Test
+    public void testRestartGame(){
+        game.shuffleDeck();
+        game.dealCards(0);
+
+        assertNotEquals(null, game.getTopCard());
+
+        // Light: 59 Dark: 116
+        player1.dealCard(new DoubleSidedCard(new NormalCard(RED, ONE), new NormalCard(TEAL, TWO)));
+        player1.dealCard(new DoubleSidedCard(new FlipCard(YELLOW), new SkipEveryoneCard(PINK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(GREEN, TWO), new WildCard(Card.Side.DARK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(BLUE, ONE), new ReverseCard(PURPLE)));
+        player1.dealCard(new DoubleSidedCard(new DrawOneCard(RED), new FlipCard(TEAL)));
+        player1.dealCard(new DoubleSidedCard(new SkipCard(GREEN), new NormalCard(PINK, THREE)));
+        player1.dealCard(new DoubleSidedCard(new ReverseCard(RED), new NormalCard(ORANGE, ONE)));
+        assertEquals(7, player1.getHand().size());
+
+        // Light: 128 Dark: 28
+        player2.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, NINE), new NormalCard(TEAL, ONE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(RED, FIVE), new NormalCard(TEAL, TWO)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(BLUE, EIGHT), new NormalCard(TEAL, THREE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(GREEN, SIX), new NormalCard(TEAL, FOUR)));
+        player2.dealCard(new DoubleSidedCard(new DrawOneCard(BLUE), new NormalCard(TEAL, FIVE)));
+        player2.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(TEAL, SIX)));
+        player2.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new NormalCard(TEAL, SEVEN)));
+        assertEquals(7, player2.getHand().size());
+
+        // Light: 29 Dark: 280
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, FIVE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, TWO), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(BLUE, THREE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, FOUR), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, SIX), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, EIGHT), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, ONE), new WildCard(Card.Side.DARK)));
+        assertEquals(7, player3.getHand().size());
+
+        // Light: 210 Dark: 191
+        player4.dealCard(new DoubleSidedCard(new SkipCard(BLUE), new DrawFiveCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(YELLOW), new WildDrawColourCard()));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(GREEN), new WildCard(Card.Side.DARK)));
+        player4.dealCard(new DoubleSidedCard(new DrawOneCard(GREEN), new NormalCard(ORANGE, ONE)));
+        player4.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new SkipEveryoneCard(TEAL)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new ReverseCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new FlipCard(PINK)));
+        assertEquals(7, player4.getHand().size());
+
+        game.setCurrentColour(RED);
+
+        // test playing RED ONE from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        game.playCard(player1.playCard(0));
+        assertEquals(6, player1.getHand().size());
+        assertEquals(new NormalCard(RED, ONE), game.getTopCard());
+
+        int oldSize = deck.size(); // want to make sure the deck size isn't the same after restart. This deck is bigger because no cards are dealt from deck
+
+        game.assignScore();
+
+        int oldPlayer1Score = player1.getScore(); // want to make sure the score is carried over
+
+        game.advanceTurn();
+
+        game.advanceTurn();
+
+        game.advanceTurn();
+
+        game.setCurrentColour(YELLOW);
+
+        assertTrue(game.isRunning()); // we'll play a flip card so that we can test that the cards are flipped after the restart
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        game.playCard(player1.playCard(0));
+        assertEquals(5, player1.getHand().size());
+
+        Card oldTopCard = game.getTopCard();
+
+        // giving player1 2 more cards so that they have the same number as the other players
+        player1.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new FlipCard(PINK)));
+        player1.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new FlipCard(PINK)));
+
+        //we'll store the player's old hands, so we can make sure they're different after the restart
+        ArrayList<DoubleSidedCard> player1Hand = new ArrayList<>();
+        ArrayList<DoubleSidedCard> player2Hand = new ArrayList<>();
+        ArrayList<DoubleSidedCard> player3Hand = new ArrayList<>();
+        ArrayList<DoubleSidedCard> player4Hand = new ArrayList<>();
+
+        for (int i = 0; i < 7; i++){
+            player1Hand.add(player1.getHand().get(i));
+            player2Hand.add(player2.getHand().get(i));
+            player3Hand.add(player3.getHand().get(i));
+            player4Hand.add(player4.getHand().get(i));
+        }
+
+        game.restartGame();
+
+        // check that player1 has a different hand
+        boolean player1Reset = false;
+        for(int i = 0; i < 7; i++){
+            player1Reset = ! (player1Hand.get(i).equals(player1.getHand().get(i)));
+            if (player1Reset){
+                break;
+            }
+        }
+        assertTrue(player1Reset);
+
+        // check that player2 has a different hand
+        boolean player2Reset = false;
+        for(int i = 0; i < 7; i++){
+            player2Reset = ! (player2Hand.get(i).equals(player2.getHand().get(i)));
+            if (player2Reset){
+                break;
+            }
+        }
+        assertTrue(player2Reset);
+
+        // check that player3 has a different hand
+        boolean player3Reset = false;
+        for(int i = 0; i < 7; i++){
+            player3Reset = ! (player3Hand.get(i).equals(player3.getHand().get(i)));
+            if (player3Reset){
+                break;
+            }
+        }
+        assertTrue(player3Reset);
+
+        // check that player4 has a different hand
+        boolean player4Reset = false;
+        for(int i = 0; i < 7; i++){
+            player4Reset = ! (player4Hand.get(i).equals(player4.getHand().get(i)));
+            if (player4Reset){
+                break;
+            }
+        }
+        assertTrue(player4Reset);
+
+        // check the deck size
+        assertEquals(112-(4*7) - 1, game.getDeck().size());
+        assertNotEquals(oldSize, game.getDeck().size());
+
+        assertEquals(oldPlayer1Score, player1.getScore()); // check that the score carried over
+
+        assertNotEquals(oldTopCard, game.getTopCard()); // check that the top card is different
+    }
+
+    @Test
     public void testEndGame() {
         game.shuffleDeck();
         game.dealCards(0);
