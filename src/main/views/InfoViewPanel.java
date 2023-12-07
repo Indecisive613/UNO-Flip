@@ -23,6 +23,7 @@ public class InfoViewPanel extends JLabel implements GameView {
         this.setFont(new Font("Arial", Font.PLAIN, 24)); // Set font
         this.setHorizontalAlignment(JLabel.CENTER); // Set horizontal alignment
     }
+
     public void setGame(Game game) {
         this.game = game;
     }

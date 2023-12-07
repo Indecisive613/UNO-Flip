@@ -1,11 +1,13 @@
 package main.models.cards;
 
+import java.io.Serializable;
+
 /**
  * A double-sided UNO Flip card
  *
  * @author Fiona Cheng
  */
-public class DoubleSidedCard {
+public class DoubleSidedCard implements Serializable {
     private final Card lightSideCard;
     private final Card darkSideCard;
     private static Card.Side activeSide = Card.Side.LIGHT;
@@ -47,7 +49,7 @@ public class DoubleSidedCard {
     /**
      * @return The Card on the active side (Light or Dark)
      */
-    public Card getActiveSide() {
+    public Card getActiveCard() {
         if (activeSide == Card.Side.LIGHT) {
             return getLightSideCard();
         } else {
@@ -65,6 +67,13 @@ public class DoubleSidedCard {
         else{
             DoubleSidedCard.activeSide = Card.Side.LIGHT;
         }
+    }
+
+    /**
+     * @return The active side of all cards
+     */
+    public static Card.Side getActiveSide() {
+        return DoubleSidedCard.activeSide;
     }
 
     @Override

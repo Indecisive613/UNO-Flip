@@ -242,7 +242,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveCard()));
         game.playCard(player1.playCard(0));
         assertEquals(6, player1.getHand().size());
         assertEquals(new NormalCard(RED, ONE), game.getTopCard());
@@ -251,7 +251,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(1).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(1).getActiveCard()));
         game.playCard(player2.playCard(1));
         assertEquals(6, player2.getHand().size());
         assertEquals(new NormalCard(RED, FIVE), game.getTopCard());
@@ -260,7 +260,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
         game.playCard(player3.playCard(0));
         assertEquals(6, player3.getHand().size());
         assertEquals(new NormalCard(GREEN, FIVE), game.getTopCard());
@@ -269,7 +269,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player4.getHand().get(3).getActiveSide()));
+        assertTrue(game.canPlayCard(player4.getHand().get(3).getActiveCard()));
         game.playCard(player4.playCard(3));
         assertEquals(6, player4.getHand().size());
         assertEquals(new DrawOneCard(GREEN), game.getTopCard());
@@ -279,7 +279,7 @@ public class GameTest {
         game.advanceTurn();
         assertEquals(7, player1.getHand().size());
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(4).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(4).getActiveCard()));
         game.playCard(player1.playCard(4));
         assertEquals(6, player1.getHand().size());
         assertEquals(new SkipCard(GREEN), game.getTopCard());
@@ -290,7 +290,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(5).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(5).getActiveCard()));
         game.playCard(player3.playCard(5));
         assertEquals(5, player3.getHand().size());
         assertEquals(new NormalCard(GREEN, ONE), game.getTopCard());
@@ -299,7 +299,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player4.getHand().get(2).getActiveSide()));
+        assertTrue(game.canPlayCard(player4.getHand().get(2).getActiveCard()));
         game.playCard(player4.playCard(2));
         assertEquals(5, player4.getHand().size());
         assertEquals(new ReverseCard(GREEN), game.getTopCard());
@@ -308,7 +308,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(4).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(4).getActiveCard()));
         game.playCard(player3.playCard(4));
         assertEquals(4, player3.getHand().size());
         assertEquals(new NormalCard(GREEN, EIGHT), game.getTopCard());
@@ -317,7 +317,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(1).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(1).getActiveCard()));
         game.playCard(player2.playCard(1));
         assertEquals(5, player2.getHand().size());
         assertEquals(new NormalCard(BLUE, EIGHT), game.getTopCard());
@@ -326,7 +326,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveCard()));
         game.playCard(player1.playCard(2));
         assertEquals(5, player1.getHand().size());
         assertEquals(new NormalCard(BLUE, ONE), game.getTopCard());
@@ -335,7 +335,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player4.getHand().get(4).getActiveSide()));
+        assertTrue(game.canPlayCard(player4.getHand().get(4).getActiveCard()));
         game.playCard(player4.playCard(4));
         assertEquals(4, player4.getHand().size());
         assertEquals(new WildDrawTwoCard(), game.getTopCard());
@@ -352,7 +352,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(4).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(4).getActiveCard()));
         game.playCard(player2.playCard(4));
         assertEquals(4, player2.getHand().size());
         assertEquals(new WildDrawTwoCard(), game.getTopCard());
@@ -369,7 +369,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player4.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player4.getHand().get(0).getActiveCard()));
         game.playCard(player4.playCard(0));
         assertEquals(3, player4.getHand().size());
         assertEquals(new SkipCard(BLUE), game.getTopCard());
@@ -380,7 +380,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(2).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(2).getActiveCard()));
         game.playCard(player2.playCard(2));
         assertEquals(3, player2.getHand().size());
         assertEquals(new DrawOneCard(BLUE), game.getTopCard());
@@ -443,7 +443,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(1).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(1).getActiveCard()));
         game.playCard(player1.playCard(1));
         assertEquals(6, player1.getHand().size());
         assertEquals(Card.Side.DARK, game.getTopCard().getSide());
@@ -455,7 +455,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(6).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(6).getActiveCard()));
         game.playCard(player2.playCard(6));
         assertEquals(6, player2.getHand().size());
         assertEquals(new NormalCard(TEAL, SEVEN), game.getTopCard());
@@ -464,7 +464,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
         game.playCard(player3.playCard(0));
         assertEquals(6, player3.getHand().size());
         assertEquals(new WildCard(Card.Side.DARK), game.getTopCard());
@@ -477,7 +477,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
         game.playCard(player4.playCard(0));
         assertEquals(6, player4.getHand().size());
         assertEquals(new DrawFiveCard(PINK), game.getTopCard());
@@ -487,7 +487,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(4).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(4).getActiveCard()));
         game.playCard(player1.playCard(4));
         assertEquals(10, player1.getHand().size());
         assertEquals(new NormalCard(PINK, THREE), game.getTopCard());
@@ -496,7 +496,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player2, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player2.getHand().get(2).getActiveSide()));
+        assertTrue(game.canPlayCard(player2.getHand().get(2).getActiveCard()));
         game.playCard(player2.playCard(2));
         assertEquals(5, player2.getHand().size());
         assertEquals(new NormalCard(TEAL, THREE), game.getTopCard());
@@ -505,7 +505,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player3, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
         game.playCard(player3.playCard(0));
         assertEquals(5, player3.getHand().size());
         assertEquals(new WildDrawColourCard(), game.getTopCard());
@@ -513,7 +513,7 @@ public class GameTest {
         // player3 chose teal, and player4 must draw cards until a TEAL is reached
         assertEquals(game.getCurrentColour(), TEAL);
         assertTrue(player4.getHand().size() > 6);
-        assertEquals(TEAL, player4.getHand().get(player4.getHand().size()-1).getActiveSide().getColour());
+        assertEquals(TEAL, player4.getHand().get(player4.getHand().size()-1).getActiveCard().getColour());
 
         //Player 4 is skipped
 
@@ -521,7 +521,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveCard()));
         game.playCard(player1.playCard(0));
         assertEquals(9, player1.getHand().size());
         assertEquals(new SkipEveryoneCard(TEAL), game.getTopCard());
@@ -532,7 +532,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveCard()));
         game.playCard(player1.playCard(2));
         assertEquals(8, player1.getHand().size());
 

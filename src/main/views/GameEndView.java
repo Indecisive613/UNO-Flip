@@ -68,7 +68,8 @@ public class GameEndView extends JOptionPane implements GameView {
 
     @Override
     public void setGame(Game game) {
-
+        this.game = game;
+        controller = new GameEndController(game, this);
     }
 
     @Override

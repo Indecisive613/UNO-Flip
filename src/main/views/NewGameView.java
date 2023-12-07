@@ -112,6 +112,7 @@ public class NewGameView extends JPanel implements GameView {
     @Override
     public void setGame(Game game) {
         this.game = game;
+        controller = new NewGameController(game, this);
     }
 
     @Override

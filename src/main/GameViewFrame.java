@@ -2,10 +2,10 @@ package main;
 
 import main.controllers.GameViewFrameController;
 import main.models.DeckBuilder;
-import main.models.GameRunner;
-import main.views.*;
-import main.models.cards.DoubleSidedCard;
 import main.models.Game;
+import main.models.GameRunner;
+import main.models.cards.DoubleSidedCard;
+import main.views.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,16 +18,15 @@ import java.util.Stack;
  */
 public class GameViewFrame extends JFrame {
 
-    private final NewGameView newGameView;
-    private GameViewFrameController controller;
+    public static final String saveFile = "save.ser";
 
     /** Create a new GameViewFrame.
      * @param game The UNO game to display
      */
-    public GameViewFrame(Game game) {
+    public GameViewFrame(Game game, GameRunner runner) {
         super("UNO");
 
-        this.controller = new GameViewFrameController(this);
+        GameViewFrameController controller = new GameViewFrameController(this, runner);
         controller.setGame(game);
 
         this.setLayout(new BorderLayout());
@@ -55,7 +54,8 @@ public class GameViewFrame extends JFrame {
         restartMenuItem.addActionListener(controller);
 
         // Add new game view
-        newGameView = new NewGameView(this, game);
+        NewGameView newGameView = new NewGameView(this, game);
+        runner.addView(newGameView);
         game.addView(newGameView);
         this.add(newGameView, BorderLayout.CENTER);
 
@@ -96,8 +96,7 @@ public class GameViewFrame extends JFrame {
         Stack<DoubleSidedCard> deck = DeckBuilder.createDoubleSidedDeck();
         Game g = new Game(deck);
         GameRunner runner = new GameRunner(g);
-        GameViewFrame f = new GameViewFrame(g);
-        runner.addView(f.newGameView);
+        new GameViewFrame(g, runner);
         runner.initGame();
     }
 }

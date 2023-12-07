@@ -157,22 +157,46 @@ public class HandViewPanel extends JPanel implements GameView {
         playerName.setText("Current Player: " + player.getName());
         actionMessage.setText(" ");
 
+        updateCardPanel();
+
         if (player.getIsAI()) {
             playerName.setText("Current Player: " + player.getName() + " (AI Player)");
+
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
+
+            drawButton.setEnabled(false);
+            drawButton.setBackground(Color.WHITE);
+
+            undoButton.setEnabled(false);
+            undoButton.setBackground(Color.WHITE);
+
+            lockHand();
+
+        } else if (game.getHasDrawnCard() || game.getHasPlayedCard()) {
+            endTurn.setEnabled(true);
+            endTurn.setBackground(Color.GREEN);
+
+            drawButton.setEnabled(false);
+            drawButton.setBackground(Color.WHITE);
+
+            undoButton.setEnabled(true);
+            undoButton.setBackground(Color.GREEN);
+
+            lockHand();
+
+        } else {
+            endTurn.setEnabled(false);
+            endTurn.setBackground(Color.WHITE);
+
+            drawButton.setEnabled(true);
+            drawButton.setBackground(Color.GREEN);
+
+            undoButton.setEnabled(false);
+            undoButton.setBackground(Color.WHITE);
         }
-
-        // Reset buttons
-        endTurn.setEnabled(false);
-        endTurn.setBackground(Color.WHITE);
-        drawButton.setEnabled(true);
-        drawButton.setBackground(Color.GREEN);
-
-        undoButton.setEnabled(false);
-        undoButton.setBackground(Color.WHITE);
         redoButton.setEnabled(false);
         redoButton.setBackground(Color.WHITE);
-
-        updateCardPanel();
     }
 
     @Override
@@ -182,9 +206,7 @@ public class HandViewPanel extends JPanel implements GameView {
     public void handleDrawCard(Card drawnCard) { updateCardPanel(); }
 
     @Override
-    public void handleGetColour() {
-
-    }
+    public void handleGetColour() {}
 
     @Override
     public void handleUpdateTurnOrder(boolean turnReversed) {
@@ -209,7 +231,7 @@ public class HandViewPanel extends JPanel implements GameView {
         cardPanel.removeAll();
 
         for (int i = 0; i < player.getHand().size(); i++) {
-            Card card = player.getHand().get(i).getActiveSide();
+            Card card = player.getHand().get(i).getActiveCard();
             JButton cardButton = new JCardButton(card);
             if (controller.isValidCard(card)) {
                 int index = i;
@@ -274,7 +296,6 @@ public class HandViewPanel extends JPanel implements GameView {
 
         } else {
             String card;
-            // TODO: Fix wild message, colour, maybe add better toString in card to avoid this lol
             if (playedCard.getColour() == Card.Colour.WILD) {
                 card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
                         .limit(playedCard.toString().split("\\s+|_").length - 2)

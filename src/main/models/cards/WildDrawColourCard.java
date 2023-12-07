@@ -23,7 +23,7 @@ public class WildDrawColourCard extends Card {
         Colour currentColour = game.getCurrentColour();
         do {
             drawnCard = game.drawCard(game.getPlayers().get(nextPlayer), false);
-        } while (!drawnCard.getActiveSide().getColour().equals(currentColour));
+        } while (!drawnCard.getActiveCard().getColour().equals(currentColour));
         game.setSkipPlayer();
     }
 }

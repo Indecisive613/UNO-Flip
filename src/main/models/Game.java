@@ -1,24 +1,27 @@
 package main.models;
 
-import main.views.GameView;
 import main.models.cards.Card;
 import main.models.cards.DoubleSidedCard;
+import main.views.GameView;
 
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Stack;
 
 /**
  * A light side UNO Flip game that has players, cards, and contains the logic required to play a game of light side UNO Flip.
  *
  * @author Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram, Jake Siushansian
  */
-public class Game {
+public class Game implements Serializable {
 
     public static final int PLAYER_MIN = 2;
     public static final int PLAYER_MAX = 4;
     public static final int STARTING_HAND_SIZE = 7;
     public static final int POINTS_TO_WIN = 500;
 
-    private final ArrayList<GameView> views;
+    private transient ArrayList<GameView> views;
     private final ArrayList<Player> players;
 
     private Stack<DoubleSidedCard> playedCards;
@@ -97,7 +100,7 @@ public class Game {
      * @return The card on top
      */
     public Card getTopCard() {
-        return playedCards.peek().getActiveSide();
+        return playedCards.peek().getActiveCard();
     }
 
     /**
@@ -176,7 +179,7 @@ public class Game {
         }
         DoubleSidedCard topCard = deck.pop();
         playedCards.push(topCard);
-        currentColour = topCard.getActiveSide().getColour();
+        currentColour = topCard.getActiveCard().getColour();
     }
 
     /**
@@ -192,6 +195,22 @@ public class Game {
      */
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    /** Update the Game with new Views, and update each View
+     *
+     * @param views The list of Views
+     */
+    public void updateViews(ArrayList<GameView> views) {
+        this.views = views;
+        if (isDark() && DoubleSidedCard.getActiveSide() == Card.Side.LIGHT) {
+            DoubleSidedCard.flip();
+        }
+        this.views.forEach(view -> view.handleNewTurn(getCurrentPlayer()));
+    }
+
+    public ArrayList<GameView> getViews() {
+        return views;
     }
 
     /**
@@ -236,13 +255,13 @@ public class Game {
 
                 if (secondAction != -1) {
                     playedCard = getCurrentPlayer().playCard(secondAction);
-                    activeCard = playedCard.getActiveSide();
+                    activeCard = playedCard.getActiveCard();
                     playCard(playedCard);
                 }
             }
             else {
                 playedCard = getCurrentPlayer().playCard(action);
-                activeCard = playedCard.getActiveSide();
+                activeCard = playedCard.getActiveCard();
                 playCard(playedCard);
                 hasPlayedCard = true;
             }
@@ -278,7 +297,7 @@ public class Game {
         storePriorState();
         playedCards.push(card);
         setHasPlayedCard();
-        Card activeSide = card.getActiveSide();
+        Card activeSide = card.getActiveCard();
 
         if(activeSide.getColour() == Card.Colour.WILD) {
             activeSide.cardAction(this);
@@ -322,7 +341,7 @@ public class Game {
         player.dealCard(drawnCard);
         setHasDrawnCard();
         for (GameView view : views) {
-            view.handleDrawCard(drawnCard.getActiveSide());
+            view.handleDrawCard(drawnCard.getActiveCard());
         }
         return drawnCard;
     }
@@ -476,7 +495,7 @@ public class Game {
      * @return If the current player has won
      */
     public boolean hasWonRound(){
-        return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().size() == 0;
+        return currentPlayerIndex != -1 && players.get(currentPlayerIndex).getHand().isEmpty();
     }
 
     /**
@@ -494,7 +513,7 @@ public class Game {
         dark = !dark;
         Collections.reverse(deck);
         Collections.reverse(playedCards);
-        setCurrentColour(playedCards.peek().getActiveSide().getColour());
+        setCurrentColour(playedCards.peek().getActiveCard().getColour());
     }
 
     /**
@@ -632,4 +651,5 @@ public class Game {
             view.handleRestartGame();
         }
     }
+
 }
