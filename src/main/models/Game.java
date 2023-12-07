@@ -32,6 +32,8 @@ public class Game {
     private boolean running = false;
     private int roundNumber;
     private boolean dark = false;
+    private boolean hasDrawnCard = false;
+    private boolean hasPlayedCard = false;
     private Game previousState;
 
     /**
@@ -48,6 +50,8 @@ public class Game {
         skipPlayer = false;
         skipEveryone = false;
         roundNumber = 0;
+        hasDrawnCard = false;
+        hasPlayedCard = false;
         previousState = null;
     }
 
@@ -110,6 +114,16 @@ public class Game {
      * @return the current turn order of the game
      */
     public boolean getTurnOrderReversed() { return turnOrderReversed; }
+
+    /**
+     * @return whether a card has been drawn on this turn
+     */
+    public boolean getHasDrawnCard() { return hasDrawnCard; }
+
+    /**
+     * @return whether a card has been played on this turn
+     */
+    public boolean getHasPlayedCard() { return hasPlayedCard; }
 
     /**
      * Add a new Player to the Game
@@ -193,6 +207,8 @@ public class Game {
         currentPlayerIndex = nextPlayer();
         skipPlayer = false;
         skipEveryone = false;
+        hasDrawnCard = false;
+        hasPlayedCard = false;
 
         storePriorState();
         for (Player player: players){
@@ -212,6 +228,7 @@ public class Game {
             if (action == -1) {
                 drawCard(getCurrentPlayer(), false);
                 drewCard = true;
+                hasDrawnCard = true;
 
                 // the AI player can check if their drawn card can be played
                 AiHelper aiHelperDraw = new AiHelper(this, getCurrentPlayer().getActiveHand());
@@ -227,6 +244,7 @@ public class Game {
                 playedCard = getCurrentPlayer().playCard(action);
                 activeCard = playedCard.getActiveSide();
                 playCard(playedCard);
+                hasPlayedCard = true;
             }
             for (GameView view : views) {
                 view.handleAiPlayerTurn(getCurrentPlayer(), activeCard, currentColour, drewCard);
@@ -259,6 +277,7 @@ public class Game {
     public void playCard(DoubleSidedCard card) {
         storePriorState();
         playedCards.push(card);
+        setHasPlayedCard();
         Card activeSide = card.getActiveSide();
 
         if(activeSide.getColour() == Card.Colour.WILD) {
@@ -286,8 +305,8 @@ public class Game {
     /**
      * Deal a card from the deck to a given Player
      *
-     * @param player   The Player whose turn it is
-     * @param storeState
+     * @param player The Player whose turn it is
+     * @param storeState Whether the current state of the game has been stored
      */
     public DoubleSidedCard drawCard(Player player, boolean storeState) {
         if (storeState) {
@@ -301,6 +320,7 @@ public class Game {
         }
         DoubleSidedCard drawnCard = deck.pop();
         player.dealCard(drawnCard);
+        setHasDrawnCard();
         for (GameView view : views) {
             view.handleDrawCard(drawnCard.getActiveSide());
         }
@@ -333,9 +353,9 @@ public class Game {
     }
 
     /**
-     * Return whether or not a Player has won the game
+     * Return whether a Player has won the game
      *
-     * @return Whether or not a Player has won the game
+     * @return Whether a Player has won the game
      */
     public boolean hasWonGame(){
         for (Player player : players){
@@ -384,6 +404,8 @@ public class Game {
         turnOrderReversed = false;
         skipPlayer = false;
         skipEveryone = false;
+        hasDrawnCard = false;
+        hasPlayedCard = false;
         currentPlayerIndex = -1;
         for (Player player: players){
             player.clearHand();
@@ -420,6 +442,20 @@ public class Game {
      */
     public void setSkipEveryone(){
         skipEveryone = true;
+    }
+
+    /**
+     * Sets the status of a card having been drawn on the current turn to true
+     */
+    public void setHasDrawnCard() {
+        hasDrawnCard = true;
+    }
+
+    /**
+     * Sets the status of a card having been played on the current turn to true
+     */
+    public void setHasPlayedCard() {
+        hasPlayedCard = true;
     }
 
     /**
@@ -499,6 +535,8 @@ public class Game {
         priorState.currentColour = currentColour;
         priorState.running = running;
         priorState.roundNumber = roundNumber;
+        priorState.hasDrawnCard = hasDrawnCard;
+        priorState.hasPlayedCard = hasPlayedCard;
         priorState.dark = dark;
         return priorState;
     }
@@ -521,6 +559,8 @@ public class Game {
         currentColour = previousState.currentColour;
         running = previousState.running;
         roundNumber = previousState.roundNumber;
+        hasDrawnCard = previousState.hasDrawnCard;
+        hasPlayedCard = previousState.hasPlayedCard;
         dark = previousState.dark;
     }
 
@@ -574,6 +614,8 @@ public class Game {
         turnOrderReversed = false;
         skipPlayer = false;
         skipEveryone = false;
+        hasDrawnCard = false;
+        hasPlayedCard = false;
         currentPlayerIndex = -1;
         for (Player player: players){
             player.clearHand();

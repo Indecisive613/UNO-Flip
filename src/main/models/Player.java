@@ -136,7 +136,7 @@ public class Player {
 
     /**
      * Copy the current hand of the current player
-     * This copy can later be used to save and load the previous hand of the current player
+     * This copy can later be used to save andcd load the previous hand of the current player
      *
      * @return the previous hand of the current player
      */

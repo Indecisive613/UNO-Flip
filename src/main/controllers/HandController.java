@@ -46,6 +46,20 @@ public class HandController {
     public void drawCard() { game.drawCard(game.getCurrentPlayer(), true); }
 
     /**
+     * Check if a card has been drawn this turn
+     *
+     * @return Whether the current player has drawn a card in the current state
+     */
+    public boolean hasDrawnCard() { return game.getHasDrawnCard(); }
+
+    /**
+     * Check if a card has been played this turn
+     *
+     * @return Whether the current player has played a card in the current state
+     */
+    public boolean hasPlayedCard() { return game.getHasPlayedCard(); }
+
+    /**
      * advances the turn so that the next player in the game can play
      */
     public void nextTurn() {
