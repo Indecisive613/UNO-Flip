@@ -687,7 +687,7 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveCard()));
         game.playCard(player1.playCard(0));
         assertEquals(6, player1.getHand().size());
         assertEquals(new NormalCard(RED, ONE), game.getTopCard());
@@ -709,7 +709,7 @@ public class GameTest {
         assertTrue(game.isRunning()); // we'll play a flip card so that we can test that the cards are flipped after the restart
         game.advanceTurn();
         assertEquals(player1, game.getCurrentPlayer());
-        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveSide()));
+        assertTrue(game.canPlayCard(player1.getHand().get(0).getActiveCard()));
         game.playCard(player1.playCard(0));
         assertEquals(5, player1.getHand().size());
 
