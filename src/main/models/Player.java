@@ -2,6 +2,7 @@ package main.models;
 
 import main.models.cards.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Fiona Cheng, Jackie Smolkin-Lerner, Anand Balaram
  */
-public class Player {
+public class Player implements Serializable {
 
     private final String name;
     private int score;
@@ -78,7 +79,7 @@ public class Player {
     public ArrayList<Card> getActiveHand() {
         ArrayList<Card> activeHand = new ArrayList<>();
         for(DoubleSidedCard card: hand){
-            activeHand.add(card.getActiveSide());
+            activeHand.add(card.getActiveCard());
         }
         return activeHand;
     }

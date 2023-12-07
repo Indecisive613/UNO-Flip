@@ -2,6 +2,7 @@ package main.models.cards;
 
 import main.models.Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,7 +11,7 @@ import java.util.Arrays;
  *
  * @author Fiona Cheng, Anand Balaram
  */
-public abstract class Card {
+public abstract class Card implements Serializable {
     public enum Side { LIGHT, DARK}
     public enum Colour { RED, GREEN, BLUE, YELLOW, WILD, PINK, TEAL, PURPLE, ORANGE}
     public enum Symbol {

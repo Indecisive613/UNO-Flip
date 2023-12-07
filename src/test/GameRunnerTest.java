@@ -25,7 +25,7 @@ public class GameRunnerTest {
         // Test that each card has a dark and light side
         for(DoubleSidedCard card: deck){
             assertEquals(Card.Side.LIGHT, card.getLightSideCard().getSide());
-            assertEquals(Card.Side.LIGHT, card.getActiveSide().getSide());
+            assertEquals(Card.Side.LIGHT, card.getActiveCard().getSide());
             assertEquals(Card.Side.DARK, card.getDarkSideCard().getSide());
         }
     }

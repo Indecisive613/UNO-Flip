@@ -1,7 +1,8 @@
 package main.controllers;
 
-import main.models.Game;
 import main.GameViewFrame;
+import main.models.Game;
+import main.models.GameRunner;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,15 +15,17 @@ import java.awt.event.ActionListener;
 public class GameViewFrameController implements ActionListener {
 
     private Game game;
-    private GameViewFrame view;
+    private final GameViewFrame view;
+    private final GameRunner gameRunner;
 
     /**
      * Create a controller for GameViewFrame
      *
      * @param view associated view
      */
-    public GameViewFrameController(GameViewFrame view) {
+    public GameViewFrameController(GameViewFrame view, GameRunner gameRunner) {
         this.view = view;
+        this.gameRunner = gameRunner;
     }
 
     /**
@@ -33,6 +36,7 @@ public class GameViewFrameController implements ActionListener {
     public void setGame(Game game) {
         this.game = game;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -40,9 +44,12 @@ public class GameViewFrameController implements ActionListener {
         if ("Exit".equals(command)) {
             System.exit(0);
         } else if ("Save Game".equals(command)) {
-            System.out.println("Save"); //TODO change this to export to a file
+            gameRunner.exportGame(GameViewFrame.saveFile);
         }else if("Load Game".equals(command)){
-            System.out.println("Load"); //TODO change this to import from a specified file
+            gameRunner.importGame(GameViewFrame.saveFile);
+            // Re-render game
+            view.setVisible(false);
+            view.setVisible(true);
         } else if("Restart".equals(command)){
             game.restartGame();
         }

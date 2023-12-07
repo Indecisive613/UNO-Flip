@@ -2,6 +2,7 @@ package main.models;
 
 import main.views.GameView;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class GameRunner {
 
-    private final Game game;
+    private Game game;
     private final ArrayList<GameView> views;
 
     /**
@@ -45,4 +46,34 @@ public class GameRunner {
         game.advanceTurn();
     }
 
+    /** Export the current Game as a file
+     *
+     * @param filename The name of the exported file
+     */
+    public void exportGame(String filename) {
+        try(ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(filename))) {
+            objOut.writeObject(this.game);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** Update the Game from an imported save file
+     *
+     * @param filename The file name of the saved game
+     */
+    public void importGame(String filename) {
+        try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(filename))) {
+            Game importedGame = (Game) objIn.readObject();
+
+            ArrayList<GameView> gameViews = game.getViews();
+            gameViews.forEach(view -> view.setGame(importedGame));
+            importedGame.updateViews(gameViews);
+
+            this.game = importedGame;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
