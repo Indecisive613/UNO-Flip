@@ -1,6 +1,7 @@
 package main;
 
 import main.controllers.GameViewFrameController;
+import main.models.DeckBuilder;
 import main.models.GameRunner;
 import main.views.*;
 import main.models.cards.DoubleSidedCard;
@@ -92,7 +93,7 @@ public class GameViewFrame extends JFrame {
      * @param args Main args - not used
      */
     public static void main(String[] args) {
-        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
+        Stack<DoubleSidedCard> deck = DeckBuilder.createDoubleSidedDeck();
         Game g = new Game(deck);
         GameRunner runner = new GameRunner(g);
         GameViewFrame f = new GameViewFrame(g);

@@ -398,7 +398,7 @@ public class Game {
             flip();
             dark = false;
         }
-        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
+        Stack<DoubleSidedCard> deck = DeckBuilder.createDoubleSidedDeck();
         setDeck(deck);
         this.playedCards = new Stack<DoubleSidedCard>();
         turnOrderReversed = false;
@@ -608,7 +608,7 @@ public class Game {
             flip();
             dark = false;
         }
-        Stack<DoubleSidedCard> deck = GameRunner.createDoubleSidedDeck();
+        Stack<DoubleSidedCard> deck = DeckBuilder.createDoubleSidedDeck();
         setDeck(deck);
         this.playedCards = new Stack<DoubleSidedCard>();
         turnOrderReversed = false;

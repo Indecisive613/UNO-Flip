@@ -1,5 +1,6 @@
 package test;
 
+import main.models.DeckBuilder;
 import main.models.cards.Card;
 import main.models.cards.DoubleSidedCard;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class GameRunnerTest {
 
     @Test
     public void testCreateDoubleSidedDeck(){
-        Stack<DoubleSidedCard> deck = main.models.GameRunner.createDoubleSidedDeck();
+        Stack<DoubleSidedCard> deck = DeckBuilder.createDoubleSidedDeck();
         assertNotNull(deck);
         assertEquals(112, deck.size());
 

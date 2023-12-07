@@ -6,8 +6,8 @@ import static main.models.cards.Card.Colour.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import main.models.DeckBuilder;
 import main.models.Game;
-import main.models.GameRunner;
 import main.models.Player;
 import main.models.cards.*;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class GameTest {
         player3 = new Player("C", hand3, false); // create player3
         player4 = new Player("D", hand4, false); // create player4
 
-        deck = GameRunner.createDoubleSidedDeck(); // create the deck
+        deck = DeckBuilder.createDoubleSidedDeck(); // create the deck
         game = new Game(deck); // create the game with the players and the deck
 
         // add the players to the game
