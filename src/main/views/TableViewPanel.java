@@ -88,6 +88,7 @@ public class TableViewPanel extends JPanel implements GameView {
 
         this.add(topCardPanel);
 
+        handleUpdateTurnOrder(game.getTurnOrderReversed());
         currentColor.setText(" --- Current Color: " + controller.getCurrentColour());
         remainingCards.setText(" --- Remaining Cards: " + controller.getDeckSize() + " ---");
 
