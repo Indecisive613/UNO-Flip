@@ -1,9 +1,6 @@
 package test;
 
-import main.models.AiHelper;
-import main.models.Game;
-import main.models.GameRunner;
-import main.models.Player;
+import main.models.*;
 import main.models.cards.*;
 import org.junit.Test;
 
@@ -24,7 +21,7 @@ public class AiHelperTest {
     @Test
     public void testCreateAiHelper() {
         player = new Player("Player", new ArrayList<DoubleSidedCard>(), true);
-        game = new Game(GameRunner.createDoubleSidedDeck());
+        game = new Game(DeckBuilder.createDoubleSidedDeck());
         game.addPlayer(player);
         game.dealCards(Game.STARTING_HAND_SIZE);
 
