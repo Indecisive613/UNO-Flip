@@ -245,12 +245,12 @@ public class HandViewPanel extends JPanel implements GameView {
             redoButton.setEnabled(false);
             redoButton.setBackground(Color.WHITE);
 
-        } else if (!controller.hasDrawnCard() && controller.hasPlayedCard() && !controller.canRedo()) {
+        } else if (controller.hasDrawnCard() && controller.hasPlayedCard() && controller.canRedo()) {
             endTurn.setEnabled(true);
             endTurn.setBackground(Color.GREEN);
 
-            drawButton.setEnabled(true);
-            drawButton.setBackground(Color.GREEN);
+            drawButton.setEnabled(false);
+            drawButton.setBackground(Color.WHITE);
 
             undoButton.setEnabled(true);
             undoButton.setBackground(Color.GREEN);
@@ -260,7 +260,7 @@ public class HandViewPanel extends JPanel implements GameView {
 
             lockHand();
 
-        } else if (controller.hasDrawnCard() && controller.hasPlayedCard() && controller.canRedo()) {
+        } else if (!controller.hasDrawnCard() && controller.hasPlayedCard() && !controller.canRedo()) {
             endTurn.setEnabled(true);
             endTurn.setBackground(Color.GREEN);
 
@@ -288,7 +288,6 @@ public class HandViewPanel extends JPanel implements GameView {
             redoButton.setEnabled(true);
             redoButton.setBackground(Color.GREEN);
         }
-
     }
 
     @Override
