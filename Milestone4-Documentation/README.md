@@ -58,5 +58,7 @@ Authors:
 ![Milestone 4 Sequence Diagram Redo Action.png](Milestone%204%20Sequence%20Diagram%20Redo%20Action.png)
 
 ### 3. Save Game
+![Milestone 4 Sequence Diagram Save Game.png](Milestone%204%20Sequence%20Diagram%20Save%20Game.png)
 
 ### 4. Save Game
+![Milestone 4 Sequence Diagram Load Game.png](Milestone%204%20Sequence%20Diagram%20Load%20Game.png)
