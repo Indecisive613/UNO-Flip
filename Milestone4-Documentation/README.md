@@ -20,10 +20,9 @@ Navigate to the project folder in the command prompt then enter:
 > java -jar UNO-Flip.jar
 
 ## Extensibility
-This project was built to keep coupling low and cohesion high using a few different design patterns and techniques, 
-which helped in the development of the 4 milestones, and also make it easy to extend the game with new cards, features, and more. 
+This project was built to keep coupling low and cohesion high using a few different design patterns and techniques. This helped in the development of the 4 milestones, by keeping things organized and making it easy to extend the game with new cards and features. 
 
-The cards follow the strategy pattern, where there is a base *Card* class which each card extends and overrides. 
+The cards follow the strategy pattern, where there is a base *Card* class which each type of card extends and overrides. 
 To add a new card, simply create a new class that extends *Card*, and override its *cardAction* method with calls to Game. 
 
 MVC was used to separate UNO Game logic (the models) from GUI components (views and controllers), 
@@ -72,7 +71,7 @@ Authors:
 * Jake Siushansian - 101226956
 
 ## Class Diagram
-
+![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/38c6105a-3c6d-4fdf-9b3b-572addc90bac)
 
 ## Sequence Diagrams
 ### 1. Undo Action

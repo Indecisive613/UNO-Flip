@@ -1,17 +1,17 @@
 package test;
 
-import static main.models.cards.Card.Symbol.*;
-import static main.models.cards.Card.Colour.*;
-
-import java.util.ArrayList;
-import java.util.Stack;
-
 import main.models.DeckBuilder;
 import main.models.Game;
 import main.models.Player;
 import main.models.cards.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+import static main.models.cards.Card.Colour.*;
+import static main.models.cards.Card.Symbol.*;
 import static org.junit.Assert.*;
 
 /**
@@ -858,5 +858,273 @@ public class GameTest {
         assertTrue(game.isRunning());
         game.advanceTurn();
         assertEquals(player4, game.getCurrentPlayer());
+    }
+
+    @Test
+    public void testUndoAndRedo() {
+        // the cards must be dealt and then returned to the deck ...
+        // ... to ensure that there is a top card in the played cards pile
+        game.shuffleDeck();
+        game.dealCards(0);
+
+        assertNotEquals(null, game.getTopCard());
+
+        // create hand for player1 with some number and action cards
+        player1.dealCard(new DoubleSidedCard(new NormalCard(RED, ONE), new NormalCard(TEAL, TWO)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, FIVE), new SkipEveryoneCard(PINK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(GREEN, TWO), new WildCard(Card.Side.DARK)));
+        player1.dealCard(new DoubleSidedCard(new NormalCard(BLUE, ONE), new ReverseCard(PURPLE)));
+        player1.dealCard(new DoubleSidedCard(new DrawOneCard(RED), new FlipCard(TEAL)));
+        player1.dealCard(new DoubleSidedCard(new SkipCard(GREEN), new NormalCard(PINK, THREE)));
+        player1.dealCard(new DoubleSidedCard(new ReverseCard(RED), new NormalCard(ORANGE, ONE)));
+        assertEquals(7, player1.getHand().size());
+
+        // create hand for player2 with some number, action, and wild cards
+        player2.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, NINE), new NormalCard(TEAL, ONE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(RED, FIVE), new NormalCard(TEAL, TWO)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(BLUE, EIGHT), new NormalCard(TEAL, THREE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(GREEN, SIX), new NormalCard(TEAL, FOUR)));
+        player2.dealCard(new DoubleSidedCard(new DrawOneCard(BLUE), new NormalCard(TEAL, FIVE)));
+        player2.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(TEAL, SIX)));
+        player2.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new NormalCard(TEAL, SEVEN)));
+        assertEquals(7, player2.getHand().size());
+
+        // create hand for player3 with only number cards
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, FIVE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, TWO), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(BLUE, THREE), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, FOUR), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(RED, SIX), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, EIGHT), new WildCard(Card.Side.DARK)));
+        player3.dealCard(new DoubleSidedCard(new NormalCard(GREEN, ONE), new WildCard(Card.Side.DARK)));
+        assertEquals(7, player3.getHand().size());
+
+        // create hand for player4 with only action and wild cards
+        player4.dealCard(new DoubleSidedCard(new SkipCard(BLUE), new DrawFiveCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(YELLOW), new WildDrawColourCard()));
+        player4.dealCard(new DoubleSidedCard(new ReverseCard(GREEN), new WildCard(Card.Side.DARK)));
+        player4.dealCard(new DoubleSidedCard(new DrawOneCard(GREEN), new NormalCard(ORANGE, ONE)));
+        player4.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new SkipEveryoneCard(TEAL)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new ReverseCard(PINK)));
+        player4.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new FlipCard(PINK)));
+        assertEquals(7, player4.getHand().size());
+
+        // sets the current colour to GREEN so that the first card can be played ...
+        // ... despite not knowing anything about the current top card
+        game.setCurrentColour(GREEN);
+
+        // test playing RED ONE from the hand of player1
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(2).getActiveCard()));
+        game.playCard(player1.playCard(2));
+        assertEquals(6, player1.getHand().size());
+        assertEquals(new NormalCard(GREEN, TWO), game.getTopCard());
+
+        game.undo(); // undo the action of player1 playing GREEN TWO from their hand
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(7, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing GREEN SKIP from the hand of player1
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(5).getActiveCard()));
+        game.playCard(player1.playCard(5));
+        assertEquals(6, player1.getHand().size());
+        assertEquals(new NormalCard(GREEN, SKIP), game.getTopCard());
+
+        game.undo(); // undo the action of player1 playing GREEN SKIP from their hand
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(7, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.drawCard(game.getCurrentPlayer(), true); // draw a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(8, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.undo(); // undo the action of player1 drawing a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(7, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.redo(); // redo the action of player1 drawing a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(8, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.undo(); // undo the action of player1 drawing a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(7, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.drawCard(game.getCurrentPlayer(), true); // draw a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(8, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing GREEN SKIP from the hand of player1
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(5).getActiveCard()));
+        game.playCard(player1.playCard(5));
+        assertEquals(7, player1.getHand().size());
+        assertEquals(new NormalCard(GREEN, SKIP), game.getTopCard());
+
+        game.undo(); // undo the action of player1 drawing a card from the deck
+
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertEquals(8, player1.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing GREEN SKIP from the hand of player1
+        assertTrue(game.isRunning());
+        assertEquals(player1, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player1.getHand().get(5).getActiveCard()));
+        game.playCard(player1.playCard(5));
+        assertEquals(7, player1.getHand().size());
+        assertEquals(new NormalCard(GREEN, SKIP), game.getTopCard());
+
+        // skip player2
+
+        // test playing GREEN FIVE from the hand of player3
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player3, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
+        game.playCard(player3.playCard(0));
+        assertEquals(6, player3.getHand().size());
+        assertEquals(new NormalCard(GREEN, FIVE), game.getTopCard());
+
+        game.undo(); // undo the action of player3 playing GREEN FIVE from their hand
+
+        assertTrue(game.isRunning());
+        assertEquals(player3, game.getCurrentPlayer());
+        assertEquals(7, player3.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.redo(); // redo the action of player3 playing GREEN FIVE from their hand
+
+        assertTrue(game.isRunning());
+        assertEquals(player3, game.getCurrentPlayer());
+        assertEquals(6, player3.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        game.undo(); // undo the action of player3 playing GREEN FIVE from their hand
+
+        assertTrue(game.isRunning());
+        assertEquals(player3, game.getCurrentPlayer());
+        assertEquals(7, player3.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing GREEN FIVE from the hand of player3
+        assertTrue(game.isRunning());
+        assertEquals(player3, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player3.getHand().get(0).getActiveCard()));
+        game.playCard(player3.playCard(0));
+        assertEquals(6, player3.getHand().size());
+        assertEquals(new NormalCard(GREEN, FIVE), game.getTopCard());
+
+        // test playing GREEN DRAW ONE from the hand of player4
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player4, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player4.getHand().get(3).getActiveCard()));
+        game.playCard(player4.playCard(3));
+        assertEquals(6, player4.getHand().size());
+        assertEquals(new NormalCard(GREEN, DRAW_ONE), game.getTopCard());
+
+        assertEquals(8, player1.getHand().size()); // check if a card was added to the hand of player1
+        game.undo(); // undo the action of player4 playing GREEN DRAW ONE from their hand
+        assertEquals(7, player1.getHand().size()); // check if a card was removed from the hand of player1
+
+        assertTrue(game.isRunning());
+        assertEquals(player4, game.getCurrentPlayer());
+        assertEquals(7, player4.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing WILD from the hand of player4
+        assertTrue(game.isRunning());
+        assertEquals(player4, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player4.getHand().get(4).getActiveCard()));
+        game.playCard(player4.playCard(4));
+        assertEquals(6, player4.getHand().size());
+        assertEquals(new WildCard(Card.Side.LIGHT), game.getTopCard());
+
+        game.setCurrentColour(Card.Colour.BLUE); // sets the current colour to BLUE
+        assertEquals(Card.Colour.BLUE, game.getCurrentColour()); // checks that the current colour was correctly changed
+
+        game.undo(); // undo the action of player4 playing WILD from their hand
+
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+        assertTrue(game.isRunning());
+        assertEquals(player4, game.getCurrentPlayer());
+        assertEquals(7, player4.getHand().size());
+        assertEquals(Card.Colour.GREEN, game.getCurrentColour());
+
+        // test playing WILD WILD_DRAW_TWO from the hand of player4
+        assertTrue(game.isRunning());
+        assertEquals(player4, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player4.getHand().get(6).getActiveCard()));
+        game.playCard(player4.playCard(6));
+        assertEquals(6, player4.getHand().size());
+        assertEquals(new WildDrawTwoCard(), game.getTopCard());
+
+        assertEquals(10, player1.getHand().size()); // check if two cards were added to the hand of player1
+
+        game.setCurrentColour(Card.Colour.BLUE); // sets the current colour to BLUE
+        assertEquals(Card.Colour.BLUE, game.getCurrentColour()); // checks that the current colour was correctly changed
+
+        // skip player1
+
+        // test playing BLUE DRAW ONE from the hand of player4
+        assertTrue(game.isRunning());
+        game.advanceTurn();
+        assertEquals(player2, game.getCurrentPlayer());
+        assertTrue(game.canPlayCard(player2.getHand().get(4).getActiveCard()));
+        game.playCard(player2.playCard(4));
+        assertEquals(6, player2.getHand().size());
+        assertEquals(new NormalCard(BLUE, DRAW_ONE), game.getTopCard());
+
+        assertEquals(7, player3.getHand().size()); // check if a card was added to the hand of player3
+        game.undo(); // undo the action of player2 playing BLUE DRAW ONE from their hand
+        assertEquals(6, player3.getHand().size()); // check if a card was removed from the hand of player3
+        assertEquals(new WildDrawTwoCard(), game.getTopCard());
+        assertEquals(Card.Colour.BLUE, game.getCurrentColour()); // checks that the current colour was correctly changed
+
+        game.redo(); // redo the action of player2 playing BLUE DRAW ONE from their hand
+        assertEquals(7, player3.getHand().size()); // check if a card was added to the hand of player3
+        assertEquals(new NormalCard(BLUE, DRAW_ONE), game.getTopCard());
+        assertEquals(Card.Colour.BLUE, game.getCurrentColour()); // checks that the current colour was correctly changed
+
+        /*
+        // create hand for player2 with some number, action, and wild cards
+        player2.dealCard(new DoubleSidedCard(new NormalCard(YELLOW, NINE), new NormalCard(TEAL, ONE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(RED, FIVE), new NormalCard(TEAL, TWO)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(BLUE, EIGHT), new NormalCard(TEAL, THREE)));
+        player2.dealCard(new DoubleSidedCard(new NormalCard(GREEN, SIX), new NormalCard(TEAL, FOUR)));
+        player2.dealCard(new DoubleSidedCard(new DrawOneCard(BLUE), new NormalCard(TEAL, FIVE)));
+        player2.dealCard(new DoubleSidedCard(new WildCard(Card.Side.LIGHT), new NormalCard(TEAL, SIX)));
+        player2.dealCard(new DoubleSidedCard(new WildDrawTwoCard(), new NormalCard(TEAL, SEVEN)));
+        assertEquals(7, player2.getHand().size());
+        */
+
     }
 }
