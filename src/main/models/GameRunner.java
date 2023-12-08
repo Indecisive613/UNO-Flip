@@ -62,7 +62,7 @@ public class GameRunner {
      *
      * @param filename The file name of the saved game
      */
-    public void importGame(String filename) {
+    public Game importGame(String filename) {
         try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(filename))) {
             Game importedGame = (Game) objIn.readObject();
 
@@ -71,9 +71,10 @@ public class GameRunner {
             importedGame.updateViews(gameViews);
 
             this.game = importedGame;
+
+            return this.game;
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

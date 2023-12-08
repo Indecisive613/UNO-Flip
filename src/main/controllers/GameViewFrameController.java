@@ -46,7 +46,8 @@ public class GameViewFrameController implements ActionListener {
         } else if ("Save Game".equals(command)) {
             gameRunner.exportGame(GameViewFrame.saveFile);
         }else if("Load Game".equals(command)){
-            gameRunner.importGame(GameViewFrame.saveFile);
+            Game importedGame = gameRunner.importGame(GameViewFrame.saveFile);
+            this.game = importedGame;
             // Re-render game
             view.setVisible(false);
             view.setVisible(true);
