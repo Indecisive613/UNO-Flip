@@ -74,7 +74,9 @@ public class GameRunner {
 
             return this.game;
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+
+            return null;
         }
     }
 }

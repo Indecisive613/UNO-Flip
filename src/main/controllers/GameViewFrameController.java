@@ -4,6 +4,7 @@ import main.GameViewFrame;
 import main.models.Game;
 import main.models.GameRunner;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,10 +48,16 @@ public class GameViewFrameController implements ActionListener {
             gameRunner.exportGame(GameViewFrame.saveFile);
         }else if("Load Game".equals(command)){
             Game importedGame = gameRunner.importGame(GameViewFrame.saveFile);
-            this.game = importedGame;
-            // Re-render game
-            view.setVisible(false);
-            view.setVisible(true);
+            if (importedGame == null) {
+                JOptionPane.showMessageDialog(view, "Error: No save file found");
+
+            } else {
+                this.game = importedGame;
+                // Re-render game
+                view.setVisible(false);
+                view.setVisible(true);
+
+            }
         } else if("Restart".equals(command)){
             game.restartGame();
         }
