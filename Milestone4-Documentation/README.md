@@ -72,7 +72,7 @@ Authors:
 * Jake Siushansian - 101226956
 
 ## Class Diagram
-
+![image](https://github.com/Indecisive613/UNO-Flip/assets/83597131/38c6105a-3c6d-4fdf-9b3b-572addc90bac)
 
 ## Sequence Diagrams
 ### 1. Undo Action
