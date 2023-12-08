@@ -196,9 +196,9 @@ public class SerializeTest {
         // Check that the players are the same
         assertEquals(4, importedGame.getPlayers().size());
         assertTrue(game.getPlayers().get(0).equals(importedGame.getPlayers().get(0)));
-        assertEquals(game.getPlayers().get(1), importedGame.getPlayers().get(0));
-        assertEquals(game.getPlayers().get(2), importedGame.getPlayers().get(0));
-        assertEquals(game.getPlayers().get(3), importedGame.getPlayers().get(0));
+        assertTrue(game.getPlayers().get(1).equals(importedGame.getPlayers().get(1)));
+        assertTrue(game.getPlayers().get(2).equals(importedGame.getPlayers().get(2)));
+        assertTrue(game.getPlayers().get(3).equals(importedGame.getPlayers().get(3)));
 
         // Check the played cards and the deck
         assertEquals(game.getDeck().size(), importedGame.getDeck().size());

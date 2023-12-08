@@ -16,11 +16,6 @@ public class Player implements Serializable {
     private int score;
     private ArrayList<DoubleSidedCard> hand;
     private boolean isAI;
-
-    public ArrayList<DoubleSidedCard> getPreviousHand() {
-        return previousHand;
-    }
-
     private ArrayList<DoubleSidedCard> previousHand;
 
     /**
@@ -71,6 +66,13 @@ public class Player implements Serializable {
      */
     public ArrayList<DoubleSidedCard> getHand() {
         return hand;
+    }
+
+    /**
+     * @return The Player's previous hand
+     */
+    public ArrayList<DoubleSidedCard> getPreviousHand() {
+        return previousHand;
     }
 
     /**
@@ -159,7 +161,7 @@ public class Player implements Serializable {
         }
         Player c = (Player) o;
 
-        if(c.isAI != this.isAI || c.getName() != this.getName() || c.getScore() != this.getScore()){
+        if(c.isAI != this.isAI || !c.getName().equals(this.getName()) || c.getScore() != this.getScore()){
             return false;
         }
 
