@@ -86,4 +86,11 @@ public class HandController {
     public void redoAction() {
         game.redo();
     }
+
+    /**
+     * @return The last played card
+     */
+    public Card getPlayedCard() {
+        return game.getTopCard();
+    }
 }

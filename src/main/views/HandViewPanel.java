@@ -155,9 +155,9 @@ public class HandViewPanel extends JPanel implements GameView {
     public void handleNewTurn(Player player) {
         this.player = player;
         playerName.setText("Current Player: " + player.getName());
-        actionMessage.setText(" ");
 
         updateCardPanel();
+        actionMessage.setText(getActionMessage());
 
         if (player.getIsAI()) {
             playerName.setText("Current Player: " + player.getName() + " (AI Player)");
@@ -363,55 +363,14 @@ public class HandViewPanel extends JPanel implements GameView {
         redoButton.setEnabled(false);
         redoButton.setBackground(Color.WHITE);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(currentPlayer.getName());
-        if (playedCard == null) {
-            sb.append(" drew a card");
-        } else if (playedCard != null && drewCard) {
-            String card;
-            sb.append(" drew a card and played a ");
-
-            if (playedCard.getColour() == Card.Colour.WILD) {
-                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
-                        .limit(playedCard.toString().split("\\s+|_").length - 2)
-                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                        .collect(Collectors.joining(" "));
-                card += " and set the colour to " + currentColour;
-            } else {
-                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
-                        .limit(playedCard.toString().split("\\s+|_").length - 1)
-                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                        .collect(Collectors.joining(" "));
-            }
-            sb.append(card);
-
-        } else {
-            String card;
-            if (playedCard.getColour() == Card.Colour.WILD) {
-                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
-                        .limit(playedCard.toString().split("\\s+|_").length - 2)
-                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                        .collect(Collectors.joining(" "));
-                card += " and set the colour to " + currentColour;
-            } else {
-                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
-                        .limit(playedCard.toString().split("\\s+|_").length - 1)
-                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-                        .collect(Collectors.joining(" "));
-            }
-            sb.append(" played a ").append(card);
-        }
-        if (playedCard != null && playedCard.getSymbol() == Card.Symbol.FLIP) {
-            sb.append(" and flipped the deck ");
-        }
-        actionMessage.setText(sb.toString());
+        actionMessage.setText(getActionMessage());
     }
 
     @Override
     public void handleUndoAction() {
         updateCardPanel();
 
-        actionMessage.setText("The action of " + player.getName() + " was undone");
+        actionMessage.setText(getActionMessage());
 
         if (controller.hasDrawnCard()) {
             endTurn.setEnabled(true);
@@ -458,5 +417,69 @@ public class HandViewPanel extends JPanel implements GameView {
     @Override
     public void handleRestartGame() {
 
+    }
+
+    private String getActionMessage() {
+        if (player.getIsAI()) {
+            return buildAiMessage();
+        } else if (controller.canRedo()) {
+            return "The action of " + player.getName() + " was undone";
+        }
+
+        return " ";
+    }
+
+    private String buildAiMessage() {
+        StringBuilder sb = new StringBuilder();
+        Card.Colour currentColour = null;
+        Card playedCard = null;
+
+        if (controller.hasPlayedCard()) {
+            playedCard = controller.getPlayedCard();
+            currentColour = playedCard.getColour();
+        }
+
+        sb.append(player.getName());
+        if (playedCard == null) {
+            sb.append(" drew a card");
+        } else if (controller.hasPlayedCard()) {
+            String card;
+            sb.append(" drew a card and played a ");
+
+            if (playedCard.getColour() == Card.Colour.WILD) {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
+                        .limit(playedCard.toString().split("\\s+|_").length - 2)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+                card += " and set the colour to " + currentColour;
+            } else {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
+                        .limit(playedCard.toString().split("\\s+|_").length - 1)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+            }
+            sb.append(card);
+
+        } else {
+            String card;
+            if (playedCard.getColour() == Card.Colour.WILD) {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_")).skip(1)
+                        .limit(playedCard.toString().split("\\s+|_").length - 2)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+                card += " and set the colour to " + currentColour;
+            } else {
+                card = Arrays.stream(playedCard.toString().split("\\s+|_"))
+                        .limit(playedCard.toString().split("\\s+|_").length - 1)
+                        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                        .collect(Collectors.joining(" "));
+            }
+            sb.append(" played a ").append(card);
+        }
+        if (playedCard != null && playedCard.getSymbol() == Card.Symbol.FLIP) {
+            sb.append(" and flipped the deck ");
+        }
+
+        return sb.toString();
     }
 }
