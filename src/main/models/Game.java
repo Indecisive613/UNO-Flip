@@ -37,6 +37,8 @@ public class Game implements Serializable {
     private boolean dark = false;
     private boolean hasDrawnCard = false;
     private boolean hasPlayedCard = false;
+
+    private boolean canRedo = false;
     private Game previousState;
 
     /**
@@ -55,6 +57,7 @@ public class Game implements Serializable {
         roundNumber = 0;
         hasDrawnCard = false;
         hasPlayedCard = false;
+        canRedo = false;
         previousState = null;
     }
 
@@ -127,6 +130,11 @@ public class Game implements Serializable {
      * @return whether a card has been played on this turn
      */
     public boolean getHasPlayedCard() { return hasPlayedCard; }
+
+    /**
+     * @return whether a player can redo
+     */
+    public boolean getCanRedo() { return canRedo; }
 
     /**
      * Add a new Player to the Game
@@ -228,6 +236,7 @@ public class Game implements Serializable {
         skipEveryone = false;
         hasDrawnCard = false;
         hasPlayedCard = false;
+        canRedo = false;
 
         storePriorState();
         for (Player player: players){
@@ -247,7 +256,7 @@ public class Game implements Serializable {
             if (action == -1) {
                 drawCard(getCurrentPlayer(), false);
                 drewCard = true;
-                hasDrawnCard = true;
+                setHasDrawnCard();
 
                 // the AI player can check if their drawn card can be played
                 AiHelper aiHelperDraw = new AiHelper(this, getCurrentPlayer().getActiveHand());
@@ -263,7 +272,7 @@ public class Game implements Serializable {
                 playedCard = getCurrentPlayer().playCard(action);
                 activeCard = playedCard.getActiveCard();
                 playCard(playedCard);
-                hasPlayedCard = true;
+                setHasPlayedCard();
             }
             for (GameView view : views) {
                 view.handleAiPlayerTurn(getCurrentPlayer(), activeCard, currentColour, drewCard);
@@ -297,6 +306,7 @@ public class Game implements Serializable {
         storePriorState();
         playedCards.push(card);
         setHasPlayedCard();
+
         Card activeSide = card.getActiveCard();
 
         if(activeSide.getColour() == Card.Colour.WILD) {
@@ -425,6 +435,7 @@ public class Game implements Serializable {
         skipEveryone = false;
         hasDrawnCard = false;
         hasPlayedCard = false;
+        canRedo = false;
         currentPlayerIndex = -1;
         for (Player player: players){
             player.clearHand();
@@ -476,6 +487,11 @@ public class Game implements Serializable {
     public void setHasPlayedCard() {
         hasPlayedCard = true;
     }
+
+    /**
+     * Sets the status of whether the player can redo
+     */
+    public void setCanRedo() { canRedo = true; }
 
     /**
      * @return The number of the current round
@@ -556,6 +572,7 @@ public class Game implements Serializable {
         priorState.roundNumber = roundNumber;
         priorState.hasDrawnCard = hasDrawnCard;
         priorState.hasPlayedCard = hasPlayedCard;
+        priorState.canRedo = canRedo;
         priorState.dark = dark;
         return priorState;
     }
@@ -580,6 +597,7 @@ public class Game implements Serializable {
         roundNumber = previousState.roundNumber;
         hasDrawnCard = previousState.hasDrawnCard;
         hasPlayedCard = previousState.hasPlayedCard;
+        canRedo = previousState.canRedo;
         dark = previousState.dark;
     }
 
@@ -589,6 +607,7 @@ public class Game implements Serializable {
     public void undo(){
         Game tempGame = copyGame();
         restorePriorState();
+        setCanRedo();
         if (tempGame.isDark() != isDark()){
             DoubleSidedCard.flip();
         }
@@ -617,7 +636,9 @@ public class Game implements Serializable {
         undo();
         for (GameView view: views) {
             view.handleRedoAction();
-        }}
+        }
+        canRedo = false;
+    }
 
     /**
      * Restart the game from the start of the most recent round

@@ -60,6 +60,13 @@ public class HandController {
     public boolean hasPlayedCard() { return game.getHasPlayedCard(); }
 
     /**
+     * Check if the player can undo
+     *
+     * @return Whether the current player can undo their action
+     */
+    public boolean canRedo() { return game.getCanRedo(); }
+
+    /**
      * advances the turn so that the next player in the game can play
      */
     public void nextTurn() {
