@@ -11,7 +11,6 @@ This project contains the following deliverables:
 * UNO-Flip executable
 * UML sequence diagrams
 * UML class diagram
-* Design explanation
 
 ## Installation
 This project was compiled with Java 14, so make sure you run it with Java version 14 or ensure your Java version can run Java version 14.
@@ -19,6 +18,31 @@ This project was compiled with Java 14, so make sure you run it with Java versio
 ## Usage
 Navigate to the project folder in the command prompt then enter:
 > java -jar UNO-Flip.jar
+
+## Extensibility
+This project was built to keep coupling low and cohesion high using a few different design patterns and techniques, 
+which helped in the development of the 4 milestones, and also make it easy to extend the game with new cards, features, and more. 
+
+The cards follow the strategy pattern, where there is a base *Card* class which each card extends and overrides. 
+To add a new card, simply create a new class that extends *Card*, and override its *cardAction* method with calls to Game. 
+
+MVC was used to separate UNO Game logic (the models) from GUI components (views and controllers), 
+which lowered coupling making it easier to add new features to the game. The *GameView* interface contained many methods that Game
+would call when an action was taken, such as *handleDrawCard* or *handleNewTurn*. Every view in the game implements *GameView* 
+decoupling it from game and allowing each view to update differently based on actions from *Game*. In the future extra views could
+be simply added by having them extend *GameView* and adding a new controller class to interact with the models if user interaction 
+is required.
+
+### Implementations of GameView
+Below is a list of the views that implement the *GameView* interface, and their function
+- GameEndView: Popup on game end game
+- HandViewPanel: Display players hand, and contains action buttons
+- InfoViewPanel: Display game info
+- NewGameView: Popup on new game to select players, names, and AIs
+- TableViewPanel: Displays current player, top card, and deck info
+- WildView: Popup when a wild card is played
+
+These can be copied and modified to add new views to the game.
 
 ## Assumptions
 * If the starting card is not a normal card, ignore the effect but can still play on the color/pick any color if it is a wild
