@@ -90,7 +90,7 @@ public class SerializeTest {
             // Ensure file exists
             File filename = new File("Serialized.txt");
             assertTrue(filename.exists());
-            assertEquals(0, filename.length());
+            assertNotEquals(0, filename.length());
 
         } catch (IOException e) {
             System.out.println("IOException is caught");
@@ -170,7 +170,7 @@ public class SerializeTest {
             // Ensure file exists
             File filename = new File("Serialized.txt");
             assertTrue(filename.exists());
-            assertEquals(0, filename.length());
+            assertNotEquals(0, filename.length());
 
         } catch (IOException e) {
             assertEquals("No exception", "Exception found");
@@ -195,7 +195,7 @@ public class SerializeTest {
 
         // Check that the players are the same
         assertEquals(4, importedGame.getPlayers().size());
-        assertEquals(game.getPlayers().get(0), importedGame.getPlayers().get(0));
+        assertTrue(game.getPlayers().get(0).equals(importedGame.getPlayers().get(0)));
         assertEquals(game.getPlayers().get(1), importedGame.getPlayers().get(0));
         assertEquals(game.getPlayers().get(2), importedGame.getPlayers().get(0));
         assertEquals(game.getPlayers().get(3), importedGame.getPlayers().get(0));

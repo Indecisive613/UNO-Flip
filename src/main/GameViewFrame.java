@@ -20,7 +20,9 @@ public class GameViewFrame extends JFrame {
 
     public static final String saveFile = "save.ser";
 
-    /** Create a new GameViewFrame.
+    /**
+     * Create a new GameViewFrame.
+     *
      * @param game The UNO game to display
      */
     public GameViewFrame(Game game, GameRunner runner) {

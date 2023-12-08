@@ -662,7 +662,6 @@ public class Game implements Serializable {
         }
 
         for (GameView view : views) {
-            view.handleNewGame();
             view.handleUpdateTurnOrder(false);
         }
         shuffleDeck();
